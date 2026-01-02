@@ -1,9 +1,8 @@
 {
-  "name": "portfolio",
+  "name": "web-site",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:JunichiroKohari/portfolio.git",
-  "author": "JunichiroKohari <junichiro@kohari.jp>",
+  "author": "JunichiroKohari",
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
@@ -21,6 +20,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "favicons": "^7.2.0",
     "file-loader": "^5.1.0",
     "html-loader": "^3.1.2",
     "html-webpack-plugin": "^5.5.0",
@@ -28,17 +28,14 @@
     "import-glob-loader": "^1.1.0",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^2.6.1",
-    "node-sass": "^9.0.0",
     "pug-html-loader": "^1.1.5",
     "regl": "^2.1.0",
+    "sass": "^1.97.0",
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "url-loader": "^4.1.1",
-    "webpack": "^5.73.0",
+    "webpack": "^5.104.1",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2"
-  },
-  "dependencies": {
-    "microcms-js-sdk": "^2.2.1"
   }
 }
