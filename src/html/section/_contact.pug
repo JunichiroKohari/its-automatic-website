@@ -6,21 +6,18 @@ section(
 )
   .section-wrapper
     h3(class="content__text") CONTACT
-    p(class="contact-info")
-      | &#x1f481; 当サイトやお仕事についてのお問い合わせは以下にご入力いただき、送信をお願いいたします。
-    p(class="contact-info") 原則として3営業日以内にご返信いたします。
-    form(action="#" class="contact-form")
+    form(action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfC8tSEmIDTy3r__oWRG21EgbiwIEcS5OqbfWa_Q5ngHSY9sA/formResponse" class="contact-form")
       .input-item
         span(class="required") 必須
-        label(class="contact-label") お名前
-        input(type="text" class="contact-input" required)
+        label(for="name" class="contact-label") お名前
+        input(id="name" type="text" name="entry.583715521" class="contact-input" required)
       .input-item
         span(class="required") 必須
-        label(class="contact-label") メールアドレス
-        input(type="email" class="contact-input" required)
+        label(for="email" class="contact-label") メールアドレス
+        input(id="email" type="email" name="entry.1476939802" class="contact-input" required)
       .input-item
         span(class="required") 必須
-        label(class="contact-label") メッセージ
-        textarea(name="contact-txt" class="contact-input contact-txt" required)
+        label(for="message" class="contact-label") メッセージ
+        textarea(id="message" name="entry.1258476309" class="contact-input contact-txt" required)
       div(class="input-item btn-div")
-        button(class="btn" onclick="alert('hey');") 送信
+        button(type="submit" class="btn") 送信
