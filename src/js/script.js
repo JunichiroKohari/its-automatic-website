@@ -1,8 +1,6 @@
 import $ from 'jquery'
 import AOS from 'aos'
 import createREGL from 'regl'
-import { createClient } from 'microcms-js-sdk'
-import { config } from '../../config'
 
 const makeAnime = function() {
   const FS_CODE = `
@@ -173,52 +171,6 @@ const makeAnime = function() {
   }
 }
 
-const showWorkTags = function(workCard, content) {
-  console.log(workCard)
-  workCard.find('.work-card__projectName').text(content.projectName)
-
-  const ulBusinessType = workCard.find('.work-card__businessType')
-  ulBusinessType.append(`<li><span class="tag tagcolor-design">#${content.businessType}</span></li>`)
-
-  const ulProcesses = workCard.find('.work-card__processes')
-  content.processes.forEach(function(process) {
-    ulProcesses.append(`<li><span class="tag tagcolor-category">#${process}</span></li>`)
-  })
-  const ulLanguages = workCard.find('.work-card__languages')
-  content.languages.forEach(function(lang) {
-    ulLanguages.append(`<li><span class="tag tagcolor-wordpress">#${lang}</span></li>`)
-  })
-  const ulFrameworks = workCard.find('.work-card__frameworks')
-  content.frameworks.forEach(function(fw) {
-    ulFrameworks.append(`<li><span class="tag tagcolor-quality">#${fw}</span></li>`)
-  })
-}
-const embedContents = function() {
-  const client = createClient({
-    serviceDomain: config.serviceDomain,
-    apiKey: config.apiKey,
-  });
-  client
-    .get({
-      endpoint: 'works',
-      queries: { filters: 'createdAt[greater_than]2021' },
-    })
-    .then((res) => {
-      if (res.totalCount < 0) {
-        return
-      }
-      res.contents.forEach((content, i) => {
-        const clonedElem = $('#work-li').clone()
-        clonedElem.attr('id', `#work-li${i}`)
-        const workCard = clonedElem.find('#work-card')
-        workCard.attr('id', `#work-card${i}`)
-        showWorkTags(workCard, content)
-        $('#works-list').append(clonedElem)
-      })
-    })
-    .catch((err) => console.error(err));
-}
-
 !function() {
   'use strict'
 
@@ -232,15 +184,15 @@ const embedContents = function() {
 
   // SP版サブタイトル文字数変更
   $(window).on('load resize', function(){
-    const subtitle = 'Fleelance Software Developer'
     const winW = $(window).width()
-    const devW = 415
+    const devW = 725
     if (winW <= devW) {
-      $('.main-subtitle').html(subtitle);
-    } else {
-      const devicesEmoji = '&#128421; &#128187; &#128241;'
-      $('.main-subtitle').html(`${subtitle} ${devicesEmoji}`)
+      return
     }
+
+    const subtitle = 'Software Company'
+    const devicesEmoji = '&#128421; &#128187; &#128241;'
+    $('.main-subtitle').html(`/* ${subtitle} ${devicesEmoji} */`)
   })
 
   // フェードインライブラリ初期化
@@ -261,11 +213,6 @@ const embedContents = function() {
     $('.nav').toggleClass('hamb-nav display-none')
   })
 
-  // モーダルライブラリ初期化
-  $("#dummy1").modaal({
-    content_source: '#dummy1-modal'
-})
-
   // スクロールボタン押下時処理　トップに戻る
   $(window).scroll(function () {
     const now = $(window).scrollTop()
@@ -278,5 +225,4 @@ const embedContents = function() {
 
   makeAnime()
 
-  embedContents()
 }()
