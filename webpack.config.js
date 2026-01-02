@@ -9,6 +9,7 @@ module.exports = {
     entry: './src/js/index.js',
     output: {
         path: path.resolve(__dirname, './dist'),
+        publicPath: '',
         filename: 'js/index.js'
     },
     module: {
@@ -40,10 +41,10 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpg|jpeg)/,
+                test: /\.(png|jpg|jpeg|svg)/,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'ima/[name].[ext]'
+                    filename: 'img/[name][ext]'
                 },
             },
             {
@@ -68,14 +69,15 @@ module.exports = {
         ],
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: './style/main.css',
         }),
         new HtmlWebpackPlugin({
             template: './src/html/index.pug',
+            favicon: path.resolve(__dirname, './src/img/icon.png'),
             // filename: 'index.pug'
-        }),
-        new CleanWebpackPlugin()
+        })
     ],
     externals: {
         jquery: 'jQuery',
