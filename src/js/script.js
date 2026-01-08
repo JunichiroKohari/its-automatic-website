@@ -190,7 +190,7 @@ const makeAnime = function() {
       return
     }
 
-    const subtitle = 'Software Company'
+    const subtitle = 'Software-Oriented Company'
     const devicesEmoji = '&#128421; &#128187; &#128241;'
     $('.main-subtitle').html(`/* ${subtitle} ${devicesEmoji} */`)
   })
