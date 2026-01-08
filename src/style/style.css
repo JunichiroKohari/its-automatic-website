@@ -340,6 +340,10 @@ main::before {
 	margin-top: 4px;
 	gap: 4px;
 }
+.product-bottom-left {
+	border: 1px solid;
+	padding: 2em;
+}
 .product-bottom-left,
 .product-bottom-right {
 	flex: 1;
@@ -361,6 +365,16 @@ main::before {
 	height: auto;
 	opacity: .5;
 	display: block;
+}
+@media screen and (max-width: 815px) {
+	.product-bottom-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+	.product-bottom-left,
+	.product-bottom-right {
+		width: auto;
+	}
 }
 @media screen and (max-width: 1024px) {
 	.products-container {
