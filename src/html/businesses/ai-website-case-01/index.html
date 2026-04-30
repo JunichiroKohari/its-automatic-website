@@ -31,6 +31,87 @@
       color: var(--text);
       overflow-x: hidden;
     }
+    body.disclaimer-open {
+      overflow: hidden;
+    }
+
+    /* ── DISCLAIMER DIALOG ── */
+    .site-disclaimer {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+    .site-disclaimer[hidden] {
+      display: none;
+    }
+    .site-disclaimer__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 15, 26, 0.68);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .site-disclaimer__panel {
+      position: relative;
+      width: min(100%, 560px);
+      padding: 2rem;
+      background: rgba(255, 252, 245, 0.98);
+      border: 1px solid rgba(180,150,90,0.28);
+      border-radius: 10px;
+      box-shadow: 0 24px 60px rgba(7, 15, 26, 0.28);
+      opacity: 0;
+      transform: translateY(18px) scale(0.98);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .site-disclaimer.is-visible .site-disclaimer__backdrop,
+    .site-disclaimer.is-visible .site-disclaimer__panel {
+      opacity: 1;
+    }
+    .site-disclaimer.is-visible .site-disclaimer__panel {
+      transform: translateY(0) scale(1);
+    }
+    .site-disclaimer__eyebrow {
+      margin-bottom: 0.8rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+    }
+    .site-disclaimer__title {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--navy);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .site-disclaimer__text {
+      font-size: 0.95rem;
+      line-height: 1.95;
+      color: var(--text-mid);
+    }
+    .site-disclaimer__button {
+      margin-top: 1.5rem;
+      border: none;
+      border-radius: 2px;
+      padding: 0.95rem 1.5rem;
+      background: var(--navy);
+      color: #fff;
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .site-disclaimer__button:hover {
+      background: var(--navy-light);
+      transform: translateY(-1px);
+    }
+    .site-disclaimer__button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
 
     /* ── NAV ── */
     nav {
@@ -642,6 +723,25 @@
 </head>
 <body>
 
+<div
+  class="site-disclaimer"
+  id="siteDisclaimer"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="siteDisclaimerTitle"
+  aria-describedby="siteDisclaimerDesc"
+  hidden
+>
+  <div class="site-disclaimer__backdrop" data-disclaimer-close></div>
+  <div class="site-disclaimer__panel" role="document">
+    <h2 class="site-disclaimer__title" id="siteDisclaimerTitle">このページについて</h2>
+    <p class="site-disclaimer__text" id="siteDisclaimerDesc">
+      このページは、生成AIによるWebサイト制作事例として作成したサンプルです。掲載している「小針不動産株式会社」は架空の会社であり、実在の企業・団体とは関係ありません。
+    </p>
+    <button type="button" class="site-disclaimer__button" id="siteDisclaimerClose">内容を確認しました</button>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav id="mainNav">
   <a href="#" class="nav-logo">小針不動産株式会社</a>
@@ -997,6 +1097,35 @@
   const nav = document.getElementById('mainNav');
   const scrollTop = document.getElementById('scrollTop');
   const heroVideo = document.getElementById('heroVideo');
+  const siteDisclaimer = document.getElementById('siteDisclaimer');
+  const siteDisclaimerClose = document.getElementById('siteDisclaimerClose');
+
+  const openDisclaimer = () => {
+    if (!siteDisclaimer) return;
+    siteDisclaimer.hidden = false;
+    document.body.classList.add('disclaimer-open');
+    requestAnimationFrame(() => siteDisclaimer.classList.add('is-visible'));
+    siteDisclaimerClose?.focus();
+  };
+
+  const closeDisclaimer = () => {
+    if (!siteDisclaimer || siteDisclaimer.hidden) return;
+    siteDisclaimer.classList.remove('is-visible');
+    document.body.classList.remove('disclaimer-open');
+    window.setTimeout(() => {
+      siteDisclaimer.hidden = true;
+    }, 200);
+  };
+
+  openDisclaimer();
+
+  siteDisclaimerClose?.addEventListener('click', closeDisclaimer);
+  siteDisclaimer?.querySelector('[data-disclaimer-close]')?.addEventListener('click', closeDisclaimer);
+  siteDisclaimer?.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeDisclaimer();
+    }
+  });
 
   window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
