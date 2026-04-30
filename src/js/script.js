@@ -174,6 +174,40 @@ const makeAnime = function() {
 !function() {
   'use strict'
 
+  let pendingWheelDeltaY = 0
+  let wheelFrameId = null
+
+  const flushWheelScroll = function() {
+    if (pendingWheelDeltaY !== 0) {
+      window.scrollBy(0, pendingWheelDeltaY)
+      pendingWheelDeltaY = 0
+    }
+
+    wheelFrameId = null
+  }
+
+  window.addEventListener('wheel', function(event) {
+    if (event.ctrlKey) {
+      return
+    }
+
+    event.preventDefault()
+
+    const lineHeight = 16
+    const pageHeight = window.innerHeight
+    const scale = event.deltaMode === WheelEvent.DOM_DELTA_LINE
+      ? lineHeight
+      : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+        ? pageHeight
+        : 1
+
+    pendingWheelDeltaY += event.deltaY * scale
+
+    if (wheelFrameId === null) {
+      wheelFrameId = window.requestAnimationFrame(flushWheelScroll)
+    }
+  }, { passive: false, capture: true })
+
   const windowHeight = $(window).height()
   $('.content').css({
     'height': windowHeight,
@@ -213,14 +247,32 @@ const makeAnime = function() {
     $('.nav').toggleClass('hamb-nav display-none')
   })
 
-  // スクロールボタン押下時処理　トップに戻る
-  $(window).scroll(function () {
-    const now = $(window).scrollTop()
-    if (now > 200) {
-      $('.pagetop').fadeIn("slow")
-    } else {
-      $('.pagetop').fadeOut('slow')
+  // テキストエリアを自動拡張して、内部スクロールがホイール入力を奪わないようにする
+  $('.contact-txt').each(function() {
+    const textarea = this
+
+    const syncTextareaHeight = function() {
+      textarea.style.height = 'auto'
+      textarea.style.height = `${textarea.scrollHeight}px`
     }
+
+    syncTextareaHeight()
+    textarea.addEventListener('input', syncTextareaHeight)
+  })
+
+  // スクロールボタン押下時処理　トップに戻る
+  const pageTop = $('.pagetop')
+  let isPageTopVisible = false
+
+  $(window).on('scroll', function () {
+    const shouldShowPageTop = $(window).scrollTop() > 200
+
+    if (shouldShowPageTop === isPageTopVisible) {
+      return
+    }
+
+    isPageTopVisible = shouldShowPageTop
+    pageTop.stop(true, true)[shouldShowPageTop ? 'fadeIn' : 'fadeOut']('slow')
   })
 
   makeAnime()
