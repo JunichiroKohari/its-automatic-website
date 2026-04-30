@@ -19,6 +19,12 @@ const pages = [
         filename: 'tokushoho.html',
         chunks: ['ai-training'],
     },
+    {
+        template: './src/html/businesses/ai-website-case-01/index.html',
+        filename: 'ai-website-case-01.html',
+        chunks: [],
+        inject: false,
+    },
 ]
 
 module.exports = {
@@ -67,6 +73,17 @@ module.exports = {
                 generator: {
                     filename: 'img/[name][ext]'
                 },
+            },
+            {
+                test: /\.mp4$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'media/[name][ext]'
+                },
+            },
+            {
+                test: /\.html$/i,
+                loader: 'html-loader',
             },
             {
                 test: /\.pug/,
