@@ -1,0 +1,501 @@
+-
+  const painPoints = [
+    {
+      number: '01',
+      title: 'AIを導入したいが、何から始めればいいかわからない',
+      text: 'ChatGPTの話題は耳にするが、実際の業務にどう活かすべきか判断できない。',
+    },
+    {
+      number: '02',
+      title: '社員にAIを学ばせる時間・体制が整っていない',
+      text: '研修に割けるリソースが少なく、専門家に相談する機会もない。',
+    },
+    {
+      number: '03',
+      title: '費用対効果が見えず、投資の判断がしづらい',
+      text: 'AIツールの導入コストと効果が不明確で、決断できずにいる。',
+    },
+  ]
+
+  const features = [
+    {
+      number: '01',
+      title: '現場で即使えるカリキュラム',
+      text: '実際の業務シナリオに沿った演習中心の研修。ChatGPT・画像生成AI・業務自動化ツールを実際に操作しながら習得します。',
+    },
+    {
+      number: '02',
+      title: '非エンジニア向けに設計',
+      text: 'プログラミングの知識は不要。営業・総務・人事・経営管理など、あらゆる職種のビジネスパーソンを対象に設計しています。',
+    },
+    {
+      number: '03',
+      title: '貴社に合わせたカスタマイズ',
+      text: '業種・業態・受講者のレベルに応じてカリキュラムをカスタマイズ。製造業・小売・サービス業など幅広い業種への導入実績があります。',
+    },
+    {
+      number: '04',
+      title: 'オンライン・訪問どちらも対応',
+      text: 'Zoomなどのオンライン研修と社内対面研修どちらでも実施可能。少人数から大人数まで柔軟に対応します。',
+    },
+    {
+      number: '05',
+      title: '研修後のフォローアップ',
+      text: '研修終了後も、Slackやメールでの質問対応を提供。導入後の定着をサポートします。',
+    },
+    {
+      number: '06',
+      title: '明確な成果指標',
+      text: '研修前後でのAI活用スキル診断テストを実施し、習得度を可視化。人事評価や研修効果報告書として活用いただけます。',
+    },
+  ]
+
+  const useCases = [
+    {
+      number: '01',
+      label: 'BACK OFFICE',
+      title: '議事録・報告書の下書きを短時間で作成',
+      text: '会議メモや箇条書きから、要点整理・ToDo・報告文のたたき台を生成。毎回ゼロから書く作業を、確認と調整中心に切り替えられます。',
+      points: [
+        '打ち合わせ内容の要約',
+        '定例報告のテンプレート化',
+        '社内共有のスピード向上',
+      ],
+    },
+    {
+      number: '02',
+      label: 'SALES',
+      title: '問い合わせ返信・提案文の初稿をすばやく用意',
+      text: 'お客様からの問い合わせや営業提案の文面を複数案で生成。担当者ごとのばらつきを抑えつつ、返信速度を上げられます。',
+      points: [
+        'メール返信の叩き台作成',
+        '提案文の言い回し比較',
+        '既存資料の要約と再構成',
+      ],
+    },
+    {
+      number: '03',
+      label: 'PLANNING',
+      title: '調査・企画整理の初速を上げる',
+      text: '競合調査、FAQ整理、LP構成案の作成など、時間がかかりやすい初期検討を高速化。人は判断と仕上げに集中できます。',
+      points: [
+        '競合情報の整理',
+        '企画の壁打ち',
+        '構成案のたたき台作成',
+      ],
+    },
+  ]
+
+  const websiteCasePoints = [
+    '要件整理からページ構成案までの初動を高速化',
+    'キャッチコピーや説明文の叩き台を複数案で比較',
+    '業種に合わせた世界観づくりを短期間で具体化',
+  ]
+
+  const courses = [
+    {
+      tag: '基礎',
+      tagClass: 'course-tag course-tag--base',
+      title: 'AI基礎・ChatGPT入門',
+      time: '半日（4時間）',
+      audience: '全社員',
+      points: [
+        'AIとは何か・生成AIの仕組み',
+        'ChatGPTの基本操作',
+        'プロンプト作成の基本',
+        '業務メール・資料作成への活用',
+      ],
+      featured: false,
+    },
+    {
+      tag: '実践',
+      tagClass: 'course-tag course-tag--practice',
+      title: '業務自動化・効率化コース',
+      time: '1日（8時間）',
+      audience: '一般社員・リーダー層',
+      points: [
+        'Excel×AI活用術',
+        '議事録・報告書の自動生成',
+        'データ分析とAIの組み合わせ',
+        '社内ナレッジ整備へのAI活用',
+      ],
+      featured: true,
+    },
+    {
+      tag: '応用',
+      tagClass: 'course-tag course-tag--applied',
+      title: 'AI経営戦略コース',
+      time: '半日（4時間）',
+      audience: '経営者・管理職',
+      points: [
+        'AI導入のROI計算',
+        '競合のAI活用事例',
+        '自社へのAI活用ロードマップ策定',
+        'AIリテラシー組織文化の醸成',
+      ],
+      featured: false,
+    },
+  ]
+
+  const testimonials = [
+    {
+      body: '研修を受ける前は「AIは難しい」という印象でしたが、実際に操作しながら学べるので、社員全員がすぐに使い始めました。業務時間が週10時間削減できました。',
+      company: '株式会社〇〇商事 / 代表取締役',
+      industry: '卸売業・従業員20名',
+    },
+    {
+      body: '社内でAIリテラシーのばらつきがあり困っていましたが、レベル別にカリキュラムを組んでいただき、全員が同じ土台で動けるようになりました。',
+      company: '△△サービス株式会社 / 人事部長',
+      industry: 'サービス業・従業員50名',
+    },
+    {
+      body: '個人事業主でも参加できる内容で安心しました。特にChatGPTを使った提案書作成が劇的に速くなり、受注率も上がりました。',
+      company: '◇◇設計事務所 / 代表',
+      industry: '建築設計・個人事業主',
+    },
+  ]
+
+  const pricingPlans = [
+    {
+      title: 'スターターパック',
+      price: '¥98,000',
+      unit: '〜 / 回',
+      items: ['半日（4時間）研修', '受講者5〜20名', 'オンライン実施', '標準カリキュラム提供', '研修後レポート提供'],
+      featured: false,
+      cta: 'お問い合わせ',
+      ctaClass: 'button button--dark-outline',
+    },
+    {
+      title: 'スタンダードパック',
+      price: '¥198,000',
+      unit: '〜 / 回',
+      items: ['1日（8時間）研修', '受講者5〜30名', 'オンライン・訪問対応', 'カリキュラムカスタマイズ', '受講前後スキル診断', '研修後30日間フォロー'],
+      featured: true,
+      cta: '無料相談を予約する',
+      ctaClass: 'button button--primary',
+    },
+    {
+      title: 'エンタープライズ',
+      price: '要相談',
+      unit: '',
+      items: ['複数回・連続研修', '受講者数制限なし', '訪問研修対応', '完全カスタムカリキュラム', '専任担当者アサイン', 'AI活用ロードマップ策定'],
+      featured: false,
+      cta: 'お問い合わせ',
+      ctaClass: 'button button--dark-outline',
+    },
+  ]
+
+  const faqs = [
+    {
+      id: 1,
+      q: 'IT知識がない社員でも受講できますか？',
+      a: 'はい、まったく問題ありません。本研修はプログラミング等の専門知識がない方を対象に設計されています。スマートフォンやPCの基本操作ができれば十分です。',
+    },
+    {
+      id: 2,
+      q: '何名から受講可能ですか？',
+      a: '最小5名から対応しています。1〜4名の少人数の場合は個別プランもご用意しています。お気軽にご相談ください。',
+    },
+    {
+      id: 3,
+      q: 'カリキュラムは業種に合わせてもらえますか？',
+      a: 'はい、事前のヒアリングをもとに、貴社の業種・業務内容・課題に合わせたカリキュラムをご提案します。製造業・小売業・士業など幅広い業種への導入実績があります。',
+    },
+    {
+      id: 4,
+      q: 'オンラインと訪問どちらが多いですか？',
+      a: '地方の企業様にはオンライン（Zoom・Teams等）、首都圏・関西圏の企業様には訪問研修が多い傾向です。どちらも同等の内容で実施可能です。',
+    },
+    {
+      id: 5,
+      q: '研修後のフォローはどのような内容ですか？',
+      a: 'スタンダードパック以上では、研修後30日間のSlack・メールサポートを提供しています。実際の業務でAIを使い始めた際の疑問・課題にお答えします。',
+    },
+  ]
+
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="color-scheme" content="light")
+    title AI研修サービス | 株式会社 It's Automatic
+    meta(name="description" content="中小企業・個人事業主に向けた、現場で使えるAI研修サービス。ChatGPTや生成AIを、実務に落とし込む実践型カリキュラムを提供します。")
+  body.ai-training-page
+    nav.site-nav
+      a.nav-brand(href="#top" aria-label="It's Automatic トップへ戻る")
+        img(src="../../img/logo-primary.png" alt="It's Automatic")
+
+      .nav-links(aria-label="主要メニュー")
+        a(href="#services") サービス内容
+        a(href="#showcase") 活用事例
+        a(href="#testimonials") 導入事例
+        a(href="#pricing") 料金プラン
+        a(href="#faq") よくある質問
+        a.button.button--primary(href="#contact") 無料相談を予約する
+
+      button.nav-toggle(type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu")
+        span
+        span
+        span
+
+    #mobile-menu.mobile-menu(aria-hidden="true")
+      a(href="#services") サービス内容
+      a(href="#showcase") 活用事例
+      a(href="#testimonials") 導入事例
+      a(href="#pricing") 料金プラン
+      a(href="#faq") よくある質問
+      a.button.button--primary(href="#contact") 無料相談を予約する
+
+    main#top
+      section.hero
+        .hero__grid(aria-hidden="true")
+        span.hero__orb.hero__orb--one(aria-hidden="true")
+        span.hero__orb.hero__orb--two(aria-hidden="true")
+        span.hero__orb.hero__orb--three(aria-hidden="true")
+        img.hero__bg(src="../../img/ai-training-hero-bg.png" alt="" aria-hidden="true")
+        .hero__veil.hero__veil--gradient
+        .hero__veil.hero__veil--radial
+        .hero__glow
+
+        .hero__content(data-stagger data-stagger-step="90")
+          .pill(data-reveal)
+            span.pill__dot
+            | 企業向けAI研修 ・ 中小企業・個人事業主に特化
+
+          h1(data-reveal)
+            | AIを、現場の武器に。
+            br
+            strong 今日から使える
+            | 研修があります。
+
+          p.hero__lead(data-reveal) 専門知識は不要です。ChatGPTなど生成AIを実務で活用するための実践的なカリキュラムを、貴社のペースで導入できます。
+
+          .hero__actions(data-reveal)
+            a.button.button--primary(href="#contact") 無料相談を予約する
+            a.button.button--secondary(href="#services") サービス内容を見る
+
+          .stats-bar(aria-label="主要実績" data-reveal)
+            .stat
+              .stat__value
+                span.stat__count(data-count-to="50") 0
+                span.stat__suffix 社以上
+              .stat__label 導入実績
+            .stat
+              .stat__value
+                span.stat__count(data-count-to="98") 0
+                span.stat__suffix %
+              .stat__label 受講満足度
+            .stat
+              .stat__value オンライン・訪問
+              .stat__label 研修形式
+
+          .hero__scroll(data-reveal aria-hidden="true")
+            span.hero__scroll-label Scroll
+            span.hero__scroll-line
+
+      section.section.section--dark
+        .container
+          .section-intro(data-reveal)
+            p.section-eyebrow こんなお悩みはありませんか
+            h2.section-title
+              | AI活用への壁は、
+              br
+              | 多くの企業が直面しています。
+
+          .grid-3(data-stagger)
+            each item in painPoints
+              article.card.pain-card(data-reveal data-spotlight)
+                .pain-card__number= item.number
+                h3= item.title
+                p= item.text
+
+      section#services.section.section--light
+        .container
+          .section-intro(data-reveal)
+            p.section-eyebrow サービスの特徴
+            h2.section-title(style="color: var(--navy);") なぜ、It's AutomaticのAI研修なのか。
+
+          .grid-3(data-stagger)
+            each item in features
+              article.card.card--light.card--lift.feature-card(data-reveal data-spotlight)
+                .feature-card__badge= item.number
+                h3= item.title
+                p= item.text
+
+      section#showcase.section.section--light
+        .container
+          .section-intro(data-reveal)
+            p.section-eyebrow AI活用事例
+            h2.section-title(style="color: var(--navy);")
+              | AI導入で、
+              br
+              | 現場の仕事はここまで変わります。
+            p.ai-proof__lead 定型業務の時短だけでなく、企画整理やWeb制作の初期設計まで、AIは幅広い業務の初速を引き上げられます。
+
+          .grid-3.ai-proof__grid(data-stagger)
+            each item in useCases
+              article.card.card--light.card--lift.ai-proof-card(data-reveal data-spotlight)
+                .ai-proof-card__meta
+                  span.ai-proof-card__number= item.number
+                  span.ai-proof-card__label= item.label
+                h3= item.title
+                p= item.text
+                ul.ai-proof-card__list
+                  each point in item.points
+                    li= point
+
+          article.ai-website-case(data-reveal)
+            .ai-website-case__media
+              img(src="../../img/ai-corporate-site-thumbnail.png" alt="AIで制作した小針不動産株式会社サイトのサムネイル")
+              .ai-website-case__overlay
+                p.ai-website-case__company 小針不動産株式会社
+                p.ai-website-case__catch
+                  span 理想の住まい
+                  | を、共に見つける。
+            .ai-website-case__body
+              h3 AIで制作したホームページ事例
+              p.ai-website-case__text 不動産会社向けコーポレートサイトを題材に、構成案・コピー案・ページ全体のトーン設計・実装にAIを活用した制作例です。初期案の速度を高めつつ、最終的な表現は人の判断で磨き込んでいます。
+              ul.ai-website-case__list
+                each point in websiteCasePoints
+                  li= point
+              .ai-website-case__actions
+                a.button.button--primary(href="../../ai-corporate-site/index.html" target="_blank" rel="noopener noreferrer") 制作事例を見る
+                a.button.button--secondary(href="#contact") 自社での活用を相談する
+
+      section.section.section--dark
+        .container
+          .section-intro(data-reveal)
+            p.section-eyebrow カリキュラム
+            h2.section-title
+              | 目的に合わせて選べる
+              br
+              | 3つのコース
+
+          .grid-3(data-stagger)
+            each course in courses
+              article.card.course-card(data-reveal data-spotlight class=course.featured ? 'course-card--featured' : '')
+                span(class=course.tagClass)= course.tag
+                h3= course.title
+                .course-meta
+                  div
+                    .course-meta__label 時間
+                    .course-meta__value= course.time
+                  div
+                    .course-meta__label 対象
+                    .course-meta__value= course.audience
+                ul.course-list
+                  each point in course.points
+                    li= point
+
+      section#testimonials.section.section--light
+        .container
+          .section-intro(data-reveal)
+            p.section-eyebrow 導入事例
+            h2.section-title(style="color: var(--navy);") 受講企業・個人からの声
+
+          .grid-3(data-stagger)
+            each item in testimonials
+              article.card.card--light.testimonial-card(data-reveal data-spotlight)
+                .quote-mark "
+                p= item.body
+                .testimonial-card__meta
+                  div
+                    .testimonial-card__company= item.company
+                    .testimonial-card__industry= item.industry
+
+      section#pricing.section.section--dark
+        .container
+          .section-intro(data-reveal)
+            p.section-eyebrow 料金プラン
+            h2.section-title
+              | 企業規模に合わせた
+              br
+              | シンプルな料金体系
+            p.section-subtitle 表示価格は税別です
+
+          .pricing-grid(data-stagger)
+            each plan in pricingPlans
+              article.pricing-card(data-reveal data-spotlight class=plan.featured ? 'pricing-card--featured' : '')
+                if plan.featured
+                  .pricing-badge 人気
+                h3= plan.title
+                .pricing-price
+                  span.pricing-price__value= plan.price
+                  if plan.unit
+                    span.pricing-price__unit= plan.unit
+                ul.pricing-list
+                  each point in plan.items
+                    li= point
+                a(class=plan.ctaClass, href="#contact")= plan.cta
+
+      section#faq.section.section--light
+        .faq-wrap(data-stagger)
+          .section-intro(data-reveal)
+            p.section-eyebrow よくある質問
+            h2.section-title(style="color: var(--navy);") お問い合わせ前にご確認ください
+
+          each faq in faqs
+            .faq-item(data-reveal)
+              button.faq-question(type="button" aria-expanded="false" aria-controls=`faq-a-${faq.id}` id=`faq-q-${faq.id}`)
+                span.faq-question__text= faq.q
+                span.faq-question__icon(aria-hidden="true") +
+              .faq-answer(id=`faq-a-${faq.id}` role="region" aria-labelledby=`faq-q-${faq.id}` hidden)
+                p= faq.a
+
+      section#contact.section.section--dark.contact
+        .contact__inner(data-stagger)
+
+          h2.contact-title(data-reveal) まずは、お気軽にご相談ください。
+          p.contact__lead(data-reveal) 貴社の課題や目標をお聞きした上で、最適な研修プランをご提案します。相談は無料です。
+
+          form.contact-form(data-reveal)
+            .form-grid
+              .field
+                label(for="company") 会社名
+                input#company(name="company" type="text" placeholder="株式会社〇〇")
+              .field
+                label(for="name") お名前
+                input#name(name="name" type="text" placeholder="山田 太郎")
+
+            .field
+              label(for="email") メールアドレス
+              input#email(name="email" type="email" placeholder="info@company.co.jp")
+
+            .field
+              label(for="message") お問い合わせ内容
+              textarea#message(name="message" rows="4" placeholder="研修のご相談内容をご記入ください")
+
+            button.button.button--submit(type="submit") 無料相談を申し込む
+
+    footer.site-footer
+      .container
+        .footer-top
+          .footer-brand
+            img(src="../../img/logo-primary.png" alt="It's Automatic")
+            p
+              | スマホアプリ・Webサービスの企画・開発・運営。
+              br
+              | 企業向けAI研修を提供しています。
+
+          .footer-columns
+            div
+              .footer-title サービス
+              .footer-links
+                a(href="#top") AI研修サービス
+                a(href="#services") カリキュラム
+                a(href="#showcase") 活用事例
+                a(href="#pricing") 料金プラン
+                a(href="#testimonials") 導入事例
+
+            div
+              .footer-title 会社情報
+              .footer-links
+                a(href="index.html#company") 会社概要
+                a(href="index.html") コーポレートサイト
+                a(href="tokushoho.html") 特定商取引法に基づく表記
+                a(href="#contact") お問い合わせ
+
+        .footer-bottom
+          div &copy; 2026 株式会社 It's Automatic. All rights reserved.
+          div 大阪府吹田市

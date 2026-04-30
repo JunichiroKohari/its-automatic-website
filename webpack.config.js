@@ -3,14 +3,35 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const pages = [
+    {
+        template: './src/html/index.pug',
+        filename: 'index.html',
+        chunks: ['main'],
+    },
+    {
+        template: './src/html/businesses/ai_training.pug',
+        filename: 'ai_training.html',
+        chunks: ['ai-training'],
+    },
+    {
+        template: './src/html/businesses/tokushoho.pug',
+        filename: 'tokushoho.html',
+        chunks: ['ai-training'],
+    },
+]
+
 module.exports = {
     mode: 'development',
     // devtool: 'source-map',
-    entry: './src/js/index.js',
+    entry: {
+        main: './src/js/index.js',
+        'ai-training': './src/js/ai-training.js',
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
         publicPath: '',
-        filename: 'js/index.js'
+        filename: 'js/[name].js'
     },
     module: {
         rules: [
@@ -71,13 +92,12 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: './style/main.css',
+            filename: './style/[name].css',
         }),
-        new HtmlWebpackPlugin({
-            template: './src/html/index.pug',
+        ...pages.map((page) => new HtmlWebpackPlugin({
+            ...page,
             favicon: path.resolve(__dirname, './src/img/icon.png'),
-            // filename: 'index.pug'
-        })
+        })),
     ],
     externals: {
         jquery: 'jQuery',
