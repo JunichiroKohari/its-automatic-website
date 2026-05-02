@@ -473,7 +473,9 @@
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
     }
     .prop-card {
+      display: block;
       background: #fff; border-radius: 4px; overflow: hidden;
+      color: inherit; text-decoration: none;
       box-shadow: 0 2px 16px rgba(0,0,0,0.06);
       transition: transform 0.3s, box-shadow 0.3s;
       cursor: pointer;
@@ -892,13 +894,13 @@
         <div class="section-tag reveal">FEATURED LISTINGS</div>
         <h2 class="reveal reveal-delay-1">おすすめ物件</h2>
       </div>
-      <a href="#" class="see-all reveal reveal-delay-2">
+      <a href="properties.html" class="see-all reveal reveal-delay-2">
         すべての物件を見る
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
     <div class="properties-grid">
-      <div class="prop-card reveal">
+      <a href="property-detail.html?id=setagaya-house" class="prop-card reveal">
         <div class="prop-img">
           <span class="prop-badge">新着</span>
           <img src="assets/images/property-setagaya-house.png" alt="東京都世田谷区の閑静な住宅街に佇む一戸建ての外観">
@@ -916,8 +918,8 @@
             <span class="prop-spec">築8年</span>
           </div>
         </div>
-      </div>
-      <div class="prop-card reveal reveal-delay-1">
+      </a>
+      <a href="property-detail.html?id=yokohama-penthouse" class="prop-card reveal reveal-delay-1">
         <div class="prop-img" style="background: linear-gradient(135deg, #cdd4d8 0%, #bec6cb 100%);">
           <span class="prop-badge" style="background: var(--navy);">おすすめ</span>
           <img src="assets/images/property-yokohama-penthouse.png" alt="神奈川県横浜市の眺望良好なマンション最上階のリビング">
@@ -935,8 +937,8 @@
             <span class="prop-spec">築3年</span>
           </div>
         </div>
-      </div>
-      <div class="prop-card reveal reveal-delay-2">
+      </a>
+      <a href="property-detail.html?id=suginami-land" class="prop-card reveal reveal-delay-2">
         <div class="prop-img" style="background: linear-gradient(135deg, #d4cec5 0%, #c5bdb3 100%);">
           <img src="assets/images/property-suginami-land.png" alt="東京都杉並区の駅徒歩5分にある整形地の土地">
         </div>
@@ -953,7 +955,7 @@
             <span class="prop-spec">更地渡し</span>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1061,24 +1063,24 @@
     </div>
     <div class="footer-col">
       <h4>サービス</h4>
-      <a href="#">住宅購入</a>
-      <a href="#">不動産売却</a>
-      <a href="#">土地売買</a>
-      <a href="#">無料査定</a>
+      <a href="service-purchase.html">住宅購入</a>
+      <a href="consultation.html">不動産売却</a>
+      <a href="properties.html">土地売買</a>
+      <a href="consultation.html">無料査定</a>
     </div>
     <div class="footer-col">
       <h4>会社情報</h4>
-      <a href="#">会社概要</a>
-      <a href="#">スタッフ紹介</a>
-      <a href="#">取引事例</a>
-      <a href="#">お知らせ</a>
+      <a href="access.html">会社概要</a>
+      <a href="#about">スタッフ紹介</a>
+      <a href="property-detail.html">取引事例</a>
+      <a href="properties.html">お知らせ</a>
     </div>
     <div class="footer-col">
       <h4>お問い合わせ</h4>
-      <a href="#">無料相談予約</a>
-      <a href="#">物件査定依頼</a>
-      <a href="#">アクセス</a>
-      <a href="#">プライバシーポリシー</a>
+      <a href="consultation.html">無料相談予約</a>
+      <a href="consultation.html">物件査定依頼</a>
+      <a href="access.html">アクセス</a>
+      <a href="consultation.html">プライバシーポリシー</a>
     </div>
   </div>
   <div class="footer-bottom">

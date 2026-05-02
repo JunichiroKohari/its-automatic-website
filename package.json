@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
-    "build": "npx webpack --mode production"
+    "build": "./node_modules/.bin/webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
