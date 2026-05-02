@@ -15,11 +15,12 @@ npm run build
 1. Push this repository to GitHub.
 2. Open [Codex](https://chatgpt.com/codex) and connect your GitHub account.
 3. In Codex settings, create a cloud environment for `JunichiroKohari/its-automatic-website`.
-4. Use the default `universal` image and pin `Node.js` to `24` to match the version verified in this repo.
-5. Set the setup step to `npm ci`.
+4. Use the default `universal` image and pin `Node.js` to `22`.
+5. Set the setup step to `npm ci --ignore-scripts`.
 6. Keep agent internet access off unless a task truly needs it.
 
 This repository does not currently require any `.env` file or runtime secret for build/edit tasks.
+The `--ignore-scripts` flag is intentional for Codex cloud setup because the repo no longer needs the old native image install steps that tend to fail in fresh Linux containers.
 
 ## What Codex should edit
 

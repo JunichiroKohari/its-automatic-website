@@ -8,10 +8,11 @@
 
 ## Setup and validation
 
-- Install dependencies with `npm ci`.
+- Install dependencies with `npm ci --ignore-scripts` in fresh cloud environments.
 - Start the dev server with `npm start`.
 - Build production output with `npm run build`.
 - There is no automated test suite in this repo right now. The required validation step is a successful production build.
+- `favicons` and `image-webpack-loader` are intentionally not part of the active toolchain.
 
 ## Editing guidelines
 
