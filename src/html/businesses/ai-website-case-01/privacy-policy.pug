@@ -11,8 +11,12 @@ html(lang="ja")
     link(rel="stylesheet", href="assets/css/privacy-policy.css")
   body(class="case-site case-site-page case-site-privacy")
     nav
-      a(href="index.html", class="nav-logo")
-        | 小針不動産株式会社
+      a(href="index.html", class="nav-logo", aria-label="小針不動産株式会社 ホーム")
+        span(class="nav-logo-text")
+          span(class="nav-logo-corp")
+            | 株式会社
+          span(class="nav-logo-ja")
+            | 小針不動産
       ul(class="nav-links")
         li
           a(href="index.html#services")
