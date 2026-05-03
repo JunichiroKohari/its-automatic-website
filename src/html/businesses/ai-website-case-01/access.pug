@@ -389,7 +389,7 @@ html(lang="ja")
             | 無料相談を予約する
           a(href="tel:00-0000-0000", class="btn-outline-w")
             | 電話で問い合わせる
-include _site-footer.pug
+    include _site-footer.pug
 
     script
       .
@@ -428,4 +428,3 @@ include _site-footer.pug
               entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
             }, { threshold: 0.1 });
             reveals.forEach(el => obs.observe(el));
-

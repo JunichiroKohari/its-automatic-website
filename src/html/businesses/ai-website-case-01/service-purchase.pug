@@ -9,7 +9,6 @@ html(lang="ja")
     link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
     style
       .
-
               :root {
                 --navy: #1a2540;
                 --navy-light: #2e3d60;
@@ -26,7 +25,6 @@ html(lang="ja")
               *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
               html { scroll-behavior: smooth; }
               body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
-
               /* ── NAV ── */
               nav {
                 position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -45,7 +43,6 @@ html(lang="ja")
               .nav-cta { background: var(--gold); color: #fff !important; padding: 0.55rem 1.4rem; border-radius: 2px; font-weight: 500 !important; }
               .nav-cta::after { display: none !important; }
               .nav-cta:hover { background: var(--gold-light) !important; }
-
               /* ── HERO ── */
               .page-hero {
                 margin-top: 64px;
@@ -105,7 +102,6 @@ html(lang="ja")
                 background: rgba(180,150,90,0.9); color: #fff;
                 font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.3rem 0.8rem; border-radius: 2px;
               }
-
               /* ── SECTION COMMON ── */
               .section-tag {
                 font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold);
@@ -114,7 +110,6 @@ html(lang="ja")
               .section-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
               h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 600; color: var(--navy); letter-spacing: 0.04em; line-height: 1.4; margin-bottom: 1rem; }
               .section-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 2; max-width: 560px; }
-
               /* reveal */
               .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
               .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -122,7 +117,6 @@ html(lang="ja")
               .reveal-delay-2 { transition-delay: 0.24s; }
               .reveal-delay-3 { transition-delay: 0.36s; }
               .reveal-delay-4 { transition-delay: 0.48s; }
-
               /* ── APPEAL ── */
               .appeal { padding: 6rem 4rem; background: #fff; }
               .appeal-inner { max-width: 1100px; margin: 0 auto; }
@@ -140,7 +134,6 @@ html(lang="ja")
               .appeal-num { font-family: 'Noto Serif JP', serif; font-size: 2.4rem; font-weight: 300; color: rgba(180,150,90,0.25); line-height: 1; margin-bottom: 1rem; }
               .appeal-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-bottom: 0.8rem; letter-spacing: 0.03em; }
               .appeal-card p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
-
               /* ── FLOW ── */
               .flow { padding: 6rem 4rem; background: var(--ivory); }
               .flow-inner { max-width: 1100px; margin: 0 auto; }
@@ -174,7 +167,6 @@ html(lang="ja")
                 font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em;
               }
               .flow-step-body .step-note svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; stroke-width: 2; }
-
               /* ── SUPPORT DETAIL ── */
               .support { padding: 6rem 4rem; background: var(--navy); position: relative; overflow: hidden; }
               .support::before {
@@ -201,7 +193,6 @@ html(lang="ja")
               .support-card-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
               .support-card h3 { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.6rem; letter-spacing: 0.03em; }
               .support-card p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.9; }
-
               /* ── CHECKLIST ── */
               .checklist { padding: 6rem 4rem; background: #fff; }
               .checklist-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
@@ -223,7 +214,6 @@ html(lang="ja")
               .check-item:hover .check-circle svg { stroke: #fff; }
               .check-item h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
               .check-item p { font-size: 0.78rem; color: var(--text-light); line-height: 1.7; }
-
               /* Worry cards */
               .worry-cards { display: flex; flex-direction: column; gap: 1rem; }
               .worry-card {
@@ -240,7 +230,6 @@ html(lang="ja")
               .worry-answer { grid-column: 1 / -1; padding: 0.9rem 1rem; background: #fff; border-radius: 3px; border-left: 3px solid var(--gold); margin-top: 0.2rem; }
               .worry-answer p { font-size: 0.78rem; color: var(--text-mid); line-height: 1.8; }
               .worry-answer p strong { color: var(--navy); }
-
               /* ── VOICE ── */
               .voice { padding: 6rem 4rem; background: var(--ivory-deep); }
               .voice-inner { max-width: 1100px; margin: 0 auto; }
@@ -262,7 +251,6 @@ html(lang="ja")
               .voice-avatar svg { width: 20px; height: 20px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
               .voice-name { font-size: 0.8rem; font-weight: 500; color: var(--navy); }
               .voice-attr { font-size: 0.7rem; color: var(--text-light); margin-top: 0.1rem; }
-
               /* ── CTA ── */
               .cta-section {
                 padding: 6rem 4rem;
@@ -280,14 +268,12 @@ html(lang="ja")
               .cta-section h2 { color: #fff; font-size: clamp(1.6rem, 2.5vw, 2.4rem); position: relative; z-index: 1; }
               .cta-section p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 2; margin: 1rem 0 2.5rem; letter-spacing: 0.04em; position: relative; z-index: 1; }
               .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-
               /* ── FOOTER ── */
               footer { background: #111820; padding: 2.5rem 4rem; }
               .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
               .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
               .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
               .footer-bottom a:hover { color: var(--gold); }
-
               @media (max-width: 900px) {
                 nav { padding: 1rem 1.5rem; }
                 .page-hero { padding: 3.5rem 1.5rem 3rem; }
@@ -304,7 +290,6 @@ html(lang="ja")
                 .cta-section { padding: 4rem 1.5rem; }
                 footer { padding: 2rem 1.5rem; }
               }
-
   body
     nav
       a(href="index.html", class="nav-logo")
@@ -751,11 +736,10 @@ html(lang="ja")
           | 無料相談を予約する
         a(href="properties.html", class="btn-outline-w")
           | 物件を探す
-include _site-footer.pug
+    include _site-footer.pug
 
     script
       .
-
             const reveals = document.querySelectorAll('.reveal');
             const obs = new IntersectionObserver(entries => {
               entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });

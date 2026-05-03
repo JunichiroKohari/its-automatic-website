@@ -721,7 +721,7 @@ html(lang="ja")
                 | 当日キャンセルはできますか？
               div(class="faq-a")
                 | 可能です。お電話またはメールにてご連絡ください。
-include _site-footer.pug
+    include _site-footer.pug
 
     script
       .
@@ -913,4 +913,3 @@ include _site-footer.pug
               entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
             }, { threshold: 0.1 });
             reveals.forEach(el => obs.observe(el));
-
