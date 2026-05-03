@@ -9,7 +9,7 @@ html(lang="ja")
     link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
     style
       .
-        
+
               :root {
                 --navy: #1a2540;
                 --navy-light: #2e3d60;
@@ -28,7 +28,7 @@ html(lang="ja")
               *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
               html { scroll-behavior: smooth; }
               body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
-          
+
               /* ── NAV ── */
               nav {
                 position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -47,7 +47,7 @@ html(lang="ja")
               .nav-cta { background: var(--gold); color: #fff !important; padding: 0.55rem 1.4rem; border-radius: 2px; font-weight: 500 !important; }
               .nav-cta::after { display: none !important; }
               .nav-cta:hover { background: var(--gold-light) !important; }
-          
+
               /* ── PAGE HEADER ── */
               .page-header {
                 margin-top: 64px;
@@ -70,7 +70,7 @@ html(lang="ja")
               .page-tag::before, .page-tag::after { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
               .page-header h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; color: #fff; letter-spacing: 0.04em; margin-bottom: 0.8rem; }
               .page-header p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.9; letter-spacing: 0.04em; }
-          
+
               /* ── STEPS ── */
               .steps-bar {
                 background: #fff; border-bottom: 1px solid rgba(0,0,0,0.07);
@@ -90,14 +90,14 @@ html(lang="ja")
               .step-label { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--text-mid); white-space: nowrap; }
               .step-label.active { color: var(--navy); font-weight: 500; }
               .step-connector { flex: 1; height: 1px; background: rgba(0,0,0,0.12); margin: 0 0.5rem; min-width: 20px; }
-          
+
               /* ── MAIN ── */
               .main-wrap {
                 max-width: 1100px; margin: 0 auto;
                 padding: 3rem 4rem 5rem;
                 display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start;
               }
-          
+
               /* ── FORM ── */
               .form-card {
                 background: #fff; border-radius: 6px;
@@ -117,7 +117,7 @@ html(lang="ja")
               }
               .form-section-title svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
               .form-section-desc { font-size: 0.78rem; color: var(--text-light); margin-bottom: 1.6rem; letter-spacing: 0.04em; }
-          
+
               .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
               .form-row.full { grid-template-columns: 1fr; }
               .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -145,7 +145,7 @@ html(lang="ja")
               .form-input::placeholder { color: var(--text-light); }
               select.form-input { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
               textarea.form-input { resize: vertical; min-height: 100px; }
-          
+
               /* Type selector chips */
               .type-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
               .type-chip {
@@ -159,7 +159,7 @@ html(lang="ja")
               .type-chip.active { background: var(--navy); border-color: var(--navy); color: #fff; }
               .type-chip svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
               .type-chip input { display: none; }
-          
+
               /* Contact method */
               .method-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
               .method-card {
@@ -175,7 +175,7 @@ html(lang="ja")
               .method-card h4 { font-size: 0.78rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
               .method-card p { font-size: 0.68rem; color: var(--text-light); line-height: 1.5; }
               .method-card input { display: none; }
-          
+
               /* Calendar */
               .calendar-wrap { margin-top: 0.5rem; }
               .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
@@ -201,7 +201,7 @@ html(lang="ja")
               .cal-day.sun { color: #c0392b; }
               .cal-day.sat { color: #2980b9; }
               .cal-day.selected.sun, .cal-day.selected.sat { color: #fff; }
-          
+
               /* Time slots */
               .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
               .time-slot {
@@ -212,13 +212,13 @@ html(lang="ja")
               .time-slot:hover:not(.full) { border-color: var(--gold); color: var(--gold); }
               .time-slot.selected { background: var(--gold); border-color: var(--gold); color: #fff; }
               .time-slot.full { color: var(--text-light); background: rgba(0,0,0,0.03); cursor: default; text-decoration: line-through; font-size: 0.72rem; }
-          
+
               /* Privacy */
               .privacy-check { display: flex; align-items: flex-start; gap: 0.7rem; margin-top: 0.5rem; }
               .privacy-check input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; cursor: pointer; }
               .privacy-check label { font-size: 0.78rem; color: var(--text-mid); line-height: 1.7; cursor: pointer; }
               .privacy-check a { color: var(--gold); text-decoration: underline; }
-          
+
               /* Submit */
               .form-footer { padding: 1.8rem 2.4rem; background: var(--ivory-deep); }
               .btn-submit {
@@ -232,10 +232,10 @@ html(lang="ja")
               .btn-submit:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.15); }
               .btn-submit:disabled { background: rgba(0,0,0,0.2); cursor: not-allowed; transform: none; box-shadow: none; }
               .form-note { font-size: 0.72rem; color: var(--text-light); text-align: center; margin-top: 0.8rem; line-height: 1.7; }
-          
+
               /* ── SIDEBAR ── */
               .sidebar { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 1.5rem; }
-          
+
               .info-card {
                 background: #fff; border-radius: 6px;
                 border: 1px solid rgba(0,0,0,0.07);
@@ -245,7 +245,7 @@ html(lang="ja")
               .info-card-header { background: var(--navy); padding: 1.2rem 1.5rem; }
               .info-card-header h3 { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: #fff; letter-spacing: 0.04em; }
               .info-card-body { padding: 1.5rem; }
-          
+
               .contact-item { display: flex; gap: 0.8rem; align-items: flex-start; margin-bottom: 1.2rem; }
               .contact-item:last-child { margin-bottom: 0; }
               .contact-icon { width: 36px; height: 36px; border-radius: 3px; background: oklch(96% 0.015 72); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -253,19 +253,19 @@ html(lang="ja")
               .contact-info h4 { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.2rem; }
               .contact-info p { font-size: 0.9rem; font-weight: 500; color: var(--navy); letter-spacing: 0.04em; line-height: 1.5; }
               .contact-info small { font-size: 0.68rem; color: var(--text-light); }
-          
+
               .faq-item { border-bottom: 1px solid rgba(0,0,0,0.06); padding: 1rem 0; }
               .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
               .faq-q { font-size: 0.82rem; font-weight: 500; color: var(--navy); margin-bottom: 0.4rem; display: flex; gap: 0.5rem; }
               .faq-q::before { content: 'Q'; color: var(--gold); font-family: var(--serif); font-weight: 700; flex-shrink: 0; }
               .faq-a { font-size: 0.75rem; color: var(--text-mid); line-height: 1.7; display: flex; gap: 0.5rem; }
               .faq-a::before { content: 'A'; color: var(--text-light); font-family: var(--serif); font-weight: 700; flex-shrink: 0; }
-          
+
               .point-list { display: flex; flex-direction: column; gap: 0.8rem; }
               .point-item { display: flex; gap: 0.7rem; align-items: flex-start; }
               .point-item svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 1px; }
               .point-item p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.6; }
-          
+
               /* ── COMPLETE SCREEN ── */
               .complete-screen {
                 display: none; text-align: center; padding: 5rem 2rem;
@@ -289,20 +289,20 @@ html(lang="ja")
               .complete-detail-row span:last-child { color: var(--navy); font-weight: 500; }
               .btn-home { display: inline-block; margin-top: 1rem; padding: 0.9rem 2.4rem; background: var(--navy); color: #fff; border-radius: 3px; font-size: 0.88rem; letter-spacing: 0.1em; text-decoration: none; transition: background 0.2s; }
               .btn-home:hover { background: var(--navy-light); }
-          
+
               /* reveal */
               .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
               .reveal.visible { opacity: 1; transform: translateY(0); }
               .reveal-delay-1 { transition-delay: 0.1s; }
               .reveal-delay-2 { transition-delay: 0.2s; }
-          
+
               /* footer */
               footer { background: #111820; padding: 2.5rem 4rem; }
               .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
               .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
               .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
               .footer-bottom a:hover { color: var(--gold); }
-          
+
               @media (max-width: 900px) {
                 nav { padding: 1rem 1.5rem; }
                 .page-header { padding: 3rem 1.5rem 2.5rem; }
@@ -313,7 +313,7 @@ html(lang="ja")
                 .method-cards { grid-template-columns: 1fr 1fr 1fr; }
                 footer { padding: 2rem 1.5rem; }
               }
-            
+
   body
     nav
       a(href="index.html", class="nav-logo")
@@ -721,33 +721,29 @@ html(lang="ja")
                 | 当日キャンセルはできますか？
               div(class="faq-a")
                 | 可能です。お電話またはメールにてご連絡ください。
-    footer
-      div(class="footer-bottom")
-        p
-          | © 2024 小針不動産株式会社 All Rights Reserved.
-        a(href="index.html")
-          | ← トップページへ戻る
+include _site-footer.pug
+
     script
       .
-        
+
             // ── Chip toggle (multi select)
             function toggleChip(el) { el.classList.toggle('active'); }
-          
+
             // ── Method select (single)
             function selectMethod(el) {
               document.querySelectorAll('.method-card').forEach(c => c.classList.remove('active'));
               el.classList.add('active');
             }
-          
+
             // ── Calendar
             const today = new Date();
             let calYear = today.getFullYear();
             let calMonth = today.getMonth();
             let selectedDate = null;
-          
+
             const WEEKDAYS = ['日','月','火','水','木','金','土'];
             const CLOSED = [0]; // 日曜定休
-          
+
             function renderCalendar() {
               const title = document.getElementById('calTitle');
               const grid = document.getElementById('calGrid');
@@ -787,7 +783,7 @@ html(lang="ja")
                 grid.appendChild(el);
               }
             }
-          
+
             function selectDay(date, el) {
               document.querySelectorAll('.cal-day.selected').forEach(d => d.classList.remove('selected'));
               el.classList.add('selected');
@@ -801,13 +797,13 @@ html(lang="ja")
               wrap.style.display = 'block';
               wrap.scrollIntoView && (wrap.style.scrollMargin = '20px');
             }
-          
+
             function selectTime(el) {
               if (el.classList.contains('full')) return;
               document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
               el.classList.add('selected');
             }
-          
+
             function prevMonth() {
               calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
               renderCalendar();
@@ -816,9 +812,9 @@ html(lang="ja")
               calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
               renderCalendar();
             }
-          
+
             renderCalendar();
-          
+
             // ── Steps indicator
             function setStep(n) {
               [1,2,3].forEach(i => {
@@ -829,7 +825,7 @@ html(lang="ja")
                 else { num.className = 'step-num pending'; lbl.className = 'step-label'; }
               });
             }
-          
+
             // ── Collect form data
             function collectData() {
               const form = document.getElementById('reservationForm');
@@ -853,7 +849,7 @@ html(lang="ja")
                 timeStr:   timeSelected ? timeSelected.textContent : '未選択',
               };
             }
-          
+
             // ── Build detail rows HTML
             function buildDetailRows(data) {
               const rows = [
@@ -873,18 +869,18 @@ html(lang="ja")
                 `<div class="complete-detail-row"><span>${k}</span><span>${v}</span></div>`
               ).join('');
             }
-          
+
             // ── Form submit → show confirm screen
             document.getElementById('reservationForm').addEventListener('submit', function(e) {
               e.preventDefault();
               const data = collectData();
               const privacy = document.getElementById('privacyCheck').checked;
-          
+
               if (!data.lastName || !data.firstName || !data.tel || !data.email || !privacy) {
                 alert('必須項目をすべてご入力の上、プライバシーポリシーにご同意ください。');
                 return;
               }
-          
+
               // Show confirm screen (step 2)
               setStep(2);
               document.getElementById('confirmDetail').innerHTML = buildDetailRows(data);
@@ -892,7 +888,7 @@ html(lang="ja")
               document.getElementById('confirmScreen').style.display = 'block';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-          
+
             // ── Back to form
             function backToForm() {
               setStep(1);
@@ -900,7 +896,7 @@ html(lang="ja")
               document.querySelector('.form-card').style.display = 'block';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-          
+
             // ── Final submit → show complete screen
             function submitFinal() {
               const data = collectData();
@@ -910,11 +906,11 @@ html(lang="ja")
               document.getElementById('completeScreen').style.display = 'block';
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-          
+
             // ── Reveal
             const reveals = document.querySelectorAll('.reveal');
             const obs = new IntersectionObserver(entries => {
               entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
             }, { threshold: 0.1 });
             reveals.forEach(el => obs.observe(el));
-          
+

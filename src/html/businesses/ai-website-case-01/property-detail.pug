@@ -9,7 +9,7 @@ html(lang="ja")
     link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
     style
       .
-        
+
               :root {
                 --navy: #1a2540;
                 --navy-light: #2e3d60;
@@ -26,7 +26,7 @@ html(lang="ja")
               *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
               html { scroll-behavior: smooth; }
               body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
-          
+
               /* ── NAV ── */
               nav {
                 position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -58,7 +58,7 @@ html(lang="ja")
               }
               .nav-cta::after { display: none !important; }
               .nav-cta:hover { background: var(--gold-light) !important; }
-          
+
               /* ── BREADCRUMB ── */
               .breadcrumb-bar {
                 margin-top: 64px;
@@ -73,7 +73,7 @@ html(lang="ja")
               .breadcrumb a { color: var(--text-light); text-decoration: none; transition: color 0.3s; }
               .breadcrumb a:hover { color: var(--gold); }
               .breadcrumb span { color: var(--text-light); }
-          
+
               /* ── GALLERY ── */
               .gallery {
                 background: var(--navy);
@@ -125,17 +125,17 @@ html(lang="ja")
                 font-size: 0.72rem; letter-spacing: 0.1em;
                 padding: 0.3rem 0.8rem; border-radius: 2px;
               }
-          
+
               /* ── MAIN CONTENT ── */
               .detail-wrap {
                 max-width: 1200px; margin: 0 auto;
                 padding: 2.5rem 4rem 5rem;
                 display: grid; grid-template-columns: 1fr 360px; gap: 3rem; align-items: start;
               }
-          
+
               /* ── LEFT: DETAIL ── */
               .detail-left {}
-          
+
               .detail-header { margin-bottom: 1.8rem; }
               .detail-badges { display: flex; gap: 0.4rem; margin-bottom: 0.8rem; }
               .badge {
@@ -144,7 +144,7 @@ html(lang="ja")
               }
               .badge-new { background: var(--gold); color: #fff; }
               .badge-type { background: var(--navy); color: #fff; }
-          
+
               .detail-title {
                 font-family: var(--serif);
                 font-size: clamp(1.4rem, 2.5vw, 1.9rem);
@@ -157,7 +157,7 @@ html(lang="ja")
                 font-size: 0.82rem; color: var(--text-light); letter-spacing: 0.06em;
               }
               .detail-location svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 2; }
-          
+
               .detail-price-row {
                 display: flex; align-items: baseline; gap: 1rem;
                 padding: 1.4rem 0; border-top: 1px solid rgba(0,0,0,0.07); border-bottom: 1px solid rgba(0,0,0,0.07);
@@ -168,7 +168,7 @@ html(lang="ja")
               }
               .detail-price span { font-size: 1rem; font-weight: 300; color: var(--text-light); margin-left: 0.2rem; }
               .detail-price-note { font-size: 0.75rem; color: var(--text-light); line-height: 1.6; }
-          
+
               /* Quick specs */
               .quick-specs {
                 display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem;
@@ -182,7 +182,7 @@ html(lang="ja")
               .qs-item svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 0.5rem; }
               .qs-label { font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 0.2rem; }
               .qs-value { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--navy); }
-          
+
               /* TABS */
               .tabs { display: flex; gap: 0; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 2rem; }
               .tab-btn {
@@ -193,10 +193,10 @@ html(lang="ja")
               }
               .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 500; }
               .tab-btn:hover:not(.active) { color: var(--text); }
-          
+
               .tab-panel { display: none; }
               .tab-panel.active { display: block; }
-          
+
               /* Detail table */
               .detail-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
               .detail-table tr { border-bottom: 1px solid rgba(0,0,0,0.06); }
@@ -211,7 +211,7 @@ html(lang="ja")
                 padding: 1rem 1.2rem; font-size: 0.85rem;
                 color: var(--text); line-height: 1.7;
               }
-          
+
               /* Description */
               .desc-section h3 {
                 font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
@@ -232,7 +232,7 @@ html(lang="ja")
                 content: ''; display: block; width: 6px; height: 6px;
                 background: var(--gold); border-radius: 50%; flex-shrink: 0;
               }
-          
+
               /* MAP placeholder */
               .map-placeholder {
                 width: 100%; height: 320px;
@@ -257,10 +257,10 @@ html(lang="ja")
                 z-index: 2;
               }
               .map-pin svg { width: 32px; height: 32px; stroke: var(--gold); fill: rgba(180,150,90,0.2); stroke-width: 2; }
-          
+
               /* ── RIGHT: STICKY CARD ── */
               .detail-right { position: sticky; top: 88px; }
-          
+
               .contact-card {
                 background: #fff; border-radius: 6px;
                 border: 1px solid rgba(0,0,0,0.07);
@@ -275,17 +275,17 @@ html(lang="ja")
               }
               .contact-card-header .price span { font-size: 0.9rem; font-weight: 300; color: rgba(255,255,255,0.5); margin-left: 0.2rem; }
               .contact-card-header .cc-label { font-size: 0.68rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem; }
-          
+
               .contact-card-body { padding: 1.8rem; }
-          
+
               .cc-specs {
                 display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1.6rem;
               }
               .cc-spec { font-size: 0.75rem; color: var(--text-light); }
               .cc-spec strong { display: block; font-size: 0.88rem; color: var(--navy); font-weight: 500; margin-top: 0.15rem; }
-          
+
               .cc-divider { height: 1px; background: rgba(0,0,0,0.07); margin-bottom: 1.6rem; }
-          
+
               .cc-form { display: flex; flex-direction: column; gap: 0.7rem; }
               .cc-input {
                 width: 100%; padding: 0.75rem 1rem; border-radius: 3px;
@@ -304,7 +304,7 @@ html(lang="ja")
               }
               .cc-textarea:focus { border-color: var(--gold); }
               .cc-textarea::placeholder { color: var(--text-light); }
-          
+
               .btn-contact {
                 width: 100%; padding: 1rem; background: var(--gold); color: #fff;
                 border: none; border-radius: 3px; font-family: var(--sans);
@@ -312,7 +312,7 @@ html(lang="ja")
                 cursor: pointer; transition: background 0.2s, transform 0.2s;
               }
               .btn-contact:hover { background: var(--gold-light); transform: translateY(-1px); }
-          
+
               .btn-tel {
                 width: 100%; padding: 0.85rem; background: #fff; color: var(--navy);
                 border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
@@ -323,9 +323,9 @@ html(lang="ja")
               }
               .btn-tel:hover { border-color: var(--gold); color: var(--gold); }
               .btn-tel svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
-          
+
               .cc-note { font-size: 0.68rem; color: var(--text-light); text-align: center; line-height: 1.7; margin-top: 0.8rem; }
-          
+
               /* Fav / share bar */
               .action-bar {
                 display: flex; gap: 0.6rem; margin-top: 1rem;
@@ -341,7 +341,7 @@ html(lang="ja")
               .action-btn:hover { border-color: var(--gold); color: var(--gold); }
               .action-btn.fav-active { border-color: #e05c5c; color: #e05c5c; }
               .action-btn.fav-active svg { fill: #e05c5c; stroke: #e05c5c; }
-          
+
               /* ── RELATED ── */
               .related-section {
                 background: var(--ivory-deep);
@@ -374,7 +374,7 @@ html(lang="ja")
               .rel-title { font-family: var(--serif); font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.5; }
               .rel-price { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--gold); }
               .rel-price span { font-size: 0.72rem; font-weight: 300; color: var(--text-light); margin-left: 0.2rem; }
-          
+
               /* ── FOOTER ── */
               footer { background: #111820; padding: 3rem 4rem 2rem; }
               .footer-bottom {
@@ -384,14 +384,14 @@ html(lang="ja")
               .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
               .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
               .footer-bottom a:hover { color: var(--gold); }
-          
+
               /* reveal */
               .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
               .reveal.visible { opacity: 1; transform: translateY(0); }
               .reveal-delay-1 { transition-delay: 0.12s; }
               .reveal-delay-2 { transition-delay: 0.24s; }
               .reveal-delay-3 { transition-delay: 0.36s; }
-          
+
               /* lightbox */
               .lightbox {
                 position: fixed; inset: 0; z-index: 200;
@@ -413,7 +413,7 @@ html(lang="ja")
                 width: 900px; height: 560px;
               }
               .lightbox-img p { font-family: monospace; font-size: 0.75rem; color: rgba(0,0,0,0.3); letter-spacing: 0.1em; }
-          
+
               @media (max-width: 1000px) {
                 nav { padding: 1rem 1.5rem; }
                 .breadcrumb-bar { padding: 0.75rem 1.5rem; }
@@ -426,7 +426,7 @@ html(lang="ja")
                 .related-grid { grid-template-columns: 1fr 1fr; }
                 footer { padding: 2rem 1.5rem; }
               }
-            
+
   body
     nav
       a(href="index.html", class="nav-logo")
@@ -827,22 +827,11 @@ html(lang="ja")
                 | 3,280
                 span
                   | 万円
-    footer
-      div(class="footer-bottom")
-        p
-          | © 2024 小針不動産株式会社 All Rights Reserved.
-        a(href="properties.html")
-          | ← 物件一覧に戻る
-    div(class="lightbox", id="lightbox", onclick="closeLightbox()")
-      button(class="lightbox-close", onclick="closeLightbox()")
-        | ×
-      div(class="lightbox-img", onclick="event.stopPropagation()")
-        p
-          | 物件写真（拡大表示）
-    script(src="assets/js/property-detail.js", data-case-script="property-detail")
+include _site-footer.pug
+
     script
       .
-        
+
             // Tab switching
             function switchTab(btn, panelId) {
               document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -850,23 +839,23 @@ html(lang="ja")
               btn.classList.add('active');
               document.getElementById(panelId).classList.add('active');
             }
-          
+
             // Fav toggle
             function toggleFav() {
               const btn = document.getElementById('favBtn');
               btn.classList.toggle('fav-active');
               btn.querySelector('span') || btn.childNodes;
             }
-          
+
             // Lightbox
             function openLightbox() { document.getElementById('lightbox').classList.add('open'); }
             function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
             document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-          
+
             // Reveal
             const reveals = document.querySelectorAll('.reveal');
             const obs = new IntersectionObserver(entries => {
               entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
             }, { threshold: 0.1 });
             reveals.forEach(el => obs.observe(el));
-          
+

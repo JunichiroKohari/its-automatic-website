@@ -9,7 +9,7 @@ html(lang="ja")
     link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
     style
       .
-        
+
               :root {
                 --navy: #1a2540;
                 --navy-light: #2e3d60;
@@ -23,11 +23,11 @@ html(lang="ja")
                 --serif: 'Noto Serif JP', serif;
                 --sans: 'Noto Sans JP', sans-serif;
               }
-          
+
               *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-          
+
               html { scroll-behavior: smooth; font-size: 16px; }
-          
+
               body {
                 font-family: var(--sans);
                 background: var(--ivory);
@@ -37,7 +37,7 @@ html(lang="ja")
               body.disclaimer-open {
                 overflow: hidden;
               }
-          
+
               /* ── DISCLAIMER DIALOG ── */
               .site-disclaimer {
                 position: fixed;
@@ -115,7 +115,7 @@ html(lang="ja")
                 outline: 2px solid var(--gold);
                 outline-offset: 3px;
               }
-          
+
               /* ── NAV ── */
               nav {
                 position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -168,7 +168,7 @@ html(lang="ja")
               }
               .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
               .nav-cta::after { display: none !important; }
-          
+
               /* ── HERO ── */
               .hero {
                 position: relative; height: 100vh; min-height: 600px;
@@ -327,7 +327,7 @@ html(lang="ja")
               @keyframes heroFadeUp {
                 to { opacity: 1; transform: translateY(0); }
               }
-          
+
               /* ── STATS BAR ── */
               .stats-bar {
                 background: var(--navy);
@@ -352,7 +352,7 @@ html(lang="ja")
                 color: rgba(255,255,255,0.5);
                 margin-top: 0.3rem;
               }
-          
+
               /* ── SECTION COMMON ── */
               section { padding: 7rem 4rem; }
               .section-tag {
@@ -375,7 +375,7 @@ html(lang="ja")
                 font-size: 0.92rem; color: var(--text-mid);
                 line-height: 2; max-width: 500px;
               }
-          
+
               /* reveal animation */
               .reveal {
                 opacity: 0; transform: translateY(40px);
@@ -386,7 +386,7 @@ html(lang="ja")
               .reveal-delay-2 { transition-delay: 0.3s; }
               .reveal-delay-3 { transition-delay: 0.45s; }
               .reveal-delay-4 { transition-delay: 0.6s; }
-          
+
               /* ── SERVICES ── */
               .services { background: var(--ivory); }
               .services-inner {
@@ -419,7 +419,7 @@ html(lang="ja")
                 letter-spacing: 0.02em;
               }
               .service-card p { font-size: 0.82rem; color: var(--text-light); line-height: 1.9; }
-          
+
               /* ── FLOW ── */
               .flow { background: var(--navy); }
               .flow-inner { max-width: 1100px; margin: 0 auto; }
@@ -457,7 +457,7 @@ html(lang="ja")
                 letter-spacing: 0.04em;
               }
               .flow-step p { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.8; }
-          
+
               /* ── PROPERTIES ── */
               .properties { background: var(--ivory-deep); }
               .properties-inner { max-width: 1200px; margin: 0 auto; }
@@ -534,7 +534,7 @@ html(lang="ja")
                 padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.06);
               }
               .prop-spec { font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.05em; }
-          
+
               /* ── ABOUT ── */
               .about { background: #fff; }
               .about-inner {
@@ -585,7 +585,7 @@ html(lang="ja")
               .about-feat-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 2; }
               .about-feat h4 { font-size: 0.85rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
               .about-feat p { font-size: 0.75rem; color: var(--text-light); line-height: 1.7; }
-          
+
               /* ── CTA ── */
               .cta-section {
                 padding: 8rem 4rem;
@@ -639,7 +639,7 @@ html(lang="ja")
               .contact-card svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 1rem; }
               .contact-card h4 { font-size: 0.82rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); margin-bottom: 0.3rem; }
               .contact-card p { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
-          
+
               /* ── FOOTER ── */
               footer {
                 background: #111820;
@@ -673,7 +673,7 @@ html(lang="ja")
               }
               .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
               .footer-bottom a { color: rgba(255,255,255,0.25); text-decoration: none; font-size: 0.72rem; }
-          
+
               /* ── Scroll top btn ── */
               .scroll-top {
                 position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 50;
@@ -687,10 +687,10 @@ html(lang="ja")
               .scroll-top.visible { opacity: 1; pointer-events: all; }
               .scroll-top:hover { transform: translateY(-3px); border-color: var(--gold); }
               .scroll-top svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; }
-          
+
               /* Hamburger */
               .hamburger { display: none; }
-          
+
               @media (max-width: 900px) {
                 nav { padding: 1.2rem 1.5rem; }
                 nav.scrolled { padding: 0.8rem 1.5rem; }
@@ -724,7 +724,7 @@ html(lang="ja")
                 .hero-video { object-position: 50% 58%; }
                 .hero-scroll { bottom: 1.75rem; }
               }
-            
+
   body
     div(class="site-disclaimer", id="siteDisclaimer", role="dialog", aria-modal="true", aria-labelledby="siteDisclaimerTitle", aria-describedby="siteDisclaimerDesc", hidden)
       div(class="site-disclaimer__backdrop", data-disclaimer-close)
@@ -1082,71 +1082,18 @@ html(lang="ja")
       div(style="margin-top: 3rem; position: relative; z-index: 1;", class="reveal reveal-delay-3")
         a(href="#", class="btn-primary", style="display: inline-block;")
           | 無料相談を予約する →
-    footer
-      div(class="footer-inner")
-        div(class="footer-brand")
-          h3
-            | 小針不動産株式会社
-          p
-            | 地域に根ざした信頼の不動産会社として、
-            br
-            | お客様一人ひとりの夢の実現をサポートします。
-            br
-            br
-            | 〒000-0000 ○○都○○区○○町 1-2-3
-            br
-            | TEL: 00-0000-0000
-        div(class="footer-col")
-          h4
-            | サービス
-          a(href="service-purchase.html")
-            | 住宅購入
-          a(href="consultation.html")
-            | 不動産売却
-          a(href="properties.html")
-            | 土地売買
-          a(href="consultation.html")
-            | 無料査定
-        div(class="footer-col")
-          h4
-            | 会社情報
-          a(href="access.html")
-            | 会社概要
-          a(href="#about")
-            | スタッフ紹介
-          a(href="property-detail.html")
-            | 取引事例
-          a(href="properties.html")
-            | お知らせ
-        div(class="footer-col")
-          h4
-            | お問い合わせ
-          a(href="consultation.html")
-            | 無料相談予約
-          a(href="consultation.html")
-            | 物件査定依頼
-          a(href="access.html")
-            | アクセス
-          a(href="consultation.html")
-            | プライバシーポリシー
-      div(class="footer-bottom")
-        p
-          | © 2026 小針不動産株式会社 All Rights Reserved.
-        a(href="#")
-          | 宅地建物取引業者 国土交通大臣（○）第○○○○号
-    button(class="scroll-top", id="scrollTop", onclick="window.scrollTo({top:0,behavior:'smooth'})")
-      svg(viewbox="0 0 24 24")
-        polyline(points="18 15 12 9 6 15")
+include _site-footer.pug
+
     script
       .
-        
+
             // NAV scroll behavior
             const nav = document.getElementById('mainNav');
             const scrollTop = document.getElementById('scrollTop');
             const heroVideo = document.getElementById('heroVideo');
             const siteDisclaimer = document.getElementById('siteDisclaimer');
             const siteDisclaimerClose = document.getElementById('siteDisclaimerClose');
-          
+
             const openDisclaimer = () => {
               if (!siteDisclaimer) return;
               siteDisclaimer.hidden = false;
@@ -1154,7 +1101,7 @@ html(lang="ja")
               requestAnimationFrame(() => siteDisclaimer.classList.add('is-visible'));
               siteDisclaimerClose?.focus();
             };
-          
+
             const closeDisclaimer = () => {
               if (!siteDisclaimer || siteDisclaimer.hidden) return;
               siteDisclaimer.classList.remove('is-visible');
@@ -1163,9 +1110,9 @@ html(lang="ja")
                 siteDisclaimer.hidden = true;
               }, 200);
             };
-          
+
             openDisclaimer();
-          
+
             siteDisclaimerClose?.addEventListener('click', closeDisclaimer);
             siteDisclaimer?.querySelector('[data-disclaimer-close]')?.addEventListener('click', closeDisclaimer);
             siteDisclaimer?.addEventListener('keydown', e => {
@@ -1173,7 +1120,7 @@ html(lang="ja")
                 closeDisclaimer();
               }
             });
-          
+
             window.addEventListener('scroll', () => {
               if (window.scrollY > 60) {
                 nav.classList.add('scrolled');
@@ -1183,7 +1130,7 @@ html(lang="ja")
                 scrollTop.classList.remove('visible');
               }
             });
-          
+
             // Intersection Observer for reveal animations
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
@@ -1194,9 +1141,9 @@ html(lang="ja")
                 }
               });
             }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-          
+
             reveals.forEach(el => observer.observe(el));
-          
+
             // Animated counters
             function animateCount(el, target, suffix, duration = 1800) {
               let start = 0;
@@ -1207,7 +1154,7 @@ html(lang="ja")
                 el.innerHTML = start.toLocaleString() + '<span>' + suffix + '</span>';
               }, 16);
             }
-          
+
             const statNums = document.querySelectorAll('.stat-num[data-target]');
             const statObserver = new IntersectionObserver((entries) => {
               entries.forEach(e => {
@@ -1221,9 +1168,9 @@ html(lang="ja")
                 }
               });
             }, { threshold: 0.5 });
-          
+
             statNums.forEach(el => statObserver.observe(el));
-          
+
             // Respect reduced motion preferences for the hero background video.
             const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
             const syncHeroVideo = () => {
@@ -1237,14 +1184,14 @@ html(lang="ja")
                 playPromise.catch(() => {});
               }
             };
-          
+
             syncHeroVideo();
             if (typeof reducedMotionQuery.addEventListener === 'function') {
               reducedMotionQuery.addEventListener('change', syncHeroVideo);
             } else if (typeof reducedMotionQuery.addListener === 'function') {
               reducedMotionQuery.addListener(syncHeroVideo);
             }
-          
+
             // Smooth nav links
             document.querySelectorAll('a[href^="#"]').forEach(a => {
               a.addEventListener('click', e => {
@@ -1256,4 +1203,4 @@ html(lang="ja")
                 }
               });
             });
-          
+
