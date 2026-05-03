@@ -14,7 +14,15 @@ class RelativeCaseSiteAssetUrlsPlugin {
                         return data
                     }
 
+                    const caseSitePageName = path.basename(data.outputName, '.html')
+                    const caseSiteStylesheetLinks = [
+                        '<link rel="stylesheet" href="assets/css/common.css">',
+                        `<link rel="stylesheet" href="assets/css/${caseSitePageName}.css">`,
+                    ].join('')
+
                     data.html = data.html.replace(/ai-website-case-01\/assets\//g, 'assets/')
+                    data.html = data.html.replace(/<link rel="stylesheet" href="(?!https?:\/\/)[^"]+\.css">/g, '')
+                    data.html = data.html.replace('</head>', `${caseSiteStylesheetLinks}</head>`)
                     data.html = data.html.replace(
                         /<script[^>]*data-case-script="properties-listing"[^>]*><\/script>/,
                         '<script src="assets/js/properties-listing.js"></script>'
@@ -31,19 +39,21 @@ class RelativeCaseSiteAssetUrlsPlugin {
     }
 }
 
-class CopyCaseSiteDataPlugin {
+class CopyCaseSiteStaticAssetsPlugin {
     apply(compiler) {
-        compiler.hooks.afterEmit.tap('CopyCaseSiteDataPlugin', () => {
-            const sourceDir = path.resolve(__dirname, caseSiteDir, 'assets/data')
-            const destinationDir = path.resolve(__dirname, 'dist/ai-website-case-01/assets/data')
+        compiler.hooks.afterEmit.tap('CopyCaseSiteStaticAssetsPlugin', () => {
+            const copyDirectories = ['assets/data', 'assets/css']
 
-            fs.mkdirSync(destinationDir, { recursive: true })
+            copyDirectories.forEach((relativeDir) => {
+                const sourceDir = path.resolve(__dirname, caseSiteDir, relativeDir)
 
-            fs.readdirSync(sourceDir).forEach((file) => {
-                fs.copyFileSync(
-                    path.join(sourceDir, file),
-                    path.join(destinationDir, file)
-                )
+                if (!fs.existsSync(sourceDir)) {
+                    return
+                }
+
+                const destinationDir = path.resolve(__dirname, 'dist/ai-website-case-01', relativeDir)
+                fs.mkdirSync(path.dirname(destinationDir), { recursive: true })
+                fs.cpSync(sourceDir, destinationDir, { recursive: true })
             })
         })
     }
@@ -182,7 +192,7 @@ module.exports = {
             filename: './style/[name].css',
         }),
         new RelativeCaseSiteAssetUrlsPlugin(),
-        new CopyCaseSiteDataPlugin(),
+        new CopyCaseSiteStaticAssetsPlugin(),
         ...pages.map((page) => new HtmlWebpackPlugin({
             ...page,
             favicon: path.resolve(__dirname, './src/img/icon.png'),
