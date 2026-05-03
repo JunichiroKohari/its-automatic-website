@@ -1,0 +1,920 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title
+      | 無料相談予約 | 小針不動産株式会社
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
+    style
+      .
+        
+              :root {
+                --navy: #1a2540;
+                --navy-light: #2e3d60;
+                --gold: oklch(68% 0.12 72);
+                --gold-light: oklch(80% 0.10 72);
+                --ivory: oklch(97.5% 0.008 80);
+                --ivory-deep: oklch(93% 0.012 75);
+                --text: #1a1a1a;
+                --text-mid: #555;
+                --text-light: #888;
+                --serif: 'Noto Serif JP', serif;
+                --sans: 'Noto Sans JP', sans-serif;
+                --error: #c0392b;
+                --success: #27ae60;
+              }
+              *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+              html { scroll-behavior: smooth; }
+              body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
+          
+              /* ── NAV ── */
+              nav {
+                position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 1rem 4rem;
+                background: rgba(255,255,255,0.97);
+                box-shadow: 0 1px 24px rgba(0,0,0,0.07);
+                backdrop-filter: blur(12px);
+              }
+              .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; text-decoration: none; }
+              .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
+              .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--text-mid); text-decoration: none; transition: color 0.3s; position: relative; }
+              .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+              .nav-links a:hover { color: var(--navy); }
+              .nav-links a:hover::after { width: 100%; }
+              .nav-cta { background: var(--gold); color: #fff !important; padding: 0.55rem 1.4rem; border-radius: 2px; font-weight: 500 !important; }
+              .nav-cta::after { display: none !important; }
+              .nav-cta:hover { background: var(--gold-light) !important; }
+          
+              /* ── PAGE HEADER ── */
+              .page-header {
+                margin-top: 64px;
+                background: var(--navy); padding: 4rem 4rem 3.5rem;
+                position: relative; overflow: hidden;
+              }
+              .page-header::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+                background-size: 60px 60px;
+              }
+              .page-header-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; text-align: center; }
+              .breadcrumb { display: flex; gap: 0.5rem; align-items: center; justify-content: center; font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem; }
+              .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .breadcrumb a:hover { color: var(--gold); }
+              .page-tag { font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+              .page-tag::before, .page-tag::after { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
+              .page-header h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; color: #fff; letter-spacing: 0.04em; margin-bottom: 0.8rem; }
+              .page-header p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.9; letter-spacing: 0.04em; }
+          
+              /* ── STEPS ── */
+              .steps-bar {
+                background: #fff; border-bottom: 1px solid rgba(0,0,0,0.07);
+                padding: 1.5rem 4rem;
+              }
+              .steps-inner { max-width: 760px; margin: 0 auto; display: flex; align-items: center; }
+              .step-item { display: flex; align-items: center; gap: 0.6rem; flex: 1; }
+              .step-num {
+                width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 0.8rem; font-weight: 600; letter-spacing: 0;
+                transition: background 0.3s, color 0.3s, border-color 0.3s;
+              }
+              .step-num.active { background: var(--gold); color: #fff; border: 2px solid var(--gold); }
+              .step-num.done { background: var(--navy); color: #fff; border: 2px solid var(--navy); }
+              .step-num.pending { background: #fff; color: var(--text-light); border: 2px solid rgba(0,0,0,0.15); }
+              .step-label { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--text-mid); white-space: nowrap; }
+              .step-label.active { color: var(--navy); font-weight: 500; }
+              .step-connector { flex: 1; height: 1px; background: rgba(0,0,0,0.12); margin: 0 0.5rem; min-width: 20px; }
+          
+              /* ── MAIN ── */
+              .main-wrap {
+                max-width: 1100px; margin: 0 auto;
+                padding: 3rem 4rem 5rem;
+                display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start;
+              }
+          
+              /* ── FORM ── */
+              .form-card {
+                background: #fff; border-radius: 6px;
+                border: 1px solid rgba(0,0,0,0.07);
+                box-shadow: 0 4px 32px rgba(0,0,0,0.05);
+                overflow: hidden;
+              }
+              .form-section {
+                padding: 2.2rem 2.4rem;
+                border-bottom: 1px solid rgba(0,0,0,0.06);
+              }
+              .form-section:last-child { border-bottom: none; }
+              .form-section-title {
+                font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
+                color: var(--navy); margin-bottom: 0.3rem; letter-spacing: 0.03em;
+                display: flex; align-items: center; gap: 0.6rem;
+              }
+              .form-section-title svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
+              .form-section-desc { font-size: 0.78rem; color: var(--text-light); margin-bottom: 1.6rem; letter-spacing: 0.04em; }
+          
+              .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+              .form-row.full { grid-template-columns: 1fr; }
+              .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+              .form-label {
+                font-size: 0.75rem; letter-spacing: 0.08em; color: var(--text-mid); font-weight: 500;
+                display: flex; align-items: center; gap: 0.4rem;
+              }
+              .req {
+                font-size: 0.62rem; background: var(--gold); color: #fff;
+                padding: 0.1rem 0.4rem; border-radius: 2px; letter-spacing: 0.05em;
+              }
+              .opt {
+                font-size: 0.62rem; background: rgba(0,0,0,0.08); color: var(--text-light);
+                padding: 0.1rem 0.4rem; border-radius: 2px; letter-spacing: 0.05em;
+              }
+              .form-input {
+                padding: 0.75rem 1rem; border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.14); background: var(--ivory);
+                font-family: var(--sans); font-size: 0.88rem; color: var(--text);
+                outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+                width: 100%;
+              }
+              .form-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(180,150,90,0.1); }
+              .form-input.error { border-color: var(--error); }
+              .form-input::placeholder { color: var(--text-light); }
+              select.form-input { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+              textarea.form-input { resize: vertical; min-height: 100px; }
+          
+              /* Type selector chips */
+              .type-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+              .type-chip {
+                display: flex; align-items: center; gap: 0.5rem;
+                padding: 0.65rem 1.1rem; border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.14); background: var(--ivory);
+                font-family: var(--sans); font-size: 0.82rem; color: var(--text-mid);
+                cursor: pointer; transition: all 0.2s; user-select: none;
+              }
+              .type-chip:hover { border-color: var(--gold); color: var(--gold); }
+              .type-chip.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+              .type-chip svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+              .type-chip input { display: none; }
+          
+              /* Contact method */
+              .method-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+              .method-card {
+                border: 1px solid rgba(0,0,0,0.14); border-radius: 4px;
+                padding: 1rem; text-align: center; cursor: pointer;
+                transition: all 0.25s; position: relative;
+                background: var(--ivory);
+              }
+              .method-card:hover { border-color: var(--gold); }
+              .method-card.active { border-color: var(--navy); background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+              .method-card.active::before { content: '✓'; position: absolute; top: 0.4rem; right: 0.6rem; font-size: 0.65rem; color: var(--gold); font-weight: 700; }
+              .method-card svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 0.5rem; display: block; margin: 0 auto 0.5rem; }
+              .method-card h4 { font-size: 0.78rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
+              .method-card p { font-size: 0.68rem; color: var(--text-light); line-height: 1.5; }
+              .method-card input { display: none; }
+          
+              /* Calendar */
+              .calendar-wrap { margin-top: 0.5rem; }
+              .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+              .cal-title { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; }
+              .cal-btn { background: none; border: 1px solid rgba(0,0,0,0.12); border-radius: 3px; width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+              .cal-btn:hover { border-color: var(--gold); }
+              .cal-btn svg { width: 14px; height: 14px; stroke: var(--text-mid); fill: none; stroke-width: 2; }
+              .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+              .cal-dow { font-size: 0.65rem; letter-spacing: 0.08em; color: var(--text-light); text-align: center; padding: 0.3rem 0; }
+              .cal-dow:first-child { color: #c0392b; }
+              .cal-dow:last-child { color: #2980b9; }
+              .cal-day {
+                aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+                font-size: 0.8rem; border-radius: 3px; cursor: pointer;
+                transition: background 0.2s, color 0.2s; border: 1px solid transparent;
+              }
+              .cal-day:hover:not(.empty):not(.past):not(.closed) { border-color: var(--gold); color: var(--gold); }
+              .cal-day.selected { background: var(--navy); color: #fff; border-color: var(--navy); }
+              .cal-day.today { color: var(--gold); font-weight: 600; }
+              .cal-day.past { color: rgba(0,0,0,0.2); cursor: default; }
+              .cal-day.closed { color: rgba(0,0,0,0.15); cursor: default; text-decoration: line-through; }
+              .cal-day.empty { cursor: default; }
+              .cal-day.sun { color: #c0392b; }
+              .cal-day.sat { color: #2980b9; }
+              .cal-day.selected.sun, .cal-day.selected.sat { color: #fff; }
+          
+              /* Time slots */
+              .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
+              .time-slot {
+                padding: 0.6rem; border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
+                font-size: 0.78rem; text-align: center; cursor: pointer; background: var(--ivory);
+                color: var(--text-mid); transition: all 0.2s;
+              }
+              .time-slot:hover:not(.full) { border-color: var(--gold); color: var(--gold); }
+              .time-slot.selected { background: var(--gold); border-color: var(--gold); color: #fff; }
+              .time-slot.full { color: var(--text-light); background: rgba(0,0,0,0.03); cursor: default; text-decoration: line-through; font-size: 0.72rem; }
+          
+              /* Privacy */
+              .privacy-check { display: flex; align-items: flex-start; gap: 0.7rem; margin-top: 0.5rem; }
+              .privacy-check input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+              .privacy-check label { font-size: 0.78rem; color: var(--text-mid); line-height: 1.7; cursor: pointer; }
+              .privacy-check a { color: var(--gold); text-decoration: underline; }
+          
+              /* Submit */
+              .form-footer { padding: 1.8rem 2.4rem; background: var(--ivory-deep); }
+              .btn-submit {
+                width: 100%; padding: 1.1rem; background: var(--navy); color: #fff;
+                border: none; border-radius: 4px; font-family: var(--sans);
+                font-size: 0.95rem; font-weight: 500; letter-spacing: 0.1em;
+                cursor: pointer; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+                display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+              }
+              .btn-submit svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
+              .btn-submit:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.15); }
+              .btn-submit:disabled { background: rgba(0,0,0,0.2); cursor: not-allowed; transform: none; box-shadow: none; }
+              .form-note { font-size: 0.72rem; color: var(--text-light); text-align: center; margin-top: 0.8rem; line-height: 1.7; }
+          
+              /* ── SIDEBAR ── */
+              .sidebar { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 1.5rem; }
+          
+              .info-card {
+                background: #fff; border-radius: 6px;
+                border: 1px solid rgba(0,0,0,0.07);
+                box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+                overflow: hidden;
+              }
+              .info-card-header { background: var(--navy); padding: 1.2rem 1.5rem; }
+              .info-card-header h3 { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: #fff; letter-spacing: 0.04em; }
+              .info-card-body { padding: 1.5rem; }
+          
+              .contact-item { display: flex; gap: 0.8rem; align-items: flex-start; margin-bottom: 1.2rem; }
+              .contact-item:last-child { margin-bottom: 0; }
+              .contact-icon { width: 36px; height: 36px; border-radius: 3px; background: oklch(96% 0.015 72); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+              .contact-icon svg { width: 17px; height: 17px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
+              .contact-info h4 { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-light); margin-bottom: 0.2rem; }
+              .contact-info p { font-size: 0.9rem; font-weight: 500; color: var(--navy); letter-spacing: 0.04em; line-height: 1.5; }
+              .contact-info small { font-size: 0.68rem; color: var(--text-light); }
+          
+              .faq-item { border-bottom: 1px solid rgba(0,0,0,0.06); padding: 1rem 0; }
+              .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+              .faq-q { font-size: 0.82rem; font-weight: 500; color: var(--navy); margin-bottom: 0.4rem; display: flex; gap: 0.5rem; }
+              .faq-q::before { content: 'Q'; color: var(--gold); font-family: var(--serif); font-weight: 700; flex-shrink: 0; }
+              .faq-a { font-size: 0.75rem; color: var(--text-mid); line-height: 1.7; display: flex; gap: 0.5rem; }
+              .faq-a::before { content: 'A'; color: var(--text-light); font-family: var(--serif); font-weight: 700; flex-shrink: 0; }
+          
+              .point-list { display: flex; flex-direction: column; gap: 0.8rem; }
+              .point-item { display: flex; gap: 0.7rem; align-items: flex-start; }
+              .point-item svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 1px; }
+              .point-item p { font-size: 0.8rem; color: var(--text-mid); line-height: 1.6; }
+          
+              /* ── COMPLETE SCREEN ── */
+              .complete-screen {
+                display: none; text-align: center; padding: 5rem 2rem;
+                background: #fff; border-radius: 6px;
+                border: 1px solid rgba(0,0,0,0.07);
+                box-shadow: 0 4px 32px rgba(0,0,0,0.05);
+              }
+              .complete-icon {
+                width: 80px; height: 80px; border-radius: 50%;
+                background: oklch(95% 0.04 150); border: 2px solid oklch(75% 0.12 150);
+                display: flex; align-items: center; justify-content: center;
+                margin: 0 auto 1.5rem;
+              }
+              .complete-icon svg { width: 36px; height: 36px; stroke: oklch(45% 0.15 150); fill: none; stroke-width: 2; }
+              .complete-screen h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--navy); margin-bottom: 1rem; letter-spacing: 0.04em; }
+              .complete-screen p { font-size: 0.88rem; color: var(--text-mid); line-height: 2; margin-bottom: 0.5rem; }
+              .complete-detail { background: var(--ivory-deep); border-radius: 4px; padding: 1.5rem 2rem; margin: 2rem 0; text-align: left; }
+              .complete-detail-row { display: flex; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 0.85rem; }
+              .complete-detail-row:last-child { border-bottom: none; }
+              .complete-detail-row span:first-child { color: var(--text-light); width: 120px; flex-shrink: 0; }
+              .complete-detail-row span:last-child { color: var(--navy); font-weight: 500; }
+              .btn-home { display: inline-block; margin-top: 1rem; padding: 0.9rem 2.4rem; background: var(--navy); color: #fff; border-radius: 3px; font-size: 0.88rem; letter-spacing: 0.1em; text-decoration: none; transition: background 0.2s; }
+              .btn-home:hover { background: var(--navy-light); }
+          
+              /* reveal */
+              .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+              .reveal.visible { opacity: 1; transform: translateY(0); }
+              .reveal-delay-1 { transition-delay: 0.1s; }
+              .reveal-delay-2 { transition-delay: 0.2s; }
+          
+              /* footer */
+              footer { background: #111820; padding: 2.5rem 4rem; }
+              .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+              .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+              .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .footer-bottom a:hover { color: var(--gold); }
+          
+              @media (max-width: 900px) {
+                nav { padding: 1rem 1.5rem; }
+                .page-header { padding: 3rem 1.5rem 2.5rem; }
+                .steps-bar { padding: 1rem 1.5rem; }
+                .step-label { display: none; }
+                .main-wrap { grid-template-columns: 1fr; padding: 2rem 1.5rem 4rem; }
+                .sidebar { position: static; }
+                .method-cards { grid-template-columns: 1fr 1fr 1fr; }
+                footer { padding: 2rem 1.5rem; }
+              }
+            
+  body
+    nav
+      a(href="index.html", class="nav-logo")
+        | 小針不動産株式会社
+      ul(class="nav-links")
+        li
+          a(href="index.html#services")
+            | サービス
+        li
+          a(href="index.html#flow")
+            | 売買の流れ
+        li
+          a(href="properties.html")
+            | 物件情報
+        li
+          a(href="index.html#about")
+            | 会社案内
+        li
+          a(href="consultation.html", class="nav-cta")
+            | 無料相談
+    div(class="page-header")
+      div(class="page-header-inner")
+        div(class="breadcrumb")
+          a(href="index.html")
+            | ホーム
+          span
+            | ›
+          span(style="color:rgba(255,255,255,0.6)")
+            | 無料相談予約
+        div(class="page-tag")
+          | FREE CONSULTATION
+        h1
+          | 無料相談予約
+        p
+          | 不動産売買に関するあらゆるお悩みを、
+          br
+          | 経験豊富な専門スタッフが無料でお答えします。
+    div(class="steps-bar")
+      div(class="steps-inner")
+        div(class="step-item")
+          div(class="step-num active", id="step1-num")
+            | 1
+          div(class="step-label active", id="step1-label")
+            | ご入力
+        div(class="step-connector")
+        div(class="step-item")
+          div(class="step-num pending", id="step2-num")
+            | 2
+          div(class="step-label", id="step2-label")
+            | 確認
+        div(class="step-connector")
+        div(class="step-item")
+          div(class="step-num pending", id="step3-num")
+            | 3
+          div(class="step-label", id="step3-label")
+            | 完了
+    div(class="main-wrap")
+      div
+        form(id="reservationForm", novalidate)
+          div(class="form-card reveal")
+            div(class="form-section")
+              div(class="form-section-title")
+                svg(viewbox="0 0 24 24")
+                  path(d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z")
+                | ご相談の種類
+              div(class="form-section-desc")
+                | 当てはまるものをお選びください（複数可）
+              div(class="type-chips")
+                label(class="type-chip", onclick="toggleChip(this)")
+                  input(type="checkbox", name="type", value="purchase")
+                  svg(viewbox="0 0 24 24")
+                    path(d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z")
+                    polyline(points="9 22 9 12 15 12 15 22")
+                  | 住宅購入
+                label(class="type-chip", onclick="toggleChip(this)")
+                  input(type="checkbox", name="type", value="sell")
+                  svg(viewbox="0 0 24 24")
+                    circle(cx="12", cy="12", r="10")
+                    line(x1="12", y1="8", x2="12", y2="16")
+                    line(x1="8", y1="12", x2="16", y2="12")
+                  | 不動産売却
+                label(class="type-chip", onclick="toggleChip(this)")
+                  input(type="checkbox", name="type", value="land")
+                  svg(viewbox="0 0 24 24")
+                    polygon(points="3 11 12 2 21 11 21 21 15 21 15 15 9 15 9 21 3 21")
+                  | 土地売買
+                label(class="type-chip", onclick="toggleChip(this)")
+                  input(type="checkbox", name="type", value="assess")
+                  svg(viewbox="0 0 24 24")
+                    rect(x="2", y="3", width="20", height="14", rx="2")
+                    line(x1="8", y1="21", x2="16", y2="21")
+                    line(x1="12", y1="17", x2="12", y2="21")
+                  | 無料査定
+                label(class="type-chip", onclick="toggleChip(this)")
+                  input(type="checkbox", name="type", value="other")
+                  svg(viewbox="0 0 24 24")
+                    circle(cx="12", cy="12", r="10")
+                    path(d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3")
+                    line(x1="12", y1="17", x2="12.01", y2="17")
+                  | その他
+            div(class="form-section")
+              div(class="form-section-title")
+                svg(viewbox="0 0 24 24")
+                  path(d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2")
+                  circle(cx="12", cy="7", r="4")
+                | お客様情報
+              div(class="form-section-desc")
+                | 以下の項目をご記入ください
+              div(class="form-row")
+                div(class="form-group")
+                  label(class="form-label")
+                    | お名前（姓）
+                    span(class="req")
+                      | 必須
+                  input(class="form-input", type="text", name="lastName", placeholder="小針", required)
+                div(class="form-group")
+                  label(class="form-label")
+                    | お名前（名）
+                    span(class="req")
+                      | 必須
+                  input(class="form-input", type="text", name="firstName", placeholder="太郎", required)
+              div(class="form-row")
+                div(class="form-group")
+                  label(class="form-label")
+                    | フリガナ（姓）
+                    span(class="req")
+                      | 必須
+                  input(class="form-input", type="text", name="lastKana", placeholder="コバリ", required)
+                div(class="form-group")
+                  label(class="form-label")
+                    | フリガナ（名）
+                    span(class="req")
+                      | 必須
+                  input(class="form-input", type="text", name="firstKana", placeholder="タロウ", required)
+              div(class="form-row")
+                div(class="form-group")
+                  label(class="form-label")
+                    | 電話番号
+                    span(class="req")
+                      | 必須
+                  input(class="form-input", type="tel", name="tel", placeholder="00-0000-0000", required)
+                div(class="form-group")
+                  label(class="form-label")
+                    | メールアドレス
+                    span(class="req")
+                      | 必須
+                  input(class="form-input", type="email", name="email", placeholder="example@email.com", required)
+              div(class="form-row full")
+                div(class="form-group")
+                  label(class="form-label")
+                    | 現在のご住所
+                    span(class="opt")
+                      | 任意
+                  input(class="form-input", type="text", name="address", placeholder="東京都○○区○○町 1-2-3")
+            div(class="form-section")
+              div(class="form-section-title")
+                svg(viewbox="0 0 24 24")
+                  path(d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z")
+                | 相談方法
+              div(class="form-section-desc")
+                | ご希望の相談方法をお選びください
+              div(class="method-cards")
+                label(class="method-card active", onclick="selectMethod(this)")
+                  input(type="radio", name="method", value="visit", checked)
+                  svg(viewbox="0 0 24 24")
+                    path(d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z")
+                  h4
+                    | 来店相談
+                  p
+                    | 弊社オフィスにてご相談
+                label(class="method-card", onclick="selectMethod(this)")
+                  input(type="radio", name="method", value="online")
+                  svg(viewbox="0 0 24 24")
+                    rect(x="2", y="3", width="20", height="14", rx="2")
+                    line(x1="8", y1="21", x2="16", y2="21")
+                    line(x1="12", y1="17", x2="12", y2="21")
+                  h4
+                    | オンライン
+                  p
+                    | Zoom・LINE等で対応
+                label(class="method-card", onclick="selectMethod(this)")
+                  input(type="radio", name="method", value="tel")
+                  svg(viewbox="0 0 24 24")
+                    path(d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z")
+                  h4
+                    | 電話相談
+                  p
+                    | 担当よりお電話します
+            div(class="form-section")
+              div(class="form-section-title")
+                svg(viewbox="0 0 24 24")
+                  rect(x="3", y="4", width="18", height="18", rx="2", ry="2")
+                  line(x1="16", y1="2", x2="16", y2="6")
+                  line(x1="8", y1="2", x2="8", y2="6")
+                  line(x1="3", y1="10", x2="21", y2="10")
+                | ご希望日程
+              div(class="form-section-desc")
+                | カレンダーから希望日を選択し、時間帯をお選びください
+              div(class="calendar-wrap")
+                div(class="cal-nav")
+                  button(type="button", class="cal-btn", onclick="prevMonth()")
+                    svg(viewbox="0 0 24 24")
+                      polyline(points="15 18 9 12 15 6")
+                  div(class="cal-title", id="calTitle")
+                  button(type="button", class="cal-btn", onclick="nextMonth()")
+                    svg(viewbox="0 0 24 24")
+                      polyline(points="9 18 15 12 9 6")
+                div(class="cal-grid", id="calGrid")
+              div(id="timeSlotWrap", style="display:none;")
+                div(style="font-size:0.78rem;color:var(--text-mid);margin-top:1.2rem;margin-bottom:0.5rem;letter-spacing:0.04em;", id="selectedDateLabel")
+                div(class="time-slots", id="timeSlots")
+                  div(class="time-slot", onclick="selectTime(this)")
+                    | 9:00〜10:00
+                  div(class="time-slot", onclick="selectTime(this)")
+                    | 10:00〜11:00
+                  div(class="time-slot full")
+                    | 11:00〜12:00
+                  div(class="time-slot", onclick="selectTime(this)")
+                    | 13:00〜14:00
+                  div(class="time-slot", onclick="selectTime(this)")
+                    | 14:00〜15:00
+                  div(class="time-slot full")
+                    | 15:00〜16:00
+                  div(class="time-slot", onclick="selectTime(this)")
+                    | 16:00〜17:00
+                  div(class="time-slot", onclick="selectTime(this)")
+                    | 17:00〜18:00
+            div(class="form-section")
+              div(class="form-section-title")
+                svg(viewbox="0 0 24 24")
+                  line(x1="8", y1="6", x2="21", y2="6")
+                  line(x1="8", y1="12", x2="21", y2="12")
+                  line(x1="8", y1="18", x2="21", y2="18")
+                  line(x1="3", y1="6", x2="3.01", y2="6")
+                  line(x1="3", y1="12", x2="3.01", y2="12")
+                  line(x1="3", y1="18", x2="3.01", y2="18")
+                | ご要望・ご質問
+              div(class="form-section-desc")
+                | 事前にお知らせいただきたい内容があればご記入ください
+              div(class="form-row full")
+                div(class="form-group")
+                  label(class="form-label")
+                    | ご要望・ご質問
+                    span(class="opt")
+                      | 任意
+                  textarea(class="form-input", name="message", placeholder="例：3,000万円台の一戸建てを探しています。4人家族で、東急田園都市線沿線を希望しています。")
+              div(class="form-row full", style="margin-top:0.5rem;")
+                div(class="form-group")
+                  label(class="form-label")
+                    | ご予算
+                    span(class="opt")
+                      | 任意
+                  select(class="form-input", name="budget")
+                    option(value="")
+                      | -- 選択してください --
+                    option
+                      | 〜2,000万円
+                    option
+                      | 2,000〜3,000万円
+                    option
+                      | 3,000〜4,000万円
+                    option
+                      | 4,000〜5,000万円
+                    option
+                      | 5,000〜7,000万円
+                    option
+                      | 7,000万円〜
+                    option
+                      | 未定・相談したい
+            div(class="form-footer")
+              div(class="privacy-check", style="margin-bottom:1.2rem;")
+                input(type="checkbox", id="privacyCheck", required)
+                label(for="privacyCheck")
+                  a(href="#")
+                    | プライバシーポリシー
+                  | に同意する（必須）
+              button(type="submit", class="btn-submit", id="submitBtn")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+                | 予約内容を送信する
+              p(class="form-note")
+                | 送信後、担当者より確認のご連絡をいたします
+                br
+                | （平日9:00〜18:00、翌営業日中を目安）
+          div(class="complete-screen", id="confirmScreen")
+            div(class="complete-icon", style="background:oklch(95% 0.015 72);border-color:oklch(70% 0.10 72);")
+              svg(viewbox="0 0 24 24", style="stroke:oklch(45% 0.12 72)")
+                path(d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z")
+                polyline(points="14 2 14 8 20 8")
+                line(x1="16", y1="13", x2="8", y2="13")
+                line(x1="16", y1="17", x2="8", y2="17")
+                polyline(points="10 9 9 9 8 9")
+            h2
+              | 予約内容のご確認
+            p
+              | 以下の内容でよろしいでしょうか。
+              br
+              | 内容をご確認の上、「この内容で送信する」ボタンを押してください。
+            div(class="complete-detail", id="confirmDetail")
+            div(style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;")
+              button(type="button", onclick="backToForm()", style="padding:0.9rem 2rem;border:1px solid rgba(0,0,0,0.15);border-radius:3px;background:#fff;font-family:var(--sans);font-size:0.88rem;color:var(--text-mid);cursor:pointer;letter-spacing:0.06em;transition:border-color 0.2s;", onmouseover="this.style.borderColor='var(--gold)'", onmouseout="this.style.borderColor='rgba(0,0,0,0.15)'")
+                | ← 入力内容を修正する
+              button(type="button", onclick="submitFinal()", style="padding:0.9rem 2.4rem;background:var(--navy);color:#fff;border:none;border-radius:3px;font-family:var(--sans);font-size:0.88rem;font-weight:500;letter-spacing:0.1em;cursor:pointer;transition:background 0.2s;", onmouseover="this.style.background='var(--navy-light)'", onmouseout="this.style.background='var(--navy)'")
+                | この内容で送信する →
+          div(class="complete-screen", id="completeScreen")
+            div(class="complete-icon")
+              svg(viewbox="0 0 24 24")
+                polyline(points="20 6 9 17 4 12")
+            h2
+              | ご予約を受け付けました
+            p
+              | お申し込みいただきありがとうございます。
+              br
+              | 担当者より確認のご連絡をいたします。
+            div(class="complete-detail", id="completeDetail")
+            p(style="font-size:0.78rem;color:var(--text-light);")
+              | ※ご登録のメールアドレスに確認メールをお送りしました
+              br
+              | ※メールが届かない場合はお電話にてお問い合わせください
+            a(href="index.html", class="btn-home")
+              | トップページへ戻る
+      aside(class="sidebar")
+        div(class="info-card reveal reveal-delay-1")
+          div(class="info-card-header")
+            h3
+              | 安心の無料相談
+          div(class="info-card-body")
+            div(class="point-list")
+              div(class="point-item")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+                p
+                  | 相談・査定は
+                  strong
+                    | 完全無料
+                  | 。費用は一切かかりません
+              div(class="point-item")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+                p
+                  | しつこい営業・勧誘は
+                  strong
+                    | 一切行いません
+              div(class="point-item")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+                p
+                  | 経験豊富な
+                  strong
+                    | 専任スタッフ
+                  | が丁寧に対応します
+              div(class="point-item")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+                p
+                  | ご相談内容は
+                  strong
+                    | 厳重に管理
+                  | いたします
+        div(class="info-card reveal reveal-delay-1")
+          div(class="info-card-header")
+            h3
+              | お電話でのご相談
+          div(class="info-card-body")
+            div(class="contact-item")
+              div(class="contact-icon")
+                svg(viewbox="0 0 24 24")
+                  path(d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z")
+              div(class="contact-info")
+                h4
+                  | 電話番号
+                p
+                  | 00-0000-0000
+                small
+                  | 平日 9:00〜18:00
+            div(class="contact-item")
+              div(class="contact-icon")
+                svg(viewbox="0 0 24 24")
+                  path(d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z")
+                  circle(cx="12", cy="10", r="3")
+              div(class="contact-info")
+                h4
+                  | 所在地
+                p(style="font-size:0.82rem;")
+                  | 〒000-0000
+                  br
+                  | ○○都○○区○○町 1-2-3
+        div(class="info-card reveal reveal-delay-2")
+          div(class="info-card-header")
+            h3
+              | よくある質問
+          div(class="info-card-body")
+            div(class="faq-item")
+              div(class="faq-q")
+                | 相談は本当に無料ですか？
+              div(class="faq-a")
+                | はい、完全無料です。査定のみのご依頼も承ります。
+            div(class="faq-item")
+              div(class="faq-q")
+                | 相談後に必ず契約が必要ですか？
+              div(class="faq-a")
+                | いいえ。ご相談のみでも構いません。しつこい営業は行いません。
+            div(class="faq-item")
+              div(class="faq-q")
+                | 当日キャンセルはできますか？
+              div(class="faq-a")
+                | 可能です。お電話またはメールにてご連絡ください。
+    footer
+      div(class="footer-bottom")
+        p
+          | © 2024 小針不動産株式会社 All Rights Reserved.
+        a(href="index.html")
+          | ← トップページへ戻る
+    script
+      .
+        
+            // ── Chip toggle (multi select)
+            function toggleChip(el) { el.classList.toggle('active'); }
+          
+            // ── Method select (single)
+            function selectMethod(el) {
+              document.querySelectorAll('.method-card').forEach(c => c.classList.remove('active'));
+              el.classList.add('active');
+            }
+          
+            // ── Calendar
+            const today = new Date();
+            let calYear = today.getFullYear();
+            let calMonth = today.getMonth();
+            let selectedDate = null;
+          
+            const WEEKDAYS = ['日','月','火','水','木','金','土'];
+            const CLOSED = [0]; // 日曜定休
+          
+            function renderCalendar() {
+              const title = document.getElementById('calTitle');
+              const grid = document.getElementById('calGrid');
+              title.textContent = `${calYear}年 ${calMonth + 1}月`;
+              grid.innerHTML = '';
+              WEEKDAYS.forEach((d, i) => {
+                const el = document.createElement('div');
+                el.className = 'cal-dow';
+                el.textContent = d;
+                grid.appendChild(el);
+              });
+              const first = new Date(calYear, calMonth, 1).getDay();
+              const days = new Date(calYear, calMonth + 1, 0).getDate();
+              for (let i = 0; i < first; i++) {
+                const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
+              }
+              for (let d = 1; d <= days; d++) {
+                const date = new Date(calYear, calMonth, d);
+                const dow = date.getDay();
+                const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                const isClosed = CLOSED.includes(dow);
+                const isToday = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+                const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+                const el = document.createElement('div');
+                let cls = 'cal-day';
+                if (dow === 0) cls += ' sun';
+                if (dow === 6) cls += ' sat';
+                if (isPast) cls += ' past';
+                else if (isClosed) cls += ' closed';
+                if (isToday) cls += ' today';
+                if (isSelected) cls += ' selected';
+                el.className = cls;
+                el.textContent = d;
+                if (!isPast && !isClosed) {
+                  el.onclick = () => selectDay(date, el);
+                }
+                grid.appendChild(el);
+              }
+            }
+          
+            function selectDay(date, el) {
+              document.querySelectorAll('.cal-day.selected').forEach(d => d.classList.remove('selected'));
+              el.classList.add('selected');
+              selectedDate = date;
+              const wrap = document.getElementById('timeSlotWrap');
+              const label = document.getElementById('selectedDateLabel');
+              const weekStr = ['日','月','火','水','木','金','土'];
+              label.textContent = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日（${weekStr[date.getDay()]}）の予約可能時間`;
+              // Reset time slots
+              document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+              wrap.style.display = 'block';
+              wrap.scrollIntoView && (wrap.style.scrollMargin = '20px');
+            }
+          
+            function selectTime(el) {
+              if (el.classList.contains('full')) return;
+              document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+              el.classList.add('selected');
+            }
+          
+            function prevMonth() {
+              calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+              renderCalendar();
+            }
+            function nextMonth() {
+              calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+              renderCalendar();
+            }
+          
+            renderCalendar();
+          
+            // ── Steps indicator
+            function setStep(n) {
+              [1,2,3].forEach(i => {
+                const num = document.getElementById(`step${i}-num`);
+                const lbl = document.getElementById(`step${i}-label`);
+                if (i < n) { num.className = 'step-num done'; lbl.className = 'step-label'; }
+                else if (i === n) { num.className = 'step-num active'; lbl.className = 'step-label active'; }
+                else { num.className = 'step-num pending'; lbl.className = 'step-label'; }
+              });
+            }
+          
+            // ── Collect form data
+            function collectData() {
+              const form = document.getElementById('reservationForm');
+              const timeSelected = document.querySelector('.time-slot.selected');
+              const weekStr = ['日','月','火','水','木','金','土'];
+              return {
+                lastName:  form.lastName.value.trim(),
+                firstName: form.firstName.value.trim(),
+                lastKana:  form.lastKana.value.trim(),
+                firstKana: form.firstKana.value.trim(),
+                tel:       form.tel.value.trim(),
+                email:     form.email.value.trim(),
+                address:   form.address.value.trim(),
+                budget:    form.budget.value,
+                message:   form.message.value.trim(),
+                types:     [...document.querySelectorAll('.type-chip.active')].map(c => c.textContent.trim()).join('、') || '未選択',
+                method:    document.querySelector('.method-card.active h4')?.textContent || '来店相談',
+                dateStr:   selectedDate
+                  ? `${selectedDate.getFullYear()}年${selectedDate.getMonth()+1}月${selectedDate.getDate()}日（${weekStr[selectedDate.getDay()]}）`
+                  : '未選択',
+                timeStr:   timeSelected ? timeSelected.textContent : '未選択',
+              };
+            }
+          
+            // ── Build detail rows HTML
+            function buildDetailRows(data) {
+              const rows = [
+                ['お名前',       `${data.lastName} ${data.firstName} 様`],
+                ['フリガナ',     `${data.lastKana} ${data.firstKana}`],
+                ['電話番号',     data.tel],
+                ['メールアドレス', data.email],
+                ['現在のご住所', data.address || '—'],
+                ['ご相談種別',   data.types],
+                ['相談方法',     data.method],
+                ['ご希望日',     data.dateStr],
+                ['ご希望時間',   data.timeStr],
+                ['ご予算',       data.budget || '—'],
+                ['ご要望・ご質問', data.message || '—'],
+              ];
+              return rows.map(([k, v]) =>
+                `<div class="complete-detail-row"><span>${k}</span><span>${v}</span></div>`
+              ).join('');
+            }
+          
+            // ── Form submit → show confirm screen
+            document.getElementById('reservationForm').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const data = collectData();
+              const privacy = document.getElementById('privacyCheck').checked;
+          
+              if (!data.lastName || !data.firstName || !data.tel || !data.email || !privacy) {
+                alert('必須項目をすべてご入力の上、プライバシーポリシーにご同意ください。');
+                return;
+              }
+          
+              // Show confirm screen (step 2)
+              setStep(2);
+              document.getElementById('confirmDetail').innerHTML = buildDetailRows(data);
+              document.querySelector('.form-card').style.display = 'none';
+              document.getElementById('confirmScreen').style.display = 'block';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+          
+            // ── Back to form
+            function backToForm() {
+              setStep(1);
+              document.getElementById('confirmScreen').style.display = 'none';
+              document.querySelector('.form-card').style.display = 'block';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          
+            // ── Final submit → show complete screen
+            function submitFinal() {
+              const data = collectData();
+              setStep(3);
+              document.getElementById('completeDetail').innerHTML = buildDetailRows(data);
+              document.getElementById('confirmScreen').style.display = 'none';
+              document.getElementById('completeScreen').style.display = 'block';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          
+            // ── Reveal
+            const reveals = document.querySelectorAll('.reveal');
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            reveals.forEach(el => obs.observe(el));
+          

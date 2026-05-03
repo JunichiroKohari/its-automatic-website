@@ -1,0 +1,435 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title
+      | アクセス | 小針不動産株式会社
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
+    style
+      .
+        
+              :root {
+                --navy: #1a2540;
+                --navy-light: #2e3d60;
+                --gold: oklch(68% 0.12 72);
+                --gold-light: oklch(80% 0.10 72);
+                --ivory: oklch(97.5% 0.008 80);
+                --ivory-deep: oklch(93% 0.012 75);
+                --text: #1a1a1a;
+                --text-mid: #555;
+                --text-light: #888;
+                --serif: 'Noto Serif JP', serif;
+                --sans: 'Noto Sans JP', sans-serif;
+              }
+              *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+              html { scroll-behavior: smooth; }
+              body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
+          
+              /* ── NAV ── */
+              nav {
+                position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 1rem 4rem;
+                background: rgba(255,255,255,0.97);
+                box-shadow: 0 1px 24px rgba(0,0,0,0.07);
+                backdrop-filter: blur(12px);
+              }
+              .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; text-decoration: none; }
+              .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
+              .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--text-mid); text-decoration: none; transition: color 0.3s; position: relative; }
+              .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+              .nav-links a:hover { color: var(--navy); }
+              .nav-links a:hover::after { width: 100%; }
+              .nav-cta { background: var(--gold); color: #fff !important; padding: 0.55rem 1.4rem; border-radius: 2px; font-weight: 500 !important; }
+              .nav-cta::after { display: none !important; }
+              .nav-cta:hover { background: var(--gold-light) !important; }
+          
+              /* ── PAGE HEADER ── */
+              .page-header {
+                margin-top: 64px;
+                background: var(--navy); padding: 4rem 4rem 3.5rem;
+                position: relative; overflow: hidden;
+              }
+              .page-header::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+                background-size: 60px 60px;
+              }
+              .page-header-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; text-align: center; }
+              .breadcrumb { display: flex; gap: 0.5rem; align-items: center; justify-content: center; font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem; }
+              .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .breadcrumb a:hover { color: var(--gold); }
+              .page-tag { font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+              .page-tag::before, .page-tag::after { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
+              .page-header h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; color: #fff; letter-spacing: 0.04em; margin-bottom: 0.8rem; }
+              .page-header p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.9; letter-spacing: 0.04em; }
+          
+              /* ── MAP SECTION ── */
+              .map-section { background: #fff; }
+              .map-embed {
+                width: 100%; height: 480px; border: none; display: block;
+                filter: contrast(1.05) saturate(0.9);
+              }
+          
+              /* ── INFO SECTION ── */
+              .info-section { padding: 5rem 4rem; background: var(--ivory); }
+              .info-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+          
+              /* Company info table */
+              .company-info {}
+              .section-tag {
+                font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold);
+                display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
+              }
+              .section-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
+              h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 600; color: var(--navy); letter-spacing: 0.04em; margin-bottom: 2rem; }
+          
+              .info-table { width: 100%; border-collapse: collapse; }
+              .info-table tr { border-bottom: 1px solid rgba(0,0,0,0.07); }
+              .info-table tr:last-child { border-bottom: none; }
+              .info-table th {
+                width: 38%; padding: 1rem 1rem 1rem 0;
+                font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+                color: var(--text-light); text-align: left; vertical-align: top;
+              }
+              .info-table td {
+                padding: 1rem 0; font-size: 0.88rem; color: var(--text); line-height: 1.8;
+              }
+              .info-table td a { color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
+              .info-table td a:hover { opacity: 0.75; }
+          
+              /* Access info cards */
+              .access-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+              .access-card {
+                background: #fff; border-radius: 4px;
+                border: 1px solid rgba(0,0,0,0.07);
+                box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+                padding: 1.6rem 1.8rem;
+                display: flex; gap: 1.2rem; align-items: flex-start;
+                transition: box-shadow 0.3s, transform 0.3s;
+              }
+              .access-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
+              .access-icon {
+                width: 48px; height: 48px; border-radius: 4px; flex-shrink: 0;
+                background: oklch(96% 0.015 72);
+                display: flex; align-items: center; justify-content: center;
+              }
+              .access-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
+              .access-body {}
+              .access-body h4 { font-family: var(--serif); font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; letter-spacing: 0.03em; }
+              .access-body p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.85; }
+              .access-body strong { color: var(--navy); }
+          
+              /* ── HOURS SECTION ── */
+              .hours-section { padding: 0 4rem 5rem; background: var(--ivory); }
+              .hours-inner { max-width: 1100px; margin: 0 auto; }
+              .hours-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 2rem; }
+              .hours-day {
+                background: #fff; border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.07);
+                padding: 1rem 0.5rem; text-align: center;
+                transition: border-color 0.3s;
+              }
+              .hours-day:hover { border-color: rgba(180,150,90,0.3); }
+              .hours-day.closed { background: var(--ivory-deep); }
+              .hours-day.today-col { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+              .hours-day-name { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 0.5rem; }
+              .hours-day-name.sun { color: #c0392b; }
+              .hours-day-name.sat { color: #2980b9; }
+              .hours-status { font-family: var(--serif); font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+              .hours-status.closed-txt { color: var(--text-light); font-weight: 400; font-size: 0.75rem; }
+              .hours-time { font-size: 0.68rem; color: var(--text-light); margin-top: 0.3rem; line-height: 1.5; }
+              .hours-note { margin-top: 1.2rem; font-size: 0.78rem; color: var(--text-light); line-height: 1.8; display: flex; gap: 0.5rem; align-items: flex-start; }
+              .hours-note::before { content: '※'; flex-shrink: 0; color: var(--gold); }
+          
+              /* ── CTA STRIP ── */
+              .cta-strip {
+                background: var(--navy); padding: 4rem;
+                position: relative; overflow: hidden;
+              }
+              .cta-strip::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+                background-size: 40px 40px;
+              }
+              .cta-strip-inner {
+                max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;
+                display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap;
+              }
+              .cta-strip h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: #fff; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+              .cta-strip p { font-size: 0.85rem; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
+              .cta-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+              .btn-gold { padding: 0.9rem 2rem; background: var(--gold); color: #fff; border-radius: 2px; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.1em; text-decoration: none; transition: background 0.2s, transform 0.2s; white-space: nowrap; }
+              .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+              .btn-outline-w { padding: 0.9rem 2rem; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); border-radius: 2px; font-size: 0.88rem; letter-spacing: 0.1em; text-decoration: none; transition: border-color 0.2s, color 0.2s; white-space: nowrap; }
+              .btn-outline-w:hover { border-color: #fff; color: #fff; }
+          
+              /* ── FOOTER ── */
+              footer { background: #111820; padding: 2.5rem 4rem; }
+              .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+              .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+              .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .footer-bottom a:hover { color: var(--gold); }
+          
+              /* reveal */
+              .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+              .reveal.visible { opacity: 1; transform: translateY(0); }
+              .reveal-delay-1 { transition-delay: 0.12s; }
+              .reveal-delay-2 { transition-delay: 0.24s; }
+              .reveal-delay-3 { transition-delay: 0.36s; }
+          
+              @media (max-width: 900px) {
+                nav { padding: 1rem 1.5rem; }
+                .page-header { padding: 3rem 1.5rem 2.5rem; }
+                .info-section { padding: 3.5rem 1.5rem; }
+                .info-inner { grid-template-columns: 1fr; gap: 3rem; }
+                .hours-section { padding: 0 1.5rem 3.5rem; }
+                .hours-grid { grid-template-columns: repeat(4, 1fr); }
+                .cta-strip { padding: 3rem 1.5rem; }
+                .cta-strip-inner { flex-direction: column; align-items: flex-start; }
+                footer { padding: 2rem 1.5rem; }
+                .map-embed { height: 320px; }
+              }
+            
+  body
+    nav
+      a(href="index.html", class="nav-logo")
+        | 小針不動産株式会社
+      ul(class="nav-links")
+        li
+          a(href="index.html#services")
+            | サービス
+        li
+          a(href="index.html#flow")
+            | 売買の流れ
+        li
+          a(href="properties.html")
+            | 物件情報
+        li
+          a(href="index.html#about")
+            | 会社案内
+        li
+          a(href="consultation.html", class="nav-cta")
+            | 無料相談
+    div(class="page-header")
+      div(class="page-header-inner")
+        div(class="breadcrumb")
+          a(href="index.html")
+            | ホーム
+          span
+            | ›
+          span(style="color:rgba(255,255,255,0.6)")
+            | アクセス
+        div(class="page-tag")
+          | ACCESS
+        h1
+          | アクセス
+        p
+          | 大阪府吹田市幸町8-13
+          br
+          | お気軽にご来店ください。
+    div(class="map-section")
+      iframe(class="map-embed", src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.0!2d135.5175!3d34.7608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f5d4cba3b0ff%3A0x0!2z5aSn6Ziq5bqD5ZCb5biC5Lyt55S677yY4oiS77yR77yT!5e0!3m2!1sja!2sjp!4v1000000000000!5m2!1sja!2sjp&q=大阪府吹田市幸町8-13", allowfullscreen="", loading="lazy", referrerpolicy="no-referrer-when-downgrade", title="小針不動産株式会社 地図")
+    div(class="info-section")
+      div(class="info-inner")
+        div(class="company-info")
+          div(class="section-tag reveal")
+            | COMPANY INFO
+          h2(class="reveal reveal-delay-1")
+            | 会社情報
+          table(class="info-table reveal reveal-delay-2")
+            tbody
+              tr
+                th
+                  | 会社名
+                td
+                  | 小針不動産株式会社
+              tr
+                th
+                  | 所在地
+                td
+                  | 〒564-0032
+                  br
+                  | 大阪府吹田市幸町8-13
+              tr
+                th
+                  | 電話番号
+                td
+                  a(href="tel:00-0000-0000")
+                    | 00-0000-0000
+              tr
+                th
+                  | FAX
+                td
+                  | 00-0000-0001
+              tr
+                th
+                  | メール
+                td
+                  a(href="mailto:info@kobari-realestate.co.jp")
+                    | info@kobari-realestate.co.jp
+              tr
+                th
+                  | 営業時間
+                td
+                  | 月〜土 9:00〜18:00
+                  br
+                  span(style="font-size:0.78rem;color:var(--text-light)")
+                    | 日曜・祝日定休
+              tr
+                th
+                  | 免許番号
+                td
+                  | 宅地建物取引業者
+                  br
+                  | 大阪府知事（○）第○○○○号
+              tr
+                th
+                  | 加盟団体
+                td
+                  | （公社）大阪府宅地建物取引業協会
+                  br
+                  | 全国宅地建物取引業保証協会
+        div
+          div(class="section-tag reveal")
+            | HOW TO GET THERE
+          h2(class="reveal reveal-delay-1")
+            | 交通アクセス
+          div(class="access-cards")
+            div(class="access-card reveal reveal-delay-1")
+              div(class="access-icon")
+                svg(viewbox="0 0 24 24")
+                  rect(x="5", y="2", width="14", height="20", rx="2")
+                  line(x1="12", y1="18", x2="12.01", y2="18")
+                  path(d="M5 6h14M5 10h14")
+              div(class="access-body")
+                h4
+                  | 電車でお越しの場合
+                p
+                  strong
+                    | 阪急千里線「吹田駅」
+                  | より徒歩約7分
+                  br
+                  strong
+                    | JR京都線「吹田駅」
+                  | より徒歩約10分
+            div(class="access-card reveal reveal-delay-2")
+              div(class="access-icon")
+                svg(viewbox="0 0 24 24")
+                  path(d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3")
+                  rect(x="9", y="11", width="14", height="10", rx="2")
+                  circle(cx="12", cy="21", r="1")
+                  circle(cx="20", cy="21", r="1")
+              div(class="access-body")
+                h4
+                  | バスでお越しの場合
+                p
+                  strong
+                    | 阪急バス「幸町」停留所
+                  | より徒歩約1分
+                  br
+                  | 吹田駅前バスターミナルより乗車
+            div(class="access-card reveal reveal-delay-3")
+              div(class="access-icon")
+                svg(viewbox="0 0 24 24")
+                  path(d="M14 16H9m10 0h3v-3.15a1 1 0 00-.84-.99L16 11l-2.7-3.6a1 1 0 00-.8-.4H5a2 2 0 00-2 2v7h3")
+                  circle(cx="6.5", cy="16.5", r="2.5")
+                  circle(cx="16.5", cy="16.5", r="2.5")
+              div(class="access-body")
+                h4
+                  | お車でお越しの場合
+                p
+                  strong
+                    | 名神高速「吹田IC」
+                  | より約5分
+                  br
+                  | 近隣にコインパーキングあり（ご来店時にご案内します）
+            div(class="access-card reveal reveal-delay-3")
+              div(class="access-icon")
+                svg(viewbox="0 0 24 24")
+                  path(d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z")
+                  circle(cx="12", cy="10", r="3")
+              div(class="access-body")
+                h4
+                  | 周辺の目印
+                p
+                  | 吹田市役所より北西へ徒歩約5分
+                  br
+                  strong
+                    | 吹田幸町郵便局
+                  | の向かいビル1階
+    div(class="hours-section")
+      div(class="hours-inner")
+        div(class="section-tag reveal")
+          | BUSINESS HOURS
+        h2(class="reveal reveal-delay-1")
+          | 営業時間
+        div(class="hours-grid reveal reveal-delay-2", id="hoursGrid")
+        p(class="hours-note reveal reveal-delay-3")
+          | 祝日は定休日となります。年末年始・お盆期間は営業時間が異なる場合がございます。詳しくはお電話にてお問い合わせください。
+        p(class="hours-note reveal reveal-delay-3")
+          | ご予約いただければ日曜・祝日も対応可能な場合がございます。お気軽にご相談ください。
+    div(class="cta-strip")
+      div(class="cta-strip-inner")
+        div
+          h3
+            | まずはお気軽にご相談ください
+          p
+            | ご来店・お電話・オンラインにて無料でご相談を承ります
+        div(class="cta-btns")
+          a(href="consultation.html", class="btn-gold")
+            | 無料相談を予約する
+          a(href="tel:00-0000-0000", class="btn-outline-w")
+            | 電話で問い合わせる
+    footer
+      div(class="footer-bottom")
+        p
+          | © 2024 小針不動産株式会社 All Rights Reserved.
+        a(href="index.html")
+          | ← トップページへ戻る
+    script
+      .
+        
+            // ── 営業時間グリッド（今日をハイライト）
+            const DAY_NAMES = ['日','月','火','水','木','金','土'];
+            const DAY_CLASSES = ['sun','','','','','','sat'];
+            const HOURS = [
+              { open: false, time: '定休日' },       // 日
+              { open: true,  time: '9:00〜18:00' },  // 月
+              { open: true,  time: '9:00〜18:00' },  // 火
+              { open: true,  time: '9:00〜18:00' },  // 水
+              { open: true,  time: '9:00〜18:00' },  // 木
+              { open: true,  time: '9:00〜18:00' },  // 金
+              { open: true,  time: '9:00〜18:00' },  // 土
+            ];
+          
+            const todayDow = new Date().getDay();
+            const grid = document.getElementById('hoursGrid');
+            DAY_NAMES.forEach((name, i) => {
+              const h = HOURS[i];
+              const isToday = i === todayDow;
+              const div = document.createElement('div');
+              div.className = 'hours-day' + (h.open ? '' : ' closed') + (isToday ? ' today-col' : '');
+              div.innerHTML = `
+                <div class="hours-day-name ${DAY_CLASSES[i]}">${name}${isToday ? '<br><span style="font-size:0.58rem;color:var(--gold);letter-spacing:0.05em">今日</span>' : ''}</div>
+                <div class="hours-status ${h.open ? '' : 'closed-txt'}">${h.open ? '営業' : '休業'}</div>
+                <div class="hours-time">${h.time}</div>
+              `;
+              grid.appendChild(div);
+            });
+          
+            // ── Reveal
+            const reveals = document.querySelectorAll('.reveal');
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            reveals.forEach(el => obs.observe(el));
+          

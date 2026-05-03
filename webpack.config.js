@@ -51,10 +51,10 @@ class CopyCaseSiteDataPlugin {
 
 const caseSiteDir = './src/html/businesses/ai-website-case-01'
 const caseSitePages = fs.readdirSync(path.resolve(__dirname, caseSiteDir))
-    .filter((file) => file.endsWith('.html'))
+    .filter((file) => file.endsWith('.pug'))
     .map((file) => ({
         template: `${caseSiteDir}/${file}`,
-        filename: `ai-website-case-01/${file}`,
+        filename: `ai-website-case-01/${file.replace(/\.pug$/, '.html')}`,
         chunks: [],
         inject: false,
     }))
