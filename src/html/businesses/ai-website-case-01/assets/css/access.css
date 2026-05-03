@@ -30,10 +30,11 @@
 
 /* ── INFO SECTION ── */
 .info-section { padding: 5rem 4rem; background: var(--ivory); }
-.info-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.info-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 4rem; }
 
 /* Company info table */
-.company-info {}
+.company-info { width: 100%; }
+.access-info { width: 100%; }
 .section-tag {
   font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold);
   display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
@@ -135,7 +136,7 @@ h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2rem); font-weig
   nav { padding: 1rem 1.5rem; }
   .page-header { padding: 3rem 1.5rem 2.5rem; }
   .info-section { padding: 3.5rem 1.5rem; }
-  .info-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .info-inner { gap: 3rem; }
   .hours-section { padding: 0 1.5rem 3.5rem; }
   .hours-grid { grid-template-columns: repeat(4, 1fr); }
   .cta-strip { padding: 3rem 1.5rem; }

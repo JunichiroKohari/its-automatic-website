@@ -4,7 +4,7 @@ html(lang="ja")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title
-      | アクセス | 小針不動産株式会社
+      | 会社情報 | 小針不動産株式会社
     link(rel="preconnect", href="https://fonts.googleapis.com")
     link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
     link(rel="stylesheet", href="assets/css/common.css")
@@ -24,8 +24,8 @@ html(lang="ja")
           a(href="properties.html")
             | 物件情報
         li
-          a(href="index.html#about")
-            | 会社案内
+          a(href="team.html")
+            | スタッフ紹介
         li
           a(href="consultation.html", class="nav-cta")
             | 無料相談
@@ -37,20 +37,18 @@ html(lang="ja")
           span
             | ›
           span(style="color:rgba(255,255,255,0.6)")
-            | アクセス
+            | 会社情報
         div(class="page-tag")
-          | ACCESS
+          | COMPANY INFO
         h1
-          | アクセス
+          | 会社情報
         p
-          | 大阪府吹田市幸町8-13
+          | 小針不動産株式会社の基本情報と
           br
-          | お気軽にご来店ください。
-    div(class="map-section")
-      iframe(class="map-embed", src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.0!2d135.5175!3d34.7608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f5d4cba3b0ff%3A0x0!2z5aSn6Ziq5bqD5ZCb5biC5Lyt55S677yY4oiS77yR77yT!5e0!3m2!1sja!2sjp!4v1000000000000!5m2!1sja!2sjp&q=大阪府吹田市幸町8-13", allowfullscreen="", loading="lazy", referrerpolicy="no-referrer-when-downgrade", title="小針不動産株式会社 地図")
+          | ご来店時のアクセス方法をご案内します。
     div(class="info-section")
       div(class="info-inner")
-        div(class="company-info")
+        section(class="company-info")
           div(class="section-tag reveal")
             | COMPANY INFO
           h2(class="reveal reveal-delay-1")
@@ -108,7 +106,9 @@ html(lang="ja")
                   | （公社）大阪府宅地建物取引業協会
                   br
                   | 全国宅地建物取引業保証協会
-        div
+        div(class="map-section")
+          iframe(class="map-embed", src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.0!2d135.5175!3d34.7608!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f5d4cba3b0ff%3A0x0!2z5aSn6Ziq5bqD5ZCb5biC5Lyt55S677yY4oiS77yR77yT!5e0!3m2!1sja!2sjp!4v1000000000000!5m2!1sja!2sjp&q=大阪府吹田市幸町8-13", allowfullscreen="", loading="lazy", referrerpolicy="no-referrer-when-downgrade", title="小針不動産株式会社 地図")
+        section(class="access-info")
           div(class="section-tag reveal")
             | HOW TO GET THERE
           h2(class="reveal reveal-delay-1")
