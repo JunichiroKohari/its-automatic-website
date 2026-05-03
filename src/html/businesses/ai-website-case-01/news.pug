@@ -1,0 +1,211 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title
+      | お知らせ | 小針不動産株式会社
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
+    link(rel="stylesheet", href="assets/css/common.css")
+    link(rel="stylesheet", href="assets/css/news.css")
+  body(class="case-site case-site-page case-site-news")
+    nav
+      a(href="index.html", class="nav-logo")
+        | 小針不動産株式会社
+      ul(class="nav-links")
+        li
+          a(href="index.html#services")
+            | サービス
+        li
+          a(href="index.html#flow")
+            | 売買の流れ
+        li
+          a(href="properties.html")
+            | 物件情報
+        li
+          a(href="team.html")
+            | スタッフ紹介
+        li
+          a(href="consultation.html", class="nav-cta")
+            | 無料相談
+    div(class="page-header")
+      div(class="page-header-inner")
+        div(class="breadcrumb")
+          a(href="index.html")
+            | ホーム
+          span
+            | ›
+          span(style="color:rgba(255,255,255,0.6)")
+            | お知らせ
+        div(class="page-tag")
+          | NEWS
+        h1
+          | お知らせ
+        p
+          | 営業案内や新着物件、イベント情報など、
+          br
+          | 小針不動産株式会社からの最新情報を掲載しています。
+    main(class="news-main")
+      section(class="news-featured")
+        div(class="news-featured-copy")
+          div(class="section-tag reveal")
+            | FEATURED UPDATE
+          h2(class="reveal reveal-delay-1")
+            | GW期間中の営業スケジュールについて
+          p(class="news-featured-meta reveal reveal-delay-2")
+            span(class="news-badge")
+              | 営業案内
+            time(datetime="2026-04-25")
+              | 2026.04.25
+          p(class="news-featured-text reveal reveal-delay-3")
+            | 4月29日から5月6日までは事前予約制でのご案内となります。ご来店相談・オンライン相談ともに前日18時までのご予約をお願いしております。査定依頼や物件見学のご相談は、フォームまたはお電話より受け付けています。
+          div(class="news-featured-actions reveal reveal-delay-3")
+            a(href="consultation.html", class="btn-gold")
+              | 相談を予約する
+            a(href="properties.html", class="btn-outline")
+              | 新着物件を見る
+        aside(class="news-featured-panel reveal reveal-delay-2")
+          h3
+            | よくあるお問い合わせ
+          ul(class="news-panel-list")
+            li
+              strong
+                | ご見学予約
+              span
+                | 当日予約は空き状況により対応可能です。
+            li
+              strong
+                | 査定のご相談
+              span
+                | オンライン面談にも対応しています。
+            li
+              strong
+                | 定休日
+              span
+                | 日曜・祝日は原則休業です。
+      section(class="news-list-section")
+        div(class="section-heading")
+          div
+            div(class="section-tag reveal")
+              | LATEST NEWS
+            h2(class="reveal reveal-delay-1")
+              | 最新のお知らせ一覧
+          p(class="section-desc reveal reveal-delay-2")
+            | カテゴリごとに、営業案内・物件情報・地域イベントなどの更新情報をご覧いただけます。
+        div(class="news-layout")
+          aside(class="news-sidebar reveal")
+            h3
+              | カテゴリ
+            ul(class="news-categories")
+              li
+                a(href="#category-business")
+                  | 営業案内
+              li
+                a(href="#category-property")
+                  | 物件情報
+              li
+                a(href="#category-event")
+                  | 地域情報・イベント
+          div(class="news-groups")
+            section(class="news-group", id="category-business")
+              h3(class="news-group-title reveal")
+                | 営業案内
+              article(class="news-item reveal reveal-delay-1")
+                time(class="news-date", datetime="2026-04-25")
+                  | 2026.04.25
+                div(class="news-body")
+                  div(class="news-item-meta")
+                    span(class="news-badge")
+                      | 営業案内
+                  h4
+                    | GW期間中の営業スケジュールを更新しました
+                  p
+                    | 期間中は予約制での対応となります。ご来店前にご予約いただくと、物件資料や資金計画のご案内をスムーズに行えます。
+              article(class="news-item reveal reveal-delay-2")
+                time(class="news-date", datetime="2026-03-12")
+                  | 2026.03.12
+                div(class="news-body")
+                  div(class="news-item-meta")
+                    span(class="news-badge")
+                      | 営業案内
+                  h4
+                    | 春の住み替え相談会の受付を開始しました
+                  p
+                    | 購入と売却を並行して進めたい方向けに、住み替えの進め方や資金計画を整理する個別相談会を実施しています。
+            section(class="news-group", id="category-property")
+              h3(class="news-group-title reveal")
+                | 物件情報
+              article(class="news-item reveal reveal-delay-1")
+                time(class="news-date", datetime="2026-04-18")
+                  | 2026.04.18
+                div(class="news-body")
+                  div(class="news-item-meta")
+                    span(class="news-badge")
+                      | 新着物件
+                  h4
+                    | 世田谷区の新規販売物件を公開しました
+                  p
+                    | 閑静な住宅街に位置する一戸建て物件を掲載しました。周辺環境や内覧予約については物件詳細ページからご確認いただけます。
+              article(class="news-item reveal reveal-delay-2")
+                time(class="news-date", datetime="2026-02-28")
+                  | 2026.02.28
+                div(class="news-body")
+                  div(class="news-item-meta")
+                    span(class="news-badge")
+                      | 成約情報
+                  h4
+                    | 横浜ベイエリアのマンションがご成約となりました
+                  p
+                    | 多数のお問い合わせをいただいていた物件が成約となりました。近い条件の物件も順次ご紹介可能ですので、お気軽にご相談ください。
+            section(class="news-group", id="category-event")
+              h3(class="news-group-title reveal")
+                | 地域情報・イベント
+              article(class="news-item reveal reveal-delay-1")
+                time(class="news-date", datetime="2026-04-05")
+                  | 2026.04.05
+                div(class="news-body")
+                  div(class="news-item-meta")
+                    span(class="news-badge")
+                      | 地域情報
+                  h4
+                    | 吹田エリアの学校区情報ページを更新しました
+                  p
+                    | 子育て世帯からご相談の多い通学エリアや生活利便施設の情報を整理し、スタッフからの補足コメントも追記しています。
+              article(class="news-item reveal reveal-delay-2")
+                time(class="news-date", datetime="2026-01-20")
+                  | 2026.01.20
+                div(class="news-body")
+                  div(class="news-item-meta")
+                    span(class="news-badge")
+                      | イベント
+                  h4
+                    | はじめての住宅購入セミナーを開催しました
+                  p
+                    | 住宅ローン、購入申込、契約時の注意点などをテーマに少人数セミナーを実施しました。次回開催は決まり次第ご案内します。
+      section(class="cta-strip")
+        div(class="cta-strip-inner")
+          div
+            h3
+              | 気になるお知らせがあれば、お気軽にご相談ください
+            p
+              | 新着物件のご紹介や住み替え相談、売却査定のご予約を受け付けています。
+          div(class="cta-btns")
+            a(href="consultation.html", class="btn-gold")
+              | 無料相談を予約する
+            a(href="tel:00-0000-0000", class="btn-outline-w")
+              | 電話で問い合わせる
+    include _site-footer.pug
+
+    script
+      .
+            const reveals = document.querySelectorAll('.reveal');
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  obs.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.12 });
+            reveals.forEach(el => obs.observe(el));
