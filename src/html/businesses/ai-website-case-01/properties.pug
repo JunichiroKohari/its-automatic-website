@@ -1,487 +1,495 @@
 doctype html
-|   <!DOCTYPE html>
-|   <html lang="ja">
-|   <head>
-|     <meta charset="UTF-8">
-|     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-|     <title>物件一覧 | 小針不動産株式会社</title>
-|     <link rel="preconnect" href="https://fonts.googleapis.com">
-|     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
-|     <style>
-|       :root {
-|         --navy: #1a2540;
-|         --navy-light: #2e3d60;
-|         --gold: oklch(68% 0.12 72);
-|         --gold-light: oklch(80% 0.10 72);
-|         --ivory: oklch(97.5% 0.008 80);
-|         --ivory-deep: oklch(93% 0.012 75);
-|         --text: #1a1a1a;
-|         --text-mid: #555;
-|         --text-light: #888;
-|         --serif: 'Noto Serif JP', serif;
-|         --sans: 'Noto Sans JP', sans-serif;
-|       }
-|       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-|       html { scroll-behavior: smooth; }
-|       body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
-|   
-|       /* NAV */
-|       nav {
-|         position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-|         display: flex; align-items: center; justify-content: space-between;
-|         padding: 1rem 4rem;
-|         background: rgba(255,255,255,0.97);
-|         box-shadow: 0 1px 24px rgba(0,0,0,0.07);
-|         backdrop-filter: blur(12px);
-|       }
-|       .nav-logo {
-|         font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
-|         color: var(--navy); letter-spacing: 0.04em; text-decoration: none;
-|       }
-|       .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
-|       .nav-links a {
-|         font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
-|         color: var(--text-mid); text-decoration: none; transition: color 0.3s;
-|         position: relative;
-|       }
-|       .nav-links a::after {
-|         content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
-|         background: var(--gold); transition: width 0.3s;
-|       }
-|       .nav-links a:hover { color: var(--navy); }
-|       .nav-links a:hover::after { width: 100%; }
-|       .nav-cta {
-|         background: var(--gold); color: #fff !important;
-|         padding: 0.55rem 1.4rem; border-radius: 2px;
-|         font-weight: 500 !important;
-|       }
-|       .nav-cta::after { display: none !important; }
-|       .nav-cta:hover { background: var(--gold-light) !important; }
-|   
-|       /* PAGE HEADER */
-|       .page-header {
-|         padding: 9rem 4rem 4rem;
-|         background: var(--navy);
-|         position: relative; overflow: hidden;
-|       }
-|       .page-header::before {
-|         content: '';
-|         position: absolute; inset: 0;
-|         background-image:
-|           linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-|           linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-|         background-size: 60px 60px;
-|       }
-|       .page-header-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
-|       .breadcrumb {
-|         display: flex; gap: 0.5rem; align-items: center;
-|         font-size: 0.72rem; letter-spacing: 0.1em;
-|         color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
-|       }
-|       .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
-|       .breadcrumb a:hover { color: var(--gold); }
-|       .breadcrumb span { color: rgba(255,255,255,0.25); }
-|       .page-header h1 {
-|         font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
-|         font-weight: 600; color: #fff; letter-spacing: 0.04em; margin-bottom: 0.6rem;
-|       }
-|       .page-header p { font-size: 0.88rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; }
-|   
-|       .result-count {
-|         font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.04em;
-|         white-space: nowrap;
-|       }
-|       .result-count strong { color: var(--navy); font-weight: 600; }
-|   
-|       /* MAIN LAYOUT */
-|       .main-content {
-|         max-width: 1200px; margin: 0 auto;
-|         padding: 2.5rem 4rem 5rem;
-|         display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start;
-|       }
-|   
-|       /* SIDEBAR FILTERS */
-|       .sidebar { position: sticky; top: 88px; }
-|       .filter-card {
-|         background: #fff; border-radius: 4px;
-|         border: 1px solid rgba(0,0,0,0.06);
-|         padding: 1.8rem;
-|         box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-|       }
-|       .filter-title {
-|         font-family: var(--serif); font-size: 1rem; font-weight: 600;
-|         color: var(--navy); margin-bottom: 1.5rem; letter-spacing: 0.03em;
-|         padding-bottom: 0.8rem; border-bottom: 1px solid rgba(0,0,0,0.06);
-|         display: flex; justify-content: space-between; align-items: center;
-|       }
-|       .filter-clear {
-|         font-size: 0.68rem; color: var(--text-light); cursor: pointer;
-|         letter-spacing: 0.08em; text-decoration: underline;
-|         background: none; border: none; font-family: var(--sans);
-|       }
-|       .filter-clear:hover { color: var(--gold); }
-|       .filter-section { margin-bottom: 1.5rem; }
-|       .filter-section h4 {
-|         font-size: 0.72rem; letter-spacing: 0.15em; color: var(--text-light);
-|         text-transform: uppercase; margin-bottom: 0.8rem;
-|       }
-|       .filter-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-|       .chip {
-|         padding: 0.35rem 0.8rem;
-|         border: 1px solid rgba(0,0,0,0.12); border-radius: 2px;
-|         font-size: 0.75rem; color: var(--text-mid);
-|         cursor: pointer; transition: all 0.2s;
-|         background: none; font-family: var(--sans);
-|       }
-|       .chip:hover { border-color: var(--gold); color: var(--gold); }
-|       .chip.active { background: var(--gold); border-color: var(--gold); color: #fff; }
-|       .price-range { display: flex; flex-direction: column; gap: 0.6rem; }
-|       .price-row { display: flex; gap: 0.5rem; align-items: center; }
-|       .price-row input {
-|         flex: 1; min-width: 0; border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
-|         padding: 0.45rem 0.5rem; font-size: 0.78rem;
-|         font-family: var(--sans); color: var(--text); outline: none;
-|         transition: border-color 0.3s; background: var(--ivory);
-|         width: 0;
-|       }
-|       .price-row input:focus { border-color: var(--gold); }
-|       .price-row span { font-size: 0.72rem; color: var(--text-light); }
-|       .filter-check { display: flex; flex-direction: column; gap: 0.6rem; }
-|       .check-item { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; }
-|       .check-item input[type="checkbox"] { accent-color: var(--gold); width: 14px; height: 14px; cursor: pointer; }
-|       .check-item span { font-size: 0.8rem; color: var(--text-mid); }
-|   
-|       /* LISTING AREA */
-|       .listing-header {
-|         display: flex; justify-content: space-between; align-items: center;
-|         gap: 1rem; flex-wrap: wrap;
-|         margin-bottom: 1.5rem;
-|       }
-|       .listing-header-main { display: flex; gap: 0.9rem; align-items: center; flex-wrap: wrap; }
-|       .sort-select {
-|         border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
-|         padding: 0.45rem 0.8rem; font-family: var(--sans);
-|         font-size: 0.8rem; color: var(--text-mid);
-|         background: #fff; outline: none; cursor: pointer;
-|       }
-|       .view-toggles { display: flex; gap: 0.3rem; }
-|       .view-btn {
-|         width: 36px; height: 36px;
-|         border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
-|         background: #fff; cursor: pointer;
-|         display: flex; align-items: center; justify-content: center;
-|         transition: all 0.2s;
-|       }
-|       .view-btn.active { background: var(--navy); border-color: var(--navy); }
-|       .view-btn.active svg { stroke: #fff; }
-|       .view-btn:hover:not(.active) { border-color: var(--gold); }
-|       .view-btn:hover:not(.active) svg { stroke: var(--gold); }
-|       .view-btn svg { width: 16px; height: 16px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
-|   
-|       /* PROPERTY GRID */
-|       .prop-grid {
-|         display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
-|       }
-|       .prop-grid.list-view { grid-template-columns: 1fr; }
-|   
-|       .prop-card {
-|         background: #fff; border-radius: 4px; overflow: hidden;
-|         box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-|         border: 1px solid rgba(0,0,0,0.05);
-|         transition: transform 0.3s, box-shadow 0.3s;
-|         cursor: pointer;
-|         opacity: 0; transform: translateY(20px);
-|         animation: cardFadeIn 0.5s ease forwards;
-|       }
-|       .prop-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
-|   
-|       @keyframes cardFadeIn {
-|         to { opacity: 1; transform: translateY(0); }
-|       }
-|   
-|       /* list view card */
-|       .prop-grid.list-view .prop-card {
-|         display: grid; grid-template-columns: 280px 1fr;
-|       }
-|       .prop-grid.list-view .prop-img { height: 100%; min-height: 180px; }
-|   
-|       .prop-img {
-|         height: 190px; position: relative; overflow: hidden;
-|         background: linear-gradient(135deg, #d4cfc8 0%, #c8c2ba 100%);
-|         display: flex; align-items: center; justify-content: center;
-|       }
-|       .prop-img::after {
-|         content: ''; position: absolute; inset: 0;
-|         background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.07));
-|       }
-|       .prop-img-inner {
-|         text-align: center; z-index: 1;
-|       }
-|       .prop-img-inner svg {
-|         width: 40px; height: 40px; stroke: rgba(0,0,0,0.2); fill: none; stroke-width: 1;
-|         margin-bottom: 0.5rem; display: block; margin: 0 auto 0.5rem;
-|       }
-|       .prop-img-inner p {
-|         font-family: monospace; font-size: 0.62rem;
-|         color: rgba(0,0,0,0.25); letter-spacing: 0.1em;
-|       }
-|   
-|       .prop-badges {
-|         position: absolute; top: 0.8rem; left: 0.8rem; z-index: 2;
-|         display: flex; gap: 0.4rem; flex-wrap: wrap;
-|       }
-|       .prop-badge {
-|         font-size: 0.62rem; letter-spacing: 0.08em;
-|         padding: 0.2rem 0.6rem; border-radius: 2px;
-|         font-weight: 500;
-|       }
-|       .badge-new { background: var(--gold); color: #fff; }
-|       .badge-rec { background: var(--navy); color: #fff; }
-|       .badge-sold { background: #888; color: #fff; }
-|   
-|       .prop-fav {
-|         position: absolute; top: 0.8rem; right: 0.8rem; z-index: 2;
-|         width: 32px; height: 32px; border-radius: 50%;
-|         background: rgba(255,255,255,0.9); border: none; cursor: pointer;
-|         display: flex; align-items: center; justify-content: center;
-|         transition: background 0.2s, transform 0.2s;
-|       }
-|       .prop-fav:hover { background: #fff; transform: scale(1.1); }
-|       .prop-fav svg { width: 15px; height: 15px; stroke: var(--text-light); fill: none; stroke-width: 2; transition: stroke 0.2s, fill 0.2s; }
-|       .prop-fav.active svg { stroke: #e05c5c; fill: #e05c5c; }
-|   
-|       .prop-body { padding: 1.3rem 1.5rem 1.5rem; }
-|       .prop-location {
-|         font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.08em;
-|         margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.3rem;
-|       }
-|       .prop-location svg { width: 11px; height: 11px; stroke: var(--gold); fill: none; stroke-width: 2; flex-shrink: 0; }
-|       .prop-title {
-|         font-family: var(--serif); font-size: 0.95rem; font-weight: 600;
-|         color: var(--navy); margin-bottom: 0.6rem; letter-spacing: 0.02em;
-|         line-height: 1.5;
-|       }
-|       .prop-price {
-|         font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--gold);
-|       }
-|       .prop-price span { font-size: 0.75rem; font-weight: 300; color: var(--text-light); margin-left: 0.2rem; }
-|       .prop-specs {
-|         display: flex; gap: 1rem; margin-top: 0.9rem;
-|         padding-top: 0.9rem; border-top: 1px solid rgba(0,0,0,0.06); flex-wrap: wrap;
-|       }
-|       .prop-spec { font-size: 0.72rem; color: var(--text-light); display: flex; align-items: center; gap: 0.25rem; }
-|       .prop-spec svg { width: 11px; height: 11px; stroke: var(--text-light); fill: none; stroke-width: 2; }
-|       .prop-actions {
-|         display: flex; gap: 0.6rem; margin-top: 1rem;
-|       }
-|       .prop-btn-main {
-|         flex: 1; padding: 0.6rem; background: var(--navy); color: #fff;
-|         border: none; border-radius: 2px; font-family: var(--sans);
-|         font-size: 0.75rem; letter-spacing: 0.08em; cursor: pointer;
-|         transition: background 0.2s; text-decoration: none;
-|         display: inline-flex; align-items: center; justify-content: center;
-|       }
-|       .prop-btn-main:hover { background: var(--navy-light); }
-|       .prop-btn-sub {
-|         padding: 0.6rem 0.9rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 2px;
-|         background: #fff; font-family: var(--sans); font-size: 0.75rem;
-|         color: var(--text-mid); cursor: pointer; transition: border-color 0.2s, color 0.2s;
-|       }
-|       .prop-btn-sub:hover { border-color: var(--gold); color: var(--gold); }
-|   
-|       /* PAGINATION */
-|       .pagination {
-|         display: flex; justify-content: center; gap: 0.4rem; margin-top: 3rem; flex-wrap: wrap;
-|       }
-|       .page-btn {
-|         width: 40px; height: 40px; border-radius: 3px;
-|         border: 1px solid rgba(0,0,0,0.1); background: #fff;
-|         font-family: var(--sans); font-size: 0.85rem; color: var(--text-mid);
-|         cursor: pointer; transition: all 0.2s;
-|         display: flex; align-items: center; justify-content: center;
-|       }
-|       .page-btn:hover { border-color: var(--gold); color: var(--gold); }
-|       .page-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
-|       .page-btn.arrow { width: auto; padding: 0 1rem; font-size: 0.78rem; letter-spacing: 0.06em; }
-|       .page-btn:disabled { opacity: 0.45; cursor: default; pointer-events: none; }
-|       .pagination[hidden] { display: none; }
-|   
-|       /* FOOTER */
-|       footer {
-|         background: #111820; padding: 3rem 4rem 2rem;
-|       }
-|       .footer-bottom {
-|         max-width: 1200px; margin: 0 auto;
-|         display: flex; justify-content: space-between; align-items: center;
-|       }
-|       .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
-|       .footer-bottom a {
-|         font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none;
-|         font-family: var(--serif); transition: color 0.3s;
-|       }
-|       .footer-bottom a:hover { color: var(--gold); }
-|   
-|       /* reveal */
-|       .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-|       .reveal.visible { opacity: 1; transform: translateY(0); }
-|   
-|       @media (max-width: 960px) {
-|         nav { padding: 1rem 1.5rem; }
-|         .main-content { grid-template-columns: 1fr; padding: 2rem 1.5rem 4rem; }
-|         .sidebar { position: static; }
-|         .prop-grid { grid-template-columns: 1fr; }
-|         .prop-grid.list-view .prop-card { grid-template-columns: 1fr; }
-|         .page-header { padding: 8rem 1.5rem 3rem; }
-|         footer { padding: 2rem 1.5rem; }
-|       }
-|     </style>
-|   </head>
-|   <body>
-|   
-|   <!-- NAV -->
-|   <nav>
-|     <a href="index.html" class="nav-logo">小針不動産株式会社</a>
-|     <ul class="nav-links">
-|       <li><a href="index.html#services">サービス</a></li>
-|       <li><a href="index.html#flow">売買の流れ</a></li>
-|       <li><a href="properties.html">物件情報</a></li>
-|       <li><a href="index.html#about">会社案内</a></li>
-|       <li><a href="index.html#contact" class="nav-cta">無料相談</a></li>
-|     </ul>
-|   </nav>
-|   
-|   <!-- PAGE HEADER -->
-|   <div class="page-header">
-|     <div class="page-header-inner">
-|       <div class="breadcrumb">
-|         <a href="index.html">ホーム</a>
-|         <span>›</span>
-|         <span style="color: rgba(255,255,255,0.6);">物件一覧</span>
-|       </div>
-|       <h1>物件一覧</h1>
-|       <p>こだわりの条件で、あなたにぴったりの物件を見つけましょう。</p>
-|     </div>
-|   </div>
-|   
-|   <!-- MAIN -->
-|   <div class="main-content">
-|   
-|     <!-- SIDEBAR -->
-|     <aside class="sidebar">
-|       <div class="filter-card">
-|         <div class="filter-title">
-|           絞り込み
-|           <button class="filter-clear">クリア</button>
-|         </div>
-|   
-|         <div class="filter-section">
-|           <h4>物件種別</h4>
-|           <div class="filter-chips">
-|             <button class="chip active" type="button" onclick="toggleChip(this)" data-filter-group="category" data-filter-value="">すべて</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="category" data-filter-value="一戸建て">一戸建て</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="category" data-filter-value="マンション">マンション</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="category" data-filter-value="土地">土地</button>
-|           </div>
-|         </div>
-|   
-|         <div class="filter-section">
-|           <h4>価格帯（万円）</h4>
-|           <div class="price-range">
-|             <div class="price-row">
-|               <input id="priceMinInput" type="number" placeholder="下限" min="0" step="100">
-|               <span>〜</span>
-|               <input id="priceMaxInput" type="number" placeholder="上限" min="0" step="100">
-|             </div>
-|           </div>
-|         </div>
-|   
-|         <div class="filter-section">
-|           <h4>エリア</h4>
-|           <div class="filter-chips">
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="area" data-filter-value="東京都">東京都</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="area" data-filter-value="神奈川県">神奈川県</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="area" data-filter-value="埼玉県">埼玉県</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="area" data-filter-value="千葉県">千葉県</button>
-|           </div>
-|         </div>
-|   
-|         <div class="filter-section">
-|           <h4>間取り</h4>
-|           <div class="filter-chips">
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="sidebar-layout" data-filter-value="under-1ldk">1LDK以下</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="sidebar-layout" data-filter-value="2ldk">2LDK</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="sidebar-layout" data-filter-value="3ldk">3LDK</button>
-|             <button class="chip" type="button" onclick="toggleChip(this)" data-filter-group="sidebar-layout" data-filter-value="4ldk-plus">4LDK以上</button>
-|           </div>
-|         </div>
-|   
-|         <div class="filter-section">
-|           <h4>こだわり条件</h4>
-|           <div class="filter-check">
-|             <label class="check-item">
-|               <input id="filterWalk10" type="checkbox" data-filter-flag="walk10"> <span>駅徒歩10分以内</span>
-|             </label>
-|             <label class="check-item">
-|               <input id="filterAge10" type="checkbox" data-filter-flag="age10"> <span>築10年以内</span>
-|             </label>
-|             <label class="check-item">
-|               <input id="filterParking" type="checkbox" data-filter-flag="parking"> <span>駐車場あり</span>
-|             </label>
-|             <label class="check-item">
-|               <input id="filterSouth" type="checkbox" data-filter-flag="southFacing"> <span>南向き</span>
-|             </label>
-|             <label class="check-item">
-|               <input id="filterCorner" type="checkbox" data-filter-flag="corner"> <span>角部屋・角地</span>
-|             </label>
-|             <label class="check-item">
-|               <input id="filterRenovated" type="checkbox" data-filter-flag="renovated"> <span>リフォーム済み</span>
-|             </label>
-|           </div>
-|         </div>
-|       </div>
-|     </aside>
-|   
-|     <!-- LISTINGS -->
-|     <div>
-|       <div class="listing-header reveal">
-|         <div class="listing-header-main">
-|           <div class="result-count"><strong>18</strong> 件の物件が見つかりました</div>
-|           <select class="sort-select">
-|             <option value="newest">並び替え：新着順</option>
-|             <option value="price-asc">価格が安い順</option>
-|             <option value="price-desc">価格が高い順</option>
-|             <option value="area-desc">面積が広い順</option>
-|             <option value="age-asc">築年数が新しい順</option>
-|           </select>
-|         </div>
-|         <div style="display:flex;gap:0.8rem;align-items:center;">
-|           <div class="view-toggles">
-|             <button class="view-btn active" id="gridBtn" onclick="setView('grid')">
-|               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-|             </button>
-|             <button class="view-btn" id="listBtn" onclick="setView('list')">
-|               <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-|             </button>
-|           </div>
-|         </div>
-|       </div>
-|   
-|       <div class="prop-grid" id="propGrid"></div><!-- /prop-grid -->
-|   
-|       <!-- PAGINATION -->
-|       <div class="pagination reveal" id="pagination"></div>
-|     </div><!-- /listing -->
-|   
-|   </div><!-- /main-content -->
-|   
-|   <footer>
-|     <div class="footer-bottom">
-|       <p>© 2024 小針不動産株式会社 All Rights Reserved.</p>
-|       <a href="index.html">← トップページへ戻る</a>
-|     </div>
-|   </footer>
-|   
-|   <script src="assets/js/properties-listing.js" data-case-script="properties-listing"></script>
-|   
-|   </body>
-|   </html>
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title
+      | 物件一覧 | 小針不動産株式会社
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
+    style
+      .
+        
+              :root {
+                --navy: #1a2540;
+                --navy-light: #2e3d60;
+                --gold: oklch(68% 0.12 72);
+                --gold-light: oklch(80% 0.10 72);
+                --ivory: oklch(97.5% 0.008 80);
+                --ivory-deep: oklch(93% 0.012 75);
+                --text: #1a1a1a;
+                --text-mid: #555;
+                --text-light: #888;
+                --serif: 'Noto Serif JP', serif;
+                --sans: 'Noto Sans JP', sans-serif;
+              }
+              *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+              html { scroll-behavior: smooth; }
+              body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
+          
+              /* NAV */
+              nav {
+                position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 1rem 4rem;
+                background: rgba(255,255,255,0.97);
+                box-shadow: 0 1px 24px rgba(0,0,0,0.07);
+                backdrop-filter: blur(12px);
+              }
+              .nav-logo {
+                font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+                color: var(--navy); letter-spacing: 0.04em; text-decoration: none;
+              }
+              .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
+              .nav-links a {
+                font-size: 0.82rem; font-weight: 400; letter-spacing: 0.08em;
+                color: var(--text-mid); text-decoration: none; transition: color 0.3s;
+                position: relative;
+              }
+              .nav-links a::after {
+                content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+                background: var(--gold); transition: width 0.3s;
+              }
+              .nav-links a:hover { color: var(--navy); }
+              .nav-links a:hover::after { width: 100%; }
+              .nav-cta {
+                background: var(--gold); color: #fff !important;
+                padding: 0.55rem 1.4rem; border-radius: 2px;
+                font-weight: 500 !important;
+              }
+              .nav-cta::after { display: none !important; }
+              .nav-cta:hover { background: var(--gold-light) !important; }
+          
+              /* PAGE HEADER */
+              .page-header {
+                padding: 9rem 4rem 4rem;
+                background: var(--navy);
+                position: relative; overflow: hidden;
+              }
+              .page-header::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+                background-size: 60px 60px;
+              }
+              .page-header-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+              .breadcrumb {
+                display: flex; gap: 0.5rem; align-items: center;
+                font-size: 0.72rem; letter-spacing: 0.1em;
+                color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
+              }
+              .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .breadcrumb a:hover { color: var(--gold); }
+              .breadcrumb span { color: rgba(255,255,255,0.25); }
+              .page-header h1 {
+                font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+                font-weight: 600; color: #fff; letter-spacing: 0.04em; margin-bottom: 0.6rem;
+              }
+              .page-header p { font-size: 0.88rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; }
+          
+              .result-count {
+                font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.04em;
+                white-space: nowrap;
+              }
+              .result-count strong { color: var(--navy); font-weight: 600; }
+          
+              /* MAIN LAYOUT */
+              .main-content {
+                max-width: 1200px; margin: 0 auto;
+                padding: 2.5rem 4rem 5rem;
+                display: grid; grid-template-columns: 260px 1fr; gap: 3rem; align-items: start;
+              }
+          
+              /* SIDEBAR FILTERS */
+              .sidebar { position: sticky; top: 88px; }
+              .filter-card {
+                background: #fff; border-radius: 4px;
+                border: 1px solid rgba(0,0,0,0.06);
+                padding: 1.8rem;
+                box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+              }
+              .filter-title {
+                font-family: var(--serif); font-size: 1rem; font-weight: 600;
+                color: var(--navy); margin-bottom: 1.5rem; letter-spacing: 0.03em;
+                padding-bottom: 0.8rem; border-bottom: 1px solid rgba(0,0,0,0.06);
+                display: flex; justify-content: space-between; align-items: center;
+              }
+              .filter-clear {
+                font-size: 0.68rem; color: var(--text-light); cursor: pointer;
+                letter-spacing: 0.08em; text-decoration: underline;
+                background: none; border: none; font-family: var(--sans);
+              }
+              .filter-clear:hover { color: var(--gold); }
+              .filter-section { margin-bottom: 1.5rem; }
+              .filter-section h4 {
+                font-size: 0.72rem; letter-spacing: 0.15em; color: var(--text-light);
+                text-transform: uppercase; margin-bottom: 0.8rem;
+              }
+              .filter-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+              .chip {
+                padding: 0.35rem 0.8rem;
+                border: 1px solid rgba(0,0,0,0.12); border-radius: 2px;
+                font-size: 0.75rem; color: var(--text-mid);
+                cursor: pointer; transition: all 0.2s;
+                background: none; font-family: var(--sans);
+              }
+              .chip:hover { border-color: var(--gold); color: var(--gold); }
+              .chip.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+              .price-range { display: flex; flex-direction: column; gap: 0.6rem; }
+              .price-row { display: flex; gap: 0.5rem; align-items: center; }
+              .price-row input {
+                flex: 1; min-width: 0; border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
+                padding: 0.45rem 0.5rem; font-size: 0.78rem;
+                font-family: var(--sans); color: var(--text); outline: none;
+                transition: border-color 0.3s; background: var(--ivory);
+                width: 0;
+              }
+              .price-row input:focus { border-color: var(--gold); }
+              .price-row span { font-size: 0.72rem; color: var(--text-light); }
+              .filter-check { display: flex; flex-direction: column; gap: 0.6rem; }
+              .check-item { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; }
+              .check-item input[type="checkbox"] { accent-color: var(--gold); width: 14px; height: 14px; cursor: pointer; }
+              .check-item span { font-size: 0.8rem; color: var(--text-mid); }
+          
+              /* LISTING AREA */
+              .listing-header {
+                display: flex; justify-content: space-between; align-items: center;
+                gap: 1rem; flex-wrap: wrap;
+                margin-bottom: 1.5rem;
+              }
+              .listing-header-main { display: flex; gap: 0.9rem; align-items: center; flex-wrap: wrap; }
+              .sort-select {
+                border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
+                padding: 0.45rem 0.8rem; font-family: var(--sans);
+                font-size: 0.8rem; color: var(--text-mid);
+                background: #fff; outline: none; cursor: pointer;
+              }
+              .view-toggles { display: flex; gap: 0.3rem; }
+              .view-btn {
+                width: 36px; height: 36px;
+                border: 1px solid rgba(0,0,0,0.12); border-radius: 3px;
+                background: #fff; cursor: pointer;
+                display: flex; align-items: center; justify-content: center;
+                transition: all 0.2s;
+              }
+              .view-btn.active { background: var(--navy); border-color: var(--navy); }
+              .view-btn.active svg { stroke: #fff; }
+              .view-btn:hover:not(.active) { border-color: var(--gold); }
+              .view-btn:hover:not(.active) svg { stroke: var(--gold); }
+              .view-btn svg { width: 16px; height: 16px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
+          
+              /* PROPERTY GRID */
+              .prop-grid {
+                display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+              }
+              .prop-grid.list-view { grid-template-columns: 1fr; }
+          
+              .prop-card {
+                background: #fff; border-radius: 4px; overflow: hidden;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+                border: 1px solid rgba(0,0,0,0.05);
+                transition: transform 0.3s, box-shadow 0.3s;
+                cursor: pointer;
+                opacity: 0; transform: translateY(20px);
+                animation: cardFadeIn 0.5s ease forwards;
+              }
+              .prop-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+          
+              @keyframes cardFadeIn {
+                to { opacity: 1; transform: translateY(0); }
+              }
+          
+              /* list view card */
+              .prop-grid.list-view .prop-card {
+                display: grid; grid-template-columns: 280px 1fr;
+              }
+              .prop-grid.list-view .prop-img { height: 100%; min-height: 180px; }
+          
+              .prop-img {
+                height: 190px; position: relative; overflow: hidden;
+                background: linear-gradient(135deg, #d4cfc8 0%, #c8c2ba 100%);
+                display: flex; align-items: center; justify-content: center;
+              }
+              .prop-img::after {
+                content: ''; position: absolute; inset: 0;
+                background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.07));
+              }
+              .prop-img-inner {
+                text-align: center; z-index: 1;
+              }
+              .prop-img-inner svg {
+                width: 40px; height: 40px; stroke: rgba(0,0,0,0.2); fill: none; stroke-width: 1;
+                margin-bottom: 0.5rem; display: block; margin: 0 auto 0.5rem;
+              }
+              .prop-img-inner p {
+                font-family: monospace; font-size: 0.62rem;
+                color: rgba(0,0,0,0.25); letter-spacing: 0.1em;
+              }
+          
+              .prop-badges {
+                position: absolute; top: 0.8rem; left: 0.8rem; z-index: 2;
+                display: flex; gap: 0.4rem; flex-wrap: wrap;
+              }
+              .prop-badge {
+                font-size: 0.62rem; letter-spacing: 0.08em;
+                padding: 0.2rem 0.6rem; border-radius: 2px;
+                font-weight: 500;
+              }
+              .badge-new { background: var(--gold); color: #fff; }
+              .badge-rec { background: var(--navy); color: #fff; }
+              .badge-sold { background: #888; color: #fff; }
+          
+              .prop-fav {
+                position: absolute; top: 0.8rem; right: 0.8rem; z-index: 2;
+                width: 32px; height: 32px; border-radius: 50%;
+                background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+                display: flex; align-items: center; justify-content: center;
+                transition: background 0.2s, transform 0.2s;
+              }
+              .prop-fav:hover { background: #fff; transform: scale(1.1); }
+              .prop-fav svg { width: 15px; height: 15px; stroke: var(--text-light); fill: none; stroke-width: 2; transition: stroke 0.2s, fill 0.2s; }
+              .prop-fav.active svg { stroke: #e05c5c; fill: #e05c5c; }
+          
+              .prop-body { padding: 1.3rem 1.5rem 1.5rem; }
+              .prop-location {
+                font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.08em;
+                margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.3rem;
+              }
+              .prop-location svg { width: 11px; height: 11px; stroke: var(--gold); fill: none; stroke-width: 2; flex-shrink: 0; }
+              .prop-title {
+                font-family: var(--serif); font-size: 0.95rem; font-weight: 600;
+                color: var(--navy); margin-bottom: 0.6rem; letter-spacing: 0.02em;
+                line-height: 1.5;
+              }
+              .prop-price {
+                font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--gold);
+              }
+              .prop-price span { font-size: 0.75rem; font-weight: 300; color: var(--text-light); margin-left: 0.2rem; }
+              .prop-specs {
+                display: flex; gap: 1rem; margin-top: 0.9rem;
+                padding-top: 0.9rem; border-top: 1px solid rgba(0,0,0,0.06); flex-wrap: wrap;
+              }
+              .prop-spec { font-size: 0.72rem; color: var(--text-light); display: flex; align-items: center; gap: 0.25rem; }
+              .prop-spec svg { width: 11px; height: 11px; stroke: var(--text-light); fill: none; stroke-width: 2; }
+              .prop-actions {
+                display: flex; gap: 0.6rem; margin-top: 1rem;
+              }
+              .prop-btn-main {
+                flex: 1; padding: 0.6rem; background: var(--navy); color: #fff;
+                border: none; border-radius: 2px; font-family: var(--sans);
+                font-size: 0.75rem; letter-spacing: 0.08em; cursor: pointer;
+                transition: background 0.2s; text-decoration: none;
+                display: inline-flex; align-items: center; justify-content: center;
+              }
+              .prop-btn-main:hover { background: var(--navy-light); }
+              .prop-btn-sub {
+                padding: 0.6rem 0.9rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 2px;
+                background: #fff; font-family: var(--sans); font-size: 0.75rem;
+                color: var(--text-mid); cursor: pointer; transition: border-color 0.2s, color 0.2s;
+              }
+              .prop-btn-sub:hover { border-color: var(--gold); color: var(--gold); }
+          
+              /* PAGINATION */
+              .pagination {
+                display: flex; justify-content: center; gap: 0.4rem; margin-top: 3rem; flex-wrap: wrap;
+              }
+              .page-btn {
+                width: 40px; height: 40px; border-radius: 3px;
+                border: 1px solid rgba(0,0,0,0.1); background: #fff;
+                font-family: var(--sans); font-size: 0.85rem; color: var(--text-mid);
+                cursor: pointer; transition: all 0.2s;
+                display: flex; align-items: center; justify-content: center;
+              }
+              .page-btn:hover { border-color: var(--gold); color: var(--gold); }
+              .page-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+              .page-btn.arrow { width: auto; padding: 0 1rem; font-size: 0.78rem; letter-spacing: 0.06em; }
+              .page-btn:disabled { opacity: 0.45; cursor: default; pointer-events: none; }
+              .pagination[hidden] { display: none; }
+          
+              /* FOOTER */
+              footer {
+                background: #111820; padding: 3rem 4rem 2rem;
+              }
+              .footer-bottom {
+                max-width: 1200px; margin: 0 auto;
+                display: flex; justify-content: space-between; align-items: center;
+              }
+              .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+              .footer-bottom a {
+                font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none;
+                font-family: var(--serif); transition: color 0.3s;
+              }
+              .footer-bottom a:hover { color: var(--gold); }
+          
+              /* reveal */
+              .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+              .reveal.visible { opacity: 1; transform: translateY(0); }
+          
+              @media (max-width: 960px) {
+                nav { padding: 1rem 1.5rem; }
+                .main-content { grid-template-columns: 1fr; padding: 2rem 1.5rem 4rem; }
+                .sidebar { position: static; }
+                .prop-grid { grid-template-columns: 1fr; }
+                .prop-grid.list-view .prop-card { grid-template-columns: 1fr; }
+                .page-header { padding: 8rem 1.5rem 3rem; }
+                footer { padding: 2rem 1.5rem; }
+              }
+            
+  body
+    nav
+      a(href="index.html", class="nav-logo")
+        | 小針不動産株式会社
+      ul(class="nav-links")
+        li
+          a(href="index.html#services")
+            | サービス
+        li
+          a(href="index.html#flow")
+            | 売買の流れ
+        li
+          a(href="properties.html")
+            | 物件情報
+        li
+          a(href="index.html#about")
+            | 会社案内
+        li
+          a(href="index.html#contact", class="nav-cta")
+            | 無料相談
+    div(class="page-header")
+      div(class="page-header-inner")
+        div(class="breadcrumb")
+          a(href="index.html")
+            | ホーム
+          span
+            | ›
+          span(style="color: rgba(255,255,255,0.6);")
+            | 物件一覧
+        h1
+          | 物件一覧
+        p
+          | こだわりの条件で、あなたにぴったりの物件を見つけましょう。
+    div(class="main-content")
+      aside(class="sidebar")
+        div(class="filter-card")
+          div(class="filter-title")
+            | 絞り込み
+            button(class="filter-clear")
+              | クリア
+          div(class="filter-section")
+            h4
+              | 物件種別
+            div(class="filter-chips")
+              button(class="chip active", type="button", onclick="toggleChip(this)", data-filter-group="category", data-filter-value="")
+                | すべて
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="category", data-filter-value="一戸建て")
+                | 一戸建て
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="category", data-filter-value="マンション")
+                | マンション
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="category", data-filter-value="土地")
+                | 土地
+          div(class="filter-section")
+            h4
+              | 価格帯（万円）
+            div(class="price-range")
+              div(class="price-row")
+                input(id="priceMinInput", type="number", placeholder="下限", min="0", step="100")
+                span
+                  | 〜
+                input(id="priceMaxInput", type="number", placeholder="上限", min="0", step="100")
+          div(class="filter-section")
+            h4
+              | エリア
+            div(class="filter-chips")
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="area", data-filter-value="東京都")
+                | 東京都
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="area", data-filter-value="神奈川県")
+                | 神奈川県
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="area", data-filter-value="埼玉県")
+                | 埼玉県
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="area", data-filter-value="千葉県")
+                | 千葉県
+          div(class="filter-section")
+            h4
+              | 間取り
+            div(class="filter-chips")
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="sidebar-layout", data-filter-value="under-1ldk")
+                | 1LDK以下
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="sidebar-layout", data-filter-value="2ldk")
+                | 2LDK
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="sidebar-layout", data-filter-value="3ldk")
+                | 3LDK
+              button(class="chip", type="button", onclick="toggleChip(this)", data-filter-group="sidebar-layout", data-filter-value="4ldk-plus")
+                | 4LDK以上
+          div(class="filter-section")
+            h4
+              | こだわり条件
+            div(class="filter-check")
+              label(class="check-item")
+                input(id="filterWalk10", type="checkbox", data-filter-flag="walk10")
+                span
+                  | 駅徒歩10分以内
+              label(class="check-item")
+                input(id="filterAge10", type="checkbox", data-filter-flag="age10")
+                span
+                  | 築10年以内
+              label(class="check-item")
+                input(id="filterParking", type="checkbox", data-filter-flag="parking")
+                span
+                  | 駐車場あり
+              label(class="check-item")
+                input(id="filterSouth", type="checkbox", data-filter-flag="southFacing")
+                span
+                  | 南向き
+              label(class="check-item")
+                input(id="filterCorner", type="checkbox", data-filter-flag="corner")
+                span
+                  | 角部屋・角地
+              label(class="check-item")
+                input(id="filterRenovated", type="checkbox", data-filter-flag="renovated")
+                span
+                  | リフォーム済み
+      div
+        div(class="listing-header reveal")
+          div(class="listing-header-main")
+            div(class="result-count")
+              strong
+                | 18
+              | 件の物件が見つかりました
+            select(class="sort-select")
+              option(value="newest")
+                | 並び替え：新着順
+              option(value="price-asc")
+                | 価格が安い順
+              option(value="price-desc")
+                | 価格が高い順
+              option(value="area-desc")
+                | 面積が広い順
+              option(value="age-asc")
+                | 築年数が新しい順
+          div(style="display:flex;gap:0.8rem;align-items:center;")
+            div(class="view-toggles")
+              button(class="view-btn active", id="gridBtn", onclick="setView('grid')")
+                svg(viewbox="0 0 24 24")
+                  rect(x="3", y="3", width="7", height="7")
+                  rect(x="14", y="3", width="7", height="7")
+                  rect(x="3", y="14", width="7", height="7")
+                  rect(x="14", y="14", width="7", height="7")
+              button(class="view-btn", id="listBtn", onclick="setView('list')")
+                svg(viewbox="0 0 24 24")
+                  line(x1="8", y1="6", x2="21", y2="6")
+                  line(x1="8", y1="12", x2="21", y2="12")
+                  line(x1="8", y1="18", x2="21", y2="18")
+                  line(x1="3", y1="6", x2="3.01", y2="6")
+                  line(x1="3", y1="12", x2="3.01", y2="12")
+                  line(x1="3", y1="18", x2="3.01", y2="18")
+        div(class="prop-grid", id="propGrid")
+        div(class="pagination reveal", id="pagination")
+    footer
+      div(class="footer-bottom")
+        p
+          | © 2024 小針不動産株式会社 All Rights Reserved.
+        a(href="index.html")
+          | ← トップページへ戻る
+    script(src="assets/js/properties-listing.js", data-case-script="properties-listing")

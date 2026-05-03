@@ -1,649 +1,768 @@
 doctype html
-|   <!DOCTYPE html>
-|   <html lang="ja">
-|   <head>
-|     <meta charset="UTF-8">
-|     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-|     <title>住宅購入サポート | 小針不動産株式会社</title>
-|     <link rel="preconnect" href="https://fonts.googleapis.com">
-|     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
-|     <style>
-|       :root {
-|         --navy: #1a2540;
-|         --navy-light: #2e3d60;
-|         --gold: oklch(68% 0.12 72);
-|         --gold-light: oklch(80% 0.10 72);
-|         --ivory: oklch(97.5% 0.008 80);
-|         --ivory-deep: oklch(93% 0.012 75);
-|         --text: #1a1a1a;
-|         --text-mid: #555;
-|         --text-light: #888;
-|         --serif: 'Noto Serif JP', serif;
-|         --sans: 'Noto Sans JP', sans-serif;
-|       }
-|       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-|       html { scroll-behavior: smooth; }
-|       body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
-|   
-|       /* ── NAV ── */
-|       nav {
-|         position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-|         display: flex; align-items: center; justify-content: space-between;
-|         padding: 1rem 4rem;
-|         background: rgba(255,255,255,0.97);
-|         box-shadow: 0 1px 24px rgba(0,0,0,0.07);
-|         backdrop-filter: blur(12px);
-|       }
-|       .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; text-decoration: none; }
-|       .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
-|       .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--text-mid); text-decoration: none; transition: color 0.3s; position: relative; }
-|       .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
-|       .nav-links a:hover { color: var(--navy); }
-|       .nav-links a:hover::after { width: 100%; }
-|       .nav-cta { background: var(--gold); color: #fff !important; padding: 0.55rem 1.4rem; border-radius: 2px; font-weight: 500 !important; }
-|       .nav-cta::after { display: none !important; }
-|       .nav-cta:hover { background: var(--gold-light) !important; }
-|   
-|       /* ── HERO ── */
-|       .page-hero {
-|         margin-top: 64px;
-|         background: var(--navy);
-|         padding: 5rem 4rem 4.5rem;
-|         position: relative; overflow: hidden;
-|       }
-|       .page-hero::before {
-|         content: '';
-|         position: absolute; inset: 0;
-|         background-image:
-|           linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-|           linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-|         background-size: 60px 60px;
-|         animation: gridPan 30s linear infinite;
-|       }
-|       @keyframes gridPan { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
-|       .page-hero::after {
-|         content: '';
-|         position: absolute; inset: 0;
-|         background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(180,150,90,0.1) 0%, transparent 70%);
-|       }
-|       .page-hero-inner {
-|         position: relative; z-index: 1;
-|         max-width: 1100px; margin: 0 auto;
-|         display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-|       }
-|       .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem; }
-|       .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
-|       .breadcrumb a:hover { color: var(--gold); }
-|       .page-tag { font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
-|       .page-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
-|       .page-hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 600; color: #fff; letter-spacing: 0.04em; line-height: 1.4; margin-bottom: 1rem; }
-|       .page-hero h1 span { color: var(--gold); }
-|       .page-hero p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 2; letter-spacing: 0.04em; margin-bottom: 2rem; }
-|       .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-|       .btn-gold { padding: 0.9rem 2rem; background: var(--gold); color: #fff; border-radius: 2px; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.1em; text-decoration: none; transition: background 0.2s, transform 0.2s; display: inline-block; }
-|       .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-|       .btn-outline-w { padding: 0.9rem 2rem; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); border-radius: 2px; font-size: 0.88rem; letter-spacing: 0.1em; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
-|       .btn-outline-w:hover { border-color: #fff; color: #fff; }
-|       .hero-visual {
-|         aspect-ratio: 4/3;
-|         background: linear-gradient(135deg, #2e3d60 0%, #1a2540 100%);
-|         border-radius: 4px; position: relative; overflow: hidden;
-|         display: flex; align-items: center; justify-content: center;
-|       }
-|       .hero-visual::before {
-|         content: '';
-|         position: absolute; inset: 0;
-|         background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px);
-|       }
-|       .hero-visual-ph { text-align: center; z-index: 1; }
-|       .hero-visual-ph svg { width: 56px; height: 56px; stroke: rgba(180,150,90,0.4); fill: none; stroke-width: 1; display: block; margin: 0 auto 0.8rem; }
-|       .hero-visual-ph p { font-family: monospace; font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 0.12em; }
-|       .hero-badge {
-|         position: absolute; top: 1rem; left: 1rem;
-|         background: rgba(180,150,90,0.9); color: #fff;
-|         font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.3rem 0.8rem; border-radius: 2px;
-|       }
-|   
-|       /* ── SECTION COMMON ── */
-|       .section-tag {
-|         font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold);
-|         display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;
-|       }
-|       .section-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
-|       h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 600; color: var(--navy); letter-spacing: 0.04em; line-height: 1.4; margin-bottom: 1rem; }
-|       .section-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 2; max-width: 560px; }
-|   
-|       /* reveal */
-|       .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-|       .reveal.visible { opacity: 1; transform: translateY(0); }
-|       .reveal-delay-1 { transition-delay: 0.12s; }
-|       .reveal-delay-2 { transition-delay: 0.24s; }
-|       .reveal-delay-3 { transition-delay: 0.36s; }
-|       .reveal-delay-4 { transition-delay: 0.48s; }
-|   
-|       /* ── APPEAL ── */
-|       .appeal { padding: 6rem 4rem; background: #fff; }
-|       .appeal-inner { max-width: 1100px; margin: 0 auto; }
-|       .appeal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
-|       .appeal-card {
-|         padding: 2.2rem 2rem; border-radius: 4px;
-|         border: 1px solid rgba(0,0,0,0.07);
-|         background: var(--ivory);
-|         transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-|         position: relative; overflow: hidden;
-|       }
-|       .appeal-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); border-color: rgba(180,150,90,0.3); }
-|       .appeal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-|       .appeal-card:hover::before { transform: scaleX(1); }
-|       .appeal-num { font-family: 'Noto Serif JP', serif; font-size: 2.4rem; font-weight: 300; color: rgba(180,150,90,0.25); line-height: 1; margin-bottom: 1rem; }
-|       .appeal-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-bottom: 0.8rem; letter-spacing: 0.03em; }
-|       .appeal-card p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
-|   
-|       /* ── FLOW ── */
-|       .flow { padding: 6rem 4rem; background: var(--ivory); }
-|       .flow-inner { max-width: 1100px; margin: 0 auto; }
-|       .flow-steps { display: flex; flex-direction: column; gap: 0; margin-top: 3.5rem; }
-|       .flow-step {
-|         display: grid; grid-template-columns: 80px 1fr; gap: 2rem;
-|         padding: 2rem 0; border-bottom: 1px solid rgba(0,0,0,0.07);
-|         position: relative;
-|       }
-|       .flow-step:last-child { border-bottom: none; }
-|       .flow-step-left { display: flex; flex-direction: column; align-items: center; gap: 0; }
-|       .flow-step-circle {
-|         width: 56px; height: 56px; border-radius: 50%;
-|         background: var(--navy); color: #fff;
-|         display: flex; align-items: center; justify-content: center;
-|         font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
-|         flex-shrink: 0; position: relative; z-index: 1;
-|         transition: background 0.3s;
-|       }
-|       .flow-step:hover .flow-step-circle { background: var(--gold); }
-|       .flow-step-line { width: 1px; flex: 1; background: rgba(0,0,0,0.1); margin-top: 4px; }
-|       .flow-step:last-child .flow-step-line { display: none; }
-|       .flow-step-body { padding-top: 0.8rem; padding-bottom: 1rem; }
-|       .flow-step-tag { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.4rem; }
-|       .flow-step-body h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; letter-spacing: 0.03em; }
-|       .flow-step-body p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.9; }
-|       .flow-step-body .step-note {
-|         display: inline-flex; align-items: center; gap: 0.4rem;
-|         margin-top: 0.8rem; padding: 0.4rem 0.9rem;
-|         background: oklch(96% 0.015 72); border-radius: 2px;
-|         font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em;
-|       }
-|       .flow-step-body .step-note svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; stroke-width: 2; }
-|   
-|       /* ── SUPPORT DETAIL ── */
-|       .support { padding: 6rem 4rem; background: var(--navy); position: relative; overflow: hidden; }
-|       .support::before {
-|         content: '';
-|         position: absolute; inset: 0;
-|         background-image:
-|           linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-|           linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-|         background-size: 40px 40px;
-|       }
-|       .support-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-|       .support .section-tag { color: var(--gold-light); }
-|       .support .section-tag::before { background: var(--gold-light); }
-|       .support h2 { color: #fff; }
-|       .support-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
-|       .support-card {
-|         background: rgba(255,255,255,0.05);
-|         border: 1px solid rgba(255,255,255,0.08);
-|         border-radius: 4px; padding: 2rem;
-|         transition: background 0.3s, border-color 0.3s;
-|       }
-|       .support-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(180,150,90,0.4); }
-|       .support-card-icon { width: 44px; height: 44px; border-radius: 3px; background: rgba(180,150,90,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
-|       .support-card-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
-|       .support-card h3 { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.6rem; letter-spacing: 0.03em; }
-|       .support-card p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.9; }
-|   
-|       /* ── CHECKLIST ── */
-|       .checklist { padding: 6rem 4rem; background: #fff; }
-|       .checklist-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-|       .checklist-text .section-desc { margin-bottom: 2rem; }
-|       .check-items { display: flex; flex-direction: column; gap: 0; }
-|       .check-item {
-|         display: flex; gap: 1rem; align-items: flex-start;
-|         padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.07);
-|       }
-|       .check-item:last-child { border-bottom: none; }
-|       .check-circle {
-|         width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-|         background: oklch(96% 0.015 72); border: 1.5px solid rgba(180,150,90,0.4);
-|         display: flex; align-items: center; justify-content: center;
-|         margin-top: 2px; transition: background 0.2s, border-color 0.2s;
-|       }
-|       .check-circle svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; stroke-width: 2.5; }
-|       .check-item:hover .check-circle { background: var(--gold); border-color: var(--gold); }
-|       .check-item:hover .check-circle svg { stroke: #fff; }
-|       .check-item h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
-|       .check-item p { font-size: 0.78rem; color: var(--text-light); line-height: 1.7; }
-|   
-|       /* Worry cards */
-|       .worry-cards { display: flex; flex-direction: column; gap: 1rem; }
-|       .worry-card {
-|         background: var(--ivory); border-radius: 4px;
-|         border: 1px solid rgba(0,0,0,0.06);
-|         padding: 1.5rem 1.8rem;
-|         display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
-|         transition: border-color 0.3s;
-|       }
-|       .worry-card:hover { border-color: rgba(180,150,90,0.4); }
-|       .worry-q { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gold); font-weight: 700; line-height: 1; padding-top: 3px; }
-|       .worry-card h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.3rem; }
-|       .worry-card p { font-size: 0.78rem; color: var(--text-mid); line-height: 1.8; }
-|       .worry-answer { grid-column: 1 / -1; padding: 0.9rem 1rem; background: #fff; border-radius: 3px; border-left: 3px solid var(--gold); margin-top: 0.2rem; }
-|       .worry-answer p { font-size: 0.78rem; color: var(--text-mid); line-height: 1.8; }
-|       .worry-answer p strong { color: var(--navy); }
-|   
-|       /* ── VOICE ── */
-|       .voice { padding: 6rem 4rem; background: var(--ivory-deep); }
-|       .voice-inner { max-width: 1100px; margin: 0 auto; }
-|       .voice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
-|       .voice-card {
-|         background: #fff; border-radius: 4px; padding: 2rem;
-|         border: 1px solid rgba(0,0,0,0.07);
-|         box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-|         transition: transform 0.3s, box-shadow 0.3s;
-|       }
-|       .voice-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.09); }
-|       .voice-stars { display: flex; gap: 2px; margin-bottom: 1rem; }
-|       .voice-stars span { color: var(--gold); font-size: 0.9rem; }
-|       .voice-text { font-size: 0.83rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 1.2rem; font-style: italic; }
-|       .voice-text::before { content: '「'; color: var(--gold); }
-|       .voice-text::after { content: '」'; color: var(--gold); }
-|       .voice-author { display: flex; align-items: center; gap: 0.8rem; }
-|       .voice-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--ivory-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-|       .voice-avatar svg { width: 20px; height: 20px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
-|       .voice-name { font-size: 0.8rem; font-weight: 500; color: var(--navy); }
-|       .voice-attr { font-size: 0.7rem; color: var(--text-light); margin-top: 0.1rem; }
-|   
-|       /* ── CTA ── */
-|       .cta-section {
-|         padding: 6rem 4rem;
-|         background: linear-gradient(135deg, var(--navy) 0%, #2a3d68 60%, var(--navy) 100%);
-|         text-align: center; position: relative; overflow: hidden;
-|       }
-|       .cta-section::before {
-|         content: '';
-|         position: absolute; inset: 0;
-|         background-image:
-|           linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-|           linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-|         background-size: 40px 40px;
-|       }
-|       .cta-section h2 { color: #fff; font-size: clamp(1.6rem, 2.5vw, 2.4rem); position: relative; z-index: 1; }
-|       .cta-section p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 2; margin: 1rem 0 2.5rem; letter-spacing: 0.04em; position: relative; z-index: 1; }
-|       .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-|   
-|       /* ── FOOTER ── */
-|       footer { background: #111820; padding: 2.5rem 4rem; }
-|       .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-|       .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
-|       .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
-|       .footer-bottom a:hover { color: var(--gold); }
-|   
-|       @media (max-width: 900px) {
-|         nav { padding: 1rem 1.5rem; }
-|         .page-hero { padding: 3.5rem 1.5rem 3rem; }
-|         .page-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-|         .appeal { padding: 4rem 1.5rem; }
-|         .appeal-grid { grid-template-columns: 1fr; }
-|         .flow { padding: 4rem 1.5rem; }
-|         .support { padding: 4rem 1.5rem; }
-|         .support-grid { grid-template-columns: 1fr; }
-|         .checklist { padding: 4rem 1.5rem; }
-|         .checklist-inner { grid-template-columns: 1fr; gap: 3rem; }
-|         .voice { padding: 4rem 1.5rem; }
-|         .voice-grid { grid-template-columns: 1fr; }
-|         .cta-section { padding: 4rem 1.5rem; }
-|         footer { padding: 2rem 1.5rem; }
-|       }
-|     </style>
-|   </head>
-|   <body>
-|   
-|   <!-- NAV -->
-|   <nav>
-|     <a href="index.html" class="nav-logo">小針不動産株式会社</a>
-|     <ul class="nav-links">
-|       <li><a href="index.html#services">サービス</a></li>
-|       <li><a href="index.html#flow">売買の流れ</a></li>
-|       <li><a href="properties.html">物件情報</a></li>
-|       <li><a href="index.html#about">会社案内</a></li>
-|       <li><a href="consultation.html" class="nav-cta">無料相談</a></li>
-|     </ul>
-|   </nav>
-|   
-|   <!-- HERO -->
-|   <div class="page-hero">
-|     <div class="page-hero-inner">
-|       <div>
-|         <div class="breadcrumb">
-|           <a href="index.html">ホーム</a><span>›</span>
-|           <a href="index.html#services">サービス</a><span>›</span>
-|           <span style="color:rgba(255,255,255,0.6)">住宅購入サポート</span>
-|         </div>
-|         <div class="page-tag">PURCHASE SUPPORT</div>
-|         <h1>はじめての住宅購入も、<br><span>安心して</span>お任せください。</h1>
-|         <p>
-|           資金計画から物件探し、契約・引渡しまで<br>
-|           経験豊富な専任スタッフが一貫してサポートします。
-|         </p>
-|         <div class="hero-btns">
-|           <a href="consultation.html" class="btn-gold">無料相談を予約する</a>
-|           <a href="properties.html" class="btn-outline-w">物件を探す</a>
-|         </div>
-|       </div>
-|       <div class="hero-visual">
-|         <div class="hero-badge">住宅購入サポート</div>
-|         <div class="hero-visual-ph">
-|           <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-|           <p>住宅イメージ写真<br>外観・リビング等</p>
-|         </div>
-|       </div>
-|     </div>
-|   </div>
-|   
-|   <!-- APPEAL -->
-|   <section class="appeal">
-|     <div class="appeal-inner">
-|       <div class="section-tag reveal">WHY CHOOSE US</div>
-|       <h2 class="reveal reveal-delay-1">小針不動産が選ばれる<br>3つの理由</h2>
-|       <div class="appeal-grid">
-|         <div class="appeal-card reveal reveal-delay-1">
-|           <div class="appeal-num">01</div>
-|           <h3>専任担当制で<br>最後まで責任対応</h3>
-|           <p>ご相談から引渡しまで、同じ担当者が一貫して対応します。担当者が変わることで生じる情報の齟齬や不安を排除し、信頼関係をしっかりと築きながら進めます。</p>
-|         </div>
-|         <div class="appeal-card reveal reveal-delay-2">
-|           <div class="appeal-num">02</div>
-|           <h3>地域密着25年の<br>豊富な物件情報</h3>
-|           <p>創業25年で培った地域のネットワークにより、ポータルサイトに掲載されていない未公開物件や、売主様から直接ご依頼いただいた物件もご紹介できます。</p>
-|         </div>
-|         <div class="appeal-card reveal reveal-delay-3">
-|           <div class="appeal-num">03</div>
-|           <h3>資金計画から<br>ローン手続きまで</h3>
-|           <p>住宅ローンの選び方や返済シミュレーション、各種補助金・税制優遇の活用まで、お金まわりのご相談にも丁寧にお答えします。提携ファイナンシャルプランナーとの相談も無料。</p>
-|         </div>
-|       </div>
-|     </div>
-|   </section>
-|   
-|   <!-- FLOW -->
-|   <section class="flow">
-|     <div class="flow-inner">
-|       <div class="section-tag reveal">PURCHASE FLOW</div>
-|       <h2 class="reveal reveal-delay-1">住宅購入の流れ</h2>
-|       <p class="section-desc reveal reveal-delay-2">初めての方でも安心できるよう、各ステップで丁寧にご説明します。</p>
-|       <div class="flow-steps">
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">01</div>
-|             <div class="flow-step-line"></div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 01</div>
-|             <h3>無料相談・ご要望のヒアリング</h3>
-|             <p>エリア・間取り・ご予算・ライフスタイルなど、お客様のご希望を詳しくお伺いします。ご来店・オンライン・お電話のいずれでも承ります。</p>
-|             <span class="step-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>所要時間：約60〜90分</span>
-|           </div>
-|         </div>
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">02</div>
-|             <div class="flow-step-line"></div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 02</div>
-|             <h3>資金計画・住宅ローン相談</h3>
-|             <p>購入可能な価格帯を明確にするため、収入・貯蓄・ご家族の状況をもとに資金計画を作成します。住宅ローンの事前審査のサポートも行います。</p>
-|             <span class="step-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>提携FPへの相談も無料</span>
-|           </div>
-|         </div>
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">03</div>
-|             <div class="flow-step-line"></div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 03</div>
-|             <h3>物件のご提案・内覧</h3>
-|             <p>ご希望条件に合った物件をピックアップしてご提案します。実際に内覧する際は担当者が同行し、建物の状態や周辺環境についてもわかりやすく説明します。</p>
-|             <span class="step-note"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>未公開物件のご紹介も可能</span>
-|           </div>
-|         </div>
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">04</div>
-|             <div class="flow-step-line"></div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 04</div>
-|             <h3>購入申込み・価格交渉</h3>
-|             <p>気に入った物件が見つかったら購入申込みを行います。売主様との価格交渉もご希望に沿って対応します。お客様の立場に立って最善の条件を目指します。</p>
-|           </div>
-|         </div>
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">05</div>
-|             <div class="flow-step-line"></div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 05</div>
-|             <h3>売買契約・重要事項説明</h3>
-|             <p>宅地建物取引士が重要事項の説明を丁寧に行います。契約内容についてご不明な点は、何でもお気軽にご質問ください。</p>
-|             <span class="step-note"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>宅地建物取引士が対応</span>
-|           </div>
-|         </div>
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">06</div>
-|             <div class="flow-step-line"></div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 06</div>
-|             <h3>住宅ローン本審査・手続き</h3>
-|             <p>金融機関への本申込み手続きをサポートします。必要書類の準備から提出まで、漏れなくお手伝いします。</p>
-|           </div>
-|         </div>
-|   
-|         <div class="flow-step reveal">
-|           <div class="flow-step-left">
-|             <div class="flow-step-circle">07</div>
-|           </div>
-|           <div class="flow-step-body">
-|             <div class="flow-step-tag">STEP 07</div>
-|             <h3>決済・お引渡し</h3>
-|             <p>残代金の支払いと鍵のお引渡しを行います。登記手続きや引越し後のアフターフォローもお任せください。新生活のスタートを全力でサポートします。</p>
-|             <span class="step-note"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>引渡し後のフォローも充実</span>
-|           </div>
-|         </div>
-|   
-|       </div>
-|     </div>
-|   </section>
-|   
-|   <!-- SUPPORT DETAIL -->
-|   <section class="support">
-|     <div class="support-inner">
-|       <div class="section-tag reveal">SUPPORT MENU</div>
-|       <h2 class="reveal reveal-delay-1">充実のサポートメニュー</h2>
-|       <div class="support-grid">
-|         <div class="support-card reveal reveal-delay-1">
-|           <div class="support-card-icon">
-|             <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-|           </div>
-|           <h3>資金・ローン相談</h3>
-|           <p>住宅ローンの選び方、金利タイプの比較、返済シミュレーション、各種補助金の活用まで、お金のことを総合的にサポートします。</p>
-|         </div>
-|         <div class="support-card reveal reveal-delay-2">
-|           <div class="support-card-icon">
-|             <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-|           </div>
-|           <h3>エリア・学区情報の提供</h3>
-|           <p>お子様の通学区域や保育園・幼稚園の情報、スーパー・病院などの生活利便施設について詳しくご案内します。</p>
-|         </div>
-|         <div class="support-card reveal reveal-delay-3">
-|           <div class="support-card-icon">
-|             <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-|           </div>
-|           <h3>建物調査・ホームインスペクション</h3>
-|           <p>中古住宅の購入時に建物の状態を専門家が調査するホームインスペクション（建物状況調査）の手配も承ります。</p>
-|         </div>
-|         <div class="support-card reveal reveal-delay-4">
-|           <div class="support-card-icon">
-|             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-|           </div>
-|           <h3>契約書類のわかりやすい説明</h3>
-|           <p>売買契約書・重要事項説明書などの難しい法律用語も、平易な言葉で丁寧にご説明します。納得できるまでご質問いただけます。</p>
-|         </div>
-|       </div>
-|     </div>
-|   </section>
-|   
-|   <!-- CHECKLIST & WORRY -->
-|   <section class="checklist">
-|     <div class="checklist-inner">
-|       <div>
-|         <div class="section-tag reveal">CHECKLIST</div>
-|         <h2 class="reveal reveal-delay-1">購入前に<br>確認したいこと</h2>
-|         <p class="section-desc reveal reveal-delay-2">はじめての購入では見落としがちなポイントをリストアップ。担当スタッフが一つひとつご確認します。</p>
-|         <div class="check-items reveal reveal-delay-2">
-|           <div class="check-item">
-|             <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-|             <div><h4>月々の返済額と総支払額を把握している</h4><p>金利・返済期間・ボーナス払いの有無によって大きく変わります</p></div>
-|           </div>
-|           <div class="check-item">
-|             <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-|             <div><h4>諸費用（仲介手数料・登記費用等）を含めた総予算を把握している</h4><p>物件価格の5〜8%程度が諸費用の目安です</p></div>
-|           </div>
-|           <div class="check-item">
-|             <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-|             <div><h4>希望エリアの相場を理解している</h4><p>同じエリアでも路線・徒歩分数で価格は大きく異なります</p></div>
-|           </div>
-|           <div class="check-item">
-|             <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-|             <div><h4>建物の状態（耐震性・リフォーム歴）を確認している</h4><p>中古物件は築年数だけでなく構造・改修歴の確認が重要です</p></div>
-|           </div>
-|           <div class="check-item">
-|             <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-|             <div><h4>将来のライフプランに合った間取りを検討している</h4><p>家族構成の変化・在宅勤務等を考慮した間取り選びが大切です</p></div>
-|           </div>
-|         </div>
-|       </div>
-|       <div>
-|         <div class="section-tag reveal">FAQ</div>
-|         <h2 class="reveal reveal-delay-1">よくあるご不安</h2>
-|         <div class="worry-cards reveal reveal-delay-2">
-|           <div class="worry-card">
-|             <div class="worry-q">Q</div>
-|             <div>
-|               <h4>頭金なしでも購入できますか？</h4>
-|             </div>
-|             <div class="worry-answer">
-|               <p>はい、<strong>フルローンでの購入も可能</strong>です。ただし審査基準や金利条件が異なるため、早めにご相談いただくことをお勧めします。</p>
-|             </div>
-|           </div>
-|           <div class="worry-card">
-|             <div class="worry-q">Q</div>
-|             <div>
-|               <h4>はじめてで何も知らないのですが大丈夫ですか？</h4>
-|             </div>
-|             <div class="worry-answer">
-|               <p><strong>まったく問題ありません。</strong>ご相談の9割は初めての方です。専門用語を使わず、わかりやすい言葉でご説明します。</p>
-|             </div>
-|           </div>
-|           <div class="worry-card">
-|             <div class="worry-q">Q</div>
-|             <div>
-|               <h4>相談だけでも来店できますか？</h4>
-|             </div>
-|             <div class="worry-answer">
-|               <p><strong>もちろんです。</strong>相談・査定・情報収集だけのご来店も大歓迎です。契約を迫ることは一切ありません。</p>
-|             </div>
-|           </div>
-|         </div>
-|       </div>
-|     </div>
-|   </section>
-|   
-|   <!-- VOICE -->
-|   <section class="voice">
-|     <div class="voice-inner">
-|       <div class="section-tag reveal">CUSTOMER VOICE</div>
-|       <h2 class="reveal reveal-delay-1">ご購入されたお客様の声</h2>
-|       <div class="voice-grid">
-|         <div class="voice-card reveal reveal-delay-1">
-|           <div class="voice-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-|           <p class="voice-text">初めての購入で不安だらけでしたが、担当の方が資金計画から丁寧に教えてくれて、安心して進めることができました。</p>
-|           <div class="voice-author">
-|             <div class="voice-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-|             <div>
-|               <div class="voice-name">T.K. 様</div>
-|               <div class="voice-attr">30代・4人家族 / 一戸建て購入</div>
-|             </div>
-|           </div>
-|         </div>
-|         <div class="voice-card reveal reveal-delay-2">
-|           <div class="voice-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-|           <p class="voice-text">未公開物件を紹介してもらい、理想の立地で希望通りの家が見つかりました。価格交渉もしっかりしてくれて感謝しています。</p>
-|           <div class="voice-author">
-|             <div class="voice-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-|             <div>
-|               <div class="voice-name">M.S. 様</div>
-|               <div class="voice-attr">40代・夫婦 / マンション購入</div>
-|             </div>
-|           </div>
-|         </div>
-|         <div class="voice-card reveal reveal-delay-3">
-|           <div class="voice-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-|           <p class="voice-text">住宅ローンのことも親身に相談にのってもらい、自分たちに合ったプランが見つかりました。引渡し後のフォローも丁寧で安心できました。</p>
-|           <div class="voice-author">
-|             <div class="voice-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-|             <div>
-|               <div class="voice-name">Y.N. 様</div>
-|               <div class="voice-attr">30代・3人家族 / 一戸建て購入</div>
-|             </div>
-|           </div>
-|         </div>
-|       </div>
-|     </div>
-|   </section>
-|   
-|   <!-- CTA -->
-|   <section class="cta-section">
-|     <h2 class="reveal">まずは無料でご相談ください</h2>
-|     <p class="reveal reveal-delay-1">お電話・ご来店・オンラインのいずれでも承ります。<br>些細なことでもお気軽にどうぞ。</p>
-|     <div class="cta-btns reveal reveal-delay-2">
-|       <a href="consultation.html" class="btn-gold">無料相談を予約する</a>
-|       <a href="properties.html" class="btn-outline-w">物件を探す</a>
-|     </div>
-|   </section>
-|   
-|   <!-- FOOTER -->
-|   <footer>
-|     <div class="footer-bottom">
-|       <p>© 2024 小針不動産株式会社 All Rights Reserved.</p>
-|       <a href="index.html">← トップページへ戻る</a>
-|     </div>
-|   </footer>
-|   
-|   <script>
-|     const reveals = document.querySelectorAll('.reveal');
-|     const obs = new IntersectionObserver(entries => {
-|       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-|     }, { threshold: 0.1 });
-|     reveals.forEach(el => obs.observe(el));
-|   </script>
-|   </body>
-|   </html>
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title
+      | 住宅購入サポート | 小針不動産株式会社
+    link(rel="preconnect", href="https://fonts.googleapis.com")
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap", rel="stylesheet")
+    style
+      .
+        
+              :root {
+                --navy: #1a2540;
+                --navy-light: #2e3d60;
+                --gold: oklch(68% 0.12 72);
+                --gold-light: oklch(80% 0.10 72);
+                --ivory: oklch(97.5% 0.008 80);
+                --ivory-deep: oklch(93% 0.012 75);
+                --text: #1a1a1a;
+                --text-mid: #555;
+                --text-light: #888;
+                --serif: 'Noto Serif JP', serif;
+                --sans: 'Noto Sans JP', sans-serif;
+              }
+              *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+              html { scroll-behavior: smooth; }
+              body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; }
+          
+              /* ── NAV ── */
+              nav {
+                position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 1rem 4rem;
+                background: rgba(255,255,255,0.97);
+                box-shadow: 0 1px 24px rgba(0,0,0,0.07);
+                backdrop-filter: blur(12px);
+              }
+              .nav-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; text-decoration: none; }
+              .nav-links { display: flex; gap: 2.4rem; list-style: none; align-items: center; }
+              .nav-links a { font-size: 0.82rem; letter-spacing: 0.08em; color: var(--text-mid); text-decoration: none; transition: color 0.3s; position: relative; }
+              .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s; }
+              .nav-links a:hover { color: var(--navy); }
+              .nav-links a:hover::after { width: 100%; }
+              .nav-cta { background: var(--gold); color: #fff !important; padding: 0.55rem 1.4rem; border-radius: 2px; font-weight: 500 !important; }
+              .nav-cta::after { display: none !important; }
+              .nav-cta:hover { background: var(--gold-light) !important; }
+          
+              /* ── HERO ── */
+              .page-hero {
+                margin-top: 64px;
+                background: var(--navy);
+                padding: 5rem 4rem 4.5rem;
+                position: relative; overflow: hidden;
+              }
+              .page-hero::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+                background-size: 60px 60px;
+                animation: gridPan 30s linear infinite;
+              }
+              @keyframes gridPan { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
+              .page-hero::after {
+                content: '';
+                position: absolute; inset: 0;
+                background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(180,150,90,0.1) 0%, transparent 70%);
+              }
+              .page-hero-inner {
+                position: relative; z-index: 1;
+                max-width: 1100px; margin: 0 auto;
+                display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+              }
+              .breadcrumb { display: flex; gap: 0.5rem; align-items: center; font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 1.2rem; }
+              .breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .breadcrumb a:hover { color: var(--gold); }
+              .page-tag { font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; }
+              .page-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
+              .page-hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 600; color: #fff; letter-spacing: 0.04em; line-height: 1.4; margin-bottom: 1rem; }
+              .page-hero h1 span { color: var(--gold); }
+              .page-hero p { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 2; letter-spacing: 0.04em; margin-bottom: 2rem; }
+              .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+              .btn-gold { padding: 0.9rem 2rem; background: var(--gold); color: #fff; border-radius: 2px; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.1em; text-decoration: none; transition: background 0.2s, transform 0.2s; display: inline-block; }
+              .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+              .btn-outline-w { padding: 0.9rem 2rem; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.85); border-radius: 2px; font-size: 0.88rem; letter-spacing: 0.1em; text-decoration: none; transition: border-color 0.2s; display: inline-block; }
+              .btn-outline-w:hover { border-color: #fff; color: #fff; }
+              .hero-visual {
+                aspect-ratio: 4/3;
+                background: linear-gradient(135deg, #2e3d60 0%, #1a2540 100%);
+                border-radius: 4px; position: relative; overflow: hidden;
+                display: flex; align-items: center; justify-content: center;
+              }
+              .hero-visual::before {
+                content: '';
+                position: absolute; inset: 0;
+                background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px);
+              }
+              .hero-visual-ph { text-align: center; z-index: 1; }
+              .hero-visual-ph svg { width: 56px; height: 56px; stroke: rgba(180,150,90,0.4); fill: none; stroke-width: 1; display: block; margin: 0 auto 0.8rem; }
+              .hero-visual-ph p { font-family: monospace; font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 0.12em; }
+              .hero-badge {
+                position: absolute; top: 1rem; left: 1rem;
+                background: rgba(180,150,90,0.9); color: #fff;
+                font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.3rem 0.8rem; border-radius: 2px;
+              }
+          
+              /* ── SECTION COMMON ── */
+              .section-tag {
+                font-size: 0.68rem; letter-spacing: 0.25em; color: var(--gold);
+                display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;
+              }
+              .section-tag::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--gold); }
+              h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 600; color: var(--navy); letter-spacing: 0.04em; line-height: 1.4; margin-bottom: 1rem; }
+              .section-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 2; max-width: 560px; }
+          
+              /* reveal */
+              .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+              .reveal.visible { opacity: 1; transform: translateY(0); }
+              .reveal-delay-1 { transition-delay: 0.12s; }
+              .reveal-delay-2 { transition-delay: 0.24s; }
+              .reveal-delay-3 { transition-delay: 0.36s; }
+              .reveal-delay-4 { transition-delay: 0.48s; }
+          
+              /* ── APPEAL ── */
+              .appeal { padding: 6rem 4rem; background: #fff; }
+              .appeal-inner { max-width: 1100px; margin: 0 auto; }
+              .appeal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+              .appeal-card {
+                padding: 2.2rem 2rem; border-radius: 4px;
+                border: 1px solid rgba(0,0,0,0.07);
+                background: var(--ivory);
+                transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+                position: relative; overflow: hidden;
+              }
+              .appeal-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); border-color: rgba(180,150,90,0.3); }
+              .appeal-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+              .appeal-card:hover::before { transform: scaleX(1); }
+              .appeal-num { font-family: 'Noto Serif JP', serif; font-size: 2.4rem; font-weight: 300; color: rgba(180,150,90,0.25); line-height: 1; margin-bottom: 1rem; }
+              .appeal-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--navy); margin-bottom: 0.8rem; letter-spacing: 0.03em; }
+              .appeal-card p { font-size: 0.82rem; color: var(--text-mid); line-height: 1.9; }
+          
+              /* ── FLOW ── */
+              .flow { padding: 6rem 4rem; background: var(--ivory); }
+              .flow-inner { max-width: 1100px; margin: 0 auto; }
+              .flow-steps { display: flex; flex-direction: column; gap: 0; margin-top: 3.5rem; }
+              .flow-step {
+                display: grid; grid-template-columns: 80px 1fr; gap: 2rem;
+                padding: 2rem 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+                position: relative;
+              }
+              .flow-step:last-child { border-bottom: none; }
+              .flow-step-left { display: flex; flex-direction: column; align-items: center; gap: 0; }
+              .flow-step-circle {
+                width: 56px; height: 56px; border-radius: 50%;
+                background: var(--navy); color: #fff;
+                display: flex; align-items: center; justify-content: center;
+                font-family: var(--serif); font-size: 1.1rem; font-weight: 600;
+                flex-shrink: 0; position: relative; z-index: 1;
+                transition: background 0.3s;
+              }
+              .flow-step:hover .flow-step-circle { background: var(--gold); }
+              .flow-step-line { width: 1px; flex: 1; background: rgba(0,0,0,0.1); margin-top: 4px; }
+              .flow-step:last-child .flow-step-line { display: none; }
+              .flow-step-body { padding-top: 0.8rem; padding-bottom: 1rem; }
+              .flow-step-tag { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 0.4rem; }
+              .flow-step-body h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; letter-spacing: 0.03em; }
+              .flow-step-body p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.9; }
+              .flow-step-body .step-note {
+                display: inline-flex; align-items: center; gap: 0.4rem;
+                margin-top: 0.8rem; padding: 0.4rem 0.9rem;
+                background: oklch(96% 0.015 72); border-radius: 2px;
+                font-size: 0.72rem; color: var(--text-mid); letter-spacing: 0.04em;
+              }
+              .flow-step-body .step-note svg { width: 12px; height: 12px; stroke: var(--gold); fill: none; stroke-width: 2; }
+          
+              /* ── SUPPORT DETAIL ── */
+              .support { padding: 6rem 4rem; background: var(--navy); position: relative; overflow: hidden; }
+              .support::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+                background-size: 40px 40px;
+              }
+              .support-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+              .support .section-tag { color: var(--gold-light); }
+              .support .section-tag::before { background: var(--gold-light); }
+              .support h2 { color: #fff; }
+              .support-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+              .support-card {
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 4px; padding: 2rem;
+                transition: background 0.3s, border-color 0.3s;
+              }
+              .support-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(180,150,90,0.4); }
+              .support-card-icon { width: 44px; height: 44px; border-radius: 3px; background: rgba(180,150,90,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; }
+              .support-card-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+              .support-card h3 { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.6rem; letter-spacing: 0.03em; }
+              .support-card p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.9; }
+          
+              /* ── CHECKLIST ── */
+              .checklist { padding: 6rem 4rem; background: #fff; }
+              .checklist-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+              .checklist-text .section-desc { margin-bottom: 2rem; }
+              .check-items { display: flex; flex-direction: column; gap: 0; }
+              .check-item {
+                display: flex; gap: 1rem; align-items: flex-start;
+                padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+              }
+              .check-item:last-child { border-bottom: none; }
+              .check-circle {
+                width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+                background: oklch(96% 0.015 72); border: 1.5px solid rgba(180,150,90,0.4);
+                display: flex; align-items: center; justify-content: center;
+                margin-top: 2px; transition: background 0.2s, border-color 0.2s;
+              }
+              .check-circle svg { width: 13px; height: 13px; stroke: var(--gold); fill: none; stroke-width: 2.5; }
+              .check-item:hover .check-circle { background: var(--gold); border-color: var(--gold); }
+              .check-item:hover .check-circle svg { stroke: #fff; }
+              .check-item h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
+              .check-item p { font-size: 0.78rem; color: var(--text-light); line-height: 1.7; }
+          
+              /* Worry cards */
+              .worry-cards { display: flex; flex-direction: column; gap: 1rem; }
+              .worry-card {
+                background: var(--ivory); border-radius: 4px;
+                border: 1px solid rgba(0,0,0,0.06);
+                padding: 1.5rem 1.8rem;
+                display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start;
+                transition: border-color 0.3s;
+              }
+              .worry-card:hover { border-color: rgba(180,150,90,0.4); }
+              .worry-q { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gold); font-weight: 700; line-height: 1; padding-top: 3px; }
+              .worry-card h4 { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.3rem; }
+              .worry-card p { font-size: 0.78rem; color: var(--text-mid); line-height: 1.8; }
+              .worry-answer { grid-column: 1 / -1; padding: 0.9rem 1rem; background: #fff; border-radius: 3px; border-left: 3px solid var(--gold); margin-top: 0.2rem; }
+              .worry-answer p { font-size: 0.78rem; color: var(--text-mid); line-height: 1.8; }
+              .worry-answer p strong { color: var(--navy); }
+          
+              /* ── VOICE ── */
+              .voice { padding: 6rem 4rem; background: var(--ivory-deep); }
+              .voice-inner { max-width: 1100px; margin: 0 auto; }
+              .voice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+              .voice-card {
+                background: #fff; border-radius: 4px; padding: 2rem;
+                border: 1px solid rgba(0,0,0,0.07);
+                box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+                transition: transform 0.3s, box-shadow 0.3s;
+              }
+              .voice-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.09); }
+              .voice-stars { display: flex; gap: 2px; margin-bottom: 1rem; }
+              .voice-stars span { color: var(--gold); font-size: 0.9rem; }
+              .voice-text { font-size: 0.83rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 1.2rem; font-style: italic; }
+              .voice-text::before { content: '「'; color: var(--gold); }
+              .voice-text::after { content: '」'; color: var(--gold); }
+              .voice-author { display: flex; align-items: center; gap: 0.8rem; }
+              .voice-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--ivory-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+              .voice-avatar svg { width: 20px; height: 20px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
+              .voice-name { font-size: 0.8rem; font-weight: 500; color: var(--navy); }
+              .voice-attr { font-size: 0.7rem; color: var(--text-light); margin-top: 0.1rem; }
+          
+              /* ── CTA ── */
+              .cta-section {
+                padding: 6rem 4rem;
+                background: linear-gradient(135deg, var(--navy) 0%, #2a3d68 60%, var(--navy) 100%);
+                text-align: center; position: relative; overflow: hidden;
+              }
+              .cta-section::before {
+                content: '';
+                position: absolute; inset: 0;
+                background-image:
+                  linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+                background-size: 40px 40px;
+              }
+              .cta-section h2 { color: #fff; font-size: clamp(1.6rem, 2.5vw, 2.4rem); position: relative; z-index: 1; }
+              .cta-section p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 2; margin: 1rem 0 2.5rem; letter-spacing: 0.04em; position: relative; z-index: 1; }
+              .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+          
+              /* ── FOOTER ── */
+              footer { background: #111820; padding: 2.5rem 4rem; }
+              .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+              .footer-bottom p { font-size: 0.72rem; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; }
+              .footer-bottom a { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+              .footer-bottom a:hover { color: var(--gold); }
+          
+              @media (max-width: 900px) {
+                nav { padding: 1rem 1.5rem; }
+                .page-hero { padding: 3.5rem 1.5rem 3rem; }
+                .page-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+                .appeal { padding: 4rem 1.5rem; }
+                .appeal-grid { grid-template-columns: 1fr; }
+                .flow { padding: 4rem 1.5rem; }
+                .support { padding: 4rem 1.5rem; }
+                .support-grid { grid-template-columns: 1fr; }
+                .checklist { padding: 4rem 1.5rem; }
+                .checklist-inner { grid-template-columns: 1fr; gap: 3rem; }
+                .voice { padding: 4rem 1.5rem; }
+                .voice-grid { grid-template-columns: 1fr; }
+                .cta-section { padding: 4rem 1.5rem; }
+                footer { padding: 2rem 1.5rem; }
+              }
+            
+  body
+    nav
+      a(href="index.html", class="nav-logo")
+        | 小針不動産株式会社
+      ul(class="nav-links")
+        li
+          a(href="index.html#services")
+            | サービス
+        li
+          a(href="index.html#flow")
+            | 売買の流れ
+        li
+          a(href="properties.html")
+            | 物件情報
+        li
+          a(href="index.html#about")
+            | 会社案内
+        li
+          a(href="consultation.html", class="nav-cta")
+            | 無料相談
+    div(class="page-hero")
+      div(class="page-hero-inner")
+        div
+          div(class="breadcrumb")
+            a(href="index.html")
+              | ホーム
+            span
+              | ›
+            a(href="index.html#services")
+              | サービス
+            span
+              | ›
+            span(style="color:rgba(255,255,255,0.6)")
+              | 住宅購入サポート
+          div(class="page-tag")
+            | PURCHASE SUPPORT
+          h1
+            | はじめての住宅購入も、
+            br
+            span
+              | 安心して
+            | お任せください。
+          p
+            | 資金計画から物件探し、契約・引渡しまで
+            br
+            | 経験豊富な専任スタッフが一貫してサポートします。
+          div(class="hero-btns")
+            a(href="consultation.html", class="btn-gold")
+              | 無料相談を予約する
+            a(href="properties.html", class="btn-outline-w")
+              | 物件を探す
+        div(class="hero-visual")
+          div(class="hero-badge")
+            | 住宅購入サポート
+          div(class="hero-visual-ph")
+            svg(viewbox="0 0 24 24")
+              path(d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z")
+              polyline(points="9 22 9 12 15 12 15 22")
+            p
+              | 住宅イメージ写真
+              br
+              | 外観・リビング等
+    section(class="appeal")
+      div(class="appeal-inner")
+        div(class="section-tag reveal")
+          | WHY CHOOSE US
+        h2(class="reveal reveal-delay-1")
+          | 小針不動産が選ばれる
+          br
+          | 3つの理由
+        div(class="appeal-grid")
+          div(class="appeal-card reveal reveal-delay-1")
+            div(class="appeal-num")
+              | 01
+            h3
+              | 専任担当制で
+              br
+              | 最後まで責任対応
+            p
+              | ご相談から引渡しまで、同じ担当者が一貫して対応します。担当者が変わることで生じる情報の齟齬や不安を排除し、信頼関係をしっかりと築きながら進めます。
+          div(class="appeal-card reveal reveal-delay-2")
+            div(class="appeal-num")
+              | 02
+            h3
+              | 地域密着25年の
+              br
+              | 豊富な物件情報
+            p
+              | 創業25年で培った地域のネットワークにより、ポータルサイトに掲載されていない未公開物件や、売主様から直接ご依頼いただいた物件もご紹介できます。
+          div(class="appeal-card reveal reveal-delay-3")
+            div(class="appeal-num")
+              | 03
+            h3
+              | 資金計画から
+              br
+              | ローン手続きまで
+            p
+              | 住宅ローンの選び方や返済シミュレーション、各種補助金・税制優遇の活用まで、お金まわりのご相談にも丁寧にお答えします。提携ファイナンシャルプランナーとの相談も無料。
+    section(class="flow")
+      div(class="flow-inner")
+        div(class="section-tag reveal")
+          | PURCHASE FLOW
+        h2(class="reveal reveal-delay-1")
+          | 住宅購入の流れ
+        p(class="section-desc reveal reveal-delay-2")
+          | 初めての方でも安心できるよう、各ステップで丁寧にご説明します。
+        div(class="flow-steps")
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 01
+              div(class="flow-step-line")
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 01
+              h3
+                | 無料相談・ご要望のヒアリング
+              p
+                | エリア・間取り・ご予算・ライフスタイルなど、お客様のご希望を詳しくお伺いします。ご来店・オンライン・お電話のいずれでも承ります。
+              span(class="step-note")
+                svg(viewbox="0 0 24 24")
+                  circle(cx="12", cy="12", r="10")
+                  polyline(points="12 6 12 12 16 14")
+                | 所要時間：約60〜90分
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 02
+              div(class="flow-step-line")
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 02
+              h3
+                | 資金計画・住宅ローン相談
+              p
+                | 購入可能な価格帯を明確にするため、収入・貯蓄・ご家族の状況をもとに資金計画を作成します。住宅ローンの事前審査のサポートも行います。
+              span(class="step-note")
+                svg(viewbox="0 0 24 24")
+                  circle(cx="12", cy="12", r="10")
+                  polyline(points="12 6 12 12 16 14")
+                | 提携FPへの相談も無料
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 03
+              div(class="flow-step-line")
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 03
+              h3
+                | 物件のご提案・内覧
+              p
+                | ご希望条件に合った物件をピックアップしてご提案します。実際に内覧する際は担当者が同行し、建物の状態や周辺環境についてもわかりやすく説明します。
+              span(class="step-note")
+                svg(viewbox="0 0 24 24")
+                  circle(cx="12", cy="12", r="10")
+                  polyline(points="12 6 12 12 16 14")
+                | 未公開物件のご紹介も可能
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 04
+              div(class="flow-step-line")
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 04
+              h3
+                | 購入申込み・価格交渉
+              p
+                | 気に入った物件が見つかったら購入申込みを行います。売主様との価格交渉もご希望に沿って対応します。お客様の立場に立って最善の条件を目指します。
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 05
+              div(class="flow-step-line")
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 05
+              h3
+                | 売買契約・重要事項説明
+              p
+                | 宅地建物取引士が重要事項の説明を丁寧に行います。契約内容についてご不明な点は、何でもお気軽にご質問ください。
+              span(class="step-note")
+                svg(viewbox="0 0 24 24")
+                  path(d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z")
+                | 宅地建物取引士が対応
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 06
+              div(class="flow-step-line")
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 06
+              h3
+                | 住宅ローン本審査・手続き
+              p
+                | 金融機関への本申込み手続きをサポートします。必要書類の準備から提出まで、漏れなくお手伝いします。
+          div(class="flow-step reveal")
+            div(class="flow-step-left")
+              div(class="flow-step-circle")
+                | 07
+            div(class="flow-step-body")
+              div(class="flow-step-tag")
+                | STEP 07
+              h3
+                | 決済・お引渡し
+              p
+                | 残代金の支払いと鍵のお引渡しを行います。登記手続きや引越し後のアフターフォローもお任せください。新生活のスタートを全力でサポートします。
+              span(class="step-note")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+                | 引渡し後のフォローも充実
+    section(class="support")
+      div(class="support-inner")
+        div(class="section-tag reveal")
+          | SUPPORT MENU
+        h2(class="reveal reveal-delay-1")
+          | 充実のサポートメニュー
+        div(class="support-grid")
+          div(class="support-card reveal reveal-delay-1")
+            div(class="support-card-icon")
+              svg(viewbox="0 0 24 24")
+                path(d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z")
+            h3
+              | 資金・ローン相談
+            p
+              | 住宅ローンの選び方、金利タイプの比較、返済シミュレーション、各種補助金の活用まで、お金のことを総合的にサポートします。
+          div(class="support-card reveal reveal-delay-2")
+            div(class="support-card-icon")
+              svg(viewbox="0 0 24 24")
+                path(d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z")
+                circle(cx="12", cy="10", r="3")
+            h3
+              | エリア・学区情報の提供
+            p
+              | お子様の通学区域や保育園・幼稚園の情報、スーパー・病院などの生活利便施設について詳しくご案内します。
+          div(class="support-card reveal reveal-delay-3")
+            div(class="support-card-icon")
+              svg(viewbox="0 0 24 24")
+                rect(x="3", y="3", width="18", height="18", rx="2")
+                circle(cx="8.5", cy="8.5", r="1.5")
+                polyline(points="21 15 16 10 5 21")
+            h3
+              | 建物調査・ホームインスペクション
+            p
+              | 中古住宅の購入時に建物の状態を専門家が調査するホームインスペクション（建物状況調査）の手配も承ります。
+          div(class="support-card reveal reveal-delay-4")
+            div(class="support-card-icon")
+              svg(viewbox="0 0 24 24")
+                path(d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z")
+                polyline(points="14 2 14 8 20 8")
+                line(x1="16", y1="13", x2="8", y2="13")
+                line(x1="16", y1="17", x2="8", y2="17")
+            h3
+              | 契約書類のわかりやすい説明
+            p
+              | 売買契約書・重要事項説明書などの難しい法律用語も、平易な言葉で丁寧にご説明します。納得できるまでご質問いただけます。
+    section(class="checklist")
+      div(class="checklist-inner")
+        div
+          div(class="section-tag reveal")
+            | CHECKLIST
+          h2(class="reveal reveal-delay-1")
+            | 購入前に
+            br
+            | 確認したいこと
+          p(class="section-desc reveal reveal-delay-2")
+            | はじめての購入では見落としがちなポイントをリストアップ。担当スタッフが一つひとつご確認します。
+          div(class="check-items reveal reveal-delay-2")
+            div(class="check-item")
+              div(class="check-circle")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+              div
+                h4
+                  | 月々の返済額と総支払額を把握している
+                p
+                  | 金利・返済期間・ボーナス払いの有無によって大きく変わります
+            div(class="check-item")
+              div(class="check-circle")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+              div
+                h4
+                  | 諸費用（仲介手数料・登記費用等）を含めた総予算を把握している
+                p
+                  | 物件価格の5〜8%程度が諸費用の目安です
+            div(class="check-item")
+              div(class="check-circle")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+              div
+                h4
+                  | 希望エリアの相場を理解している
+                p
+                  | 同じエリアでも路線・徒歩分数で価格は大きく異なります
+            div(class="check-item")
+              div(class="check-circle")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+              div
+                h4
+                  | 建物の状態（耐震性・リフォーム歴）を確認している
+                p
+                  | 中古物件は築年数だけでなく構造・改修歴の確認が重要です
+            div(class="check-item")
+              div(class="check-circle")
+                svg(viewbox="0 0 24 24")
+                  polyline(points="20 6 9 17 4 12")
+              div
+                h4
+                  | 将来のライフプランに合った間取りを検討している
+                p
+                  | 家族構成の変化・在宅勤務等を考慮した間取り選びが大切です
+        div
+          div(class="section-tag reveal")
+            | FAQ
+          h2(class="reveal reveal-delay-1")
+            | よくあるご不安
+          div(class="worry-cards reveal reveal-delay-2")
+            div(class="worry-card")
+              div(class="worry-q")
+                | Q
+              div
+                h4
+                  | 頭金なしでも購入できますか？
+              div(class="worry-answer")
+                p
+                  | はい、
+                  strong
+                    | フルローンでの購入も可能
+                  | です。ただし審査基準や金利条件が異なるため、早めにご相談いただくことをお勧めします。
+            div(class="worry-card")
+              div(class="worry-q")
+                | Q
+              div
+                h4
+                  | はじめてで何も知らないのですが大丈夫ですか？
+              div(class="worry-answer")
+                p
+                  strong
+                    | まったく問題ありません。
+                  | ご相談の9割は初めての方です。専門用語を使わず、わかりやすい言葉でご説明します。
+            div(class="worry-card")
+              div(class="worry-q")
+                | Q
+              div
+                h4
+                  | 相談だけでも来店できますか？
+              div(class="worry-answer")
+                p
+                  strong
+                    | もちろんです。
+                  | 相談・査定・情報収集だけのご来店も大歓迎です。契約を迫ることは一切ありません。
+    section(class="voice")
+      div(class="voice-inner")
+        div(class="section-tag reveal")
+          | CUSTOMER VOICE
+        h2(class="reveal reveal-delay-1")
+          | ご購入されたお客様の声
+        div(class="voice-grid")
+          div(class="voice-card reveal reveal-delay-1")
+            div(class="voice-stars")
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+            p(class="voice-text")
+              | 初めての購入で不安だらけでしたが、担当の方が資金計画から丁寧に教えてくれて、安心して進めることができました。
+            div(class="voice-author")
+              div(class="voice-avatar")
+                svg(viewbox="0 0 24 24")
+                  path(d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2")
+                  circle(cx="12", cy="7", r="4")
+              div
+                div(class="voice-name")
+                  | T.K. 様
+                div(class="voice-attr")
+                  | 30代・4人家族 / 一戸建て購入
+          div(class="voice-card reveal reveal-delay-2")
+            div(class="voice-stars")
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+            p(class="voice-text")
+              | 未公開物件を紹介してもらい、理想の立地で希望通りの家が見つかりました。価格交渉もしっかりしてくれて感謝しています。
+            div(class="voice-author")
+              div(class="voice-avatar")
+                svg(viewbox="0 0 24 24")
+                  path(d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2")
+                  circle(cx="12", cy="7", r="4")
+              div
+                div(class="voice-name")
+                  | M.S. 様
+                div(class="voice-attr")
+                  | 40代・夫婦 / マンション購入
+          div(class="voice-card reveal reveal-delay-3")
+            div(class="voice-stars")
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+              span
+                | ★
+            p(class="voice-text")
+              | 住宅ローンのことも親身に相談にのってもらい、自分たちに合ったプランが見つかりました。引渡し後のフォローも丁寧で安心できました。
+            div(class="voice-author")
+              div(class="voice-avatar")
+                svg(viewbox="0 0 24 24")
+                  path(d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2")
+                  circle(cx="12", cy="7", r="4")
+              div
+                div(class="voice-name")
+                  | Y.N. 様
+                div(class="voice-attr")
+                  | 30代・3人家族 / 一戸建て購入
+    section(class="cta-section")
+      h2(class="reveal")
+        | まずは無料でご相談ください
+      p(class="reveal reveal-delay-1")
+        | お電話・ご来店・オンラインのいずれでも承ります。
+        br
+        | 些細なことでもお気軽にどうぞ。
+      div(class="cta-btns reveal reveal-delay-2")
+        a(href="consultation.html", class="btn-gold")
+          | 無料相談を予約する
+        a(href="properties.html", class="btn-outline-w")
+          | 物件を探す
+    footer
+      div(class="footer-bottom")
+        p
+          | © 2024 小針不動産株式会社 All Rights Reserved.
+        a(href="index.html")
+          | ← トップページへ戻る
+    script
+      .
+        
+            const reveals = document.querySelectorAll('.reveal');
+            const obs = new IntersectionObserver(entries => {
+              entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            reveals.forEach(el => obs.observe(el));
+          
