@@ -48,6 +48,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 .hero-visual::before {
@@ -232,8 +233,54 @@ h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-we
 .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
-  .page-hero { padding: 3.5rem 1.5rem 3rem; }
-  .page-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .page-hero { padding: 2.5rem 1.5rem 3rem; }
+  .page-hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .page-hero-inner > :first-child { display: contents; }
+  .breadcrumb {
+    order: 1;
+    width: min(100%, 560px);
+    margin: 0 auto 1rem;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+  .page-tag {
+    order: 2;
+    width: min(100%, 560px);
+    margin: 0 auto 0.7rem;
+  }
+  .page-hero h1 {
+    order: 3;
+    width: min(100%, 560px);
+    margin: 0 auto 1rem;
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+  }
+  .page-hero-inner > .hero-visual {
+    order: 4;
+    width: min(100%, 560px);
+    margin: 0 auto 1.25rem;
+    aspect-ratio: 16 / 10;
+  }
+  .page-hero p {
+    order: 5;
+    width: min(100%, 560px);
+    margin: 0 auto 1.5rem;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+  .hero-btns {
+    order: 6;
+    width: min(100%, 560px);
+    margin: 0 auto;
+    gap: 0.75rem;
+  }
+  .hero-btns a {
+    flex: 1 1 220px;
+    text-align: center;
+  }
   .appeal { padding: 4rem 1.5rem; }
   .appeal-grid { grid-template-columns: 1fr; }
   .flow { padding: 4rem 1.5rem; }
