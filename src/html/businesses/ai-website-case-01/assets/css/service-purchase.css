@@ -193,6 +193,7 @@ h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-we
   background: #fff; border-radius: 4px; padding: 2rem;
   border: 1px solid rgba(0,0,0,0.07);
   box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  display: flex; flex-direction: column; height: 100%;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .voice-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(0,0,0,0.09); }
@@ -201,7 +202,7 @@ h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-we
 .voice-text { font-size: 0.83rem; color: var(--text-mid); line-height: 1.9; margin-bottom: 1.2rem; font-style: italic; }
 .voice-text::before { content: '「'; color: var(--gold); }
 .voice-text::after { content: '」'; color: var(--gold); }
-.voice-author { display: flex; align-items: center; gap: 0.8rem; }
+.voice-author { display: flex; align-items: center; gap: 0.8rem; margin-top: auto; }
 .voice-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--ivory-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .voice-avatar svg { width: 20px; height: 20px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
 .voice-name { font-size: 0.8rem; font-weight: 500; color: var(--navy); }
