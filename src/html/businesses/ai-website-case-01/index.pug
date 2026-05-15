@@ -19,29 +19,15 @@ html(lang="ja")
           | このページは、生成AIによるWebサイト制作事例として作成したサンプルです。掲載している「小針不動産株式会社」は架空の会社であり、実在の企業・団体とは関係ありません。
         button(type="button", class="site-disclaimer__button", id="siteDisclaimerClose")
           | 内容を確認しました
-    nav(id="mainNav")
-      a(href="#", class="nav-logo", aria-label="小針不動産株式会社 ホーム")
-        span(class="nav-logo-text")
-          span(class="nav-logo-corp")
-            | 株式会社
-          span(class="nav-logo-ja")
-            | 小針不動産
-      ul(class="nav-links")
-        li
-          a(href="#services")
-            | サービス
-        li
-          a(href="#flow")
-            | 売買の流れ
-        li
-          a(href="#properties")
-            | 物件情報
-        li
-          a(href="team.html")
-            | スタッフ紹介
-        li
-          a(href="consultation.html", class="nav-cta")
-            | 無料相談
+    -
+      const siteHeaderNavAttributes = { id: 'mainNav' }
+      const siteHeaderLogoHref = '#'
+      const siteHeaderServicesHref = '#services'
+      const siteHeaderFlowHref = '#flow'
+      const siteHeaderPropertiesHref = '#properties'
+      const siteHeaderTeamHref = 'team.html'
+      const siteHeaderCtaHref = 'consultation.html'
+    include _site-header.pug
       button(class="hamburger", aria-label="menu")
         span
         span

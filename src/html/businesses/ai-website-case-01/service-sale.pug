@@ -10,29 +10,7 @@ html(lang="ja")
     link(rel="stylesheet", href="assets/css/common.css")
     link(rel="stylesheet", href="assets/css/service-sale.css")
   body(class="case-site case-site-page case-site-service-sale")
-    nav
-      a(href="index.html", class="nav-logo", aria-label="小針不動産株式会社 ホーム")
-        span(class="nav-logo-text")
-          span(class="nav-logo-corp")
-            | 株式会社
-          span(class="nav-logo-ja")
-            | 小針不動産
-      ul(class="nav-links")
-        li
-          a(href="index.html#services")
-            | サービス
-        li
-          a(href="index.html#flow")
-            | 売買の流れ
-        li
-          a(href="properties.html")
-            | 物件情報
-        li
-          a(href="team.html")
-            | スタッフ紹介
-        li
-          a(href="consultation.html", class="nav-cta")
-            | 無料相談
+    include _site-header.pug
     div(class="page-hero")
       div(class="page-hero-inner")
         div

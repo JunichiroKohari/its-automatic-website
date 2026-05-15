@@ -1,0 +1,44 @@
+- const headerNavAttributes = typeof siteHeaderNavAttributes !== 'undefined' ? siteHeaderNavAttributes : {}
+- const headerLogoHref = typeof siteHeaderLogoHref !== 'undefined' ? siteHeaderLogoHref : 'index.html'
+- const headerServicesHref = typeof siteHeaderServicesHref !== 'undefined' ? siteHeaderServicesHref : 'index.html#services'
+- const headerFlowHref = typeof siteHeaderFlowHref !== 'undefined' ? siteHeaderFlowHref : 'index.html#flow'
+- const headerPropertiesHref = typeof siteHeaderPropertiesHref !== 'undefined' ? siteHeaderPropertiesHref : 'properties.html'
+- const headerTeamHref = typeof siteHeaderTeamHref !== 'undefined' ? siteHeaderTeamHref : 'team.html'
+- const headerCtaHref = typeof siteHeaderCtaHref !== 'undefined' ? siteHeaderCtaHref : 'consultation.html'
+
+nav&attributes(headerNavAttributes)
+  a(href=headerLogoHref, class="nav-logo", aria-label="小針不動産株式会社 ホーム")
+    span(class="nav-logo-text")
+      span(class="nav-logo-corp")
+        | 株式会社
+      span(class="nav-logo-ja")
+        | 小針不動産
+  ul(class="nav-links")
+    li(class="nav-item nav-item--services")
+      a(href=headerServicesHref)
+        | サービス
+      ul(class="nav-submenu", aria-label="サービス一覧")
+        li
+          a(href="service-purchase.html")
+            | 住宅購入サポート
+        li
+          a(href="service-sale.html")
+            | 不動産売却
+        li
+          a(href="service-land.html")
+            | 土地売買
+        li
+          a(href="consultation.html")
+            | 無料相談・査定
+    li
+      a(href=headerFlowHref)
+        | 売買の流れ
+    li
+      a(href=headerPropertiesHref)
+        | 物件情報
+    li
+      a(href=headerTeamHref)
+        | スタッフ紹介
+    li
+      a(href=headerCtaHref, class="nav-cta")
+        | 無料相談
