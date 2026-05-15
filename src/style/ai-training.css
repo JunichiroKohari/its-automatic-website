@@ -1067,6 +1067,12 @@ body.ai-training-page.menu-open .mobile-menu {
   flex-shrink: 0;
 }
 
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .testimonial-card .quote-mark {
   margin-bottom: 14px;
   color: var(--teal);
@@ -1088,6 +1094,7 @@ body.ai-training-page.menu-open .mobile-menu {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  margin-top: auto;
   padding-top: 14px;
   border-top: 1px solid var(--border);
 }
