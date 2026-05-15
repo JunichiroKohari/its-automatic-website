@@ -1,5 +1,12 @@
 @import url("./service-purchase.css");
 
+.hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .team-overview {
   padding: 6rem 4rem;
   background: #fff;
