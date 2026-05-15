@@ -1,8 +1,10 @@
 /* ── BREADCRUMB ── */
 .breadcrumb-bar {
-  margin-top: 64px;
+  padding-top: calc(0.75rem + 88px);
   background: #fff; border-bottom: 1px solid rgba(0,0,0,0.06);
-  padding: 0.75rem 4rem;
+  padding-right: 4rem;
+  padding-bottom: 0.75rem;
+  padding-left: 4rem;
 }
 .breadcrumb {
   max-width: 1200px; margin: 0 auto;
@@ -345,7 +347,12 @@
 
 @media (max-width: 1000px) {
   nav { padding: 1rem 1.5rem; }
-  .breadcrumb-bar { padding: 0.75rem 1.5rem; }
+  .breadcrumb-bar {
+    padding-top: calc(0.75rem + 88px);
+    padding-right: 1.5rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.5rem;
+  }
   .gallery { padding: 1rem 1.5rem; }
   .gallery-inner { height: 300px; }
   .detail-wrap { grid-template-columns: 1fr; padding: 2rem 1.5rem 4rem; }
