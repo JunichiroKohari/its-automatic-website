@@ -562,10 +562,8 @@ h2 {
   border: 1px solid rgba(255,255,255,0.12);
   padding: 2rem 1.5rem; border-radius: 4px;
   text-align: center;
-  transition: border-color 0.3s, background 0.3s;
-  cursor: pointer;
+  cursor: default;
 }
-.contact-card:hover { border-color: rgba(180,150,90,0.5); background: rgba(180,150,90,0.06); }
 .contact-card svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.5; margin-bottom: 1rem; }
 .contact-card h4 { font-size: 0.82rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); margin-bottom: 0.3rem; }
 .contact-card p { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
