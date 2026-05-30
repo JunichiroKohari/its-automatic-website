@@ -59,6 +59,32 @@ class CopyCaseSiteStaticAssetsPlugin {
     }
 }
 
+class CopyStandaloneBusinessSiteAssetsPlugin {
+    apply(compiler) {
+        compiler.hooks.afterEmit.tap('CopyStandaloneBusinessSiteAssetsPlugin', () => {
+            standaloneBusinessSites.forEach((site) => {
+                const sourceDir = path.resolve(__dirname, site.sourceDir)
+                const destinationDir = path.resolve(__dirname, 'dist', site.outputDir)
+
+                if (!fs.existsSync(sourceDir)) {
+                    return
+                }
+
+                fs.readdirSync(sourceDir, { withFileTypes: true }).forEach((entry) => {
+                    if (entry.isFile() && /\.(html|css|jsx?)$/.test(entry.name)) {
+                        return
+                    }
+
+                    const sourcePath = path.resolve(sourceDir, entry.name)
+                    const destinationPath = path.resolve(destinationDir, entry.name)
+                    fs.mkdirSync(path.dirname(destinationPath), { recursive: true })
+                    fs.cpSync(sourcePath, destinationPath, { recursive: true })
+                })
+            })
+        })
+    }
+}
+
 const caseSiteDir = './src/html/businesses/ai-website-case-01'
 const caseSitePages = fs.readdirSync(path.resolve(__dirname, caseSiteDir))
     .filter((file) => file.endsWith('.pug') && !file.startsWith('_'))
@@ -68,6 +94,20 @@ const caseSitePages = fs.readdirSync(path.resolve(__dirname, caseSiteDir))
         chunks: [],
         inject: false,
     }))
+
+const standaloneBusinessSites = [
+    {
+        sourceDir: './src/html/businesses/ai-training-lp',
+        outputDir: 'ai-training-lp',
+    },
+]
+
+const standaloneBusinessSitePages = standaloneBusinessSites.map((site) => ({
+    templateContent: fs.readFileSync(path.resolve(__dirname, site.sourceDir, 'index.html'), 'utf8'),
+    filename: `${site.outputDir}/index.html`,
+    chunks: [],
+    inject: false,
+}))
 
 const pages = [
     {
@@ -86,6 +126,7 @@ const pages = [
         chunks: ['ai-training'],
     },
     ...caseSitePages,
+    ...standaloneBusinessSitePages,
 ]
 
 module.exports = {
@@ -94,6 +135,7 @@ module.exports = {
     entry: {
         main: './src/js/index.js',
         'ai-training': './src/js/ai-training.js',
+        'ai-training-lp': './src/js/ai-training-lp.jsx',
         'properties-listing': './src/html/businesses/ai-website-case-01/assets/js/properties-listing.js',
         'property-detail': './src/html/businesses/ai-website-case-01/assets/js/property-detail.js',
     },
@@ -102,6 +144,7 @@ module.exports = {
         publicPath: '',
         filename: (pathData) => {
             const caseSiteScriptMap = {
+                'ai-training-lp': 'ai-training-lp/bundle.js',
                 'properties-listing': 'ai-website-case-01/assets/js/properties-listing.js',
                 'property-detail': 'ai-website-case-01/assets/js/property-detail.js',
             }
@@ -109,14 +152,23 @@ module.exports = {
             return caseSiteScriptMap[pathData.chunk && pathData.chunk.name] || 'js/[name].js'
         }
     },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: [
                     {
                         loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['@babel/preset-env', { modules: false }],
+                                ['@babel/preset-react', { runtime: 'classic' }],
+                            ],
+                        },
                     }
                 ]
             },
@@ -189,10 +241,15 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: './style/[name].css',
+            filename: (pathData) => {
+                const chunkName = pathData.chunk && pathData.chunk.name
+
+                return chunkName === 'ai-training-lp' ? 'ai-training-lp/styles.css' : './style/[name].css'
+            },
         }),
         new RelativeCaseSiteAssetUrlsPlugin(),
         new CopyCaseSiteStaticAssetsPlugin(),
+        new CopyStandaloneBusinessSiteAssetsPlugin(),
         ...pages.map((page) => new HtmlWebpackPlugin({
             ...page,
             favicon: path.resolve(__dirname, './src/img/icon.png'),
