@@ -121,6 +121,11 @@ const pages = [
         chunks: ['ai-training'],
     },
     {
+        template: './src/html/businesses/influencer_marketing.pug',
+        filename: 'influencer_marketing.html',
+        chunks: ['influencer-marketing'],
+    },
+    {
         template: './src/html/businesses/tokushoho.pug',
         filename: 'tokushoho.html',
         chunks: ['ai-training'],
@@ -136,6 +141,7 @@ module.exports = {
         main: './src/js/index.js',
         'ai-training': './src/js/ai-training.js',
         'ai-training-lp': './src/js/ai-training-lp.jsx',
+        'influencer-marketing': './src/js/influencer-marketing.js',
         'properties-listing': './src/html/businesses/ai-website-case-01/assets/js/properties-listing.js',
         'property-detail': './src/html/businesses/ai-website-case-01/assets/js/property-detail.js',
     },

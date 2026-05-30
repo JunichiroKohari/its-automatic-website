@@ -1,0 +1,240 @@
+-
+  const creators = [
+    {
+      name: '清野隆華',
+      handle: 'Creator / Men\'s lifestyle',
+      followers: '総フォロワー数 約110万人',
+      platforms: [
+        'TikTok 91.9万人',
+        'Instagram 17.4万人',
+      ],
+      strengths: [
+        'TikTok約92万人・Instagram約17万人、総フォロワー数約110万人の人気男性クリエイター',
+        'Z世代・若年層男性を中心に強い影響力を持ち、幅広いジャンルでPRが可能',
+        'スカルプD NEXT+、ZOZOTOWN、ニトリ、スプライトなど大手ブランドとのPR実績多数',
+      ],
+      brands: ['SCALP D NEXT+', 'ZOZOTOWN', 'NITORI', 'SPRITE'],
+    },
+    {
+      name: 'バンダリ亜砂也',
+      handle: 'Creator / Beauty & fashion',
+      followers: '総フォロワー数 60万人',
+      platforms: [
+        'TikTok 約44.2万人',
+        'Instagram 約16.5万人',
+      ],
+      strengths: [
+        '洗練されたビジュアルと高い表現力により、美容・ファッション領域で強い影響力を持つクリエイター',
+        'AbemaTVの恋愛リアリティショーやCM出演など、メディア露出も豊富',
+        '軽井沢プリンスホテルスキー場、BSクリニック、TCB美容外科、ジョーマローンなど有名企業とのPR実績多数',
+      ],
+      brands: ['Karuizawa Prince', 'BS CLINIC', 'TCB', 'Jo Malone'],
+    },
+  ]
+
+  const servicePoints = [
+    'TikTok・Instagramを中心に、商品の認知拡大から売上創出までを一貫して支援',
+    '単なる投稿依頼ではなく、成果に直結するプロモーション導線を設計',
+    'フォロワー100万人規模のインフルエンサー起用で、短期間で大きな認知拡大を狙える',
+  ]
+
+  const serviceModel = [
+    {
+      title: '企業様',
+      text: '目的整理・依頼内容の共有・投稿確認',
+      tone: 'client',
+    },
+    {
+      title: '弊社',
+      text: 'キャスティング・進行管理・納品報告',
+      tone: 'agency',
+    },
+    {
+      title: 'インフルエンサー',
+      text: '撮影・制作・SNS投稿',
+      tone: 'creator',
+    },
+  ]
+
+  const flow = [
+    {
+      number: '01',
+      title: '事前打ち合わせ',
+      text: '日程確認、PR内容の詳細、企業様の要望をヒアリングします。',
+    },
+    {
+      number: '02',
+      title: '準備',
+      text: '撮影要件や構成を整理し、制作に必要な条件を揃えます。',
+    },
+    {
+      number: '03',
+      title: '撮影',
+      text: 'インフルエンサーが商材や世界観に沿って撮影・制作を進行します。',
+    },
+    {
+      number: '04',
+      title: '確認',
+      text: '企業様と投稿内容を確認し、必要に応じて表現や訴求を調整します。',
+    },
+    {
+      number: '05',
+      title: '投稿',
+      text: 'SNSへ投稿し、認知拡大から購買訴求までつなげます。',
+    },
+  ]
+
+  const benefits = [
+    {
+      number: '01',
+      title: '広告よりも信頼性の高いPRが実現',
+      text: 'インフルエンサー個人の発信として紹介するため、ユーザーに自然に届き、購買意欲を高めやすい施策になります。',
+    },
+    {
+      number: '02',
+      title: '認知から購買まで一気通貫で設計可能',
+      text: '認知拡大だけでなく、興味喚起から購買までの導線を設計し、売上に近い地点まで支援できます。',
+    },
+    {
+      number: '03',
+      title: '低リスクでテスト導入しやすい',
+      text: '比較的低コストで始められるため、小さく検証しながら継続判断しやすい点が強みです。',
+    },
+    {
+      number: '04',
+      title: '起用費用を抑えやすい',
+      text: '一般相場を踏まえつつ、関係性を活かした柔軟な起用相談が可能です。',
+    },
+  ]
+
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="color-scheme" content="light")
+    title インフルエンサーマーケティング事業 | 株式会社 It's Automatic
+    meta(name="description" content="reveal.jsを使ったスライド形式のインフルエンサーマーケティング紹介ページ。キャスティングから投稿まで一気通貫で支援します。")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reset.css")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css")
+  body.influencer-slide-page
+    .deck-toolbar
+      a.deck-toolbar__brand(href="index.html")
+        img(src="../../img/logo-primary.png" alt="It's Automatic")
+      .deck-toolbar__actions
+        a.deck-chip(href="#/0") TOP
+        a.deck-chip(href="#/1") 概要
+        a.deck-chip(href="#/2") 紹介
+        a.deck-chip(href="#/3") 流れ
+        a.deck-chip(href="#/4") メリット
+        a.deck-button(href="index.html#contact") お問い合わせ
+
+    .reveal
+      .slides
+        section(data-background-gradient="linear-gradient(140deg, #0d2b31 0%, #143f46 42%, #c8923d 100%)")
+          .hero-slide.slide-anim
+            .hero-slide__copy
+              p.deck-kicker INFLUENCER MARKETING SERVICE
+              h1
+                | 発信力を、
+                br
+                | 売上につながる
+                br
+                | 施策へ。
+              p.hero-slide__lead TikTok・Instagramを中心に、影響力あるインフルエンサーを活用したPR支援を提供します。企業とクリエイターの間に入り、企画から投稿まで実行します。
+              .hero-slide__metrics
+                .metric-card
+                  strong 340万人規模
+                  span SNSネットワーク総フォロワー
+                .metric-card
+                  strong 2大SNS中心
+                  span TikTok / Instagram
+                .metric-card
+                  strong Cast to Post
+                  span キャスティングから投稿まで対応
+            .hero-slide__visual
+              img(src="../../img/influencer-thumbnail.png" alt="インフルエンサーマーケティングのイメージ")
+
+        section(data-background-gradient="linear-gradient(180deg, #f8f0df 0%, #fefcf8 100%)")
+          .slide-shell.slide-anim
+            p.deck-kicker 1. サービス概要
+            h2.slide-title 企業とインフルエンサーをつなぐ、実行型のPR支援。
+            p.slide-lead SNS上で影響力のあるインフルエンサーを活用し、認知拡大から購買訴求まで支援します。単なる投稿依頼ではなく、成果に近い導線設計を重視します。
+            .overview-grid
+              each point, index in servicePoints
+                article.glass-card
+                  .card-index 0#{index + 1}
+                  p= point
+            .model-row
+              each item, index in serviceModel
+                .model-row__item(class=`model-row__item--${item.tone}`)
+                  strong= item.title
+                  span= item.text
+
+        section
+          section(data-background-gradient="linear-gradient(140deg, #122f36 0%, #0e2329 100%)")
+            .slide-shell.slide-shell--dark.slide-anim
+              p.deck-kicker 2. インフルエンサーご紹介
+              h2.slide-title 実績あるクリエイターを起点に、商材と相性のよい訴求を設計します。
+              p.slide-lead 資料掲載の代表例を、縦スライドで順に閲覧できる構成にしています。
+              .creator-intro
+                .creator-intro__stat
+                  strong 2名の代表クリエイター
+                  span 美容・ファッション・ライフスタイル領域に強み
+                .creator-intro__stat
+                  strong 大手ブランド実績あり
+                  span タイアップ経験を前提に提案可能
+
+          each creator in creators
+            section(data-background-gradient="linear-gradient(145deg, #fff9ee 0%, #f5ebd6 100%)")
+              .slide-shell.creator-slide.slide-anim
+                .creator-slide__identity
+                  .creator-avatar= creator.name.slice(0, 1)
+                  .creator-head
+                    p.deck-kicker= creator.handle
+                    h2.slide-title= creator.name
+                    p.creator-followers= creator.followers
+                    ul.platform-pills
+                      each platform in creator.platforms
+                        li= platform
+                .creator-slide__body
+                  .creator-copy
+                    ul.creator-points
+                      each point, index in creator.strengths
+                        li= point
+                  .brand-cloud
+                    each brand, index in creator.brands
+                      span.brand-chip= brand
+
+        section(data-background-gradient="linear-gradient(180deg, #f9f3e7 0%, #fffdf9 100%)")
+          .slide-shell.slide-anim
+            p.deck-kicker 3. サービスの流れ
+            h2.slide-title 初回相談から投稿まで、進行を一本化します。
+            .timeline
+              each step, index in flow
+                article.timeline-step
+                  .timeline-step__num= step.number
+                  h3= step.title
+                  p= step.text
+            .price-note
+              strong PR費用の目安
+              p TikTokは最低30万円から、Instagramは最低15万円から対応可能です。
+              p 一般相場の目安は、各SNSフォロワー数 × 1.0円〜1.5円 + 仲介手数料20%です。
+
+        section(data-background-gradient="linear-gradient(140deg, #12353b 0%, #0a1d22 100%)")
+          .slide-shell.slide-shell--dark.slide-anim
+            p.deck-kicker 4. 御社のメリット
+            h2.slide-title 広告出稿だけでは得にくい、自然な信頼獲得につながります。
+            .benefit-grid
+              each benefit, index in benefits
+                article.benefit-card
+                  .benefit-card__num= benefit.number
+                  h3= benefit.title
+                  p= benefit.text
+            .closing-cta
+              p 美容、ファッション、ライフスタイル、トラベル領域を中心に、貴社商材とターゲットに合う起用案をご提案します。
+              .closing-cta__actions
+                a.deck-button(href="index.html#contact") お問い合わせ
+                a.deck-button.deck-button--ghost(href="index.html#products") BUSINESSへ戻る
+
+    script(src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js")
