@@ -100,6 +100,10 @@ const standaloneBusinessSites = [
         sourceDir: './src/html/businesses/ai-training-lp',
         outputDir: 'ai-training-lp',
     },
+    {
+        sourceDir: './src/html/businesses/ryokan-lp',
+        outputDir: 'ryokan-lp',
+    },
 ]
 
 const standaloneBusinessSitePages = standaloneBusinessSites.map((site) => ({
@@ -141,6 +145,7 @@ module.exports = {
         main: './src/js/index.js',
         'ai-training': './src/js/ai-training.js',
         'ai-training-lp': './src/js/ai-training-lp.jsx',
+        'ryokan-lp': './src/js/ryokan-lp.jsx',
         'influencer-marketing': './src/js/influencer-marketing.js',
         'properties-listing': './src/html/businesses/ai-website-case-01/assets/js/properties-listing.js',
         'property-detail': './src/html/businesses/ai-website-case-01/assets/js/property-detail.js',
@@ -151,6 +156,7 @@ module.exports = {
         filename: (pathData) => {
             const caseSiteScriptMap = {
                 'ai-training-lp': 'ai-training-lp/bundle.js',
+                'ryokan-lp': 'ryokan-lp/bundle.js',
                 'properties-listing': 'ai-website-case-01/assets/js/properties-listing.js',
                 'property-detail': 'ai-website-case-01/assets/js/property-detail.js',
             }
