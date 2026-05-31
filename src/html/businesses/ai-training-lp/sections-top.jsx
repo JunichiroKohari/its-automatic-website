@@ -2183,6 +2183,7 @@ function SolutionShowcase() {
             ].map((k, i) => (
               <div
                 key={k.label}
+                className="dashboard-kpi-card"
                 style={{
                   background: 'var(--bg-parchment)',
                   border: '1px solid var(--border-1)',
