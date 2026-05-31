@@ -56,12 +56,14 @@ html {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
+    overflow-x: clip;
 }
 body {
     background: var(--bg-parchment);
     color: var(--ink-1);
     font-family: var(--sans);
     line-height: 1.6;
+    overflow-x: clip;
 }
 a {
     text-decoration: none;
@@ -101,6 +103,17 @@ select {
 .container {
     max-width: var(--container);
     margin: 0 auto;
+    min-width: 0;
+}
+
+.h-display,
+.h-section,
+.h-card,
+.lead,
+.body,
+.hero-title,
+.hero-lead {
+    overflow-wrap: anywhere;
 }
 
 .h-display {
@@ -157,6 +170,8 @@ select {
     transition: all 0.18s ease;
     min-height: 48px;
     justify-content: center;
+    text-align: center;
+    white-space: normal;
 }
 .btn--primary {
     background: var(--brand);
@@ -396,6 +411,17 @@ select {
 }
 
 /* ── Responsive ── */
+@media (max-width: 1100px) {
+    .solution-showcase,
+    .course-detail {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    .dashboard-mockup {
+        max-width: 720px;
+        width: 100%;
+        justify-self: center;
+    }
+}
 @media (max-width: 900px) {
     .nav-links {
         display: none;
@@ -406,10 +432,51 @@ select {
     .hide-mobile {
         display: none !important;
     }
+    .section {
+        padding-top: 72px;
+        padding-bottom: 72px;
+    }
+    .hero-section {
+        min-height: 760px !important;
+    }
+    .hero-content {
+        padding-top: 120px !important;
+        padding-bottom: 132px !important;
+    }
+    .hero-title {
+        font-size: 48px !important;
+        line-height: 1.24 !important;
+        margin-bottom: 28px !important;
+    }
+    .hero-lead {
+        margin-bottom: 36px !important;
+    }
     /* Stack all multi-column grids */
     .container > div[style*="grid-template-columns"],
     .container > div[style*="gridTemplateColumns"] {
         grid-template-columns: 1fr !important;
+    }
+    .strengths-intro,
+    .footer-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    .results-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    .results-stats > div {
+        border-right: 1px solid var(--border-dark) !important;
+        border-bottom: 1px solid var(--border-dark);
+    }
+    .results-stats > div:nth-child(2n) {
+        border-right: none !important;
+    }
+    .results-stats > div:last-child {
+        grid-column: 1 / -1;
+        border-right: none !important;
+        border-bottom: none;
+    }
+    .results-testimonials {
+        grid-template-columns: minmax(0, 1fr) !important;
     }
     /* Stat row goes vertical */
     .stat-row {
@@ -426,6 +493,230 @@ select {
 @media (min-width: 901px) {
     .show-mobile {
         display: none !important;
+    }
+}
+
+@media (max-width: 720px) {
+    :root {
+        --px: clamp(16px, 5vw, 24px);
+    }
+    .section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    .h-section {
+        font-size: 30px;
+        line-height: 1.32;
+    }
+    .lead {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+    .hero-section {
+        min-height: 700px !important;
+    }
+    .hero-content {
+        padding-top: 104px !important;
+        padding-bottom: 112px !important;
+    }
+    .hero-title {
+        font-size: 38px !important;
+        line-height: 1.26 !important;
+        margin-bottom: 24px !important;
+        letter-spacing: 0 !important;
+    }
+    .hero-lead {
+        font-size: 15px !important;
+        line-height: 1.75 !important;
+        margin-bottom: 30px !important;
+    }
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: min(100%, 320px);
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .hero-actions .btn,
+    .mobile-cta .btn {
+        width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+        min-width: 0;
+    }
+    .mobile-cta .btn {
+        flex: 1 1 0 !important;
+        width: 0 !important;
+    }
+    .dashboard-kpis,
+    .course-meta-grid,
+    .format-options,
+    .cta-proof-grid,
+    .form-grid,
+    .intent-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    .hero-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        row-gap: 22px !important;
+    }
+    .course-tabs {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px !important;
+        width: 100%;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .course-tab {
+        width: 100%;
+        min-height: 46px;
+        justify-content: center;
+    }
+    .course-detail,
+    .solution-showcase {
+        border-radius: 14px !important;
+        padding: 22px !important;
+    }
+    .curriculum-row {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 4px !important;
+        padding: 14px 0 !important;
+    }
+    .report-metric-row {
+        align-items: flex-start !important;
+        flex-direction: column;
+        gap: 4px !important;
+    }
+    .dashboard-mockup > div:last-child {
+        padding: 16px !important;
+    }
+    .results-stats {
+        grid-template-columns: minmax(0, 1fr) !important;
+        margin-bottom: 44px !important;
+    }
+    .results-stats > div {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-dark);
+    }
+    .results-stats > div:last-child {
+        grid-column: auto;
+    }
+    .results-testimonial-kpis {
+        grid-template-columns: minmax(0, 1fr) !important;
+        min-height: auto;
+    }
+    .flow-step {
+        gap: 16px !important;
+    }
+    .flow-step > :first-child > :first-child {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 14px !important;
+    }
+    .faq-question {
+        gap: 12px !important;
+        padding: 18px 0 !important;
+    }
+    .faq-answer {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .mobile-cta {
+        padding: 10px var(--px) calc(10px + env(safe-area-inset-bottom));
+    }
+}
+
+@media (max-width: 520px) {
+    .nav-bar {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .nav-bar > a img {
+        height: 24px !important;
+    }
+    .nav-bar > a span,
+    .hero-section > a span {
+        display: none !important;
+    }
+    .hero-section > a img {
+        height: 24px !important;
+    }
+    .hero-title {
+        font-size: 30px !important;
+        max-width: 320px !important;
+    }
+    .hero-lead {
+        max-width: 320px !important;
+    }
+    .hero-actions {
+        width: min(100%, 310px);
+        max-width: 310px;
+    }
+    .h-section {
+        font-size: 27px;
+    }
+    .h-card {
+        font-size: 18px;
+    }
+    .card {
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .problem-cards {
+        gap: 12px;
+    }
+    .hero-stats-grid {
+        column-gap: 18px !important;
+    }
+    .empathy-photo {
+        aspect-ratio: 4 / 5 !important;
+    }
+    .empathy-photo figcaption {
+        justify-content: flex-end !important;
+        max-width: none !important;
+    }
+    .solution-showcase {
+        margin-left: calc(var(--px) * -0.35);
+        margin-right: calc(var(--px) * -0.35);
+    }
+    .marquee-track {
+        gap: 36px;
+        animation-duration: 24s;
+    }
+    .footer-grid {
+        gap: 24px !important;
+    }
+    .mobile-cta {
+        gap: 6px;
+    }
+    .mobile-cta .btn {
+        font-size: 12.5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 430px) {
+    .hero-title {
+        font-size: 29px !important;
+    }
+    .hero-lead {
+        font-size: 14.5px !important;
+    }
+    .btn {
+        min-height: 46px;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    .faq-question > span:first-child {
+        min-width: 20px !important;
+        font-size: 13px !important;
+    }
+    .faq-question > span:last-child {
+        width: 24px !important;
+        height: 24px !important;
     }
 }
 

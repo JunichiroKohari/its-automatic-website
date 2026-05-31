@@ -74,6 +74,7 @@ function Service() {
         {/* Tab selector */}
         <div
           role="tablist"
+          className="course-tabs"
           style={{
             display: 'flex', justifyContent: 'center', gap: 6, marginBottom: 32, flexWrap: 'wrap',
           }}
@@ -82,6 +83,7 @@ function Service() {
             <button
               key={co.tag}
               role="tab"
+              className="course-tab"
               aria-selected={tab === i}
               onClick={() => setTab(i)}
               style={{
@@ -108,6 +110,7 @@ function Service() {
         {/* Course detail */}
         <div
           key={tab}
+          className="course-detail"
           style={{
             background: 'var(--bg-ivory)',
             border: '1px solid var(--border-1)',
@@ -130,9 +133,11 @@ function Service() {
             <h3 className="h-section" style={{ fontSize: 'clamp(24px, 2.8vw, 32px)', marginBottom: 14 }}>{c.title}</h3>
             <p className="body" style={{ marginBottom: 24 }}>{c.desc}</p>
 
-            <div style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, paddingTop: 20, borderTop: '1px solid var(--border-1)',
-            }}
+            <div
+              className="course-meta-grid"
+              style={{
+                display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, paddingTop: 20, borderTop: '1px solid var(--border-1)',
+              }}
             >
               {[['対象', c.target], ['期間', c.duration], ['料金', c.price], ['実施形式', 'オンライン / 訪問']].map(([k, v]) => (
                 <div key={k}>
@@ -161,6 +166,7 @@ function Service() {
               {c.curriculum.map(([t, item], i) => (
                 <div
                   key={i}
+                  className="curriculum-row"
                   style={{
                     display: 'grid', gridTemplateColumns: '90px 1fr', gap: 14, padding: '12px 0', borderTop: i === 0 ? 'none' : '1px solid var(--border-1)',
                   }}
@@ -179,9 +185,11 @@ function Service() {
         </div>
 
         {/* Format options */}
-        <div style={{
-          marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12,
-        }}
+        <div
+          className="format-options"
+          style={{
+            marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12,
+          }}
         >
           {[
             ['オンライン研修', 'Zoom・Teams等での同期型。少人数でも全国対応。'],
@@ -247,7 +255,7 @@ function Strengths() {
     <section id="strengths" className="section" data-screen-label="06 Strengths" style={{ background: 'var(--bg-ivory)' }}>
       <div className="container">
         <window.Reveal y={20}>
-          <div style={{
+          <div className="strengths-intro" style={{
             display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 'clamp(28px, 5vw, 80px)', alignItems: 'end', marginBottom: 'clamp(40px, 5vw, 64px)',
           }}
           >
@@ -353,7 +361,7 @@ function Results() {
 
         {/* Big stats */}
         <window.Reveal delay={0.1} y={28}>
-          <div style={{
+          <div className="results-stats" style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 0, border: '1px solid var(--border-dark)', borderRadius: 16, overflow: 'hidden', background: 'var(--bg-dark-3)', marginBottom: 64,
           }}
           >

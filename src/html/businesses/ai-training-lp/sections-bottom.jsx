@@ -70,6 +70,7 @@ function Flow() {
             {steps.map((s, i) => (
               <div
                 key={s.num}
+                className="flow-step"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'auto 1fr',
@@ -196,6 +197,7 @@ function FAQ() {
           {faqs.map((f, i) => (
             <div key={i} style={{ borderTop: '1px solid var(--border-2)' }}>
               <button
+                className="faq-question"
                 onClick={() => setOpen(open === i ? -1 : i)}
                 style={{
                   width: '100%',
@@ -240,7 +242,7 @@ function FAQ() {
                 </span>
               </button>
               {open === i && (
-                <div style={{
+                <div className="faq-answer" style={{
                   paddingLeft: 42,
                   paddingBottom: 24,
                   paddingRight: 48,
@@ -340,7 +342,7 @@ function CTA() {
             「AIを入れるべきか」の段階からご相談いただけます。業務の棚卸しを一緒にし、AIで解ける部分と、AI以外で解いたほうがよい部分を、フラットにお伝えします。
           </p>
 
-          <div style={{
+          <div className="cta-proof-grid" style={{
             display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 36, textAlign: 'left',
           }}
           >
@@ -421,7 +423,7 @@ function CTA() {
                     必須
                   </span>
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                <div className="intent-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                   {[['doc', '資料ダウンロード', 'まずは情報収集から'], ['consult', '無料相談を予約', '60分・オンライン']].map(([k, t, sub]) => (
                     <button
                       key={k}
@@ -444,7 +446,7 @@ function CTA() {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <div className="field">
                   <label>
                     会社名
@@ -516,7 +518,7 @@ function Footer() {
   return (
     <footer style={{ background: 'var(--bg-dark-2)', color: 'var(--on-dark-2)', padding: '56px var(--px) 32px' }}>
       <div className="container">
-        <div style={{
+        <div className="footer-grid" style={{
           display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) repeat(3, minmax(0, 1fr))', gap: 'clamp(28px, 4vw, 56px)', marginBottom: 40,
         }}
         >

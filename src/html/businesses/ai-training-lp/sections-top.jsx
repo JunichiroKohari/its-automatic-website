@@ -124,6 +124,7 @@ function Hero({ headline }) {
     <>
       <section
         id="top"
+        className="hero-section"
         style={{
           position: "relative",
           minHeight: "min(960px, 100vh)",
@@ -214,6 +215,7 @@ function Hero({ headline }) {
 
         {/* Content — vertically centered */}
         <div
+          className="hero-content"
           style={{
             position: "relative",
             zIndex: 2,
@@ -229,6 +231,7 @@ function Hero({ headline }) {
           <div className="container" style={{ maxWidth: 1080 }}>
             <window.Reveal delay={0.08} y={24}>
               <h1
+                className="hero-title"
                 style={{
                   margin: "0 auto 36px",
                   maxWidth: 1000,
@@ -266,6 +269,7 @@ function Hero({ headline }) {
 
             <window.Reveal delay={0.18} y={20}>
               <p
+                className="hero-lead"
                 style={{
                   maxWidth: 680,
                   margin: "0 auto 48px",
@@ -284,6 +288,7 @@ function Hero({ headline }) {
 
             <window.Reveal delay={0.28} y={20}>
               <div
+                className="hero-actions"
                 style={{
                   display: "flex",
                   gap: 14,
@@ -373,6 +378,7 @@ function Hero({ headline }) {
         <div className="container">
           <window.Reveal y={16}>
             <div
+              className="hero-stats-grid"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
@@ -1713,6 +1719,7 @@ function Empathy() {
       >
         <window.Reveal y={32}>
           <figure
+            className="empathy-photo"
             style={{
               position: "relative",
               borderRadius: "clamp(16px, 2vw, 24px)",
@@ -1975,6 +1982,7 @@ function SolutionShowcase() {
   return (
     <div
       ref={ref}
+      className="solution-showcase"
       style={{
         background:
           "linear-gradient(180deg, var(--bg-parchment) 0%, var(--bg-sand) 100%)",
@@ -2028,6 +2036,7 @@ function SolutionShowcase() {
           受講アンケートではなく、業務ごとの削減時間・コスト換算ROIを一枚に。「AIを入れた」ではなく「業務が変わった」と、経営層にファクトで語れる設計です。
         </p>
         <div
+          className="report-metrics"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -2042,6 +2051,7 @@ function SolutionShowcase() {
             ["業務改善項目", "平均 12.4 件 / 部門"],
           ].map(([k, v]) => (
             <div
+              className="report-metric-row"
               key={k}
               style={{
                 display: "flex",
@@ -2069,6 +2079,7 @@ function SolutionShowcase() {
 
       {/* Dashboard mockup */}
       <div
+        className="dashboard-mockup"
         style={{
           background: "var(--bg-white)",
           border: "1px solid var(--border-2)",
@@ -2134,6 +2145,7 @@ function SolutionShowcase() {
         <div style={{ padding: "24px" }}>
           {/* Big KPI */}
           <div
+            className="dashboard-kpis"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
