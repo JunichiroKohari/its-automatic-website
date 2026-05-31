@@ -763,7 +763,6 @@ function CTA() {
     <section ref={ref} id="reserve" className="dark" style={{ paddingTop: 120, paddingBottom: 120 }}>
       <div className="wrap">
         <div className="fade" style={{ textAlign: 'center', marginBottom: 56 }}>
-          <span className="num" style={{ display: 'block', marginBottom: 18, color: 'var(--kincha)' }}>10 — RESERVE</span>
           <h2 className="h-section" style={{ color: 'var(--kinari)' }}>
             さあ、奈良の朝へ。
           </h2>

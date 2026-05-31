@@ -69,6 +69,50 @@ function TopNav({ onReserve }) {
    01  FIRST VIEW
    ============================================================ */
 
+function HeroFacts({ className = "" }) {
+  return (
+    <div
+      className={`hero-facts ${className}`}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: 24,
+        borderTop: "1px solid rgba(244,239,230,.18)",
+        paddingTop: 24,
+        fontFamily: "var(--mono)",
+        fontSize: 11,
+        letterSpacing: ".18em",
+        color: "rgba(244,239,230,.7)",
+      }}
+    >
+      <div>
+        <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
+          01 / LOCATION
+        </div>
+        <div>奈良公園 徒歩3分</div>
+      </div>
+      <div>
+        <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
+          02 / SINCE
+        </div>
+        <div>明治二十五年創業</div>
+      </div>
+      <div>
+        <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
+          03 / ROOMS
+        </div>
+        <div>全12室・離れあり</div>
+      </div>
+      <div>
+        <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
+          04 / RATING
+        </div>
+        <div>★ 4.86 / 1,240件</div>
+      </div>
+    </div>
+  );
+}
+
 function Hero({ onReserve }) {
   const videoRef = useRef(null);
   const [heroVideoEnded, setHeroVideoEnded] = useState(false);
@@ -89,6 +133,7 @@ function Hero({ onReserve }) {
   };
 
   return (
+    <>
     <header
       style={{
         position: "relative",
@@ -190,14 +235,6 @@ function Hero({ onReserve }) {
         }}
       >
         <div style={{ alignSelf: "center", maxWidth: 820 }}>
-          <div
-            className="eyebrow"
-            style={{ color: "var(--kincha)", marginBottom: 28 }}
-          >
-            <span style={{ background: "var(--kincha)" }} />
-            NARA PARK ・ EST. 1892
-          </div>
-
           <h1
             className="h-display"
             style={{
@@ -260,47 +297,15 @@ function Hero({ onReserve }) {
         </div>
 
         {/* hero footer strip */}
-        <div
-          className="hero-facts"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 24,
-            borderTop: "1px solid rgba(244,239,230,.18)",
-            paddingTop: 24,
-            fontFamily: "var(--mono)",
-            fontSize: 11,
-            letterSpacing: ".18em",
-            color: "rgba(244,239,230,.7)",
-          }}
-        >
-          <div>
-            <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
-              01 / LOCATION
-            </div>
-            <div>奈良公園 徒歩3分</div>
-          </div>
-          <div>
-            <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
-              02 / SINCE
-            </div>
-            <div>明治二十五年創業</div>
-          </div>
-          <div>
-            <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
-              03 / ROOMS
-            </div>
-            <div>全12室・離れあり</div>
-          </div>
-          <div>
-            <div style={{ color: "var(--kincha)", marginBottom: 6 }}>
-              04 / RATING
-            </div>
-            <div>★ 4.86 / 1,240件</div>
-          </div>
-        </div>
+        <HeroFacts className="hero-facts--in-hero" />
       </div>
     </header>
+    <div className="hero-facts-mobile-band" aria-label="鹿乃宿の特徴">
+      <div className="wrap">
+        <HeroFacts className="hero-facts--after-hero" />
+      </div>
+    </div>
+    </>
   );
 }
 
@@ -332,7 +337,6 @@ function Problem() {
       <div className="wrap">
         <div className="section-head fade">
           <div className="section-head__meta">
-            <span className="num">02 — PROBLEM</span>
             <span
               className="vtext"
               style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
@@ -423,12 +427,9 @@ function Empathy() {
         }}
       >
         <div className="fade">
-          <span className="eyebrow" style={{ marginBottom: 24 }}>
-            03 — EMPATHY
-          </span>
           <h2
             className="h-section"
-            style={{ color: "var(--kinari)", marginTop: 18, marginBottom: 28 }}
+            style={{ color: "var(--kinari)", marginBottom: 28 }}
           >
             分かります。
             <br />
@@ -580,7 +581,6 @@ function Solution() {
       <div className="wrap">
         <div className="section-head fade">
           <div className="section-head__meta">
-            <span className="num">04 — SOLUTION</span>
             <span
               className="vtext"
               style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
@@ -728,7 +728,6 @@ function Service() {
       <div className="wrap">
         <div className="section-head fade">
           <div className="section-head__meta">
-            <span className="num">05 — STAY</span>
             <span
               className="vtext"
               style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
@@ -1132,7 +1131,6 @@ function Strengths() {
       <div className="wrap">
         <div className="section-head fade">
           <div className="section-head__meta">
-            <span className="num">06 — STRENGTHS</span>
             <span
               className="vtext"
               style={{ fontSize: 12, color: "rgba(244,239,230,.45)" }}
@@ -1265,7 +1263,6 @@ function Voice() {
       <div className="wrap">
         <div className="section-head fade">
           <div className="section-head__meta">
-            <span className="num">07 — VOICE</span>
             <span
               className="vtext"
               style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
@@ -1414,17 +1411,6 @@ function Voice() {
           }}
         >
           <div
-            className="body-sm"
-            style={{
-              marginBottom: 18,
-              letterSpacing: ".18em",
-              fontFamily: "var(--mono)",
-              fontSize: 11,
-            }}
-          >
-            掲載 — AS FEATURED IN
-          </div>
-          <div
             className="press-grid"
             style={{
               display: "grid",
@@ -1516,7 +1502,6 @@ function Flow({ onReserve }) {
       <div className="wrap">
         <div className="section-head fade">
           <div className="section-head__meta">
-            <span className="num">08 — FLOW</span>
             <span
               className="vtext"
               style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
@@ -1652,9 +1637,6 @@ function FAQ() {
     <section ref={ref} id="faq" style={{ background: "var(--kinari)" }}>
       <div className="wrap-narrow">
         <div className="fade" style={{ textAlign: "center", marginBottom: 56 }}>
-          <span className="num" style={{ display: "block", marginBottom: 18 }}>
-            09 — FAQ
-          </span>
           <h2 className="h-section">よくあるご質問</h2>
         </div>
         <div className="fade" style={{ borderTop: "1px solid var(--line)" }}>
