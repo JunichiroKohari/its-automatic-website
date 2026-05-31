@@ -29,6 +29,7 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
+  html{scroll-padding-top:72px}
   body{
     background:var(--kinari);
     color:var(--sumi);
@@ -37,6 +38,7 @@
     line-height:1.85;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
+    overflow-x:hidden;
   }
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
@@ -163,6 +165,87 @@
     section{padding:88px 0}
   }
 
+  /* Responsive layout refinements */
+  @media (max-width:1080px){
+    .wrap{max-width:960px;padding:0 28px}
+    .wrap-narrow{padding:0 28px}
+    .nav__links{gap:18px}
+    .hero-facts{grid-template-columns:repeat(2, minmax(0, 1fr)) !important;gap:18px !important}
+    .voice-stats{grid-template-columns:repeat(2, minmax(0, 1fr)) !important}
+    .press-grid{grid-template-columns:repeat(3, minmax(0, 1fr)) !important}
+    .footer-grid{grid-template-columns:1fr 1fr !important}
+  }
+
+  @media (max-width:860px){
+    html{scroll-padding-top:64px}
+    section{padding:88px 0}
+    .wrap,.wrap-narrow{padding:0 24px}
+    .section-head__meta .vtext{display:none}
+    .problem-grid,
+    .solution-grid,
+    .room-feature,
+    .room-card-grid,
+    .cuisine-block,
+    .onsen-block,
+    .strengths-grid,
+    .voice-reviews,
+    .reserve-contact{grid-template-columns:1fr !important}
+    .problem-card{border-right:none !important;border-bottom:1px solid var(--line)}
+    .problem-card:last-child{border-bottom:none}
+    .empathy-grid{grid-template-columns:1fr !important;gap:48px !important}
+    .empathy-photo-badge{left:20px !important;bottom:-20px !important;width:180px !important}
+    .room-feature,
+    .cuisine-block,
+    .onsen-block{gap:32px !important;margin-bottom:72px !important}
+    .room-specs{grid-template-columns:1fr !important}
+    .flow-row{grid-template-columns:64px 1fr !important;gap:20px !important;padding:28px 0 !important}
+    .flow-time{display:none}
+    .booking-panel{padding:32px 24px !important}
+    .booking-steps{overflow-x:auto;scrollbar-width:none}
+    .booking-steps::-webkit-scrollbar{display:none}
+    .booking-steps__item{flex:0 0 132px !important}
+    .booking-date-grid,
+    .booking-room-grid,
+    .booking-field-row{grid-template-columns:1fr !important}
+    .meal-option{grid-template-columns:1fr !important}
+    .booking-confirm-row{grid-template-columns:1fr !important;gap:4px !important}
+    .booking-total{display:grid !important;gap:8px;text-align:left}
+  }
+
+  @media (max-width:640px){
+    .wrap,.wrap-narrow{padding:0 18px}
+    section{padding:72px 0}
+    .h-section{font-size:clamp(24px, 7vw, 32px);letter-spacing:.04em}
+    .body-lg{font-size:15px;line-height:1.9}
+    .body{font-size:14px;line-height:1.9}
+    .body-sm{font-size:12.5px;line-height:1.85}
+    .btn{width:100%;justify-content:center;padding:14px 16px;font-size:13px;letter-spacing:.1em}
+    .nav{padding:14px 16px}
+    .nav__brand{gap:10px;font-size:14px;letter-spacing:.14em}
+    .nav__brand .crest{width:28px;height:28px}
+    .nav__cta{padding:9px 14px;letter-spacing:.14em}
+    header{min-height:100svh !important;padding-top:62px !important}
+    header > .vtext{display:none}
+    header .wrap{min-height:calc(100svh - 62px) !important;padding-top:48px !important;padding-bottom:32px !important}
+    header .h-display{font-size:clamp(32px, 8.6vw, 44px) !important;letter-spacing:.02em !important;line-height:1.34 !important}
+    header .h-display span{font-size:.52em !important;letter-spacing:.18em !important;margin-bottom:14px !important}
+    header .body-lg{font-size:15px !important;margin-bottom:32px !important}
+    .hero-facts{grid-template-columns:repeat(2, minmax(0, 1fr)) !important;font-size:10px !important;letter-spacing:.1em !important;gap:14px !important;padding-top:18px !important}
+    .voice-stats,
+    .press-grid,
+    .footer-grid{grid-template-columns:1fr !important}
+    .date-picker__popover{width:min(280px, calc(100vw - 36px)) !important}
+    .room-option{padding:16px !important}
+    .room-option__head{flex-direction:column;gap:4px;align-items:flex-start !important}
+    .booking-actions{flex-direction:column-reverse;gap:12px !important}
+    .booking-actions .btn{width:100%}
+    .booking-modal{padding:16px 10px !important;align-items:flex-start !important}
+    .booking-modal__panel{padding:48px 18px 24px !important}
+    .sticky-reserve{left:16px !important;right:16px !important;bottom:16px !important;justify-content:center !important}
+    #faq button[style*="40px 1fr 24px"]{grid-template-columns:32px 1fr 20px !important;gap:10px !important}
+    #faq .fade div[style*="padding: 0 4px 28px 60px"]{padding-left:42px !important}
+  }
+
   /* Dark section variant */
   .dark{background:var(--sumi);color:var(--kinari)}
   .dark .body, .dark .body-lg, .dark .body-sm{color:rgba(244,239,230,.78)}
@@ -211,6 +294,35 @@
     content:"鹿乃宿を読み込んでいます…";
     display:block;padding:140px 0;text-align:center;
     font-family:var(--serif);color:var(--sumi-2);letter-spacing:.2em
+  }
+
+  .mobile-only-break{display:none}
+
+  @media (max-width:860px){
+    .empathy-photo-badge{left:0 !important;width:180px !important}
+  }
+
+  @media (max-width:640px){
+    .mobile-only-break{display:block}
+    .nav{width:100vw !important;right:auto !important;padding:14px 16px}
+    .nav__brand{gap:10px;font-size:14px;letter-spacing:.14em}
+    .nav__brand .crest{width:28px;height:28px}
+    .nav__cta{padding:9px 14px;letter-spacing:.14em}
+    .h-display,.h-section,.body-lg,.body,.body-sm{overflow-wrap:anywhere;word-break:break-all;line-break:anywhere}
+    header .wrap > div:first-child{max-width:100% !important}
+    header p{max-width:100% !important}
+    header .h-display{
+      font-size:clamp(28px, 7.4vw, 34px) !important;
+      letter-spacing:.01em !important;
+      overflow-wrap:anywhere;
+    }
+    header .h-display span{letter-spacing:.16em !important}
+    .empathy-photo-badge{
+      left:0 !important;
+      width:min(150px, calc(100vw - 36px)) !important;
+      padding:18px !important;
+    }
+    .empathy-photo-badge > div{max-width:100% !important}
   }
 </style>
 </head>

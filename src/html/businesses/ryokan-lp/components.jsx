@@ -222,7 +222,9 @@ function Hero({ onReserve }) {
             </span>
             門を出れば、鹿。
             <br />
-            朝の散歩から、旅が始まる。
+            朝の散歩から、
+            <br className="mobile-only-break" />
+            旅が始まる。
           </h1>
 
           <p
@@ -259,6 +261,7 @@ function Hero({ onReserve }) {
 
         {/* hero footer strip */}
         <div
+          className="hero-facts"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
@@ -347,7 +350,7 @@ function Problem() {
         </div>
 
         <div
-          className="fade"
+          className="fade problem-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -358,6 +361,7 @@ function Problem() {
         >
           {items.map((it, i) => (
             <div
+              className="problem-card"
               key={it.n}
               style={{
                 padding: "44px 32px",
@@ -410,7 +414,7 @@ function Empathy() {
   return (
     <section ref={ref} className="dark" id="empathy">
       <div
-        className="wrap"
+        className="wrap empathy-grid"
         style={{
           display: "grid",
           gridTemplateColumns: "1.05fr 1fr",
@@ -446,6 +450,7 @@ function Empathy() {
           </p>
 
           <div
+            className="okami-profile"
             style={{
               display: "flex",
               gap: 28,
@@ -502,6 +507,7 @@ function Empathy() {
             }}
           />
           <div
+            className="empathy-photo-badge"
             style={{
               position: "absolute",
               bottom: -32,
@@ -593,7 +599,7 @@ function Solution() {
         </div>
 
         <div
-          className="fade"
+          className="fade solution-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -742,7 +748,7 @@ function Service() {
 
         {/* Big room hero */}
         <div
-          className="fade"
+          className="fade room-feature"
           style={{
             display: "grid",
             gridTemplateColumns: "1.4fr 1fr",
@@ -790,6 +796,7 @@ function Service() {
               </p>
             </div>
             <div
+              className="room-specs"
               style={{
                 marginTop: 28,
                 borderTop: "1px solid var(--line)",
@@ -824,7 +831,7 @@ function Service() {
 
         {/* 3 smaller rooms */}
         <div
-          className="fade"
+          className="fade room-card-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -939,7 +946,7 @@ function Service() {
         {/* Cuisine */}
         <div
           id="cuisine"
-          className="fade"
+          className="fade cuisine-block"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1.3fr",
@@ -1016,7 +1023,7 @@ function Service() {
 
         {/* Onsen */}
         <div
-          className="fade"
+          className="fade onsen-block"
           style={{
             display: "grid",
             gridTemplateColumns: "1.3fr 1fr",
@@ -1143,7 +1150,7 @@ function Strengths() {
         </div>
 
         <div
-          className="fade"
+          className="fade strengths-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -1273,7 +1280,7 @@ function Voice() {
 
         {/* stats */}
         <div
-          className="fade"
+          className="fade voice-stats"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
@@ -1322,7 +1329,7 @@ function Voice() {
 
         {/* reviews */}
         <div
-          className="fade"
+          className="fade voice-reviews"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -1418,6 +1425,7 @@ function Voice() {
             掲載 — AS FEATURED IN
           </div>
           <div
+            className="press-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(5, 1fr)",
@@ -1526,6 +1534,7 @@ function Flow({ onReserve }) {
         <div className="fade" style={{ position: "relative" }}>
           {steps.map((s, i) => (
             <div
+              className="flow-row"
               key={s.n}
               style={{
                 display: "grid",
@@ -1539,6 +1548,7 @@ function Flow({ onReserve }) {
               }}
             >
               <div
+                className="flow-number"
                 style={{
                   fontFamily: "var(--serif)",
                   fontSize: 44,
@@ -1566,6 +1576,7 @@ function Flow({ onReserve }) {
                 </p>
               </div>
               <div
+                className="flow-time"
                 style={{
                   textAlign: "right",
                   fontFamily: "var(--mono)",

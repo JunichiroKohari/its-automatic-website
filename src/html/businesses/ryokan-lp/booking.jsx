@@ -39,8 +39,9 @@ function DatePicker({
   for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
 
   return (
-    <div ref={ref} style={{ position: 'relative' }}>
+    <div ref={ref} className="date-picker" style={{ position: 'relative' }}>
       <button
+        className="date-picker__button"
         type="button"
         onClick={() => setOpen(!open)}
         style={{
@@ -63,6 +64,7 @@ function DatePicker({
       </button>
       {open && (
         <div
+          className="date-picker__popover"
           style={{
             position: 'absolute',
             top: 'calc(100% + 6px)',
@@ -137,7 +139,7 @@ function Counter({
   value, onChange, min = 1, max = 6, label, sub,
 }) {
   return (
-    <div style={{
+    <div className="booking-counter" style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid var(--line)',
     }}
     >
@@ -145,7 +147,7 @@ function Counter({
         <div style={{ fontFamily: 'var(--serif)', fontSize: 15, letterSpacing: '.06em' }}>{label}</div>
         {sub && <div className="body-sm" style={{ margin: 0, fontSize: 12 }}>{sub}</div>}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+      <div className="booking-counter__controls" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
         <button
           type="button"
           onClick={() => onChange(Math.max(min, value - 1))}
@@ -194,6 +196,7 @@ function RoomOption({
 }) {
   return (
     <button
+      className="room-option"
       type="button"
       onClick={() => onSelect(id)}
       style={{
@@ -208,7 +211,7 @@ function RoomOption({
         transition: 'all .2s',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+      <div className="room-option__head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <span style={{
           fontFamily: 'var(--serif)', fontSize: 17, fontWeight: 600, letterSpacing: '.06em',
         }}
@@ -294,7 +297,7 @@ function BookingForm({
   /* ---------- step UIs ---------- */
 
   const StepNav = () => (
-    <div style={{
+    <div className="booking-steps" style={{
       display: 'flex', gap: 0, marginBottom: 36, borderBottom: '1px solid var(--line)',
     }}
     >
@@ -303,6 +306,7 @@ function BookingForm({
         const done = step > i + 1;
         return (
           <div
+            className="booking-steps__item"
             key={s}
             style={{
               flex: 1,
@@ -400,12 +404,12 @@ function BookingForm({
   }
 
   return (
-    <div>
+    <div className="booking-form">
       <StepNav />
 
       {step === 1 && (
         <div style={{ display: 'grid', gap: 28 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+          <div className="booking-date-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             <div>
               <label style={{
                 display: 'block', fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '.2em', color: 'var(--sumi-2)', marginBottom: 8,
@@ -462,7 +466,7 @@ function BookingForm({
             >
               ROOM ／ お部屋を選ぶ
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+            <div className="booking-room-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {ROOMS.map((r) => (
                 <RoomOption key={r.id} {...r} selected={data.room === r.id} onSelect={(id) => update('room', id)} />
               ))}
@@ -488,6 +492,7 @@ function BookingForm({
                 },
               ].map((p) => (
                 <button
+                  className="meal-option"
                   key={p.id}
                   type="button"
                   onClick={() => update('plan', p.id)}
@@ -546,7 +551,7 @@ function BookingForm({
             else rows.push([f]);
             return rows;
           }, []).map((row, ri) => (
-            <div key={ri} style={{ display: 'grid', gridTemplateColumns: row.length === 2 ? '1fr 1fr' : '1fr', gap: 18 }}>
+            <div key={ri} className="booking-field-row" style={{ display: 'grid', gridTemplateColumns: row.length === 2 ? '1fr 1fr' : '1fr', gap: 18 }}>
               {row.map((f) => (
                 <div key={f.k}>
                   <label style={{
@@ -655,6 +660,7 @@ function BookingForm({
               ['ご要望', data.notes || '—'],
             ].map(([k, v]) => (
               <div
+                className="booking-confirm-row"
                 key={k}
                 style={{
                   display: 'grid', gridTemplateColumns: '100px 1fr', gap: 16, padding: '10px 0', borderBottom: '1px dashed var(--line)',
@@ -669,7 +675,7 @@ function BookingForm({
                 <div style={{ fontFamily: 'var(--serif)', fontSize: 14, letterSpacing: '.04em' }}>{v}</div>
               </div>
             ))}
-            <div style={{
+            <div className="booking-total" style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '16px 0 0', marginTop: 8,
             }}
             >
@@ -692,7 +698,7 @@ function BookingForm({
       )}
 
       {/* nav buttons */}
-      <div style={{
+      <div className="booking-actions" style={{
         display: 'flex', justifyContent: 'space-between', marginTop: 36, paddingTop: 24, borderTop: '1px solid var(--line)',
       }}
       >
@@ -769,7 +775,7 @@ function CTA() {
         </div>
 
         <div
-          className="fade"
+          className="fade booking-panel"
           style={{
             background: 'var(--kinari)',
             color: 'var(--sumi)',
@@ -785,7 +791,7 @@ function CTA() {
 
         {/* secondary contact */}
         <div
-          className="fade"
+          className="fade reserve-contact"
           style={{
             marginTop: 48,
             paddingTop: 32,
@@ -875,6 +881,7 @@ function StickyReserve({ onOpen }) {
   }, []);
   return (
     <button
+      className="sticky-reserve"
       onClick={onOpen}
       aria-label="ご予約フォームを開く"
       style={{
@@ -926,6 +933,7 @@ function BookingModal({ open, onClose }) {
   if (!open) return null;
   return (
     <div
+      className="booking-modal"
       onClick={onClose}
       style={{
         position: 'fixed',
@@ -941,6 +949,7 @@ function BookingModal({ open, onClose }) {
       }}
     >
       <div
+        className="booking-modal__panel"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: 'var(--kinari)',
@@ -988,7 +997,7 @@ function BookingModal({ open, onClose }) {
 function Footer() {
   return (
     <footer id="access" style={{ background: '#100f0d', color: 'rgba(244,239,230,.7)', padding: '72px 0 32px' }}>
-      <div className="wrap" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 40 }}>
+      <div className="wrap footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 40 }}>
         <div>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18,
