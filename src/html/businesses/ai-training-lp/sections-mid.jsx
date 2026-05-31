@@ -255,9 +255,11 @@ function Strengths() {
     <section id="strengths" className="section" data-screen-label="06 Strengths" style={{ background: 'var(--bg-ivory)' }}>
       <div className="container">
         <window.Reveal y={20}>
-          <div className="strengths-intro" style={{
-            display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 'clamp(28px, 5vw, 80px)', alignItems: 'end', marginBottom: 'clamp(40px, 5vw, 64px)',
-          }}
+          <div
+            className="strengths-intro"
+            style={{
+              display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 'clamp(28px, 5vw, 80px)', alignItems: 'end', marginBottom: 'clamp(40px, 5vw, 64px)',
+            }}
           >
             <div>
               <h2 className="h-section" style={{ textWrap: 'balance', wordBreak: 'auto-phrase' }}>
@@ -361,9 +363,11 @@ function Results() {
 
         {/* Big stats */}
         <window.Reveal delay={0.1} y={28}>
-          <div className="results-stats" style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 0, border: '1px solid var(--border-dark)', borderRadius: 16, overflow: 'hidden', background: 'var(--bg-dark-3)', marginBottom: 64,
-          }}
+          <div
+            className="results-stats"
+            style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 0, border: '1px solid var(--border-dark)', borderRadius: 16, overflow: 'hidden', background: 'var(--bg-dark-3)', marginBottom: 64,
+            }}
           >
             {[
               { v: 50, suffix: '社+', k: '業務改善支援実績' },

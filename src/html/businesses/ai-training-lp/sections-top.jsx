@@ -8,8 +8,8 @@ function useScrolled(threshold = 24) {
   React.useEffect(() => {
     const h = () => setS(window.scrollY > threshold);
     h();
-    window.addEventListener("scroll", h, { passive: true });
-    return () => window.removeEventListener("scroll", h);
+    window.addEventListener('scroll', h, { passive: true });
+    return () => window.removeEventListener('scroll', h);
   }, [threshold]);
   return s;
 }
@@ -19,30 +19,30 @@ function Nav() {
   const scrolled = useScrolled(20);
   const [open, setOpen] = React.useState(false);
   const links = [
-    ["#problem", "課題"],
-    ["#solution", "解決策"],
-    ["#service", "サービス"],
-    ["#results", "導入事例"],
-    ["#flow", "導入の流れ"],
-    ["#faq", "よくある質問"],
+    ['#problem', '課題'],
+    ['#solution', '解決策'],
+    ['#service', 'サービス'],
+    ['#results', '導入事例'],
+    ['#flow', '導入の流れ'],
+    ['#faq', 'よくある質問'],
   ];
   return (
-    <header className={`nav-bar${scrolled ? " scrolled" : ""}`}>
-      <a href="#top" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+    <header className={`nav-bar${scrolled ? ' scrolled' : ''}`}>
+      <a href="#top" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <img
           src="assets/logo-primary.png"
           alt="It's Automatic"
-          style={{ height: 28, width: "auto" }}
+          style={{ height: 28, width: 'auto' }}
         />
         <span
           style={{
-            fontFamily: "var(--serif)",
+            fontFamily: 'var(--serif)',
             fontSize: 13,
-            color: "var(--ink-2)",
+            color: 'var(--ink-2)',
             letterSpacing: 0.5,
             paddingLeft: 12,
             marginLeft: 6,
-            borderLeft: "1px solid var(--border-2)",
+            borderLeft: '1px solid var(--border-2)',
           }}
         >
           AI研修サービス
@@ -81,15 +81,15 @@ function Nav() {
         <div
           className="show-mobile"
           style={{
-            position: "absolute",
-            top: "100%",
+            position: 'absolute',
+            top: '100%',
             left: 0,
             right: 0,
-            background: "var(--bg-ivory)",
-            borderBottom: "1px solid var(--border-2)",
-            padding: "24px var(--px)",
-            display: "flex",
-            flexDirection: "column",
+            background: 'var(--bg-ivory)',
+            borderBottom: '1px solid var(--border-2)',
+            padding: '24px var(--px)',
+            display: 'flex',
+            flexDirection: 'column',
             gap: 18,
           }}
         >
@@ -107,7 +107,7 @@ function Nav() {
             href="#contact"
             onClick={() => setOpen(false)}
             className="btn btn--primary"
-            style={{ alignSelf: "flex-start" }}
+            style={{ alignSelf: 'flex-start' }}
           >
             無料相談を予約
           </a>
@@ -119,59 +119,59 @@ function Nav() {
 
 /* ─── 01 HERO ─── */
 function Hero({ headline }) {
-  const main = headline || "AIを入れるのではなく、";
+  const main = headline || 'AIを入れるのではなく、';
   return (
     <>
       <section
         id="top"
         className="hero-section"
         style={{
-          position: "relative",
-          minHeight: "min(960px, 100vh)",
-          display: "flex",
-          flexDirection: "column",
-          overflow: "hidden",
-          color: "#ffffff",
+          position: 'relative',
+          minHeight: 'min(960px, 100vh)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
+          color: '#ffffff',
         }}
       >
         {/* Background image */}
-        <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        <div aria-hidden style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
           <img
             src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=2400&q=88&auto=format&fit=crop"
             alt=""
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "saturate(0.82) contrast(1.04)",
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              filter: 'saturate(0.82) contrast(1.04)',
             }}
           />
           {/* Top dark gradient for logo + nav legibility */}
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               inset: 0,
               background:
-                "linear-gradient(180deg, rgba(20,20,19,0.62) 0%, rgba(20,20,19,0.35) 18%, rgba(20,20,19,0.40) 55%, rgba(20,20,19,0.82) 100%)",
+                'linear-gradient(180deg, rgba(20,20,19,0.62) 0%, rgba(20,20,19,0.35) 18%, rgba(20,20,19,0.40) 55%, rgba(20,20,19,0.82) 100%)',
             }}
           />
           {/* Center vignette for headline area */}
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               inset: 0,
               background:
-                "radial-gradient(ellipse 75% 60% at 50% 50%, rgba(20,20,19,0.55) 0%, rgba(20,20,19,0.30) 50%, transparent 85%)",
+                'radial-gradient(ellipse 75% 60% at 50% 50%, rgba(20,20,19,0.55) 0%, rgba(20,20,19,0.30) 50%, transparent 85%)',
             }}
           />
           {/* Warm tonal overlay to match palette */}
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               inset: 0,
               background:
-                "linear-gradient(135deg, rgba(201,100,66,0.16) 0%, transparent 50%, rgba(20,20,19,0.25) 100%)",
-              mixBlendMode: "multiply",
+                'linear-gradient(135deg, rgba(201,100,66,0.16) 0%, transparent 50%, rgba(20,20,19,0.25) 100%)',
+              mixBlendMode: 'multiply',
             }}
           />
         </div>
@@ -181,12 +181,12 @@ function Hero({ headline }) {
           href="#top"
           aria-label="It's Automatic"
           style={{
-            position: "absolute",
-            top: "clamp(20px, 3vw, 36px)",
-            left: "var(--px)",
+            position: 'absolute',
+            top: 'clamp(20px, 3vw, 36px)',
+            left: 'var(--px)',
             zIndex: 5,
-            display: "inline-flex",
-            alignItems: "center",
+            display: 'inline-flex',
+            alignItems: 'center',
             gap: 10,
           }}
         >
@@ -195,18 +195,18 @@ function Hero({ headline }) {
             alt="It's Automatic"
             style={{
               height: 26,
-              width: "auto",
-              filter: "brightness(0) invert(1)",
+              width: 'auto',
+              filter: 'brightness(0) invert(1)',
             }}
           />
           <span
             style={{
-              fontFamily: "var(--serif)",
+              fontFamily: 'var(--serif)',
               fontSize: 12,
-              color: "rgba(255,255,255,0.85)",
+              color: 'rgba(255,255,255,0.85)',
               letterSpacing: 0.5,
               paddingLeft: 10,
-              borderLeft: "1px solid rgba(255,255,255,0.25)",
+              borderLeft: '1px solid rgba(255,255,255,0.25)',
             }}
           >
             AI研修サービス
@@ -217,15 +217,15 @@ function Hero({ headline }) {
         <div
           className="hero-content"
           style={{
-            position: "relative",
+            position: 'relative',
             zIndex: 2,
             flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
             padding:
-              "clamp(120px, 14vh, 180px) var(--px) clamp(120px, 16vh, 200px)",
-            textAlign: "center",
+              'clamp(120px, 14vh, 180px) var(--px) clamp(120px, 16vh, 200px)',
+            textAlign: 'center',
           }}
         >
           <div className="container" style={{ maxWidth: 1080 }}>
@@ -233,31 +233,31 @@ function Hero({ headline }) {
               <h1
                 className="hero-title"
                 style={{
-                  margin: "0 auto 36px",
+                  margin: '0 auto 36px',
                   maxWidth: 1000,
-                  fontFamily: "var(--serif)",
+                  fontFamily: 'var(--serif)',
                   fontWeight: 500,
-                  color: "#ffffff",
-                  fontSize: "clamp(38px, 6.8vw, 92px)",
+                  color: '#ffffff',
+                  fontSize: 'clamp(38px, 6.8vw, 92px)',
                   lineHeight: 1.22,
-                  letterSpacing: "-0.01em",
-                  textWrap: "balance",
-                  wordBreak: "auto-phrase",
+                  letterSpacing: '-0.01em',
+                  textWrap: 'balance',
+                  wordBreak: 'auto-phrase',
                   textShadow:
-                    "0 2px 28px rgba(0,0,0,0.75), 0 1px 4px rgba(0,0,0,0.55)",
+                    '0 2px 28px rgba(0,0,0,0.75), 0 1px 4px rgba(0,0,0,0.55)',
                 }}
               >
-                <span style={{ display: "block", marginBottom: "0.12em" }}>
+                <span style={{ display: 'block', marginBottom: '0.12em' }}>
                   {main}
                 </span>
-                <span style={{ display: "block" }}>
+                <span style={{ display: 'block' }}>
                   <span
                     style={{
                       backgroundImage:
-                        "linear-gradient(transparent 62%, rgba(232,123,84,0.55) 62%, rgba(232,123,84,0.55) 92%, transparent 92%)",
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "100% 100%",
-                      padding: "0 6px",
+                        'linear-gradient(transparent 62%, rgba(232,123,84,0.55) 62%, rgba(232,123,84,0.55) 92%, transparent 92%)',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '100% 100%',
+                      padding: '0 6px',
                     }}
                   >
                     業務を変える
@@ -272,14 +272,14 @@ function Hero({ headline }) {
                 className="hero-lead"
                 style={{
                   maxWidth: 680,
-                  margin: "0 auto 48px",
-                  fontSize: "clamp(15px, 1.5vw, 19px)",
+                  margin: '0 auto 48px',
+                  fontSize: 'clamp(15px, 1.5vw, 19px)',
                   lineHeight: 1.85,
-                  color: "#ffffff",
-                  textWrap: "pretty",
-                  wordBreak: "auto-phrase",
+                  color: '#ffffff',
+                  textWrap: 'pretty',
+                  wordBreak: 'auto-phrase',
                   textShadow:
-                    "0 2px 16px rgba(0,0,0,0.70), 0 1px 3px rgba(0,0,0,0.5)",
+                    '0 2px 16px rgba(0,0,0,0.70), 0 1px 3px rgba(0,0,0,0.5)',
                 }}
               >
                 AIを学ぶことがゴールではありません。「どの業務を、どう効率化するか」から逆算することで、受講者が明日から手を動かせる研修を設計します。
@@ -290,20 +290,20 @@ function Hero({ headline }) {
               <div
                 className="hero-actions"
                 style={{
-                  display: "flex",
+                  display: 'flex',
                   gap: 14,
-                  flexWrap: "wrap",
-                  justifyContent: "center",
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
                 }}
               >
                 <a
                   href="#contact"
                   className="btn btn--arrow"
                   style={{
-                    background: "var(--brand-coral)",
-                    color: "#ffffff",
+                    background: 'var(--brand-coral)',
+                    color: '#ffffff',
                     boxShadow:
-                      "0 6px 22px rgba(232,123,84,0.55), 0 1px 6px rgba(0,0,0,0.30)",
+                      '0 6px 22px rgba(232,123,84,0.55), 0 1px 6px rgba(0,0,0,0.30)',
                   }}
                 >
                   資料を無料ダウンロード
@@ -312,11 +312,11 @@ function Hero({ headline }) {
                   href="#contact"
                   className="btn"
                   style={{
-                    background: "rgba(255,255,255,0.10)",
-                    color: "#ffffff",
-                    border: "1.5px solid var(--brand-coral)",
-                    backdropFilter: "blur(10px)",
-                    boxShadow: "0 4px 18px rgba(0,0,0,0.25)",
+                    background: 'rgba(255,255,255,0.10)',
+                    color: '#ffffff',
+                    border: '1.5px solid var(--brand-coral)',
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: '0 4px 18px rgba(0,0,0,0.25)',
                   }}
                 >
                   60分の無料相談を予約
@@ -328,19 +328,19 @@ function Hero({ headline }) {
           {/* Scroll indicator */}
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: 32,
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
               gap: 8,
-              color: "rgba(255,255,255,0.7)",
+              color: 'rgba(255,255,255,0.7)',
               fontSize: 10,
               letterSpacing: 1.5,
-              textTransform: "uppercase",
-              animation: "float 2.4s ease-in-out infinite",
+              textTransform: 'uppercase',
+              animation: 'float 2.4s ease-in-out infinite',
             }}
           >
             <span>Scroll</span>
@@ -370,9 +370,9 @@ function Hero({ headline }) {
       <section
         className="section"
         style={{
-          paddingTop: "clamp(48px, 7vw, 80px)",
-          paddingBottom: "clamp(48px, 7vw, 80px)",
-          background: "var(--bg-parchment)",
+          paddingTop: 'clamp(48px, 7vw, 80px)',
+          paddingBottom: 'clamp(48px, 7vw, 80px)',
+          background: 'var(--bg-parchment)',
         }}
       >
         <div className="container">
@@ -380,38 +380,38 @@ function Hero({ headline }) {
             <div
               className="hero-stats-grid"
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: "clamp(12px, 1.4vw, 24px)",
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: 'clamp(12px, 1.4vw, 24px)',
               }}
             >
               {[
-                { v: 50, suffix: "社+", k: "業務改善支援実績" },
+                { v: 50, suffix: '社+', k: '業務改善支援実績' },
                 {
                   v: 8.6,
-                  prefix: "+",
-                  suffix: " h / 週",
+                  prefix: '+',
+                  suffix: ' h / 週',
                   dec: 1,
-                  k: "受講者あたり業務削減",
+                  k: '受講者あたり業務削減',
                 },
-                { v: 98, suffix: "%", k: "受講者満足度" },
+                { v: 98, suffix: '%', k: '受講者満足度' },
                 {
                   v: 2,
-                  prefix: "最短 ",
-                  suffix: " 週間",
-                  k: "研修開始までの期間",
+                  prefix: '最短 ',
+                  suffix: ' 週間',
+                  k: '研修開始までの期間',
                 },
-                { v: 0, k: "業務棚卸しから伴走", static: "棚卸し" },
+                { v: 0, k: '業務棚卸しから伴走', static: '棚卸し' },
               ].map((s, i) => (
-                <div key={s.k} style={{ padding: "4px 0" }}>
+                <div key={s.k} style={{ padding: '4px 0' }}>
                   <div
                     style={{
-                      fontFamily: "var(--serif)",
-                      fontSize: "clamp(28px, 3.4vw, 40px)",
+                      fontFamily: 'var(--serif)',
+                      fontSize: 'clamp(28px, 3.4vw, 40px)',
                       fontWeight: 500,
-                      color: "var(--ink-1)",
+                      color: 'var(--ink-1)',
                       lineHeight: 1.05,
-                      letterSpacing: "-0.01em",
+                      letterSpacing: '-0.01em',
                     }}
                   >
                     {s.static ? (
@@ -420,12 +420,12 @@ function Hero({ headline }) {
                       <>
                         <span
                           style={{
-                            fontSize: "0.6em",
-                            color: "var(--ink-3)",
+                            fontSize: '0.6em',
+                            color: 'var(--ink-3)',
                             marginRight: 4,
                           }}
                         >
-                          {s.prefix || ""}
+                          {s.prefix || ''}
                         </span>
                         <window.Counter
                           to={s.v}
@@ -434,12 +434,12 @@ function Hero({ headline }) {
                         />
                         <span
                           style={{
-                            fontSize: "0.55em",
-                            color: "var(--ink-3)",
+                            fontSize: '0.55em',
+                            color: 'var(--ink-3)',
                             marginLeft: 4,
                           }}
                         >
-                          {s.suffix || ""}
+                          {s.suffix || ''}
                         </span>
                       </>
                     )}
@@ -447,7 +447,7 @@ function Hero({ headline }) {
                   <div
                     style={{
                       fontSize: 12,
-                      color: "var(--ink-3)",
+                      color: 'var(--ink-3)',
                       marginTop: 10,
                       letterSpacing: 0.3,
                     }}
@@ -467,17 +467,17 @@ function Hero({ headline }) {
 function HeroPhoto() {
   const { Reveal, Parallax, Counter } = window;
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: 'relative' }}>
       <Reveal y={32}>
         <div
           style={{
-            position: "relative",
-            borderRadius: "clamp(16px, 2vw, 28px)",
-            overflow: "hidden",
+            position: 'relative',
+            borderRadius: 'clamp(16px, 2vw, 28px)',
+            overflow: 'hidden',
             boxShadow:
-              "0 30px 80px rgba(20,20,19,0.18), 0 6px 18px rgba(20,20,19,0.06)",
-            aspectRatio: "21 / 9",
-            background: "var(--bg-sand)",
+              '0 30px 80px rgba(20,20,19,0.18), 0 6px 18px rgba(20,20,19,0.06)',
+            aspectRatio: '21 / 9',
+            background: 'var(--bg-sand)',
           }}
         >
           <img
@@ -485,50 +485,50 @@ function HeroPhoto() {
             alt="チームで業務を棚卸ししている様子"
             loading="lazy"
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              filter: "saturate(0.85) contrast(1.02)",
-              display: "block",
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              filter: 'saturate(0.85) contrast(1.02)',
+              display: 'block',
             }}
           />
           <div
             aria-hidden
             style={{
-              position: "absolute",
+              position: 'absolute',
               inset: 0,
               background:
-                "linear-gradient(135deg, rgba(20,20,19,0.20) 0%, rgba(20,20,19,0.55) 100%)",
-              pointerEvents: "none",
+                'linear-gradient(135deg, rgba(20,20,19,0.20) 0%, rgba(20,20,19,0.55) 100%)',
+              pointerEvents: 'none',
             }}
           />
           <div
             aria-hidden
             style={{
-              position: "absolute",
+              position: 'absolute',
               left: 0,
               right: 0,
               bottom: 0,
-              height: "60%",
+              height: '60%',
               background:
-                "linear-gradient(180deg, transparent 0%, rgba(20,20,19,0.85) 100%)",
-              pointerEvents: "none",
+                'linear-gradient(180deg, transparent 0%, rgba(20,20,19,0.85) 100%)',
+              pointerEvents: 'none',
             }}
           />
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               left: 0,
               right: 0,
               bottom: 0,
-              padding: "clamp(20px, 3vw, 36px)",
-              color: "#ffffff",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
+              padding: 'clamp(20px, 3vw, 36px)',
+              color: '#ffffff',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
               gap: 24,
-              flexWrap: "wrap",
-              textShadow: "0 2px 12px rgba(0,0,0,0.45)",
+              flexWrap: 'wrap',
+              textShadow: '0 2px 12px rgba(0,0,0,0.45)',
             }}
           >
             <div>
@@ -536,8 +536,8 @@ function HeroPhoto() {
                 style={{
                   fontSize: 11,
                   letterSpacing: 1.4,
-                  color: "#ffd2c0",
-                  textTransform: "uppercase",
+                  color: '#ffd2c0',
+                  textTransform: 'uppercase',
                   marginBottom: 6,
                   fontWeight: 500,
                 }}
@@ -546,12 +546,12 @@ function HeroPhoto() {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--serif)",
-                  fontSize: "clamp(16px, 1.8vw, 22px)",
+                  fontFamily: 'var(--serif)',
+                  fontSize: 'clamp(16px, 1.8vw, 22px)',
                   fontWeight: 500,
-                  textWrap: "balance",
+                  textWrap: 'balance',
                   maxWidth: 560,
-                  color: "#ffffff",
+                  color: '#ffffff',
                 }}
               >
                 「どの業務に時間がかかるか」を、まず可視化する。
@@ -559,17 +559,17 @@ function HeroPhoto() {
             </div>
             <div
               style={{
-                padding: "10px 16px",
-                background: "rgba(20,20,19,0.55)",
-                backdropFilter: "blur(10px)",
+                padding: '10px 16px',
+                background: 'rgba(20,20,19,0.55)',
+                backdropFilter: 'blur(10px)',
                 borderRadius: 9999,
                 fontSize: 12,
-                color: "#ffffff",
-                border: "1px solid rgba(255,255,255,0.22)",
-                textShadow: "none",
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.22)',
+                textShadow: 'none',
               }}
             >
-              <span style={{ fontFamily: "var(--serif)" }}>導入企業 50社+</span>
+              <span style={{ fontFamily: 'var(--serif)' }}>導入企業 50社+</span>
             </div>
           </div>
         </div>
@@ -578,7 +578,7 @@ function HeroPhoto() {
       <Parallax
         speed={-0.05}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: -28,
           left: -20,
           zIndex: 3,
@@ -587,18 +587,18 @@ function HeroPhoto() {
         <Reveal delay={0.5} y={20}>
           <div
             style={{
-              background: "var(--bg-dark)",
-              color: "var(--on-dark-1)",
+              background: 'var(--bg-dark)',
+              color: 'var(--on-dark-1)',
               borderRadius: 14,
-              padding: "16px 20px",
-              boxShadow: "0 14px 36px rgba(0,0,0,0.22)",
+              padding: '16px 20px',
+              boxShadow: '0 14px 36px rgba(0,0,0,0.22)',
               minWidth: 200,
             }}
           >
             <div
               style={{
                 fontSize: 10,
-                color: "var(--on-dark-3)",
+                color: 'var(--on-dark-3)',
                 letterSpacing: 0.5,
                 marginBottom: 6,
               }}
@@ -607,13 +607,13 @@ function HeroPhoto() {
             </div>
             <div
               style={{
-                fontFamily: "var(--serif)",
+                fontFamily: 'var(--serif)',
                 fontSize: 26,
                 fontWeight: 500,
                 lineHeight: 1,
               }}
             >
-              <span style={{ color: "var(--brand-coral)" }}>
+              <span style={{ color: 'var(--brand-coral)' }}>
                 -
                 <Counter to={8.6} decimals={1} duration={1600} />
               </span>
@@ -621,14 +621,14 @@ function HeroPhoto() {
                 style={{
                   fontSize: 13,
                   marginLeft: 4,
-                  color: "var(--on-dark-2)",
+                  color: 'var(--on-dark-2)',
                 }}
               >
                 時間 / 週
               </span>
             </div>
             <div
-              style={{ fontSize: 11, color: "var(--on-dark-2)", marginTop: 8 }}
+              style={{ fontSize: 11, color: 'var(--on-dark-2)', marginTop: 8 }}
             >
               業務削減時間（実測）
             </div>
@@ -639,7 +639,7 @@ function HeroPhoto() {
       <Parallax
         speed={0.06}
         style={{
-          position: "absolute",
+          position: 'absolute',
           bottom: -32,
           right: -16,
           zIndex: 3,
@@ -649,18 +649,18 @@ function HeroPhoto() {
           <div
             className="hide-mobile"
             style={{
-              background: "var(--bg-white)",
-              border: "1px solid var(--border-2)",
+              background: 'var(--bg-white)',
+              border: '1px solid var(--border-2)',
               borderRadius: 14,
-              padding: "18px 22px",
-              boxShadow: "0 14px 36px rgba(0,0,0,0.10)",
+              padding: '18px 22px',
+              boxShadow: '0 14px 36px rgba(0,0,0,0.10)',
               minWidth: 240,
             }}
           >
             <div
               style={{
                 fontSize: 10,
-                color: "var(--ink-3)",
+                color: 'var(--ink-3)',
                 letterSpacing: 0.5,
                 marginBottom: 12,
               }}
@@ -698,55 +698,57 @@ function HeroPhoto() {
 }
 
 function HeroComposition() {
-  const { Reveal, Parallax, useInView, Counter } = window;
+  const {
+    Reveal, Parallax, useInView, Counter,
+  } = window;
   const [chatRef, chatInView] = useInView({ threshold: 0.25, once: false });
 
   return (
-    <div style={{ position: "relative", width: "100%", minHeight: 520 }}>
+    <div style={{ position: 'relative', width: '100%', minHeight: 520 }}>
       {/* Large parchment frame */}
       <Reveal delay={0.1} y={32}>
         <div
           ref={chatRef}
           style={{
-            position: "relative",
-            background: "var(--bg-ivory)",
-            border: "1px solid var(--border-2)",
+            position: 'relative',
+            background: 'var(--bg-ivory)',
+            border: '1px solid var(--border-2)',
             borderRadius: 24,
             padding: 28,
-            overflow: "hidden",
+            overflow: 'hidden',
             boxShadow:
-              "0 24px 60px rgba(20,20,19,0.10), 0 4px 12px rgba(20,20,19,0.04)",
+              '0 24px 60px rgba(20,20,19,0.10), 0 4px 12px rgba(20,20,19,0.04)',
           }}
         >
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               gap: 16,
               minHeight: 380,
             }}
           >
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
                 paddingBottom: 14,
-                borderBottom: "1px solid var(--border-1)",
+                borderBottom: '1px solid var(--border-1)',
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div
                   style={{
                     width: 28,
                     height: 28,
                     borderRadius: 7,
-                    background: "var(--brand)",
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: "var(--serif)",
+                    background: 'var(--brand)',
+                    color: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: 'var(--serif)',
                     fontSize: 13,
                     fontWeight: 500,
                   }}
@@ -758,25 +760,25 @@ function HeroComposition() {
                     style={{
                       fontSize: 13,
                       fontWeight: 500,
-                      color: "var(--ink-1)",
+                      color: 'var(--ink-1)',
                     }}
                   >
                     実践コース · DAY 2
                   </div>
-                  <div style={{ fontSize: 11, color: "var(--ink-3)" }}>
+                  <div style={{ fontSize: 11, color: 'var(--ink-3)' }}>
                     議事録 → 要約 → タスク化
                   </div>
                 </div>
               </div>
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: 6,
                   fontSize: 10,
-                  color: "var(--brand)",
-                  background: "var(--brand-soft)",
-                  padding: "4px 10px",
+                  color: 'var(--brand)',
+                  background: 'var(--brand-soft)',
+                  padding: '4px 10px',
                   borderRadius: 9999,
                 }}
               >
@@ -784,10 +786,10 @@ function HeroComposition() {
                   style={{
                     width: 6,
                     height: 6,
-                    borderRadius: "50%",
-                    background: "var(--brand)",
-                    display: "inline-block",
-                    animation: "pulse 1.6s ease-in-out infinite",
+                    borderRadius: '50%',
+                    background: 'var(--brand)',
+                    display: 'inline-block',
+                    animation: 'pulse 1.6s ease-in-out infinite',
                   }}
                 />
                 LIVE
@@ -798,14 +800,14 @@ function HeroComposition() {
 
             <div
               style={{
-                marginTop: "auto",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                marginTop: 'auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
                 paddingTop: 14,
-                borderTop: "1px solid var(--border-1)",
+                borderTop: '1px solid var(--border-1)',
                 fontSize: 11,
-                color: "var(--ink-3)",
+                color: 'var(--ink-3)',
               }}
             >
               <span>進捗 · 6/12 完了</span>
@@ -819,7 +821,7 @@ function HeroComposition() {
       <Parallax
         speed={-0.06}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: -24,
           left: -24,
           zIndex: 2,
@@ -828,18 +830,18 @@ function HeroComposition() {
         <Reveal delay={0.5} y={20}>
           <div
             style={{
-              background: "var(--bg-dark)",
-              color: "var(--on-dark-1)",
+              background: 'var(--bg-dark)',
+              color: 'var(--on-dark-1)',
               borderRadius: 14,
-              padding: "16px 20px",
-              boxShadow: "0 14px 36px rgba(0,0,0,0.20)",
+              padding: '16px 20px',
+              boxShadow: '0 14px 36px rgba(0,0,0,0.20)',
               minWidth: 190,
             }}
           >
             <div
               style={{
                 fontSize: 10,
-                color: "var(--on-dark-3)",
+                color: 'var(--on-dark-3)',
                 letterSpacing: 0.5,
                 marginBottom: 6,
               }}
@@ -848,13 +850,13 @@ function HeroComposition() {
             </div>
             <div
               style={{
-                fontFamily: "var(--serif)",
+                fontFamily: 'var(--serif)',
                 fontSize: 26,
                 fontWeight: 500,
                 lineHeight: 1,
               }}
             >
-              <span style={{ color: "var(--brand-coral)" }}>
+              <span style={{ color: 'var(--brand-coral)' }}>
                 -
                 <Counter to={8.6} decimals={1} duration={1600} />
               </span>
@@ -862,14 +864,14 @@ function HeroComposition() {
                 style={{
                   fontSize: 13,
                   marginLeft: 4,
-                  color: "var(--on-dark-2)",
+                  color: 'var(--on-dark-2)',
                 }}
               >
                 時間 / 週
               </span>
             </div>
             <div
-              style={{ fontSize: 11, color: "var(--on-dark-2)", marginTop: 8 }}
+              style={{ fontSize: 11, color: 'var(--on-dark-2)', marginTop: 8 }}
             >
               定型業務の削減
             </div>
@@ -881,7 +883,7 @@ function HeroComposition() {
       <Parallax
         speed={0.08}
         style={{
-          position: "absolute",
+          position: 'absolute',
           bottom: -24,
           right: -16,
           zIndex: 2,
@@ -890,18 +892,18 @@ function HeroComposition() {
         <Reveal delay={0.7} y={20}>
           <div
             style={{
-              background: "var(--bg-white)",
-              border: "1px solid var(--border-2)",
+              background: 'var(--bg-white)',
+              border: '1px solid var(--border-2)',
               borderRadius: 14,
-              padding: "16px 20px",
-              boxShadow: "0 14px 36px rgba(0,0,0,0.10)",
+              padding: '16px 20px',
+              boxShadow: '0 14px 36px rgba(0,0,0,0.10)',
               minWidth: 210,
             }}
           >
             <div
               style={{
                 fontSize: 10,
-                color: "var(--ink-3)",
+                color: 'var(--ink-3)',
                 letterSpacing: 0.5,
                 marginBottom: 10,
               }}
@@ -939,66 +941,66 @@ function HeroComposition() {
 /* ─── Chat conversation loop ─── */
 const CHAT_TURNS = [
   {
-    role: "user",
-    text: "この議事録から、来週までのアクションだけ抜き出して表にして。",
+    role: 'user',
+    text: 'この議事録から、来週までのアクションだけ抜き出して表にして。',
   },
   {
-    role: "assistant",
-    kind: "table",
-    title: "アクションリスト",
-    cols: ["担当", "タスク", "期限"],
+    role: 'assistant',
+    kind: 'table',
+    title: 'アクションリスト',
+    cols: ['担当', 'タスク', '期限'],
     rows: [
-      ["佐藤", "見積を再送付", "11/24"],
-      ["田中", "契約書をリーガル送付", "11/26"],
-      ["人事", "受講者枠を最終確定", "11/28"],
+      ['佐藤', '見積を再送付', '11/24'],
+      ['田中', '契約書をリーガル送付', '11/26'],
+      ['人事', '受講者枠を最終確定', '11/28'],
     ],
   },
   {
-    role: "instructor",
+    role: 'instructor',
     text: 'いいですね。"期限の表記ゆれ"も整えてみましょう。',
   },
 
-  { role: "user", text: "営業日報を集計して、今月のサマリーを作って。" },
+  { role: 'user', text: '営業日報を集計して、今月のサマリーを作って。' },
   {
-    role: "assistant",
-    kind: "summary",
-    title: "11月 営業サマリー",
+    role: 'assistant',
+    kind: 'summary',
+    title: '11月 営業サマリー',
     items: [
-      ["訪問件数", "142", "+18%"],
-      ["受注件数", "23", "+9%"],
-      ["平均単価", "¥384k", "+12%"],
+      ['訪問件数', '142', '+18%'],
+      ['受注件数', '23', '+9%'],
+      ['平均単価', '¥384k', '+12%'],
     ],
   },
   {
-    role: "instructor",
-    text: "前年同月比も併記すると、経営層に伝わりやすいですね。",
+    role: 'instructor',
+    text: '前年同月比も併記すると、経営層に伝わりやすいですね。',
   },
 
-  { role: "user", text: "面接記録から、合格者に共通する特徴を3つ挙げて。" },
+  { role: 'user', text: '面接記録から、合格者に共通する特徴を3つ挙げて。' },
   {
-    role: "assistant",
-    kind: "bullets",
-    title: "合格者の共通点 (n=42)",
+    role: 'assistant',
+    kind: 'bullets',
+    title: '合格者の共通点 (n=42)',
     items: [
-      "「具体例」を平均3件以上挙げている",
-      "質問に対し30秒以内で結論から話す",
-      "前職での数値成果を自発的に言及",
+      '「具体例」を平均3件以上挙げている',
+      '質問に対し30秒以内で結論から話す',
+      '前職での数値成果を自発的に言及',
     ],
   },
   {
-    role: "instructor",
-    text: "良い視点です。不合格者の傾向とも比較してみましょう。",
+    role: 'instructor',
+    text: '良い視点です。不合格者の傾向とも比較してみましょう。',
   },
 
-  { role: "user", text: "新入社員向けの説明会案内メールを、丁寧めに作って。" },
+  { role: 'user', text: '新入社員向けの説明会案内メールを、丁寧めに作って。' },
   {
-    role: "assistant",
-    kind: "email",
-    title: "案内メール ドラフト",
-    subject: "【ご案内】新入社員研修プログラムについて",
-    body: "配属先の皆さま\n\nお世話になっております、人事部です。\n来月開始予定の新入社員研修プログラムについて、ご案内いたします…",
+    role: 'assistant',
+    kind: 'email',
+    title: '案内メール ドラフト',
+    subject: '【ご案内】新入社員研修プログラムについて',
+    body: '配属先の皆さま\n\nお世話になっております、人事部です。\n来月開始予定の新入社員研修プログラムについて、ご案内いたします…',
   },
-  { role: "instructor", text: "宛先・件名・本文の構造化、定着しましたね。" },
+  { role: 'instructor', text: '宛先・件名・本文の構造化、定着しましたね。' },
 ];
 
 function ChatLoop({ active }) {
@@ -1037,10 +1039,10 @@ function ChatLoop({ active }) {
         return;
       }
       const turn = CHAT_TURNS[idx++];
-      if (turn.role === "user" || turn.role === "instructor") {
+      if (turn.role === 'user' || turn.role === 'instructor') {
         // Type letter-by-letter
         let i = 0;
-        setTyping({ role: turn.role, text: "" });
+        setTyping({ role: turn.role, text: '' });
         const typeChar = () => {
           if (state.cancelled) return;
           i++;
@@ -1051,7 +1053,7 @@ function ChatLoop({ active }) {
             // Finalize message into items
             setItems((arr) => [...arr, turn]);
             setTyping(null);
-            schedule(next, turn.role === "instructor" ? 1500 : 900);
+            schedule(next, turn.role === 'instructor' ? 1500 : 900);
           }
         };
         schedule(typeChar, 200);
@@ -1074,7 +1076,7 @@ function ChatLoop({ active }) {
     const el = scrollRef.current;
     if (!el) return;
     requestAnimationFrame(() => {
-      el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
     });
   }, [items.length, typing]);
 
@@ -1083,18 +1085,18 @@ function ChatLoop({ active }) {
       ref={scrollRef}
       className="chat-scroll"
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 10,
         fontSize: 12.5,
         height: 260,
-        overflowY: "auto",
-        overflowX: "hidden",
-        position: "relative",
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        position: 'relative',
         WebkitMaskImage:
-          "linear-gradient(180deg, transparent 0%, #000 12%, #000 100%)",
+          'linear-gradient(180deg, transparent 0%, #000 12%, #000 100%)',
         maskImage:
-          "linear-gradient(180deg, transparent 0%, #000 12%, #000 100%)",
+          'linear-gradient(180deg, transparent 0%, #000 12%, #000 100%)',
         paddingTop: 10,
       }}
     >
@@ -1108,49 +1110,51 @@ function ChatLoop({ active }) {
 }
 
 function Bubble({ turn }) {
-  const { role, text, typing, kind } = turn;
-  const isUser = role === "user";
-  const isInstructor = role === "instructor";
-  const isAssistant = role === "assistant";
+  const {
+    role, text, typing, kind,
+  } = turn;
+  const isUser = role === 'user';
+  const isInstructor = role === 'instructor';
+  const isAssistant = role === 'assistant';
 
   if (isUser || isInstructor) {
     return (
       <div
         style={{
-          background: "var(--bg-parchment)",
-          padding: "10px 14px",
+          background: 'var(--bg-parchment)',
+          padding: '10px 14px',
           borderRadius: isInstructor
-            ? "12px 12px 12px 4px"
-            : "12px 12px 12px 4px",
-          maxWidth: "88%",
-          alignSelf: "flex-start",
-          animation: typing ? "none" : "slidein 0.3s ease both",
+            ? '12px 12px 12px 4px'
+            : '12px 12px 12px 4px',
+          maxWidth: '88%',
+          alignSelf: 'flex-start',
+          animation: typing ? 'none' : 'slidein 0.3s ease both',
           flexShrink: 0,
-          border: isInstructor ? "1px dashed var(--border-3)" : "none",
+          border: isInstructor ? '1px dashed var(--border-3)' : 'none',
         }}
       >
         <div
           style={{
             fontSize: 10,
-            color: isInstructor ? "var(--brand)" : "var(--ink-3)",
+            color: isInstructor ? 'var(--brand)' : 'var(--ink-3)',
             marginBottom: 4,
             letterSpacing: 0.4,
             fontWeight: isInstructor ? 500 : 400,
           }}
         >
-          {isInstructor ? "講師" : "YOU"}
+          {isInstructor ? '講師' : 'YOU'}
         </div>
         <span>{text}</span>
         {typing && (
           <span
             style={{
-              display: "inline-block",
+              display: 'inline-block',
               width: 1.5,
               height: 14,
-              background: "var(--ink-1)",
+              background: 'var(--ink-1)',
               marginLeft: 2,
-              verticalAlign: "middle",
-              animation: "blink 1s steps(2) infinite",
+              verticalAlign: 'middle',
+              animation: 'blink 1s steps(2) infinite',
             }}
           />
         )}
@@ -1162,45 +1166,45 @@ function Bubble({ turn }) {
     return (
       <div
         style={{
-          background: "#1e1e1c",
-          color: "var(--on-dark-1)",
-          padding: "10px 14px",
-          borderRadius: "12px 12px 4px 12px",
-          maxWidth: "94%",
-          alignSelf: "flex-end",
-          animation: "slidein 0.35s ease both",
+          background: '#1e1e1c',
+          color: 'var(--on-dark-1)',
+          padding: '10px 14px',
+          borderRadius: '12px 12px 4px 12px',
+          maxWidth: '94%',
+          alignSelf: 'flex-end',
+          animation: 'slidein 0.35s ease both',
           flexShrink: 0,
         }}
       >
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
             marginBottom: 6,
           }}
         >
           <span
             style={{
               fontSize: 10,
-              color: "var(--brand-coral)",
+              color: 'var(--brand-coral)',
               letterSpacing: 0.4,
             }}
           >
             ASSISTANT
           </span>
           {turn.title && (
-            <span style={{ fontSize: 10, color: "var(--on-dark-3)" }}>
+            <span style={{ fontSize: 10, color: 'var(--on-dark-3)' }}>
               {turn.title}
             </span>
           )}
         </div>
-        {kind === "table" && (
+        {kind === 'table' && (
           <AssistantTable cols={turn.cols} rows={turn.rows} />
         )}
-        {kind === "summary" && <AssistantSummary items={turn.items} />}
-        {kind === "bullets" && <AssistantBullets items={turn.items} />}
-        {kind === "email" && (
+        {kind === 'summary' && <AssistantSummary items={turn.items} />}
+        {kind === 'bullets' && <AssistantBullets items={turn.items} />}
+        {kind === 'email' && (
           <AssistantEmail subject={turn.subject} body={turn.body} />
         )}
       </div>
@@ -1214,30 +1218,28 @@ function AssistantTable({ cols, rows }) {
   return (
     <div
       style={{
-        borderTop: "1px solid rgba(255,255,255,0.1)",
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
-        padding: "6px 0",
-        display: "grid",
-        gridTemplateColumns: "1fr 1.6fr 0.7fr",
+        borderTop: '1px solid rgba(255,255,255,0.1)',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        padding: '6px 0',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1.6fr 0.7fr',
         gap: 8,
         fontSize: 11.5,
       }}
     >
-      {all.map((row, i) =>
-        row.map((c, j) => (
-          <span
-            key={`${i}-${j}`}
-            style={{
-              opacity: 0,
-              animation: "fadeup 0.35s ease forwards",
-              animationDelay: `${0.05 + i * 0.12 + j * 0.04}s`,
-              color: i === 0 ? "var(--on-dark-3)" : "var(--on-dark-1)",
-            }}
-          >
-            {c}
-          </span>
-        )),
-      )}
+      {all.map((row, i) => row.map((c, j) => (
+        <span
+          key={`${i}-${j}`}
+          style={{
+            opacity: 0,
+            animation: 'fadeup 0.35s ease forwards',
+            animationDelay: `${0.05 + i * 0.12 + j * 0.04}s`,
+            color: i === 0 ? 'var(--on-dark-3)' : 'var(--on-dark-1)',
+          }}
+        >
+          {c}
+        </span>
+      )))}
     </div>
   );
 }
@@ -1246,8 +1248,8 @@ function AssistantSummary({ items }) {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 6,
         paddingTop: 4,
       }}
@@ -1256,26 +1258,26 @@ function AssistantSummary({ items }) {
         <div
           key={k}
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto auto",
-            alignItems: "baseline",
+            display: 'grid',
+            gridTemplateColumns: '1fr auto auto',
+            alignItems: 'baseline',
             gap: 10,
-            padding: "4px 0",
+            padding: '4px 0',
             borderBottom:
               i < items.length - 1
-                ? "1px solid rgba(255,255,255,0.06)"
-                : "none",
+                ? '1px solid rgba(255,255,255,0.06)'
+                : 'none',
             opacity: 0,
-            animation: "fadeup 0.4s ease forwards",
+            animation: 'fadeup 0.4s ease forwards',
             animationDelay: `${0.1 + i * 0.12}s`,
           }}
         >
-          <span style={{ color: "var(--on-dark-3)", fontSize: 11 }}>{k}</span>
+          <span style={{ color: 'var(--on-dark-3)', fontSize: 11 }}>{k}</span>
           <span
             style={{
-              fontFamily: "var(--serif)",
+              fontFamily: 'var(--serif)',
               fontSize: 14,
-              color: "var(--on-dark-1)",
+              color: 'var(--on-dark-1)',
               fontWeight: 500,
             }}
           >
@@ -1283,7 +1285,7 @@ function AssistantSummary({ items }) {
           </span>
           <span
             style={{
-              color: "var(--brand-coral)",
+              color: 'var(--brand-coral)',
               fontSize: 10,
               fontWeight: 500,
             }}
@@ -1300,8 +1302,8 @@ function AssistantBullets({ items }) {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 4,
         paddingTop: 4,
       }}
@@ -1310,30 +1312,31 @@ function AssistantBullets({ items }) {
         <div
           key={i}
           style={{
-            display: "flex",
+            display: 'flex',
             gap: 8,
-            alignItems: "flex-start",
-            padding: "3px 0",
+            alignItems: 'flex-start',
+            padding: '3px 0',
             opacity: 0,
-            animation: "fadeup 0.4s ease forwards",
+            animation: 'fadeup 0.4s ease forwards',
             animationDelay: `${0.1 + i * 0.18}s`,
           }}
         >
           <span
             style={{
-              color: "var(--brand-coral)",
-              fontFamily: "var(--serif)",
+              color: 'var(--brand-coral)',
+              fontFamily: 'var(--serif)',
               fontSize: 11,
               flexShrink: 0,
               marginTop: 1,
             }}
           >
-            {i + 1}.
+            {i + 1}
+            .
           </span>
           <span
             style={{
               fontSize: 12,
-              color: "var(--on-dark-1)",
+              color: 'var(--on-dark-1)',
               lineHeight: 1.55,
             }}
           >
@@ -1349,8 +1352,8 @@ function AssistantEmail({ subject, body }) {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
+        display: 'flex',
+        flexDirection: 'column',
         gap: 6,
         paddingTop: 4,
         fontSize: 11.5,
@@ -1358,28 +1361,28 @@ function AssistantEmail({ subject, body }) {
     >
       <div
         style={{
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
           paddingBottom: 6,
           opacity: 0,
-          animation: "fadeup 0.4s ease forwards",
-          animationDelay: "0.1s",
+          animation: 'fadeup 0.4s ease forwards',
+          animationDelay: '0.1s',
         }}
       >
         <div
-          style={{ color: "var(--on-dark-3)", fontSize: 10, marginBottom: 2 }}
+          style={{ color: 'var(--on-dark-3)', fontSize: 10, marginBottom: 2 }}
         >
           件名
         </div>
-        <div style={{ color: "var(--on-dark-1)" }}>{subject}</div>
+        <div style={{ color: 'var(--on-dark-1)' }}>{subject}</div>
       </div>
       <div
         style={{
-          color: "var(--on-dark-2)",
-          whiteSpace: "pre-line",
+          color: 'var(--on-dark-2)',
+          whiteSpace: 'pre-line',
           lineHeight: 1.6,
           opacity: 0,
-          animation: "fadeup 0.4s ease forwards",
-          animationDelay: "0.25s",
+          animation: 'fadeup 0.4s ease forwards',
+          animationDelay: '0.25s',
         }}
       >
         {body}
@@ -1392,24 +1395,24 @@ function AssistantEmail({ subject, body }) {
 function Problem() {
   const pains = [
     {
-      num: "01",
-      title: "AIを入れることが目的化している",
-      desc: "「生成AIを導入せよ」と言われ見よう見まねで動く。しかし、どの業務を、なぜ改善するのかは語られない。",
+      num: '01',
+      title: 'AIを入れることが目的化している',
+      desc: '「生成AIを導入せよ」と言われ見よう見まねで動く。しかし、どの業務を、なぜ改善するのかは語られない。',
     },
     {
-      num: "02",
-      title: "ツール研修だけでは、業務は変わらない",
-      desc: "ChatGPTの使い方を教わっても、「で、明日何に使う」となる。業務の棚卸しがないまま使える人は現れない。",
+      num: '02',
+      title: 'ツール研修だけでは、業務は変わらない',
+      desc: 'ChatGPTの使い方を教わっても、「で、明日何に使う」となる。業務の棚卸しがないまま使える人は現れない。',
     },
     {
-      num: "03",
-      title: "効果を「AI活用率」でしか語れない",
-      desc: "「で、何時間削減できたんだ」と問われても、受講アンケートと「AIツール使用率」以上の数字が出せない。",
+      num: '03',
+      title: '効果を「AI活用率」でしか語れない',
+      desc: '「で、何時間削減できたんだ」と問われても、受講アンケートと「AIツール使用率」以上の数字が出せない。',
     },
     {
-      num: "04",
-      title: "受講者はやる気になっても、現場は動かない",
-      desc: "研修当日は盛り上がる。だが、業務フローを見直さない限り、AIを使う「隚間」がないまま。",
+      num: '04',
+      title: '受講者はやる気になっても、現場は動かない',
+      desc: '研修当日は盛り上がる。だが、業務フローを見直さない限り、AIを使う「隚間」がないまま。',
     },
   ];
   return (
@@ -1424,15 +1427,15 @@ function Problem() {
             <h2
               className="h-section"
               style={{
-                color: "var(--on-dark-1)",
+                color: 'var(--on-dark-1)',
                 marginBottom: 28,
-                textWrap: "balance",
-                wordBreak: "auto-phrase",
+                textWrap: 'balance',
+                wordBreak: 'auto-phrase',
                 maxWidth: 760,
               }}
             >
               「AIを入れること」が
-              <span style={{ color: "var(--brand-coral)" }}>ゴール</span>
+              <span style={{ color: 'var(--brand-coral)' }}>ゴール</span>
               になっていませんか？
             </h2>
           </window.Reveal>
@@ -1441,8 +1444,8 @@ function Problem() {
               className="lead on-dark"
               style={{
                 maxWidth: 680,
-                textWrap: "pretty",
-                wordBreak: "auto-phrase",
+                textWrap: 'pretty',
+                wordBreak: 'auto-phrase',
               }}
             >
               AI研修を入れても、業務は変わらない。成果も見えない。その原因はスキル不足ではなく、「何を、なぜ改善するのか」が決まっていないことにあります。AIを入れることだけが目的化した研修は、現場を動かせません。
@@ -1456,46 +1459,46 @@ function Problem() {
               key={p.num}
               delay={i * 0.08}
               y={24}
-              style={{ height: "100%", display: "flex" }}
+              style={{ height: '100%', display: 'flex' }}
             >
               <div
                 className="card card--dark"
                 style={{
-                  position: "relative",
-                  overflow: "hidden",
+                  position: 'relative',
+                  overflow: 'hidden',
                   flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "28px 24px 26px",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: '28px 24px 26px',
                   minHeight: 200,
                 }}
               >
                 <div
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     top: 0,
                     left: 0,
-                    width: "40%",
+                    width: '40%',
                     height: 2,
-                    background: "var(--brand-coral)",
+                    background: 'var(--brand-coral)',
                   }}
                 />
                 <div
                   className="num-badge"
-                  style={{ color: "var(--brand-coral)", marginBottom: 18 }}
+                  style={{ color: 'var(--brand-coral)', marginBottom: 18 }}
                 >
                   {p.num}
                 </div>
                 <h3
                   style={{
-                    fontFamily: "var(--serif)",
+                    fontFamily: 'var(--serif)',
                     fontWeight: 500,
-                    fontSize: "clamp(15.5px, 1.55vw, 17px)",
+                    fontSize: 'clamp(15.5px, 1.55vw, 17px)',
                     lineHeight: 1.55,
-                    color: "var(--on-dark-1)",
+                    color: 'var(--on-dark-1)',
                     marginBottom: 12,
-                    textWrap: "balance",
-                    wordBreak: "auto-phrase",
+                    textWrap: 'balance',
+                    wordBreak: 'auto-phrase',
                   }}
                 >
                   {p.title}
@@ -1504,10 +1507,10 @@ function Problem() {
                   style={{
                     fontSize: 13.5,
                     lineHeight: 1.85,
-                    color: "var(--on-dark-2)",
-                    textWrap: "pretty",
-                    wordBreak: "auto-phrase",
-                    marginTop: "auto",
+                    color: 'var(--on-dark-2)',
+                    textWrap: 'pretty',
+                    wordBreak: 'auto-phrase',
+                    marginTop: 'auto',
                   }}
                 >
                   {p.desc}
@@ -1528,20 +1531,20 @@ function Empathy() {
       id="empathy"
       className="section"
       data-screen-label="03 Empathy"
-      style={{ background: "var(--bg-parchment)" }}
+      style={{ background: 'var(--bg-parchment)' }}
     >
       <div className="container" style={{ maxWidth: 920 }}>
         <window.Reveal delay={0.08}>
           <h2
             className="h-section"
             style={{
-              textAlign: "center",
+              textAlign: 'center',
               marginBottom: 56,
-              textWrap: "balance",
-              wordBreak: "auto-phrase",
+              textWrap: 'balance',
+              wordBreak: 'auto-phrase',
               maxWidth: 780,
-              marginLeft: "auto",
-              marginRight: "auto",
+              marginLeft: 'auto',
+              marginRight: 'auto',
             }}
           >
             AIは、
@@ -1555,29 +1558,29 @@ function Empathy() {
         <window.Reveal delay={0.16} y={28}>
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr auto 1fr",
-              gap: "clamp(12px, 2vw, 32px)",
-              alignItems: "stretch",
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              gap: 'clamp(12px, 2vw, 32px)',
+              alignItems: 'stretch',
               marginBottom: 48,
             }}
             className="empathy-equation"
           >
             <div
               style={{
-                background: "var(--bg-ivory)",
-                border: "1px solid var(--border-2)",
+                background: 'var(--bg-ivory)',
+                border: '1px solid var(--border-2)',
                 borderRadius: 14,
-                padding: "clamp(20px, 3vw, 32px)",
-                textAlign: "center",
+                padding: 'clamp(20px, 3vw, 32px)',
+                textAlign: 'center',
               }}
             >
               <div
                 style={{
                   fontSize: 10,
                   letterSpacing: 1.4,
-                  color: "var(--ink-3)",
-                  textTransform: "uppercase",
+                  color: 'var(--ink-3)',
+                  textTransform: 'uppercase',
                   marginBottom: 10,
                 }}
               >
@@ -1585,52 +1588,52 @@ function Empathy() {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--serif)",
-                  fontSize: "clamp(20px, 2.4vw, 28px)",
+                  fontFamily: 'var(--serif)',
+                  fontSize: 'clamp(20px, 2.4vw, 28px)',
                   fontWeight: 500,
-                  color: "var(--ink-2)",
-                  textDecoration: "line-through",
-                  textDecorationColor: "var(--border-3)",
+                  color: 'var(--ink-2)',
+                  textDecoration: 'line-through',
+                  textDecorationColor: 'var(--border-3)',
                   textDecorationThickness: 1,
                 }}
               >
                 AIを導入する
               </div>
               <div
-                style={{ fontSize: 12, color: "var(--ink-3)", marginTop: 10 }}
+                style={{ fontSize: 12, color: 'var(--ink-3)', marginTop: 10 }}
               >
                 これは目的ではありません
               </div>
             </div>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--serif)",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontFamily: 'var(--serif)',
                 fontSize: 32,
-                color: "var(--brand)",
+                color: 'var(--brand)',
               }}
             >
               →
             </div>
             <div
               style={{
-                background: "var(--bg-dark)",
-                color: "var(--on-dark-1)",
+                background: 'var(--bg-dark)',
+                color: 'var(--on-dark-1)',
                 borderRadius: 14,
-                padding: "clamp(20px, 3vw, 32px)",
-                textAlign: "center",
-                position: "relative",
-                boxShadow: "0 16px 40px rgba(0,0,0,0.18)",
+                padding: 'clamp(20px, 3vw, 32px)',
+                textAlign: 'center',
+                position: 'relative',
+                boxShadow: '0 16px 40px rgba(0,0,0,0.18)',
               }}
             >
               <div
                 style={{
                   fontSize: 10,
                   letterSpacing: 1.4,
-                  color: "var(--brand-coral)",
-                  textTransform: "uppercase",
+                  color: 'var(--brand-coral)',
+                  textTransform: 'uppercase',
                   marginBottom: 10,
                 }}
               >
@@ -1638,10 +1641,10 @@ function Empathy() {
               </div>
               <div
                 style={{
-                  fontFamily: "var(--serif)",
-                  fontSize: "clamp(20px, 2.4vw, 28px)",
+                  fontFamily: 'var(--serif)',
+                  fontSize: 'clamp(20px, 2.4vw, 28px)',
                   fontWeight: 500,
-                  color: "var(--on-dark-1)",
+                  color: 'var(--on-dark-1)',
                 }}
               >
                 業務を、変える
@@ -1649,7 +1652,7 @@ function Empathy() {
               <div
                 style={{
                   fontSize: 12,
-                  color: "var(--on-dark-2)",
+                  color: 'var(--on-dark-2)',
                   marginTop: 10,
                 }}
               >
@@ -1662,37 +1665,37 @@ function Empathy() {
         <window.Reveal delay={0.26} y={28}>
           <div
             style={{
-              background: "var(--bg-ivory)",
-              border: "1px solid var(--border-2)",
-              borderLeft: "3px solid var(--brand)",
+              background: 'var(--bg-ivory)',
+              border: '1px solid var(--border-2)',
+              borderLeft: '3px solid var(--brand)',
               borderRadius: 12,
-              padding: "clamp(28px, 4vw, 48px)",
-              fontFamily: "var(--serif)",
-              fontSize: "clamp(17px, 1.8vw, 21px)",
+              padding: 'clamp(28px, 4vw, 48px)',
+              fontFamily: 'var(--serif)',
+              fontSize: 'clamp(17px, 1.8vw, 21px)',
               lineHeight: 1.95,
-              color: "var(--ink-1)",
-              textWrap: "pretty",
-              wordBreak: "auto-phrase",
-              boxShadow: "0 12px 40px rgba(20,20,19,0.06)",
+              color: 'var(--ink-1)',
+              textWrap: 'pretty',
+              wordBreak: 'auto-phrase',
+              boxShadow: '0 12px 40px rgba(20,20,19,0.06)',
             }}
           >
             AI導入は、あくまで
-            <span style={{ color: "var(--brand)" }}>手段</span>
+            <span style={{ color: 'var(--brand)' }}>手段</span>
             であって、目的ではありません。
             <br />
             <br />
             業務改善を行い、業務を効率化することが目的であり、AIはそのための
-            <span style={{ color: "var(--brand)" }}>選択肢のひとつ</span>
+            <span style={{ color: 'var(--brand)' }}>選択肢のひとつ</span>
             にすぎない。
             <br />
             <br />
             だから私たちは、AIを教える前に、いつも
-            <span style={{ color: "var(--brand)" }}>業務</span>
+            <span style={{ color: 'var(--brand)' }}>業務</span>
             から話を始めます。どの業務に時間がかかり、どこにムダがあるのか。その上で、AIで解ける部分と、AI以外の手段が適している部分を見極める。
             <br />
             <br />
             「AIを入れた」ではなく、
-            <span style={{ color: "var(--brand)" }}>「業務が変わった」</span>
+            <span style={{ color: 'var(--brand)' }}>「業務が変わった」</span>
             と言える状態を、一緒につくります。
           </div>
         </window.Reveal>
@@ -1701,10 +1704,10 @@ function Empathy() {
           <p
             className="body"
             style={{
-              textAlign: "center",
+              textAlign: 'center',
               marginTop: 32,
               fontSize: 14,
-              color: "var(--ink-3)",
+              color: 'var(--ink-3)',
             }}
           >
             ── 株式会社It's Automatic 代表 / AI研修プログラム責任者
@@ -1715,17 +1718,17 @@ function Empathy() {
       {/* Editorial photo: hands at whiteboard */}
       <div
         className="container"
-        style={{ marginTop: "clamp(56px, 8vw, 96px)" }}
+        style={{ marginTop: 'clamp(56px, 8vw, 96px)' }}
       >
         <window.Reveal y={32}>
           <figure
             className="empathy-photo"
             style={{
-              position: "relative",
-              borderRadius: "clamp(16px, 2vw, 24px)",
-              overflow: "hidden",
-              boxShadow: "0 24px 60px rgba(20,20,19,0.16)",
-              aspectRatio: "21 / 8",
+              position: 'relative',
+              borderRadius: 'clamp(16px, 2vw, 24px)',
+              overflow: 'hidden',
+              boxShadow: '0 24px 60px rgba(20,20,19,0.16)',
+              aspectRatio: '21 / 8',
             }}
           >
             <img
@@ -1733,41 +1736,41 @@ function Empathy() {
               alt="業務フローを書き出すワークショップ"
               loading="lazy"
               style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                filter: "saturate(0.82) contrast(1.02)",
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                filter: 'saturate(0.82) contrast(1.02)',
               }}
             />
             <div
               aria-hidden
               style={{
-                position: "absolute",
+                position: 'absolute',
                 inset: 0,
                 background:
-                  "linear-gradient(90deg, rgba(20,20,19,0.85) 0%, rgba(20,20,19,0.50) 55%, rgba(20,20,19,0.15) 100%)",
-                pointerEvents: "none",
+                  'linear-gradient(90deg, rgba(20,20,19,0.85) 0%, rgba(20,20,19,0.50) 55%, rgba(20,20,19,0.15) 100%)',
+                pointerEvents: 'none',
               }}
             />
             <figcaption
               style={{
-                position: "absolute",
+                position: 'absolute',
                 inset: 0,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                padding: "clamp(28px, 5vw, 64px)",
-                color: "#ffffff",
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                padding: 'clamp(28px, 5vw, 64px)',
+                color: '#ffffff',
                 maxWidth: 560,
-                textShadow: "0 2px 14px rgba(0,0,0,0.45)",
+                textShadow: '0 2px 14px rgba(0,0,0,0.45)',
               }}
             >
               <div
                 style={{
                   fontSize: 11,
                   letterSpacing: 1.4,
-                  color: "#ffd2c0",
-                  textTransform: "uppercase",
+                  color: '#ffd2c0',
+                  textTransform: 'uppercase',
                   marginBottom: 14,
                   fontWeight: 500,
                 }}
@@ -1776,19 +1779,19 @@ function Empathy() {
               </div>
               <h3
                 style={{
-                  fontFamily: "var(--serif)",
-                  fontSize: "clamp(22px, 2.8vw, 34px)",
+                  fontFamily: 'var(--serif)',
+                  fontSize: 'clamp(22px, 2.8vw, 34px)',
                   fontWeight: 500,
                   lineHeight: 1.45,
-                  textWrap: "balance",
-                  wordBreak: "auto-phrase",
-                  color: "#ffffff",
+                  textWrap: 'balance',
+                  wordBreak: 'auto-phrase',
+                  color: '#ffffff',
                 }}
               >
                 AIを教える前に、
                 <br />
                 まず
-                <span style={{ color: "#ffb59a" }}>業務</span>
+                <span style={{ color: '#ffb59a' }}>業務</span>
                 を、よく見る。
               </h3>
             </figcaption>
@@ -1803,34 +1806,34 @@ function Empathy() {
 function Solution() {
   const pillars = [
     {
-      num: "01",
-      title: "業務棚卸しから、始める",
-      desc: "いきなりChatGPTを教えることはしません。まず貴社の業務を棚卸しし、どこに時間がかかり、どこにムダがあるのかを見える化します。",
+      num: '01',
+      title: '業務棚卸しから、始める',
+      desc: 'いきなりChatGPTを教えることはしません。まず貴社の業務を棚卸しし、どこに時間がかかり、どこにムダがあるのかを見える化します。',
       bullets: [
-        "業種別ヒアリングシート",
-        "業務工程マッピング",
-        "ムダ・重複業務の可視化",
+        '業種別ヒアリングシート',
+        '業務工程マッピング',
+        'ムダ・重複業務の可視化',
       ],
     },
     {
-      num: "02",
-      title: "AIで解けること、解けないことを分ける",
-      desc: "棚卸しした業務を、「AIで解ける」「ロボットや仕組み化が適している」「人がやるべき」に分類。AIは手段のひとつにすぎず、本当に効くところにだけ使います。",
+      num: '02',
+      title: 'AIで解けること、解けないことを分ける',
+      desc: '棚卸しした業務を、「AIで解ける」「ロボットや仕組み化が適している」「人がやるべき」に分類。AIは手段のひとつにすぎず、本当に効くところにだけ使います。',
       bullets: [
-        "業務別 ROI 試算",
-        "AI / 仕組み化 / 人の心得え表",
-        "そもそも不要な業務の見直し",
+        '業務別 ROI 試算',
+        'AI / 仕組み化 / 人の心得え表',
+        'そもそも不要な業務の見直し',
       ],
       featured: true,
     },
     {
-      num: "03",
-      title: "「業務が変わった」まで、伴走する",
-      desc: "研修後30日間、現場で使い続けられるまでSlack/メールで伴走。受講者アンケートではなく、「週あたりで何時間削減されたか」を業務KPIで追います。",
+      num: '03',
+      title: '「業務が変わった」まで、伴走する',
+      desc: '研修後30日間、現場で使い続けられるまでSlack/メールで伴走。受講者アンケートではなく、「週あたりで何時間削減されたか」を業務KPIで追います。',
       bullets: [
-        "業務削減時間を実測",
-        "14日後・30日後チェックイン",
-        "経営層提出用効果レポート",
+        '業務削減時間を実測',
+        '14日後・30日後チェックイン',
+        '経営層提出用効果レポート',
       ],
     },
   ];
@@ -1839,23 +1842,23 @@ function Solution() {
       id="solution"
       className="section"
       data-screen-label="04 Solution"
-      style={{ background: "var(--bg-ivory)" }}
+      style={{ background: 'var(--bg-ivory)' }}
     >
       <div className="container">
         <window.Reveal y={20}>
           <div
             style={{
-              textAlign: "center",
+              textAlign: 'center',
               maxWidth: 760,
-              margin: "0 auto 48px",
+              margin: '0 auto 48px',
             }}
           >
             <h2
               className="h-section"
               style={{
                 marginBottom: 20,
-                textWrap: "balance",
-                wordBreak: "auto-phrase",
+                textWrap: 'balance',
+                wordBreak: 'auto-phrase',
               }}
             >
               だから、研修を "AI講座" ではなく
@@ -1866,9 +1869,9 @@ function Solution() {
             <p
               className="lead"
               style={{
-                margin: "0 auto",
-                textWrap: "pretty",
-                wordBreak: "auto-phrase",
+                margin: '0 auto',
+                textWrap: 'pretty',
+                wordBreak: 'auto-phrase',
               }}
             >
               業務棚卸し → ムダの見える化 → 手段の選定（AI / 仕組み化 / 人） →
@@ -1887,39 +1890,41 @@ function Solution() {
           step={0.1}
           y={28}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: 20,
             marginTop: 48,
           }}
         >
-          {pillars.map(({ num, title, desc, bullets, featured }) => (
+          {pillars.map(({
+            num, title, desc, bullets, featured,
+          }) => (
             <div
               key={num}
               className="card"
               style={{
-                background: featured ? "var(--bg-dark)" : "var(--bg-white)",
-                color: featured ? "var(--on-dark-1)" : "var(--ink-1)",
-                borderColor: featured ? "var(--bg-dark)" : "var(--border-1)",
+                background: featured ? 'var(--bg-dark)' : 'var(--bg-white)',
+                color: featured ? 'var(--on-dark-1)' : 'var(--ink-1)',
+                borderColor: featured ? 'var(--bg-dark)' : 'var(--border-1)',
                 boxShadow: featured
-                  ? "0 16px 40px rgba(0,0,0,0.16)"
-                  : "0 1px 0 var(--border-1)",
-                transform: featured ? "translateY(-8px)" : "translateY(0)",
-                padding: "32px 28px",
+                  ? '0 16px 40px rgba(0,0,0,0.16)'
+                  : '0 1px 0 var(--border-1)',
+                transform: featured ? 'translateY(-8px)' : 'translateY(0)',
+                padding: '32px 28px',
               }}
             >
               <div
                 className="num-badge"
-                style={{ color: "var(--brand-coral)", marginBottom: 18 }}
+                style={{ color: 'var(--brand-coral)', marginBottom: 18 }}
               >
                 {num}
               </div>
               <h3
                 className="h-card"
                 style={{
-                  whiteSpace: "pre-line",
+                  whiteSpace: 'pre-line',
                   marginBottom: 14,
-                  color: featured ? "var(--on-dark-1)" : "var(--ink-1)",
+                  color: featured ? 'var(--on-dark-1)' : 'var(--ink-1)',
                 }}
               >
                 {title}
@@ -1928,7 +1933,7 @@ function Solution() {
                 style={{
                   fontSize: 14,
                   lineHeight: 1.85,
-                  color: featured ? "var(--on-dark-2)" : "var(--ink-2)",
+                  color: featured ? 'var(--on-dark-2)' : 'var(--ink-2)',
                   marginBottom: 20,
                 }}
               >
@@ -1936,10 +1941,10 @@ function Solution() {
               </p>
               <div
                 style={{
-                  borderTop: `1px solid ${featured ? "rgba(255,255,255,0.1)" : "var(--border-1)"}`,
+                  borderTop: `1px solid ${featured ? 'rgba(255,255,255,0.1)' : 'var(--border-1)'}`,
                   paddingTop: 16,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                   gap: 10,
                 }}
               >
@@ -1947,16 +1952,16 @@ function Solution() {
                   <div
                     key={b}
                     style={{
-                      display: "flex",
+                      display: 'flex',
                       gap: 10,
-                      alignItems: "flex-start",
+                      alignItems: 'flex-start',
                       fontSize: 13.5,
-                      color: featured ? "var(--on-dark-2)" : "var(--ink-2)",
+                      color: featured ? 'var(--on-dark-2)' : 'var(--ink-2)',
                     }}
                   >
                     <span
                       style={{
-                        color: "var(--brand-coral)",
+                        color: 'var(--brand-coral)',
                         flexShrink: 0,
                         marginTop: 2,
                       }}
@@ -1977,7 +1982,9 @@ function Solution() {
 
 /* ─── Solution Showcase — large editorial dashboard mockup ─── */
 function SolutionShowcase() {
-  const { Reveal, Bar, Counter, useInView } = window;
+  const {
+    Reveal, Bar, Counter, useInView,
+  } = window;
   const [ref, inView] = useInView({ threshold: 0.25 });
   return (
     <div
@@ -1985,24 +1992,24 @@ function SolutionShowcase() {
       className="solution-showcase"
       style={{
         background:
-          "linear-gradient(180deg, var(--bg-parchment) 0%, var(--bg-sand) 100%)",
-        border: "1px solid var(--border-2)",
+          'linear-gradient(180deg, var(--bg-parchment) 0%, var(--bg-sand) 100%)',
+        border: '1px solid var(--border-2)',
         borderRadius: 24,
-        overflow: "hidden",
-        padding: "clamp(28px, 4vw, 56px)",
-        display: "grid",
-        gridTemplateColumns: "minmax(0, 0.85fr) minmax(0, 1.15fr)",
-        gap: "clamp(28px, 4vw, 56px)",
-        alignItems: "center",
+        overflow: 'hidden',
+        padding: 'clamp(28px, 4vw, 56px)',
+        display: 'grid',
+        gridTemplateColumns: 'minmax(0, 0.85fr) minmax(0, 1.15fr)',
+        gap: 'clamp(28px, 4vw, 56px)',
+        alignItems: 'center',
       }}
     >
       <div>
         <div
           style={{
             fontSize: 11,
-            color: "var(--brand)",
+            color: 'var(--brand)',
             letterSpacing: 1.4,
-            textTransform: "uppercase",
+            textTransform: 'uppercase',
             marginBottom: 14,
             fontWeight: 500,
           }}
@@ -2012,16 +2019,16 @@ function SolutionShowcase() {
         <h3
           className="h-section"
           style={{
-            fontSize: "clamp(22px, 2.6vw, 32px)",
+            fontSize: 'clamp(22px, 2.6vw, 32px)',
             marginBottom: 18,
-            color: "var(--ink-1)",
-            textWrap: "balance",
-            wordBreak: "auto-phrase",
+            color: 'var(--ink-1)',
+            textWrap: 'balance',
+            wordBreak: 'auto-phrase',
           }}
         >
           測るのは「AI使用率」ではなく、
           <br />
-          <span style={{ color: "var(--brand)" }}>
+          <span style={{ color: 'var(--brand)' }}>
             業務がどれだけ変わったか。
           </span>
         </h3>
@@ -2029,8 +2036,8 @@ function SolutionShowcase() {
           className="body"
           style={{
             marginBottom: 24,
-            textWrap: "pretty",
-            wordBreak: "auto-phrase",
+            textWrap: 'pretty',
+            wordBreak: 'auto-phrase',
           }}
         >
           受講アンケートではなく、業務ごとの削減時間・コスト換算ROIを一枚に。「AIを入れた」ではなく「業務が変わった」と、経営層にファクトで語れる設計です。
@@ -2038,36 +2045,36 @@ function SolutionShowcase() {
         <div
           className="report-metrics"
           style={{
-            display: "flex",
-            flexDirection: "column",
+            display: 'flex',
+            flexDirection: 'column',
             gap: 14,
             paddingTop: 20,
-            borderTop: "1px solid var(--border-2)",
+            borderTop: '1px solid var(--border-2)',
           }}
         >
           {[
-            ["週あたり業務削減", "受講者あたり +8.6h"],
-            ["年間人件費換算", "推計 -¥940万 / 予算規模100名"],
-            ["業務改善項目", "平均 12.4 件 / 部門"],
+            ['週あたり業務削減', '受講者あたり +8.6h'],
+            ['年間人件費換算', '推計 -¥940万 / 予算規模100名'],
+            ['業務改善項目', '平均 12.4 件 / 部門'],
           ].map(([k, v]) => (
             <div
               className="report-metric-row"
               key={k}
               style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "baseline",
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'baseline',
                 gap: 16,
               }}
             >
-              <span style={{ fontSize: 13, color: "var(--ink-2)" }}>{k}</span>
+              <span style={{ fontSize: 13, color: 'var(--ink-2)' }}>{k}</span>
               <span
                 style={{
-                  fontFamily: "var(--serif)",
+                  fontFamily: 'var(--serif)',
                   fontSize: 15,
-                  color: "var(--ink-1)",
+                  color: 'var(--ink-1)',
                   fontWeight: 500,
-                  textAlign: "right",
+                  textAlign: 'right',
                 }}
               >
                 {v}
@@ -2081,74 +2088,74 @@ function SolutionShowcase() {
       <div
         className="dashboard-mockup"
         style={{
-          background: "var(--bg-white)",
-          border: "1px solid var(--border-2)",
+          background: 'var(--bg-white)',
+          border: '1px solid var(--border-2)',
           borderRadius: 16,
-          overflow: "hidden",
+          overflow: 'hidden',
           boxShadow:
-            "0 30px 80px rgba(20,20,19,0.12), 0 4px 16px rgba(20,20,19,0.04)",
+            '0 30px 80px rgba(20,20,19,0.12), 0 4px 16px rgba(20,20,19,0.04)',
           transform: inView
-            ? "translateY(0) scale(1)"
-            : "translateY(20px) scale(0.97)",
+            ? 'translateY(0) scale(1)'
+            : 'translateY(20px) scale(0.97)',
           opacity: inView ? 1 : 0,
           transition:
-            "opacity 0.9s cubic-bezier(0.22,0.61,0.36,1) 0.1s, transform 1s cubic-bezier(0.22,0.61,0.36,1) 0.1s",
+            'opacity 0.9s cubic-bezier(0.22,0.61,0.36,1) 0.1s, transform 1s cubic-bezier(0.22,0.61,0.36,1) 0.1s',
         }}
       >
         {/* Window chrome */}
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             gap: 8,
-            padding: "10px 14px",
-            borderBottom: "1px solid var(--border-1)",
-            background: "var(--bg-ivory)",
+            padding: '10px 14px',
+            borderBottom: '1px solid var(--border-1)',
+            background: 'var(--bg-ivory)',
           }}
         >
           <span
             style={{
               width: 10,
               height: 10,
-              borderRadius: "50%",
-              background: "#e8c2b3",
+              borderRadius: '50%',
+              background: '#e8c2b3',
             }}
           />
           <span
             style={{
               width: 10,
               height: 10,
-              borderRadius: "50%",
-              background: "#dcd9c9",
+              borderRadius: '50%',
+              background: '#dcd9c9',
             }}
           />
           <span
             style={{
               width: 10,
               height: 10,
-              borderRadius: "50%",
-              background: "#dcd9c9",
+              borderRadius: '50%',
+              background: '#dcd9c9',
             }}
           />
           <span
             style={{
               fontSize: 11,
-              color: "var(--ink-3)",
+              color: 'var(--ink-3)',
               marginLeft: 14,
-              fontFamily: "var(--serif)",
+              fontFamily: 'var(--serif)',
             }}
           >
             業務改善レポート — 2026 Q1
           </span>
         </div>
 
-        <div style={{ padding: "24px" }}>
+        <div style={{ padding: '24px' }}>
           {/* Big KPI */}
           <div
             className="dashboard-kpis"
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
               gap: 12,
               marginBottom: 24,
             }}
@@ -2156,37 +2163,37 @@ function SolutionShowcase() {
             {[
               {
                 v: 78,
-                suffix: "pt",
-                label: "受講後スコア",
-                sub: "+46pt",
+                suffix: 'pt',
+                label: '受講後スコア',
+                sub: '+46pt',
               },
               {
                 v: 8.6,
-                suffix: "h",
-                label: "週あたり削減",
-                sub: "/ 人",
+                suffix: 'h',
+                label: '週あたり削減',
+                sub: '/ 人',
                 dec: 1,
               },
               {
                 v: 92,
-                suffix: "%",
-                label: "30日後活用率",
-                sub: "継続",
+                suffix: '%',
+                label: '30日後活用率',
+                sub: '継続',
               },
             ].map((k, i) => (
               <div
                 key={k.label}
                 style={{
-                  background: "var(--bg-parchment)",
-                  border: "1px solid var(--border-1)",
+                  background: 'var(--bg-parchment)',
+                  border: '1px solid var(--border-1)',
                   borderRadius: 10,
-                  padding: "14px 14px",
+                  padding: '14px 14px',
                 }}
               >
                 <div
                   style={{
                     fontSize: 10,
-                    color: "var(--ink-3)",
+                    color: 'var(--ink-3)',
                     letterSpacing: 0.3,
                     marginBottom: 6,
                   }}
@@ -2195,10 +2202,10 @@ function SolutionShowcase() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "var(--serif)",
+                    fontFamily: 'var(--serif)',
                     fontSize: 22,
                     fontWeight: 500,
-                    color: "var(--ink-1)",
+                    color: 'var(--ink-1)',
                     lineHeight: 1,
                   }}
                 >
@@ -2212,7 +2219,7 @@ function SolutionShowcase() {
                 <div
                   style={{
                     fontSize: 10,
-                    color: "var(--brand)",
+                    color: 'var(--brand)',
                     marginTop: 6,
                     fontWeight: 500,
                   }}
@@ -2227,27 +2234,27 @@ function SolutionShowcase() {
           <div style={{ marginBottom: 20 }}>
             <div
               style={{
-                display: "flex",
-                alignItems: "baseline",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'baseline',
+                justifyContent: 'space-between',
                 marginBottom: 14,
               }}
             >
               <span
                 style={{
                   fontSize: 11,
-                  color: "var(--ink-2)",
+                  color: 'var(--ink-2)',
                   fontWeight: 500,
                   letterSpacing: 0.3,
                 }}
               >
                 部門別 業務削減時間 (h / 週)
               </span>
-              <span style={{ fontSize: 10, color: "var(--ink-3)" }}>
+              <span style={{ fontSize: 10, color: 'var(--ink-3)' }}>
                 受講者平均
               </span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <Bar
                 label="営業部"
                 value={9.4}
@@ -2290,14 +2297,14 @@ function SolutionShowcase() {
           {/* Score progression */}
           <div
             style={{
-              padding: "14px 0",
-              borderTop: "1px dashed var(--border-2)",
+              padding: '14px 0',
+              borderTop: '1px dashed var(--border-2)',
             }}
           >
             <div
               style={{
                 fontSize: 11,
-                color: "var(--ink-2)",
+                color: 'var(--ink-2)',
                 fontWeight: 500,
                 marginBottom: 10,
               }}
@@ -2321,10 +2328,10 @@ function ScoreLine({ inView }) {
     { x: 160, y: 20 }, // 14日後
     { x: 220, y: 14 }, // 30日後
   ];
-  const labels = ["受講前", "DAY1", "DAY2", "14日後", "30日後"];
+  const labels = ['受講前', 'DAY1', 'DAY2', '14日後', '30日後'];
   const pathD = points
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
-    .join(" ");
+    .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`)
+    .join(' ');
   const ref = React.useRef(null);
   const [len, setLen] = React.useState(0);
   React.useEffect(() => {
@@ -2332,7 +2339,7 @@ function ScoreLine({ inView }) {
   }, []);
 
   return (
-    <div style={{ position: "relative", height: 90 }}>
+    <div style={{ position: 'relative', height: 90 }}>
       <svg
         viewBox="0 0 220 90"
         preserveAspectRatio="none"
@@ -2356,7 +2363,7 @@ function ScoreLine({ inView }) {
           d={`${pathD} L 220 90 L 0 90 Z`}
           fill="var(--brand-soft)"
           opacity={inView ? 0.5 : 0}
-          style={{ transition: "opacity 1.2s ease 0.8s" }}
+          style={{ transition: 'opacity 1.2s ease 0.8s' }}
         />
         {/* line */}
         <path
@@ -2371,7 +2378,7 @@ function ScoreLine({ inView }) {
           strokeDashoffset={inView ? 0 : len || 1}
           style={{
             transition:
-              "stroke-dashoffset 1.6s cubic-bezier(0.22,0.61,0.36,1) 0.3s",
+              'stroke-dashoffset 1.6s cubic-bezier(0.22,0.61,0.36,1) 0.3s',
           }}
         />
         {/* dots */}
@@ -2391,11 +2398,11 @@ function ScoreLine({ inView }) {
       </svg>
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
+          display: 'flex',
+          justifyContent: 'space-between',
           marginTop: 4,
           fontSize: 9,
-          color: "var(--ink-3)",
+          color: 'var(--ink-3)',
         }}
       >
         {labels.map((l) => (

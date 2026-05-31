@@ -242,12 +242,14 @@ function FAQ() {
                 </span>
               </button>
               {open === i && (
-                <div className="faq-answer" style={{
-                  paddingLeft: 42,
-                  paddingBottom: 24,
-                  paddingRight: 48,
-                  animation: 'fadein 0.2s ease',
-                }}
+                <div
+                  className="faq-answer"
+                  style={{
+                    paddingLeft: 42,
+                    paddingBottom: 24,
+                    paddingRight: 48,
+                    animation: 'fadein 0.2s ease',
+                  }}
                 >
                   <p className="body" style={{ fontSize: 15 }}>{f.a}</p>
                 </div>
@@ -342,9 +344,11 @@ function CTA() {
             「AIを入れるべきか」の段階からご相談いただけます。業務の棚卸しを一緒にし、AIで解ける部分と、AI以外で解いたほうがよい部分を、フラットにお伝えします。
           </p>
 
-          <div className="cta-proof-grid" style={{
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 36, textAlign: 'left',
-          }}
+          <div
+            className="cta-proof-grid"
+            style={{
+              display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 36, textAlign: 'left',
+            }}
           >
             {[
               ['資料は1営業日以内にメール送付', '社内回覧用 / 経営層向け説明資料の2種類'],
@@ -518,9 +522,11 @@ function Footer() {
   return (
     <footer style={{ background: 'var(--bg-dark-2)', color: 'var(--on-dark-2)', padding: '56px var(--px) 32px' }}>
       <div className="container">
-        <div className="footer-grid" style={{
-          display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) repeat(3, minmax(0, 1fr))', gap: 'clamp(28px, 4vw, 56px)', marginBottom: 40,
-        }}
+        <div
+          className="footer-grid"
+          style={{
+            display: 'grid', gridTemplateColumns: 'minmax(0, 1.4fr) repeat(3, minmax(0, 1fr))', gap: 'clamp(28px, 4vw, 56px)', marginBottom: 40,
+          }}
         >
           <div>
             <img
