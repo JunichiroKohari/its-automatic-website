@@ -1887,6 +1887,7 @@ function Solution() {
         </window.Reveal>
 
         <window.Stagger
+          className="solution-pillars"
           step={0.1}
           y={28}
           style={{
@@ -1901,7 +1902,7 @@ function Solution() {
           }) => (
             <div
               key={num}
-              className="card"
+              className="card solution-pillar-card"
               style={{
                 background: featured ? 'var(--bg-dark)' : 'var(--bg-white)',
                 color: featured ? 'var(--on-dark-1)' : 'var(--ink-1)',

@@ -354,6 +354,17 @@ select {
     min-height: 92px;
 }
 
+.solution-pillars > div {
+    display: flex;
+    height: 100%;
+}
+
+.solution-pillar-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 /* ── Number badge ── */
 .num-badge {
     font-family: var(--serif);
