@@ -179,8 +179,8 @@ function Hero({ onReserve }) {
               right: 36,
               bottom: 36,
               zIndex: 4,
-              width: 64,
-              height: 64,
+              width: "clamp(48px, 8vw, 64px)",
+              height: "clamp(48px, 8vw, 64px)",
               borderRadius: "50%",
               border: "1px solid rgba(244,239,230,.58)",
               background: "rgba(26,24,22,.45)",
@@ -196,9 +196,9 @@ function Hero({ onReserve }) {
               style={{
                 width: 0,
                 height: 0,
-                borderTop: "11px solid transparent",
-                borderBottom: "11px solid transparent",
-                borderLeft: "17px solid currentColor",
+                borderTop: "clamp(8px, 1.4vw, 11px) solid transparent",
+                borderBottom: "clamp(8px, 1.4vw, 11px) solid transparent",
+                borderLeft: "clamp(13px, 2vw, 17px) solid currentColor",
                 marginLeft: 5,
               }}
             />
@@ -213,7 +213,7 @@ function Hero({ onReserve }) {
           position: "absolute",
           top: 120,
           right: 36,
-          fontSize: 13,
+          fontSize: 26,
           letterSpacing: ".5em",
           color: "rgba(244,239,230,.6)",
         }}
@@ -339,7 +339,7 @@ function Problem() {
           <div className="section-head__meta">
             <span
               className="vtext"
-              style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
+              style={{ fontSize: 16, opacity: 0.5, color: "var(--sumi-2)" }}
             >
               旅の悩み
             </span>
@@ -527,7 +527,7 @@ function Empathy() {
               <div
                 className="vtext"
                 style={{
-                  fontSize: 22,
+                  fontSize: 16,
                   color: "var(--kincha)",
                   letterSpacing: ".5em",
                 }}
@@ -583,7 +583,7 @@ function Solution() {
           <div className="section-head__meta">
             <span
               className="vtext"
-              style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
+              style={{ fontSize: 16, opacity: 0.5, color: "var(--sumi-2)" }}
             >
               鹿乃宿のお約束
             </span>
@@ -730,7 +730,7 @@ function Service() {
           <div className="section-head__meta">
             <span
               className="vtext"
-              style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
+              style={{ fontSize: 16, opacity: 0.5, color: "var(--sumi-2)" }}
             >
               客室と過ごし方
             </span>
@@ -1133,7 +1133,7 @@ function Strengths() {
           <div className="section-head__meta">
             <span
               className="vtext"
-              style={{ fontSize: 12, color: "rgba(244,239,230,.45)" }}
+              style={{ fontSize: 16, color: "rgba(244,239,230,.45)" }}
             >
               鹿乃宿の六つの強み
             </span>
@@ -1265,7 +1265,7 @@ function Voice() {
           <div className="section-head__meta">
             <span
               className="vtext"
-              style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
+              style={{ fontSize: 16, opacity: 0.5, color: "var(--sumi-2)" }}
             >
               実績とお客様の声
             </span>
@@ -1504,7 +1504,7 @@ function Flow({ onReserve }) {
           <div className="section-head__meta">
             <span
               className="vtext"
-              style={{ fontSize: 12, opacity: 0.5, color: "var(--sumi-2)" }}
+              style={{ fontSize: 16, opacity: 0.5, color: "var(--sumi-2)" }}
             >
               ご予約から滞在まで
             </span>
