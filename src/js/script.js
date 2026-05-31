@@ -1,8 +1,8 @@
-import $ from 'jquery'
-import AOS from 'aos'
-import createREGL from 'regl'
+import $ from 'jquery';
+import AOS from 'aos';
+import createREGL from 'regl';
 
-const makeAnime = function() {
+const makeAnime = function () {
   const FS_CODE = `
     #define TWO_PI 6.2831853072
     #define PI 3.14159265359
@@ -106,23 +106,24 @@ const makeAnime = function() {
 
       gl_FragColor = texture2D(gradient, vec2(0.0, value));
     }
-  `
+  `;
 
-  const canvas = document.querySelector('#webgl')
-  let scroll = 0.0, velocity = 0.0, lastScroll = 0.0
+  const canvas = document.querySelector('#webgl');
+  let scroll = 0.0; const velocity = 0.0; const
+    lastScroll = 0.0;
 
   const regl = createREGL({
-    canvas: canvas,
-    onDone: function(error, regl) {
-      if (error) { alert('申し訳ございません。只今メンテナンス中です。') }
-    }
-  })
+    canvas,
+    onDone(error, regl) {
+      if (error) { alert('申し訳ございません。只今メンテナンス中です。'); }
+    },
+  });
 
   // Loading a texture
-  const img = new Image()
-  img.src = require('../img/gradient_map3.png')
-  img.onload = function() {
-    setTimeout(function() { document.body.classList.remove('loading');}, 1000)
+  const img = new Image();
+  img.src = require('../img/gradient_map3.png');
+  img.onload = function () {
+    setTimeout(() => { document.body.classList.remove('loading'); }, 1000);
 
     // Create a REGL draw command
     const draw = regl({
@@ -136,20 +137,19 @@ const makeAnime = function() {
         aspect: regl.prop('aspect'),
         scroll: regl.prop('scroll'),
         velocity: regl.prop('velocity'),
-        gradient: regl.texture(img)
-      }
-    })
+        gradient: regl.texture(img),
+      },
+    });
 
     // Hook a callback to execute each frame
-    regl.frame(function(ctx) {
-
+    regl.frame((ctx) => {
       // Resize a canvas element with the aspect ratio (100vw, 100vh)
-      var aspect = canvas.scrollWidth / canvas.scrollHeight
-      canvas.width = 768 * aspect
-      canvas.height = 768
+      const aspect = canvas.scrollWidth / canvas.scrollHeight;
+      canvas.width = 768 * aspect;
+      canvas.height = 768;
 
       // Scroll amount (0.0 to 1.0)
-      scroll = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)
+      scroll = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
 
       // Scroll Velocity
       // Inertia example:
@@ -157,124 +157,121 @@ const makeAnime = function() {
       // lastScroll = scroll;
 
       // Clear the draw buffer
-      regl.clear({ color: [0, 0, 0, 0] })
+      regl.clear({ color: [0, 0, 0, 0] });
 
       // Execute a REGL draw command
       draw({
         globaltime: ctx.time,
         resolution: [ctx.viewportWidth, ctx.viewportHeight],
-        aspect: aspect,
-        scroll: scroll,
-        velocity: velocity
-      })
-    })
-  }
-}
+        aspect,
+        scroll,
+        velocity,
+      });
+    });
+  };
+};
 
-!function() {
-  'use strict'
+!(function () {
+  let pendingWheelDeltaY = 0;
+  let wheelFrameId = null;
 
-  let pendingWheelDeltaY = 0
-  let wheelFrameId = null
-
-  const flushWheelScroll = function() {
+  const flushWheelScroll = function () {
     if (pendingWheelDeltaY !== 0) {
-      window.scrollBy(0, pendingWheelDeltaY)
-      pendingWheelDeltaY = 0
+      window.scrollBy(0, pendingWheelDeltaY);
+      pendingWheelDeltaY = 0;
     }
 
-    wheelFrameId = null
-  }
+    wheelFrameId = null;
+  };
 
-  window.addEventListener('wheel', function(event) {
+  window.addEventListener('wheel', (event) => {
     if (event.ctrlKey) {
-      return
+      return;
     }
 
-    event.preventDefault()
+    event.preventDefault();
 
-    const lineHeight = 16
-    const pageHeight = window.innerHeight
+    const lineHeight = 16;
+    const pageHeight = window.innerHeight;
     const scale = event.deltaMode === WheelEvent.DOM_DELTA_LINE
       ? lineHeight
       : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
         ? pageHeight
-        : 1
+        : 1;
 
-    pendingWheelDeltaY += event.deltaY * scale
+    pendingWheelDeltaY += event.deltaY * scale;
 
     if (wheelFrameId === null) {
-      wheelFrameId = window.requestAnimationFrame(flushWheelScroll)
+      wheelFrameId = window.requestAnimationFrame(flushWheelScroll);
     }
-  }, { passive: false, capture: true })
+  }, { passive: false, capture: true });
 
-  const windowHeight = $(window).height()
+  const windowHeight = $(window).height();
   $('.content').css({
-    'height': windowHeight,
+    height: windowHeight,
     'padding-top': windowHeight * 0.05,
     'padding-bottom': windowHeight * 0.05,
   });
-  $('.main-visual').css({'height': $(window).height()});
+  $('.main-visual').css({ height: $(window).height() });
 
   // SP版サブタイトル文字数変更
-  $(window).on('load resize', function(){
-    const winW = $(window).width()
-    const devW = 725
+  $(window).on('load resize', () => {
+    const winW = $(window).width();
+    const devW = 725;
     if (winW <= devW) {
-      return
+      return;
     }
 
-    const subtitle = 'Software-Oriented Company'
-    const devicesEmoji = '&#128421; &#128187; &#128241;'
-    $('.main-subtitle').html(`/* ${subtitle} ${devicesEmoji} */`)
-  })
+    const subtitle = 'Software-Oriented Company';
+    const devicesEmoji = '&#128421; &#128187; &#128241;';
+    $('.main-subtitle').html(`/* ${subtitle} ${devicesEmoji} */`);
+  });
 
   // フェードインライブラリ初期化
   AOS.init({
     // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-    //offset: 400, // offset (in px) from the original trigger point
+    // offset: 400, // offset (in px) from the original trigger point
     duration: 1000, // values from 0 to 3000, with step 50ms
     once: true, // whether animation should happen only once - while scrolling down
-  })
+  });
 
   // ハンバーガーメニュー
-  $('.hamb-button').on('click', function() {
-    $('.hamb-button').toggleClass('close-button')
-    $('.nav').toggleClass('hamb-nav display-none')
-  })
-  $('.nav-link').on('click', function() {
-    $('.hamb-button').toggleClass('close-button')
-    $('.nav').toggleClass('hamb-nav display-none')
-  })
+  $('.hamb-button').on('click', () => {
+    $('.hamb-button').toggleClass('close-button');
+    $('.nav').toggleClass('hamb-nav display-none');
+  });
+  $('.nav-link').on('click', () => {
+    $('.hamb-button').toggleClass('close-button');
+    $('.nav').toggleClass('hamb-nav display-none');
+  });
 
   // テキストエリアを自動拡張して、内部スクロールがホイール入力を奪わないようにする
-  $('.contact-txt').each(function() {
-    const textarea = this
+  $('.contact-txt').each(function () {
+    const textarea = this;
 
-    const syncTextareaHeight = function() {
-      textarea.style.height = 'auto'
-      textarea.style.height = `${textarea.scrollHeight}px`
-    }
+    const syncTextareaHeight = function () {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    };
 
-    syncTextareaHeight()
-    textarea.addEventListener('input', syncTextareaHeight)
-  })
+    syncTextareaHeight();
+    textarea.addEventListener('input', syncTextareaHeight);
+  });
 
   // スクロールボタン押下時処理　トップに戻る
-  const pageTop = $('.pagetop')
-  let isPageTopVisible = false
+  const pageTop = $('.pagetop');
+  let isPageTopVisible = false;
 
-  $(window).on('scroll', function () {
-    const shouldShowPageTop = $(window).scrollTop() > 200
+  $(window).on('scroll', () => {
+    const shouldShowPageTop = $(window).scrollTop() > 200;
 
     if (shouldShowPageTop === isPageTopVisible) {
-      return
+      return;
     }
 
-    isPageTopVisible = shouldShowPageTop
-    pageTop.stop(true, true)[shouldShowPageTop ? 'fadeIn' : 'fadeOut']('slow')
-  })
+    isPageTopVisible = shouldShowPageTop;
+    pageTop.stop(true, true)[shouldShowPageTop ? 'fadeIn' : 'fadeOut']('slow');
+  });
 
-  makeAnime()
-
-}()
+  makeAnime();
+}());

@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const breadcrumb = document.querySelector('.breadcrumb')
-  const galleryInner = document.querySelector('.gallery-inner')
-  const detailWrap = document.querySelector('.detail-wrap')
-  const relatedGrid = document.querySelector('.related-grid')
-  const lightboxLabel = document.querySelector('.lightbox-img p')
-  const numberFormatter = new Intl.NumberFormat('ja-JP')
+  const breadcrumb = document.querySelector('.breadcrumb');
+  const galleryInner = document.querySelector('.gallery-inner');
+  const detailWrap = document.querySelector('.detail-wrap');
+  const relatedGrid = document.querySelector('.related-grid');
+  const lightboxLabel = document.querySelector('.lightbox-img p');
+  const numberFormatter = new Intl.NumberFormat('ja-JP');
 
   if (!breadcrumb || !galleryInner || !detailWrap || !relatedGrid) {
-    return
+    return;
   }
 
   const escapeHtml = (value) => String(value ?? '')
@@ -15,31 +15,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;')
+    .replaceAll("'", '&#39;');
 
   const buildDetailUrl = (property) => {
-    const separator = property.detailUrl.includes('?') ? '&' : '?'
-    return `${property.detailUrl}${separator}id=${encodeURIComponent(property.id)}`
-  }
+    const separator = property.detailUrl.includes('?') ? '&' : '?';
+    return `${property.detailUrl}${separator}id=${encodeURIComponent(property.id)}`;
+  };
 
   const getCategoryIcon = (category) => {
     if (category === 'マンション') {
-      return '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>'
+      return '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>';
     }
 
     if (category === '土地') {
-      return '<svg viewBox="0 0 24 24"><polygon points="3 11 12 2 21 11 21 21 15 21 15 15 9 15 9 21 3 21"/></svg>'
+      return '<svg viewBox="0 0 24 24"><polygon points="3 11 12 2 21 11 21 21 15 21 15 15 9 15 9 21 3 21"/></svg>';
     }
 
-    return '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'
-  }
+    return '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>';
+  };
 
   const parseSpecValue = (spec) => String(spec ?? '')
     .replace(/^建面積\s*/, '')
     .replace(/^土地\s*/, '')
     .replace(/^専有\s*/, '')
     .replace(/^地積\s*/, '')
-    .trim()
+    .trim();
 
   const getQuickSpecs = (property) => {
     if (property.category === 'マンション') {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         { label: '専有面積', value: parseSpecValue(property.specs[1]) || '-' },
         { label: '所在階', value: property.specs[2] || '-' },
         { label: '築年数', value: property.specs[3] || '-' },
-      ]
+      ];
     }
 
     if (property.category === '土地') {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         { label: '地積', value: parseSpecValue(property.specs[1]) || '-' },
         { label: '現況 / 特徴', value: property.specs[2] || '-' },
         { label: '条件', value: property.specs[3] || '-' },
-      ]
+      ];
     }
 
     return [
@@ -65,94 +65,94 @@ document.addEventListener('DOMContentLoaded', async () => {
       { label: '建物面積', value: parseSpecValue(property.specs[1]) || '-' },
       { label: '土地面積', value: parseSpecValue(property.specs[2]) || '-' },
       { label: '築年数', value: property.specs[3] || '-' },
-    ]
-  }
+    ];
+  };
 
   const getPrefecture = (location) => {
-    const match = String(location ?? '').match(/^(東京都|北海道|京都府|大阪府|.{2,3}県)/)
-    return match ? match[1] : location
-  }
+    const match = String(location ?? '').match(/^(東京都|北海道|京都府|大阪府|.{2,3}県)/);
+    return match ? match[1] : location;
+  };
 
   const renderRows = (rows) => rows.map(([label, value]) => (
     `<tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`
-  )).join('')
+  )).join('');
 
   const activateReveals = () => {
-    const reveals = Array.from(document.querySelectorAll('.reveal'))
+    const reveals = Array.from(document.querySelectorAll('.reveal'));
 
     if (!('IntersectionObserver' in window)) {
-      reveals.forEach((element) => element.classList.add('visible'))
-      return
+      reveals.forEach((element) => element.classList.add('visible'));
+      return;
     }
 
     const observer = new IntersectionObserver((entries, currentObserver) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
-          return
+          return;
         }
 
-        entry.target.classList.add('visible')
-        currentObserver.unobserve(entry.target)
-      })
+        entry.target.classList.add('visible');
+        currentObserver.unobserve(entry.target);
+      });
     }, {
       threshold: 0.1,
-    })
+    });
 
-    reveals.forEach((element) => observer.observe(element))
-  }
+    reveals.forEach((element) => observer.observe(element));
+  };
 
   try {
     const [propertiesResponse, detailsResponse] = await Promise.all([
       fetch('assets/data/properties.json'),
       fetch('assets/data/property-details.json'),
-    ])
+    ]);
 
     if (!propertiesResponse.ok) {
-      throw new Error(`properties.json: ${propertiesResponse.status}`)
+      throw new Error(`properties.json: ${propertiesResponse.status}`);
     }
 
     if (!detailsResponse.ok) {
-      throw new Error(`property-details.json: ${detailsResponse.status}`)
+      throw new Error(`property-details.json: ${detailsResponse.status}`);
     }
 
     const [properties, detailData] = await Promise.all([
       propertiesResponse.json(),
       detailsResponse.json(),
-    ])
+    ]);
 
-    const detailsById = new Map(detailData.map((detail) => [detail.id, detail]))
-    const params = new URLSearchParams(window.location.search)
-    const requestedId = params.get('id')
-    const property = properties.find((item) => item.id === requestedId) || properties[0]
-    const detail = detailsById.get(property.id)
+    const detailsById = new Map(detailData.map((detail) => [detail.id, detail]));
+    const params = new URLSearchParams(window.location.search);
+    const requestedId = params.get('id');
+    const property = properties.find((item) => item.id === requestedId) || properties[0];
+    const detail = detailsById.get(property.id);
 
     if (!property || !detail) {
-      throw new Error(`property not found: ${requestedId}`)
+      throw new Error(`property not found: ${requestedId}`);
     }
 
-    const quickSpecs = getQuickSpecs(property)
+    const quickSpecs = getQuickSpecs(property);
     const relatedProperties = [...properties]
       .filter((item) => item.id !== property.id)
       .sort((left, right) => {
-        const leftCategoryScore = left.category === property.category ? 0 : 1
-        const rightCategoryScore = right.category === property.category ? 0 : 1
+        const leftCategoryScore = left.category === property.category ? 0 : 1;
+        const rightCategoryScore = right.category === property.category ? 0 : 1;
 
         if (leftCategoryScore !== rightCategoryScore) {
-          return leftCategoryScore - rightCategoryScore
+          return leftCategoryScore - rightCategoryScore;
         }
 
-        const leftPrefectureScore = getPrefecture(left.location) === getPrefecture(property.location) ? 0 : 1
-        const rightPrefectureScore = getPrefecture(right.location) === getPrefecture(property.location) ? 0 : 1
+        const leftPrefectureScore = getPrefecture(left.location) === getPrefecture(property.location) ? 0 : 1;
+        const rightPrefectureScore = getPrefecture(right.location) === getPrefecture(property.location) ? 0 : 1;
 
         if (leftPrefectureScore !== rightPrefectureScore) {
-          return leftPrefectureScore - rightPrefectureScore
+          return leftPrefectureScore - rightPrefectureScore;
         }
 
-        return Math.abs(left.price - property.price) - Math.abs(right.price - property.price)
+        return Math.abs(left.price - property.price) - Math.abs(right.price - property.price);
       })
-      .slice(0, 3)
+      .slice(0, 3);
 
-    document.title = `${property.title} | 小針不動産株式会社`
+    document.title = `${property.title} | 小針不動産株式会社`;
 
     breadcrumb.innerHTML = `
       <a href="index.html">ホーム</a>
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <a href="properties.html">物件一覧</a>
       <span>›</span>
       <span style="color: var(--text-mid);">${escapeHtml(property.title)}</span>
-    `
+    `;
 
     galleryInner.innerHTML = `
       <div class="gallery-main" onclick="openLightbox()" style="background:${escapeHtml(property.background)}">
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p>${escapeHtml(detail.gallery.subCaptions[1] || detail.gallery.mainCaption)}</p>
         </div>
       </div>
-    `
+    `;
 
     detailWrap.innerHTML = `
       <div class="detail-left">
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </button>
         </div>
       </div>
-    `
+    `;
 
     relatedGrid.innerHTML = relatedProperties.map((item, index) => `
       <a href="${buildDetailUrl(item)}" class="rel-card reveal${index > 0 ? ` reveal-delay-${index}` : ''}">
@@ -313,16 +313,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="rel-price">${numberFormatter.format(item.price)}<span>万円</span></div>
         </div>
       </a>
-    `).join('')
+    `).join('');
 
     if (lightboxLabel) {
-      lightboxLabel.textContent = detail.gallery.mainCaption
+      lightboxLabel.textContent = detail.gallery.mainCaption;
     }
 
-    activateReveals()
+    activateReveals();
   } catch (error) {
-    console.error('物件詳細データの読み込みに失敗しました。', error)
-    detailWrap.innerHTML = '<div style="grid-column:1/-1;padding:2rem;background:#fff;border:1px solid rgba(0,0,0,0.06);color:#555;">物件詳細データの読み込みに失敗しました。時間をおいて再度お試しください。</div>'
-    relatedGrid.innerHTML = ''
+    console.error('物件詳細データの読み込みに失敗しました。', error);
+    detailWrap.innerHTML = '<div style="grid-column:1/-1;padding:2rem;background:#fff;border:1px solid rgba(0,0,0,0.06);color:#555;">物件詳細データの読み込みに失敗しました。時間をおいて再度お試しください。</div>';
+    relatedGrid.innerHTML = '';
   }
-})
+});

@@ -1,9 +1,9 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 
-window.React = React
-window.ReactDOM = { createRoot }
+window.React = React;
+window.ReactDOM = { createRoot };
 
-require('../html/businesses/ryokan-lp/components.jsx')
-require('../html/businesses/ryokan-lp/booking.jsx')
-require('../html/businesses/ryokan-lp/app.jsx')
+require('../html/businesses/ryokan-lp/components.jsx');
+require('../html/businesses/ryokan-lp/booking.jsx');
+require('../html/businesses/ryokan-lp/app.jsx');

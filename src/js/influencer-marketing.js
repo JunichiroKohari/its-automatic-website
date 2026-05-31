@@ -1,12 +1,12 @@
-import '../style/normalize.css'
-import '../style/influencer-marketing.css'
+import '../style/normalize.css';
+import '../style/influencer-marketing.css';
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof window.Reveal !== 'function') {
-    return
+    return;
   }
 
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   window.Reveal.initialize({
     controls: true,
@@ -24,5 +24,5 @@ document.addEventListener('DOMContentLoaded', () => {
     margin: 0.06,
     width: 1600,
     height: 1000,
-  })
-})
+  });
+});
