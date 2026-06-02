@@ -17,10 +17,12 @@ const {
   Footer,
   StickyReserve,
   BookingModal,
+  SiteDisclaimer,
 } = window;
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [disclaimerOpen, setDisclaimerOpen] = useState(true);
   const openModal = () => setModalOpen(true);
 
   return (
@@ -39,6 +41,7 @@ function App() {
       <Footer />
       <StickyReserve onOpen={openModal} />
       <BookingModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <SiteDisclaimer open={disclaimerOpen} onClose={() => setDisclaimerOpen(false)} />
     </div>
   );
 }

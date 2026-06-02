@@ -134,177 +134,178 @@ function Hero({ onReserve }) {
 
   return (
     <>
-    <header
-      style={{
-        position: "relative",
-        minHeight: "100vh",
-        paddingTop: 72,
-        background: "var(--sumi)",
-        color: "var(--kinari)",
-        overflow: "hidden",
-      }}
-    >
-      {/* full bleed hero video */}
-      <div style={{ position: "absolute", inset: 0 }}>
-        <video
-          ref={videoRef}
-          src="assets/movie/ryokan-lp-hero.mp4"
-          autoPlay
-          muted
-          playsInline
-          onEnded={handleHeroVideoEnded}
-          aria-label="奈良公園の朝霧と鹿の群れ、若草山を望む動画"
-          style={{
-            display: "block",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(180deg, rgba(26,24,22,.35) 0%, rgba(26,24,22,.55) 60%, rgba(26,24,22,.85) 100%)",
-          }}
-        />
-        {heroVideoEnded && (
-          <button
-            type="button"
-            onClick={replayHeroVideo}
-            aria-label="ヒーロー動画を再生"
-            style={{
-              position: "absolute",
-              right: 36,
-              bottom: 36,
-              zIndex: 4,
-              width: "clamp(48px, 8vw, 64px)",
-              height: "clamp(48px, 8vw, 64px)",
-              borderRadius: "50%",
-              border: "1px solid rgba(244,239,230,.58)",
-              background: "rgba(26,24,22,.45)",
-              color: "var(--kinari)",
-              display: "grid",
-              placeItems: "center",
-              cursor: "pointer",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                width: 0,
-                height: 0,
-                borderTop: "clamp(8px, 1.4vw, 11px) solid transparent",
-                borderBottom: "clamp(8px, 1.4vw, 11px) solid transparent",
-                borderLeft: "clamp(13px, 2vw, 17px) solid currentColor",
-                marginLeft: 5,
-              }}
-            />
-          </button>
-        )}
-      </div>
-
-      {/* vertical kanji */}
-      <div
-        className="vtext"
-        style={{
-          position: "absolute",
-          top: 120,
-          right: 36,
-          fontSize: 26,
-          letterSpacing: ".5em",
-          color: "rgba(244,239,230,.6)",
-        }}
-      >
-        — 千三百年、奈良の朝に
-      </div>
-
-      {/* content */}
-      <div
-        className="wrap"
+      <header
         style={{
           position: "relative",
-          zIndex: 2,
-          minHeight: "calc(100vh - 72px)",
-          display: "grid",
-          gridTemplateRows: "1fr auto",
-          paddingTop: 80,
-          paddingBottom: 56,
+          minHeight: "100vh",
+          paddingTop: 72,
+          background: "var(--sumi)",
+          color: "var(--kinari)",
+          overflow: "hidden",
         }}
       >
-        <div style={{ alignSelf: "center", maxWidth: 820 }}>
-          <h1
-            className="h-display"
+        {/* full bleed hero video */}
+        <div style={{ position: "absolute", inset: 0 }}>
+          <video
+            ref={videoRef}
+            src="assets/movie/ryokan-lp-hero.mp4"
+            autoPlay
+            muted
+            playsInline
+            onEnded={handleHeroVideoEnded}
+            aria-label="奈良公園の朝霧と鹿の群れ、若草山を望む動画"
             style={{
-              fontSize: "clamp(38px, 6vw, 78px)",
-              fontWeight: 500,
-              lineHeight: 1.25,
-              letterSpacing: ".06em",
-              marginBottom: 28,
-              color: "var(--kinari)",
+              display: "block",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
             }}
-          >
-            <span
-              style={{
-                display: "block",
-                color: "var(--kincha)",
-                fontSize: ".6em",
-                letterSpacing: ".4em",
-                marginBottom: 18,
-              }}
-            >
-              し か の や ど
-            </span>
-            門を出れば、鹿。
-            <br />
-            朝の散歩から、
-            <br className="mobile-only-break" />
-            旅が始まる。
-          </h1>
-
-          <p
-            className="body-lg"
+          />
+          <div
             style={{
-              color: "rgba(244,239,230,.85)",
-              fontSize: 17,
-              maxWidth: 620,
-              marginBottom: 44,
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(180deg, rgba(26,24,22,.35) 0%, rgba(26,24,22,.55) 60%, rgba(26,24,22,.85) 100%)",
             }}
-          >
-            奈良公園まで徒歩三分。創業百三十余年、木造数寄屋造りの宿で、
-            朝靄に佇む鹿と、千年の都の静けさをお過ごしください。
-          </p>
-
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <button className="btn btn--aka" onClick={onReserve}>
-              ご宿泊のご予約
-              <span className="btn__arrow">→</span>
-            </button>
-            <a
-              className="btn btn--ghost"
-              href="#about"
+          />
+          {heroVideoEnded && (
+            <button
+              type="button"
+              onClick={replayHeroVideo}
+              aria-label="ヒーロー動画を再生"
               style={{
+                position: "absolute",
+                right: 36,
+                bottom: 36,
+                zIndex: 4,
+                width: "clamp(48px, 8vw, 64px)",
+                height: "clamp(48px, 8vw, 64px)",
+                borderRadius: "50%",
+                border: "1px solid rgba(244,239,230,.58)",
+                background: "rgba(26,24,22,.45)",
                 color: "var(--kinari)",
-                borderColor: "rgba(244,239,230,.45)",
+                display: "grid",
+                placeItems: "center",
+                cursor: "pointer",
+                backdropFilter: "blur(10px)",
               }}
             >
-              宿について
-              <span className="btn__arrow">↓</span>
-            </a>
-          </div>
+              <span
+                aria-hidden="true"
+                style={{
+                  width: 0,
+                  height: 0,
+                  borderTop: "clamp(8px, 1.4vw, 11px) solid transparent",
+                  borderBottom: "clamp(8px, 1.4vw, 11px) solid transparent",
+                  borderLeft: "clamp(13px, 2vw, 17px) solid currentColor",
+                  marginLeft: 5,
+                }}
+              />
+            </button>
+          )}
         </div>
 
-        {/* hero footer strip */}
-        <HeroFacts className="hero-facts--in-hero" />
+        {/* vertical kanji */}
+        <div
+          className="vtext"
+          style={{
+            position: "absolute",
+            top: 120,
+            right: 36,
+            fontSize: 26,
+            letterSpacing: ".5em",
+            color: "rgba(244,239,230,.6)",
+          }}
+        >
+          — 千三百年、奈良の朝に
+        </div>
+
+        {/* content */}
+        <div
+          className="wrap"
+          style={{
+            position: "relative",
+            zIndex: 2,
+            minHeight: "calc(100vh - 72px)",
+            display: "grid",
+            gridTemplateRows: "1fr auto",
+            paddingTop: 80,
+            paddingBottom: 56,
+          }}
+        >
+          <div style={{ alignSelf: "center", maxWidth: 820 }}>
+            <h1
+              className="h-display"
+              style={{
+                fontSize: "clamp(38px, 6vw, 78px)",
+                fontWeight: 500,
+                lineHeight: 1.25,
+                letterSpacing: ".06em",
+                marginBottom: 28,
+                color: "var(--kinari)",
+              }}
+            >
+              <span
+                className="phrase"
+                style={{
+                  display: "block",
+                  color: "var(--kincha)",
+                  fontSize: ".6em",
+                  letterSpacing: ".4em",
+                  marginBottom: 18,
+                }}
+              >
+                し か の や ど
+              </span>
+              <span className="phrase">門を出れば、鹿。</span>
+              <br />
+              <span className="phrase">朝の散歩から、</span>
+              <br className="mobile-only-break" />
+              <span className="phrase">旅が始まる。</span>
+            </h1>
+
+            <p
+              className="body-lg"
+              style={{
+                color: "rgba(244,239,230,.85)",
+                fontSize: 17,
+                maxWidth: 620,
+                marginBottom: 44,
+              }}
+            >
+              奈良公園まで徒歩三分。創業百三十余年、木造数寄屋造りの宿で、
+              朝靄に佇む鹿と、千年の都の静けさをお過ごしください。
+            </p>
+
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+              <button className="btn btn--aka" onClick={onReserve}>
+                ご宿泊のご予約
+                <span className="btn__arrow">→</span>
+              </button>
+              <a
+                className="btn btn--ghost"
+                href="#about"
+                style={{
+                  color: "var(--kinari)",
+                  borderColor: "rgba(244,239,230,.45)",
+                }}
+              >
+                宿について
+                <span className="btn__arrow">↓</span>
+              </a>
+            </div>
+          </div>
+
+          {/* hero footer strip */}
+          <HeroFacts className="hero-facts--in-hero" />
+        </div>
+      </header>
+      <div className="hero-facts-mobile-band" aria-label="鹿乃宿の特徴">
+        <div className="wrap">
+          <HeroFacts className="hero-facts--after-hero" />
+        </div>
       </div>
-    </header>
-    <div className="hero-facts-mobile-band" aria-label="鹿乃宿の特徴">
-      <div className="wrap">
-        <HeroFacts className="hero-facts--after-hero" />
-      </div>
-    </div>
     </>
   );
 }
@@ -346,9 +347,13 @@ function Problem() {
           </div>
           <div className="section-head__title">
             <h2 className="h-section">
-              せっかくの奈良旅。
+              <span className="phrase">せっかくの奈良旅。</span>
               <br />
-              「思っていたのと、違った」と感じたことはありませんか。
+              <span className="phrase pc-only">
+                「思っていたのと、違った」と
+              </span>
+              <span className="phrase sp-only">「思っていたのと違う」と</span>
+              <span className="phrase">感じたことはありませんか。</span>
             </h2>
           </div>
         </div>
@@ -399,7 +404,7 @@ function Problem() {
           {`
           @media (max-width: 760px){
             #problem .fade > div[style*="grid-template-columns"]{ grid-template-columns: 1fr !important; }
-            #problem .fade > div > div{ border-right: none !important; border-bottom: 1px solid var(--line); }
+            #problem .fade > div > div{ border-right: none !important; }
             #problem .fade > div > div:last-child{ border-bottom: none; }
           }
         `}
@@ -431,9 +436,10 @@ function Empathy() {
             className="h-section"
             style={{ color: "var(--kinari)", marginBottom: 28 }}
           >
-            分かります。
+            <span className="phrase">分かります。</span>
             <br />
-            私たちも、同じ景色を見てきました。
+            <span className="phrase">私たちも、</span>
+            <span className="phrase">同じ景色を見てきました。</span>
           </h2>
           <p
             className="body-lg"
@@ -590,7 +596,9 @@ function Solution() {
           </div>
           <div className="section-head__title">
             <h2 className="h-section">
-              鹿乃宿は、「奈良で一番、朝が早く始まる宿」です。
+              <span className="phrase">鹿乃宿は、</span>
+              <span className="phrase">「奈良で一番、</span>
+              <span className="phrase">朝が早く始まる宿」です。</span>
             </h2>
             <p className="body-lg" style={{ marginTop: 22 }}>
               他のどこにも代えがたい場所と時間。三つの軸でご用意しています。
@@ -737,7 +745,9 @@ function Service() {
           </div>
           <div className="section-head__title">
             <h2 className="h-section">
-              全十二室、すべての部屋から、奈良の景色を。
+              <span className="phrase">全十二室、</span>
+              <span className="phrase">すべての部屋から、</span>
+              <span className="phrase">奈良の景色を。</span>
             </h2>
             <p className="body-lg" style={{ marginTop: 22 }}>
               本館・離れ・特別室。それぞれに、ふさわしい朝があります。
@@ -971,9 +981,10 @@ function Service() {
                 lineHeight: 1.4,
               }}
             >
-              月替わりの会席、
+              <span className="phrase">月替わりの会席、</span>
               <br />
-              大和の旬を、ひと皿ずつ。
+              <span className="phrase">大和の旬を、</span>
+              <span className="phrase">ひと皿ずつ。</span>
             </h3>
             <p className="body" style={{ marginBottom: 18 }}>
               先付から水菓子まで全九品。料理長は宇陀の畑と毎朝相談し、その日に届いた大和野菜を主役に組み立てます。
@@ -1057,7 +1068,8 @@ function Service() {
                 lineHeight: 1.4,
               }}
             >
-              檜の大浴場と、星を見る露天風呂。
+              <span className="phrase">檜の大浴場と、</span>
+              <span className="phrase">星を見る露天風呂。</span>
             </h3>
             <p className="body" style={{ margin: 0 }}>
               地下から汲み上げた弱アルカリ性の温泉を、樹齢二百年の檜風呂で。
@@ -1140,9 +1152,10 @@ function Strengths() {
           </div>
           <div className="section-head__title">
             <h2 className="h-section" style={{ color: "var(--kinari)" }}>
-              「奈良に泊まる」ということを、
+              <span className="phrase">「奈良に泊まる」</span>
+              <span className="phrase">ということを、</span>
               <br />
-              ここまで考え抜きました。
+              <span className="phrase">ここまで考え抜きました。</span>
             </h2>
           </div>
         </div>
@@ -1271,7 +1284,10 @@ function Voice() {
             </span>
           </div>
           <div className="section-head__title">
-            <h2 className="h-section">百三十余年、選ばれ続けてきました。</h2>
+            <h2 className="h-section">
+              <span className="phrase">百三十余年、</span>
+              <span className="phrase">選ばれ続けてきました。</span>
+            </h2>
           </div>
         </div>
 
@@ -1511,7 +1527,8 @@ function Flow({ onReserve }) {
           </div>
           <div className="section-head__title">
             <h2 className="h-section">
-              ご予約からお見送りまで、五つのお約束。
+              <span className="phrase">ご予約からお見送りまで、</span>
+              <span className="phrase">五つのお約束。</span>
             </h2>
           </div>
         </div>
@@ -1637,7 +1654,9 @@ function FAQ() {
     <section ref={ref} id="faq" style={{ background: "var(--kinari)" }}>
       <div className="wrap-narrow">
         <div className="fade" style={{ textAlign: "center", marginBottom: 56 }}>
-          <h2 className="h-section">よくあるご質問</h2>
+          <h2 className="h-section">
+            <span className="phrase">よくあるご質問</span>
+          </h2>
         </div>
         <div className="fade" style={{ borderTop: "1px solid var(--line)" }}>
           {qs.map((it, i) => {
