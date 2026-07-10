@@ -31,6 +31,12 @@ body.case-site.nav-open {
   overflow: hidden;
 }
 
+.case-site img,
+.case-site video,
+.case-site iframe {
+  max-width: 100%;
+}
+
 .case-site nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -328,6 +334,11 @@ body.case-site.nav-open {
     align-items: center;
     flex-wrap: wrap;
   }
+  .case-site nav.site-header {
+    max-height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
   .case-site .nav-logo-text { gap: 0.14rem; }
   .case-site .nav-logo-corp {
     font-size: 0.5rem;
@@ -347,7 +358,7 @@ body.case-site.nav-open {
     align-items: stretch;
     gap: 0;
     margin-top: 1rem;
-    padding: 1rem 0 0;
+    padding: 1rem 0 0.4rem;
     border-top: 1px solid rgba(255,255,255,0.1);
   }
   .case-site .site-header.is-open .nav-links {
@@ -461,6 +472,22 @@ body.case-site.nav-open {
 }
 
 @media (max-width: 640px) {
+  .case-site nav {
+    padding: 1rem 1.25rem;
+  }
+  .case-site .nav-links {
+    margin-top: 0.8rem;
+  }
+  .case-site .nav-links > li > a,
+  .case-site .nav-item-trigger > a {
+    padding: 0.85rem 0;
+  }
+  .case-site .nav-submenu {
+    padding-left: 0.8rem;
+  }
+  .case-site .nav-cta {
+    width: 100%;
+  }
   .case-site footer { padding: 2rem 1.25rem 1.75rem; }
   .case-site .footer-inner {
     grid-template-columns: 1fr;

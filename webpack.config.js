@@ -164,6 +164,11 @@ module.exports = {
             return caseSiteScriptMap[pathData.chunk && pathData.chunk.name] || 'js/[name].js'
         }
     },
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, './dist'),
+        },
+    },
     resolve: {
         extensions: ['.js', '.jsx'],
     },

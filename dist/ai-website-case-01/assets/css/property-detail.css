@@ -363,3 +363,111 @@
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
+
+@media (max-width: 640px) {
+  .breadcrumb-bar {
+    padding-top: calc(0.75rem + 76px);
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+  .breadcrumb {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+  .gallery {
+    padding: 0.8rem 1.25rem;
+  }
+  .gallery-inner {
+    display: block;
+    height: auto;
+  }
+  .gallery-main {
+    aspect-ratio: 4 / 3;
+  }
+  .gallery-sub {
+    display: none;
+  }
+  .detail-wrap {
+    padding: 1.75rem 1.25rem 3.5rem;
+  }
+  .detail-badges {
+    flex-wrap: wrap;
+  }
+  .detail-price-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .detail-price {
+    font-size: clamp(1.8rem, 12vw, 2.25rem);
+  }
+  .quick-specs,
+  .cc-specs {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+  }
+  .qs-item {
+    padding: 0.9rem 0.7rem;
+  }
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+  }
+  .detail-table,
+  .detail-table tbody,
+  .detail-table tr,
+  .detail-table th,
+  .detail-table td {
+    display: block;
+    width: 100%;
+  }
+  .detail-table th {
+    padding: 0.85rem 1rem 0.25rem;
+    background: transparent;
+  }
+  .detail-table td {
+    padding: 0.25rem 1rem 0.85rem;
+  }
+  .feature-list,
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+  .map-placeholder {
+    height: 260px;
+  }
+  .contact-card-header,
+  .contact-card-body {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+  .action-bar {
+    flex-direction: column;
+  }
+  .related-section {
+    padding: 2.75rem 1.25rem 3.5rem;
+  }
+  .lightbox-close {
+    top: 1rem;
+    right: 1.25rem;
+  }
+  .lightbox-img {
+    width: calc(100vw - 2rem);
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 420px) {
+  .quick-specs,
+  .cc-specs {
+    grid-template-columns: 1fr;
+  }
+  .contact-card-header .price {
+    font-size: 1.6rem;
+  }
+}

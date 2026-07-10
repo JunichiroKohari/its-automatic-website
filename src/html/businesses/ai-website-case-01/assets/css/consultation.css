@@ -259,3 +259,77 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .sidebar { position: static; }
   .method-cards { grid-template-columns: 1fr 1fr 1fr; }
 }
+
+@media (max-width: 640px) {
+  .page-header {
+    padding: 2.75rem 1.25rem 2.25rem;
+  }
+  .page-header p br {
+    display: none;
+  }
+  .steps-bar {
+    padding: 0.85rem 1.25rem;
+  }
+  .steps-inner {
+    justify-content: space-between;
+  }
+  .step-item {
+    flex: 0 0 auto;
+  }
+  .step-connector {
+    min-width: 0;
+  }
+  .main-wrap {
+    padding: 1.5rem 1.25rem 3.5rem;
+  }
+  .form-section {
+    padding: 1.6rem 1.25rem;
+  }
+  .form-row,
+  .method-cards {
+    grid-template-columns: 1fr;
+  }
+  .type-chip {
+    flex: 1 1 100%;
+  }
+  .calendar-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cal-grid {
+    min-width: 280px;
+  }
+  .time-slots {
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-footer {
+    padding: 1.5rem 1.25rem;
+  }
+  .info-card-body,
+  .info-card-header {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+  .complete-screen {
+    padding: 3.5rem 1.25rem;
+  }
+  .complete-detail {
+    padding: 1.25rem;
+  }
+  .complete-detail-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .complete-detail-row span:first-child {
+    width: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .time-slots {
+    grid-template-columns: 1fr;
+  }
+  .privacy-check label {
+    font-size: 0.75rem;
+  }
+}

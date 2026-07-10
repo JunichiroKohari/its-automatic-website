@@ -261,3 +261,76 @@
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
+
+@media (max-width: 560px) {
+  .page-header {
+    padding: 7.5rem 1.25rem 2.5rem;
+  }
+  .page-header p {
+    line-height: 1.8;
+  }
+  .main-content {
+    padding: 1.5rem 1.25rem 3.5rem;
+  }
+  .filter-card {
+    padding: 1.4rem 1.25rem;
+  }
+  .price-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  }
+  .price-row input {
+    width: 100%;
+  }
+  .listing-header,
+  .listing-header-main { align-items: stretch; flex-direction: column; }
+  .sort-select,
+  .listing-header-actions { width: 100%; }
+  .view-toggles {
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+  .active-filter-bar { flex-direction: column; gap: 0.55rem; }
+  .prop-img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .prop-body {
+    padding: 1.2rem;
+  }
+  .prop-actions {
+    flex-direction: column;
+  }
+  .prop-btn-main,
+  .prop-btn-sub {
+    width: 100%;
+    min-height: 42px;
+  }
+  .pagination {
+    gap: 0.35rem;
+  }
+  .page-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .page-btn.arrow {
+    flex: 1 1 7.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .breadcrumb {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+  .filter-chips {
+    gap: 0.35rem;
+  }
+  .chip {
+    flex: 1 1 auto;
+  }
+  .active-filter-chip {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

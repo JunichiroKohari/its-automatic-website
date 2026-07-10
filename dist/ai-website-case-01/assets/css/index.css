@@ -620,7 +620,12 @@ h2 {
   .properties-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .hero { min-height: 560px; }
   .hero-content { padding: 0 1.5rem; }
-  .hero-title { font-size: clamp(2.1rem, 9vw, 3.1rem); line-height: 1.35; }
+  .hero-title {
+    width: auto;
+    max-width: 100%;
+    font-size: clamp(2.1rem, 9vw, 3.1rem);
+    line-height: 1.35;
+  }
   .hero-sub { font-size: 0.88rem; line-height: 1.9; }
   .hero-bg::before { background-size: 48px 48px; }
   .hero-video { object-position: 50% 58%; }
@@ -628,9 +633,115 @@ h2 {
 }
 
 @media (max-width: 640px) {
+  .site-disclaimer {
+    padding: 1rem;
+  }
+  .site-disclaimer__panel {
+    padding: 1.5rem;
+  }
+  section {
+    padding: 4rem 1.25rem;
+  }
+  .hero {
+    min-height: 640px;
+    height: 100svh;
+  }
+  .hero-content {
+    padding: 0 1.25rem;
+  }
+  .hero-tag {
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+  }
+  .hero-title {
+    font-size: clamp(1.9rem, 11vw, 2.55rem);
+    letter-spacing: 0.02em;
+  }
+  .hero-title span {
+    display: inline;
+    padding: 0 0.35rem;
+  }
+  .hero-sub br,
+  .cta-section p br {
+    display: none;
+  }
+  .hero-btns {
+    width: min(100%, 22rem);
+    margin: 0 auto;
+  }
+  .hero-btns a,
+  .cta-section .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+  .stats-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+  .stat-item {
+    padding: 1.5rem 1rem;
+  }
+  .stat-num {
+    font-size: 1.65rem;
+  }
   .flow-step {
     grid-template-columns: 56px 1fr;
     gap: 1rem;
     padding: 1.5rem 0;
+  }
+  .flow-step-circle {
+    width: 48px;
+    height: 48px;
+    font-size: 0.95rem;
+  }
+  .properties-header {
+    margin-bottom: 2rem;
+  }
+  .prop-img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .prop-body {
+    padding: 1.25rem;
+  }
+  .prop-specs,
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+  .prop-specs {
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+  }
+  .about-features {
+    display: grid;
+  }
+  .cta-section {
+    padding: 4rem 1.25rem;
+  }
+  .cta-contact-cards {
+    margin-top: 2.5rem;
+  }
+  .contact-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .scroll-top {
+    right: 1rem;
+    bottom: 1rem;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-title {
+    font-size: clamp(1.75rem, 10.5vw, 2.2rem);
+  }
+  .hero-title br {
+    display: none;
+  }
+  .section-tag {
+    letter-spacing: 0.16em;
+  }
+  .stats-bar {
+    grid-template-columns: 1fr;
   }
 }

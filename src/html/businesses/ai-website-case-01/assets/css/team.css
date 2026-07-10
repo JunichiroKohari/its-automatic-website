@@ -115,3 +115,30 @@
   .staff-grid { grid-template-columns: 1fr; gap: 2rem; }
   .support-row { grid-template-columns: 1fr; gap: 0.8rem; }
 }
+
+@media (max-width: 560px) {
+  .team-overview,
+  .staff-section,
+  .support-area {
+    padding: 3.5rem 1.25rem;
+  }
+  .team-point,
+  .staff-body,
+  .support-row {
+    padding: 1.35rem 1.2rem;
+  }
+  .staff-grid {
+    gap: 1.25rem;
+    margin-top: 2.25rem;
+  }
+  .staff-photo {
+    padding: 1rem;
+  }
+  .staff-meta {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .support-rows {
+    margin-top: 2.25rem;
+  }
+}

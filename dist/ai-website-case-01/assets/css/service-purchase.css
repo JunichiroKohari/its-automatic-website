@@ -285,3 +285,102 @@ h2 { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-we
   .voice-grid { grid-template-columns: 1fr; }
   .cta-section { padding: 4rem 1.5rem; }
 }
+
+@media (max-width: 560px) {
+  .page-hero {
+    padding: 2.25rem 1.25rem 2.75rem;
+  }
+  .breadcrumb {
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+  }
+  .page-hero h1 {
+    font-size: clamp(1.55rem, 8.5vw, 2rem);
+  }
+  .page-hero p br,
+  .cta-section p br {
+    display: none;
+  }
+  .hero-btns,
+  .cta-btns {
+    width: 100%;
+  }
+  .hero-btns a,
+  .cta-btns a {
+    width: 100%;
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .appeal,
+  .flow,
+  .support,
+  .checklist,
+  .voice,
+  .cta-section {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+  .appeal-grid,
+  .support-grid,
+  .voice-grid {
+    gap: 1rem;
+    margin-top: 2.25rem;
+  }
+  .appeal-card,
+  .support-card,
+  .voice-card,
+  .worry-card {
+    padding: 1.45rem 1.25rem;
+  }
+  .flow-steps {
+    margin-top: 2.25rem;
+  }
+  .flow-step {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.45rem 0;
+  }
+  .flow-step-circle {
+    width: 44px;
+    height: 44px;
+    font-size: 0.92rem;
+  }
+  .flow-step-body {
+    padding-top: 0.35rem;
+  }
+  .flow-step-body .step-note {
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+  .checklist-inner {
+    gap: 2.25rem;
+  }
+  .check-item {
+    gap: 0.8rem;
+  }
+  .worry-card {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+  .worry-answer {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .section-tag {
+    letter-spacing: 0.16em;
+  }
+  .hero-visual {
+    aspect-ratio: 4 / 3;
+  }
+  .flow-step {
+    grid-template-columns: 1fr;
+  }
+  .flow-step-left {
+    align-items: flex-start;
+  }
+  .flow-step-line {
+    display: none;
+  }
+}
