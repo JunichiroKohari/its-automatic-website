@@ -274,7 +274,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       checkboxFilters.forEach((input) => {
-        input.checked = Boolean(state.filters.flags[input.dataset.filterFlag]);
+        const checkbox = input;
+        checkbox.checked = Boolean(state.filters.flags[checkbox.dataset.filterFlag]);
       });
 
       document.querySelectorAll('[data-filter-group]').forEach((chip) => {
@@ -774,8 +775,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setView('grid');
     render();
     setupRevealAnimations();
-  } catch (error) {
-    console.error('物件一覧データの読み込みに失敗しました。', error);
+  } catch {
     propGrid.innerHTML = '<p style="grid-column:1/-1;padding:2rem;background:#fff;border:1px solid rgba(0,0,0,0.06);color:#555;">物件データの読み込みに失敗しました。時間をおいて再度お試しください。</p>';
     pagination.hidden = true;
   }

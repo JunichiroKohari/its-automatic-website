@@ -60,7 +60,7 @@ function TopNav({ onReserve }) {
         <a href="#faq">よくある質問</a>
         <a href="#access">アクセス</a>
       </div>
-      <button className="nav__cta" onClick={onReserve}>
+      <button type="button" className="nav__cta" onClick={onReserve}>
         ご予約
       </button>
     </nav>
@@ -281,7 +281,7 @@ function Hero({ onReserve }) {
             </p>
 
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <button className="btn btn--aka" onClick={onReserve}>
+              <button type="button" className="btn btn--aka" onClick={onReserve}>
                 ご宿泊のご予約
                 <span className="btn__arrow">→</span>
               </button>
@@ -1604,7 +1604,7 @@ function Flow({ onReserve }) {
         </div>
 
         <div className="fade" style={{ marginTop: 48, textAlign: 'center' }}>
-          <button className="btn btn--aka" onClick={onReserve}>
+          <button type="button" className="btn btn--aka" onClick={onReserve}>
             まずは空室を確認する
             <span className="btn__arrow">→</span>
           </button>
@@ -1674,6 +1674,7 @@ function FAQ() {
             return (
               <div key={i} style={{ borderBottom: '1px solid var(--line)' }}>
                 <button
+                  type="button"
                   onClick={() => setOpen(isOpen ? -1 : i)}
                   style={{
                     width: '100%',

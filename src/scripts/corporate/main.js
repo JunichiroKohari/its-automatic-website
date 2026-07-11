@@ -2,7 +2,7 @@ const $ = window.jQuery;
 const { AOS } = window;
 const { createREGL } = window;
 
-const makeAnime = function () {
+function makeAnime() {
   const FS_CODE = `
     #define TWO_PI 6.2831853072
     #define PI 3.14159265359
@@ -109,20 +109,23 @@ const makeAnime = function () {
   `;
 
   const canvas = document.querySelector('#webgl');
-  let scroll = 0.0; const velocity = 0.0; const
-    lastScroll = 0.0;
+  let scroll = 0.0;
+  const velocity = 0.0;
 
   const regl = createREGL({
     canvas,
-    onDone(error, regl) {
-      if (error) { alert('申し訳ございません。只今メンテナンス中です。'); }
+    onDone(error) {
+      if (error) {
+        document.body.classList.add('webgl-unavailable');
+        document.body.classList.remove('loading');
+      }
     },
   });
 
   // Loading a texture
   const img = new Image();
   img.src = 'img/gradient_map3.png';
-  img.onload = function () {
+  img.onload = () => {
     setTimeout(() => { document.body.classList.remove('loading'); }, 1000);
 
     // Create a REGL draw command
@@ -169,13 +172,13 @@ const makeAnime = function () {
       });
     });
   };
-};
+}
 
-!(function () {
+(function initCorporatePage() {
   let pendingWheelDeltaY = 0;
   let wheelFrameId = null;
 
-  const flushWheelScroll = function () {
+  const flushWheelScroll = () => {
     if (pendingWheelDeltaY !== 0) {
       window.scrollBy(0, pendingWheelDeltaY);
       pendingWheelDeltaY = 0;
@@ -246,10 +249,10 @@ const makeAnime = function () {
   });
 
   // テキストエリアを自動拡張して、内部スクロールがホイール入力を奪わないようにする
-  $('.contact-txt').each(function () {
+  $('.contact-txt').each(function resizeContactTextarea() {
     const textarea = this;
 
-    const syncTextareaHeight = function () {
+    const syncTextareaHeight = () => {
       textarea.style.height = 'auto';
       textarea.style.height = `${textarea.scrollHeight}px`;
     };

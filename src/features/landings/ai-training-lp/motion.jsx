@@ -73,7 +73,7 @@ function useCountUp(target, { duration = 1400, decimals = 0, when = true } = {})
     if (!when) return;
     let raf;
     const start = performance.now();
-    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const easeOut = (t) => 1 - ((1 - t) ** 3);
     const tick = (now) => {
       const p = Math.min(1, (now - start) / duration);
       setVal(target * easeOut(p));

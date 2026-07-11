@@ -59,6 +59,7 @@ function Nav() {
         </a>
       </nav>
       <button
+        type="button"
         className="show-mobile"
         aria-label="menu"
         onClick={() => setOpen((o) => !o)}
@@ -402,7 +403,7 @@ function Hero({ headline }) {
                   k: '研修開始までの期間',
                 },
                 { v: 0, k: '業務棚卸しから伴走', static: '棚卸し' },
-              ].map((s, i) => (
+              ].map((s) => (
                 <div key={s.k} style={{ padding: '4px 0' }}>
                   <div
                     style={{
@@ -1984,7 +1985,7 @@ function Solution() {
 /* ─── Solution Showcase — large editorial dashboard mockup ─── */
 function SolutionShowcase() {
   const {
-    Reveal, Bar, Counter, useInView,
+    Bar, Counter, useInView,
   } = window;
   const [ref, inView] = useInView({ threshold: 0.25 });
   return (
@@ -2181,7 +2182,7 @@ function SolutionShowcase() {
                 label: '30日後活用率',
                 sub: '継続',
               },
-            ].map((k, i) => (
+            ].map((k) => (
               <div
                 key={k.label}
                 className="dashboard-kpi-card"
@@ -2418,6 +2419,8 @@ function ScoreLine({ inView }) {
 Object.assign(window, {
   Nav,
   Hero,
+  HeroPhoto,
+  HeroComposition,
   Problem,
   Empathy,
   Solution,

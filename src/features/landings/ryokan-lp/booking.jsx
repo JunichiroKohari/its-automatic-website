@@ -1,6 +1,7 @@
 /* Booking — final CTA + multi-step form + sticky widget + modal */
 
 const { React } = window;
+const { useReveal } = window;
 const {
   useState, useEffect, useMemo, useRef,
 } = React;
@@ -25,7 +26,7 @@ const nights = (a, b) => Math.max(0, Math.round((b - a) / 86400000));
 /* ---------- inline date picker ---------- */
 
 function DatePicker({
-  value, min, onChange, label,
+  value, min, onChange, label, id,
 }) {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState(value || today());
@@ -51,8 +52,10 @@ function DatePicker({
   return (
     <div ref={ref} className="date-picker" style={{ position: 'relative' }}>
       <button
+        id={id}
         className="date-picker__button"
         type="button"
+        aria-label={label}
         onClick={() => setOpen(!open)}
         style={{
           width: '100%',
@@ -197,7 +200,13 @@ function DatePicker({
                   onMouseOver={(e) => {
                     if (!disabled && !selected) e.currentTarget.style.background = 'var(--kinari-2)';
                   }}
+                  onFocus={(e) => {
+                    if (!disabled && !selected) e.currentTarget.style.background = 'var(--kinari-2)';
+                  }}
                   onMouseOut={(e) => {
+                    if (!selected) e.currentTarget.style.background = 'transparent';
+                  }}
+                  onBlur={(e) => {
                     if (!selected) e.currentTarget.style.background = 'transparent';
                   }}
                 >
@@ -595,6 +604,7 @@ function BookingForm({
         <div style={{ marginTop: 32 }}>
           <button
             className="btn btn--ghost"
+            type="button"
             onClick={() => {
               setSubmitted(false);
               setStep(1);
@@ -619,6 +629,7 @@ function BookingForm({
           >
             <div>
               <label
+                htmlFor={`${idPrefix}-check-in`}
                 style={{
                   display: 'block',
                   fontFamily: 'var(--mono)',
@@ -631,6 +642,8 @@ function BookingForm({
                 CHECK-IN ／ ご到着
               </label>
               <DatePicker
+                id={`${idPrefix}-check-in`}
+                label="チェックイン日"
                 value={data.checkIn}
                 min={today()}
                 onChange={(d) => {
@@ -641,6 +654,7 @@ function BookingForm({
             </div>
             <div>
               <label
+                htmlFor={`${idPrefix}-check-out`}
                 style={{
                   display: 'block',
                   fontFamily: 'var(--mono)',
@@ -653,6 +667,8 @@ function BookingForm({
                 CHECK-OUT ／ ご出発
               </label>
               <DatePicker
+                id={`${idPrefix}-check-out`}
+                label="チェックアウト日"
                 value={data.checkOut}
                 min={addDays(data.checkIn, 1)}
                 onChange={(d) => update('checkOut', d)}
@@ -867,6 +883,7 @@ function BookingForm({
                 {row.map((f) => (
                   <div key={f.k}>
                     <label
+                      htmlFor={`${idPrefix}-${f.k}`}
                       style={{
                         display: 'block',
                         fontFamily: 'var(--mono)',
@@ -907,6 +924,7 @@ function BookingForm({
 
           <div>
             <label
+              htmlFor={`${idPrefix}-pickup`}
               style={{
                 display: 'block',
                 fontFamily: 'var(--mono)',
@@ -919,6 +937,7 @@ function BookingForm({
               PICKUP ／ 駅からの送迎（無料）
             </label>
             <select
+              id={`${idPrefix}-pickup`}
               value={data.pickup}
               onChange={(e) => update('pickup', e.target.value)}
               style={{
@@ -938,6 +957,7 @@ function BookingForm({
 
           <div>
             <label
+              htmlFor={`${idPrefix}-notes`}
               style={{
                 display: 'block',
                 fontFamily: 'var(--mono)',
@@ -950,6 +970,7 @@ function BookingForm({
               NOTES ／ ご要望（任意）
             </label>
             <textarea
+              id={`${idPrefix}-notes`}
               value={data.notes}
               rows={3}
               placeholder="アレルギー、ベジタリアン対応、記念日のサプライズなど"
@@ -1139,7 +1160,9 @@ function BookingForm({
             onClick={() => {
               if (!canSubmit) return;
               setSubmitted(true);
-              onSubmitted && onSubmitted(data);
+              if (onSubmitted) {
+                onSubmitted(data);
+              }
             }}
             disabled={!canSubmit}
             style={{ opacity: canSubmit ? 1 : 0.5 }}
@@ -1336,6 +1359,7 @@ function StickyReserve({ onOpen }) {
   }, []);
   return (
     <button
+      type="button"
       className="sticky-reserve"
       onClick={onOpen}
       aria-label="ご予約フォームを開く"
@@ -1396,7 +1420,15 @@ function BookingModal({ open, onClose }) {
   return (
     <div
       className="booking-modal"
+      role="button"
+      tabIndex={0}
+      aria-label="予約フォームを閉じる"
       onClick={onClose}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClose();
+        }
+      }}
       style={{
         position: 'fixed',
         inset: 0,
@@ -1412,6 +1444,7 @@ function BookingModal({ open, onClose }) {
     >
       <div
         className="booking-modal__panel"
+        role="presentation"
         onClick={(e) => e.stopPropagation()}
         style={{
           background: 'var(--kinari)',
@@ -1422,6 +1455,7 @@ function BookingModal({ open, onClose }) {
         }}
       >
         <button
+          type="button"
           onClick={onClose}
           aria-label="閉じる"
           style={{
@@ -1499,7 +1533,18 @@ function SiteDisclaimer({ open, onClose }) {
       aria-labelledby="siteDisclaimerTitle"
       aria-describedby="siteDisclaimerDesc"
     >
-      <div className="site-disclaimer__backdrop" onClick={onClose} />
+      <div
+        className="site-disclaimer__backdrop"
+        role="button"
+        tabIndex={0}
+        aria-label="閉じる"
+        onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            onClose();
+          }
+        }}
+      />
       <div className="site-disclaimer__panel" role="document">
         <h2 className="site-disclaimer__title" id="siteDisclaimerTitle">
           このページについて

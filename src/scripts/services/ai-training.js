@@ -49,27 +49,30 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const setFinalCount = (element) => {
-    const countTo = Number(element.dataset.countTo);
-    element.textContent = numberFormatter.format(countTo);
+    const countElement = element;
+    const countTo = Number(countElement.dataset.countTo);
+    countElement.textContent = numberFormatter.format(countTo);
   };
 
   const animateCount = (element) => {
-    if (element.dataset.counted === 'true') {
+    const countElement = element;
+
+    if (countElement.dataset.counted === 'true') {
       return;
     }
 
-    const countTo = Number(element.dataset.countTo);
-    const duration = Number(element.dataset.countDuration) || 1400;
+    const countTo = Number(countElement.dataset.countTo);
+    const duration = Number(countElement.dataset.countDuration) || 1400;
     const startedAt = performance.now();
 
-    element.dataset.counted = 'true';
+    countElement.dataset.counted = 'true';
 
     const tick = (timestamp) => {
       const progress = Math.min((timestamp - startedAt) / duration, 1);
       const eased = 1 - ((1 - progress) ** 3);
       const currentValue = Math.round(countTo * eased);
 
-      element.textContent = numberFormatter.format(currentValue);
+      countElement.textContent = numberFormatter.format(currentValue);
 
       if (progress < 1) {
         window.requestAnimationFrame(tick);

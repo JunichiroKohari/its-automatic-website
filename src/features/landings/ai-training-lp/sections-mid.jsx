@@ -81,6 +81,7 @@ function Service() {
         >
           {courses.map((co, i) => (
             <button
+              type="button"
               key={co.tag}
               role="tab"
               className="course-tab"
@@ -275,7 +276,7 @@ function Strengths() {
         </window.Reveal>
 
         <window.Stagger step={0.06} y={20} className="strengths-grid">
-          {strengths.map(({ num, title, desc }, i) => (
+          {strengths.map(({ num, title, desc }) => (
             <div key={num} className="strength-cell">
               <div className="num-badge" style={{ marginBottom: 14 }}>{num}</div>
               <h3 style={{

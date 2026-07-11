@@ -297,9 +297,10 @@ function TweaksPanel({ title = 'Tweaks', noDeckControls = false, children }) {
         data-noncommentable=""
         style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}
       >
-        <div className="twk-hd" onMouseDown={onDragStart}>
+        <div className="twk-hd" role="presentation" onMouseDown={onDragStart}>
           <b>{title}</b>
           <button
+            type="button"
             className="twk-x"
             aria-label="Close tweaks"
             onMouseDown={(e) => e.stopPropagation()}
@@ -559,7 +560,7 @@ function __twkIsLight(hex) {
   return r * 299 + g * 587 + b * 114 > 148000;
 }
 
-const __TwkCheck = ({ light }) => (
+const TwkCheck = ({ light }) => (
   <svg viewBox="0 0 14 14" aria-hidden="true">
     <path
       d="M3 7.2 5.8 10 11 4.2"
@@ -625,7 +626,7 @@ function TweakColor({
                   {sup.map((c, j) => <i key={j} style={{ background: c }} />)}
                 </span>
               )}
-              {on && <__TwkCheck light={__twkIsLight(hero)} />}
+              {on && <TwkCheck light={__twkIsLight(hero)} />}
             </button>
           );
         })}

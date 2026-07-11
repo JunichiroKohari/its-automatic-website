@@ -197,6 +197,7 @@ function FAQ() {
           {faqs.map((f, i) => (
             <div key={i} style={{ borderTop: '1px solid var(--border-2)' }}>
               <button
+                type="button"
                 className="faq-question"
                 onClick={() => setOpen(open === i ? -1 : i)}
                 style={{
@@ -414,7 +415,7 @@ function CTA() {
             <form onSubmit={onSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {/* Intent toggle */}
               <div>
-                <label style={{
+                <div style={{
                   fontSize: 12, fontWeight: 500, color: 'var(--ink-2)', display: 'block', marginBottom: 8,
                 }}
                 >
@@ -426,7 +427,7 @@ function CTA() {
                   >
                     必須
                   </span>
-                </label>
+                </div>
                 <div className="intent-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                   {[['doc', '資料ダウンロード', 'まずは情報収集から'], ['consult', '無料相談を予約', '60分・オンライン']].map(([k, t, sub]) => (
                     <button
@@ -452,32 +453,55 @@ function CTA() {
 
               <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 <div className="field">
-                  <label>
+                  <label htmlFor="ai-contact-company">
                     会社名
                     <span className="req">必須</span>
                   </label>
-                  <input required value={form.company} onChange={(e) => update('company', e.target.value)} placeholder="株式会社〇〇" />
+                  <input
+                    id="ai-contact-company"
+                    required
+                    value={form.company}
+                    onChange={(e) => update('company', e.target.value)}
+                    placeholder="株式会社〇〇"
+                  />
                 </div>
                 <div className="field">
-                  <label>
+                  <label htmlFor="ai-contact-name">
                     お名前
                     <span className="req">必須</span>
                   </label>
-                  <input required value={form.name} onChange={(e) => update('name', e.target.value)} placeholder="山田 太郎" />
+                  <input
+                    id="ai-contact-name"
+                    required
+                    value={form.name}
+                    onChange={(e) => update('name', e.target.value)}
+                    placeholder="山田 太郎"
+                  />
                 </div>
               </div>
 
               <div className="field">
-                <label>
+                <label htmlFor="ai-contact-email">
                   会社メールアドレス
                   <span className="req">必須</span>
                 </label>
-                <input required type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="info@company.co.jp" />
+                <input
+                  id="ai-contact-email"
+                  required
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => update('email', e.target.value)}
+                  placeholder="info@company.co.jp"
+                />
               </div>
 
               <div className="field">
-                <label>従業員規模</label>
-                <select value={form.size} onChange={(e) => update('size', e.target.value)}>
+                <label htmlFor="ai-contact-size">従業員規模</label>
+                <select
+                  id="ai-contact-size"
+                  value={form.size}
+                  onChange={(e) => update('size', e.target.value)}
+                >
                   <option value="">選択してください</option>
                   <option>個人・10名未満</option>
                   <option>10〜50名</option>
@@ -489,8 +513,13 @@ function CTA() {
 
               {intent === 'consult' && (
                 <div className="field">
-                  <label>ご相談内容（任意）</label>
-                  <textarea value={form.message} onChange={(e) => update('message', e.target.value)} placeholder="検討中のコース、社内の状況などをご記入いただけるとスムーズです。" />
+                  <label htmlFor="ai-contact-message">ご相談内容（任意）</label>
+                  <textarea
+                    id="ai-contact-message"
+                    value={form.message}
+                    onChange={(e) => update('message', e.target.value)}
+                    placeholder="検討中のコース、社内の状況などをご記入いただけるとスムーズです。"
+                  />
                 </div>
               )}
 
@@ -504,7 +533,7 @@ function CTA() {
               >
                 ご入力情報は
                 {' '}
-                <a href="#" style={{ borderBottom: '1px solid currentColor' }}>プライバシーポリシー</a>
+                <a href="/tokushoho/" style={{ borderBottom: '1px solid currentColor' }}>特定商取引法に基づく表記</a>
                 {' '}
                 に従って取り扱います。
               </p>
@@ -554,9 +583,23 @@ function Footer() {
             </p>
           </div>
           {[
-            ['サービス', ['AI研修サービス', 'カリキュラム', '料金プラン', '導入事例']],
-            ['会社情報', ['会社概要', '採用情報', 'お知らせ', 'ブログ']],
-            ['ポリシー', ['プライバシーポリシー', '特定商取引法', 'お問い合わせ', 'サイトマップ']],
+            ['サービス', [
+              ['AI研修サービス', '#service'],
+              ['カリキュラム', '#service'],
+              ['料金プラン', '#service'],
+              ['導入事例', '#results'],
+            ]],
+            ['会社情報', [
+              ['会社概要', '/'],
+              ['採用情報', '/'],
+              ['お知らせ', '/'],
+              ['ブログ', '/'],
+            ]],
+            ['ポリシー', [
+              ['特定商取引法', '/tokushoho/'],
+              ['お問い合わせ', '#contact'],
+              ['サイトマップ', '/'],
+            ]],
           ].map(([h, links]) => (
             <div key={h}>
               <div style={{
@@ -566,8 +609,8 @@ function Footer() {
                 {h}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {links.map((l) => (
-                  <a key={l} href="#" style={{ fontSize: 13.5, color: 'var(--on-dark-2)' }}>{l}</a>
+                {links.map(([label, href]) => (
+                  <a key={label} href={href} style={{ fontSize: 13.5, color: 'var(--on-dark-2)' }}>{label}</a>
                 ))}
               </div>
             </div>

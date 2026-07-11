@@ -286,6 +286,7 @@ function App() {
         <window.FAQ />
         <window.CTA />
       </main>
+      <SideIndex visible={Boolean(t.showIndex)} />
       <window.Footer />
       <FloatingCTA />
       <TweaksUI />

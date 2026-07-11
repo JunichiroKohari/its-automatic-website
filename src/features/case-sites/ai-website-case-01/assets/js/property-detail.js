@@ -320,8 +320,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     activateReveals();
-  } catch (error) {
-    console.error('物件詳細データの読み込みに失敗しました。', error);
+  } catch {
     detailWrap.innerHTML = '<div style="grid-column:1/-1;padding:2rem;background:#fff;border:1px solid rgba(0,0,0,0.06);color:#555;">物件詳細データの読み込みに失敗しました。時間をおいて再度お試しください。</div>';
     relatedGrid.innerHTML = '';
   }
