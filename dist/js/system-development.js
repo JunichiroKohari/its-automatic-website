@@ -1,0 +1,1 @@
+(()=>{"use strict";document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-scroll-target]").forEach(function(t){t.addEventListener("click",function(e){var o=t.getAttribute("data-scroll-target"),n=o?document.querySelector(o):null;n&&(e.preventDefault(),n.scrollIntoView({behavior:"smooth",block:"start"}))})})})})();

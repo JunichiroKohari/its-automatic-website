@@ -325,9 +325,9 @@ main::before {
 }
 .products-grid {
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 2em;
-	width: min(1100px, 95%);
+	width: min(1180px, 95%);
 	margin: 0 auto;
 }
 .product-card {
@@ -406,6 +406,11 @@ main::before {
 	height: auto;
 	opacity: .5;
 	display: block;
+}
+@media screen and (max-width: 1080px) {
+	.products-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
 }
 @media screen and (max-width: 815px) {
 	.products-grid {

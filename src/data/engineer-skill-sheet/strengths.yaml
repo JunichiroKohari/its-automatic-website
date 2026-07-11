@@ -1,0 +1,70 @@
+- no: "01"
+  title: フロントエンド
+  items:
+    - JavaScript / TypeScript + Vue.js(Nuxt.js)・React(Next.js) でのフロントエンド開発
+  related:
+    - JavaScript
+    - TypeScript
+    - HTML / CSS
+    - Nuxt.js (Vue.js)
+    - Next.js (React)
+- no: "02"
+  title: バックエンド / API
+  items:
+    - Laravel(Lumen)・Python での REST API 開発
+    - Go での gRPC API 開発
+    - Go・Python でのバッチ開発
+    - C# での画面・バッチ開発
+  related:
+    - PHP
+    - Go (Golang)
+    - Python
+    - C#
+    - Laravel (Lumen)
+    - .NET Framework
+- no: "03"
+  title: データ基盤
+  items:
+    - Apache Airflow でのデータパイプライン構築
+    - テーブル設計（RDB / DynamoDB）
+  related:
+    - Apache Airflow
+    - PostgreSQL
+    - SQL Server
+    - NoSQL (Firestore等)
+    - MySQL
+    - SQLite
+    - SQL
+- no: "04"
+  title: インフラ / DevOps
+  items:
+    - Terraform・CloudFormation での IaC 構築
+    - Kubernetes 環境でのワークロード構築
+    - Docker での環境構築
+    - CI/CD 構築（GitHub Actions）
+  related:
+    - AWS
+    - GCP
+    - Linux
+    - Windows Server
+    - Terraform
+    - ShellScript
+    - Git
+    - GitHub
+- no: "05"
+  title: 品質 / テスト
+  items:
+    - テストコード作成（pytest / Go testing / PHPUnit / Cypress）
+    - コードレビュー（Go / Python / PHP / JS / TS）
+  related:
+    - Git
+    - GitHub
+    - BitBucket
+- no: "06"
+  title: 開発スタイル / チーム
+  items:
+    - ウォーターフォール・アジャイル（スクラム）での開発
+    - 0→1 の新規開発と長期稼働システム双方の経験
+    - 新規参画者・若手のサポート（オンボーディング / タスク分担 / 技術支援）
+    - モブプロ・ペアプロの経験
+  related: []

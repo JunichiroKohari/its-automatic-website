@@ -1,8 +1,27 @@
 const fs = require('fs')
 const path = require('path')
+const yaml = require('js-yaml')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+const loadYamlFile = (relativePath) => yaml.safeLoad(
+    fs.readFileSync(path.resolve(__dirname, relativePath), 'utf8')
+)
+
+class WatchAdditionalFilesPlugin {
+    constructor(files) {
+        this.files = files
+    }
+
+    apply(compiler) {
+        compiler.hooks.afterCompile.tap('WatchAdditionalFilesPlugin', (compilation) => {
+            this.files.forEach((file) => {
+                compilation.fileDependencies.add(path.resolve(__dirname, file))
+            })
+        })
+    }
+}
 
 class RelativeCaseSiteAssetUrlsPlugin {
     apply(compiler) {
@@ -86,6 +105,22 @@ class CopyStandaloneBusinessSiteAssetsPlugin {
 }
 
 const caseSiteDir = './src/html/businesses/ai-website-case-01'
+const engineerSkillSheetDataPaths = {
+    skills: './src/data/engineer-skill-sheet/skills.yaml',
+    strengths: './src/data/engineer-skill-sheet/strengths.yaml',
+    projects: './src/data/engineer-skill-sheet/projects.yaml',
+}
+const pugTemplateData = {}
+
+Object.defineProperty(pugTemplateData, 'skillSheet', {
+    enumerable: true,
+    get: () => ({
+        skills: loadYamlFile(engineerSkillSheetDataPaths.skills),
+        strengths: loadYamlFile(engineerSkillSheetDataPaths.strengths),
+        projects: loadYamlFile(engineerSkillSheetDataPaths.projects),
+    }),
+})
+
 const caseSitePages = fs.readdirSync(path.resolve(__dirname, caseSiteDir))
     .filter((file) => file.endsWith('.pug') && !file.startsWith('_'))
     .map((file) => ({
@@ -130,6 +165,16 @@ const pages = [
         chunks: ['influencer-marketing'],
     },
     {
+        template: './src/html/businesses/system_development.pug',
+        filename: 'system_development.html',
+        chunks: ['system-development'],
+    },
+    {
+        template: './src/html/businesses/engineer_skill_sheet.pug',
+        filename: 'engineer_skill_sheet.html',
+        chunks: ['engineer-skill-sheet'],
+    },
+    {
         template: './src/html/businesses/tokushoho.pug',
         filename: 'tokushoho.html',
         chunks: ['ai-training'],
@@ -147,6 +192,8 @@ module.exports = {
         'ai-training-lp': './src/js/ai-training-lp.jsx',
         'ryokan-lp': './src/js/ryokan-lp.jsx',
         'influencer-marketing': './src/js/influencer-marketing.js',
+        'system-development': './src/js/system-development.js',
+        'engineer-skill-sheet': './src/js/engineer-skill-sheet.js',
         'properties-listing': './src/html/businesses/ai-website-case-01/assets/js/properties-listing.js',
         'property-detail': './src/html/businesses/ai-website-case-01/assets/js/property-detail.js',
     },
@@ -249,7 +296,10 @@ module.exports = {
                         loader: 'html-loader'
                     },
                     {
-                        loader: 'pug-html-loader'
+                        loader: 'pug-html-loader',
+                        options: {
+                            data: pugTemplateData,
+                        },
                     },
                 ]
             },
@@ -267,6 +317,7 @@ module.exports = {
         new RelativeCaseSiteAssetUrlsPlugin(),
         new CopyCaseSiteStaticAssetsPlugin(),
         new CopyStandaloneBusinessSiteAssetsPlugin(),
+        new WatchAdditionalFilesPlugin(Object.values(engineerSkillSheetDataPaths)),
         ...pages.map((page) => new HtmlWebpackPlugin({
             ...page,
             favicon: path.resolve(__dirname, './src/img/icon.png'),

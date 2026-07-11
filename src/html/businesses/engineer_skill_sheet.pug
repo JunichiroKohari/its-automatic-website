@@ -1,0 +1,454 @@
+-
+  const skills = skillSheet.skills
+
+  const iconMap = {
+    'JavaScript': 'devicon-javascript-plain colored',
+    'TypeScript': 'devicon-typescript-plain colored',
+    'SQL': { fallback: 'SQL' },
+    'Python': 'devicon-python-plain colored',
+    'PHP': 'devicon-php-plain colored',
+    'Go (Golang)': 'devicon-go-plain colored',
+    'C#': 'devicon-csharp-plain colored',
+    'Kotlin': 'devicon-kotlin-plain colored',
+    'HTML / CSS': 'devicon-html5-plain colored',
+    'ShellScript': 'devicon-bash-plain colored',
+    'Nuxt.js (Vue.js)': 'devicon-nuxtjs-plain colored',
+    'Laravel (Lumen)': 'devicon-laravel-plain colored',
+    'Next.js (React)': 'devicon-nextjs-plain colored',
+    '.NET Framework': 'devicon-dot-net-plain colored',
+    'Apache Airflow': 'devicon-apacheairflow-plain colored',
+    'PostgreSQL': 'devicon-postgresql-plain colored',
+    'SQL Server': 'devicon-microsoftsqlserver-plain colored',
+    'NoSQL (Firestore等)': 'devicon-firebase-plain colored',
+    'MySQL': 'devicon-mysql-plain colored',
+    'SQLite': 'devicon-sqlite-plain colored',
+    'AWS': { fallback: 'AWS' },
+    'Linux': 'devicon-linux-plain colored',
+    'Windows Server': 'devicon-windows8-original colored',
+    'GCP': 'devicon-googlecloud-plain colored',
+    'Git': 'devicon-git-plain colored',
+    'GitHub': 'devicon-github-original colored',
+    'BitBucket': 'devicon-bitbucket-original colored',
+    'CodeCommit': { fallback: 'CC' },
+    'Terraform': 'devicon-terraform-plain colored',
+  }
+
+  const techClass = {
+    'JavaScript': 'devicon-javascript-plain colored',
+    'PHP': 'devicon-php-plain colored',
+    'Laravel': 'devicon-laravel-plain colored',
+    'Nuxt': 'devicon-nuxtjs-plain colored',
+    'Next.js': 'devicon-nextjs-plain colored',
+    'Go': 'devicon-go-plain colored',
+    'Python': 'devicon-python-plain colored',
+    'TypeScript': 'devicon-typescript-plain colored',
+    'Kotlin': 'devicon-kotlin-plain colored',
+    'Kubernetes': 'devicon-kubernetes-plain colored',
+    'GCP': 'devicon-googlecloud-plain colored',
+    'React': 'devicon-react-original colored',
+    'C#': 'devicon-csharp-plain colored',
+    '.NET Framework': 'devicon-dot-net-plain colored',
+    'Apache Airflow': 'devicon-apacheairflow-plain colored',
+    'Vue': 'devicon-vuejs-plain colored',
+    'jQuery': 'devicon-jquery-plain colored',
+    'HTML / CSS': 'devicon-html5-plain colored',
+    'SQL': { fallback: 'SQL' },
+    'PostgreSQL': 'devicon-postgresql-plain colored',
+    'SQL Server': 'devicon-microsoftsqlserver-plain colored',
+    'MySQL': 'devicon-mysql-plain colored',
+    'Docker': 'devicon-docker-plain colored',
+    'GitHub Actions': 'devicon-github-original colored',
+    'Unity': 'devicon-unity-original colored',
+    'SharePoint': { fallback: 'SP' },
+    'AWS': { fallback: 'AWS' },
+  }
+
+  const skillCategoryLabels = {
+    all: 'ALL',
+    lang: '言語',
+    fw: 'フレームワーク',
+    db: 'DB',
+    infra: 'インフラ・OS',
+    tool: 'ツール',
+    ai: 'AI',
+  }
+  const skillCategories = [
+    { key: 'all', label: skillCategoryLabels.all },
+    ...Array.from(new Set(skills.map((skill) => skill.cat))).map((key) => ({
+      key,
+      label: skillCategoryLabels[key] || key.toUpperCase(),
+    })),
+  ]
+
+  const categoryTags = {
+    lang: 'lang',
+    fw: 'framework',
+    db: 'database',
+    infra: 'infra',
+    tool: 'tool',
+    ai: 'ai',
+  }
+
+  const strengthGroups = skillSheet.strengths
+
+  const projects = skillSheet.projects
+
+  const industries = Array.from(new Set(projects.map((project) => project.industry)))
+  const technologies = Array.from(new Set(projects.flatMap((project) => project.tech))).sort()
+  const projectTypeLabels = {
+    long: '長期案件',
+    short: '短期・スポット',
+    self: '自社事業',
+  }
+  const projectTypes = Array.from(new Set(projects.map((project) => project.type))).map((type) => ({
+    key: type,
+    label: projectTypeLabels[type] || '案件',
+  }))
+  const getProjectTypeLabel = (project) => project.typeLabel || projectTypeLabels[project.type] || '案件'
+  const getProjectPeriodLabel = (project) => project.dates || project.period
+  const getProjectDateValue = (project, index) => {
+    const dateMatches = `${project.dates || ''}`.match(/\d{4}\/\d{2}\/\d{2}/g) || []
+    const value = dateMatches[index]
+    return value ? Number(value.replace(/\D/g, '')) : 0
+  }
+  const getProjectDurationMonths = (project) => {
+    const period = `${project.period || ''}`
+    const years = Number((period.match(/(\d+)年/) || [])[1] || 0)
+    const months = Number((period.match(/(\d+)ヶ?月/) || [])[1] || 0)
+    return years * 12 + months
+  }
+  const getProjectSearchText = (project) => [
+    project.sourceNo,
+    project.company,
+    project.title,
+    project.industry,
+    project.period,
+    project.dates,
+    getProjectTypeLabel(project),
+    project.phase,
+    project.engagement,
+    ...(project.tech || []),
+    project.desc,
+    project.team,
+    project.environment,
+  ].filter(Boolean).join(' ')
+  const getProjectPrintSummary = (text = '') => {
+    const summary = `${text}`.replace(/\s+/g, ' ').trim()
+    return summary.length > 104 ? `${summary.slice(0, 104)}...` : summary
+  }
+  const levels = [1, 2, 3, 4, 5]
+  const stats = []
+  const chatQuestions = [
+    {
+      text: 'Go や Python での開発経験について',
+      answer: 'Go は決済基盤、不正利用対策、広告計測SaaSのバッチ、住宅施工品質SaaSのバッチで経験があります。Python は広告計測API、Apache Airflow / MWAAのデータパイプライン、住宅施工品質SaaSのバッチで経験があります。',
+    },
+    {
+      text: '決済・金融ドメインでの実績',
+      answer: '法人クレジットカードの不正利用対策システムと、T銀行・E銀行・F銀行向けの銀行系システムで実績があります。決済基盤、社内システム、口座開設、電子帳票、個人ローン申込、営業支援まで担当しています。',
+    },
+    {
+      text: 'インフラや DevOps の対応範囲',
+      answer: 'AWS / GCP、Kubernetes、Terraform / Terragrunt、Docker、GitHub Actions、ArgoCD、Helm、MWAAなどの経験があります。アプリケーション実装とあわせて、運用を見据えた基盤整備も支援可能です。',
+    },
+  ]
+
+mixin multiline(text)
+  p
+    each line, index in text.split('\n')
+      if index
+        br
+      = line
+
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="color-scheme" content="light dark")
+    title 弊社エンジニアの詳細 | 株式会社 It's Automatic
+    meta(name="description" content="株式会社 It's Automatic がシステム開発支援でアサインするソフトウェアエンジニアのスキルシート。プロフィール、技術スキル、案件実績を掲載しています。")
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css")
+  body.skill-sheet-page(data-theme-mode="snow")
+    .skill-sheet-shell
+      aside.skill-sidebar#skill-sidebar(data-sidebar aria-label="スキルシートメニュー")
+        .skill-sidebar__mobile-head
+          span MENU
+          button.skill-sidebar__close(type="button" data-sidebar-close aria-label="メニューを閉じる") ×
+        .skill-profile-mark
+          span.skill-profile-mark__dot
+          span J.K. — skillsheet
+        .skill-sidebar__name
+          | J.K
+          span .
+        p.skill-sidebar__role
+          | ソフトウェアエンジニア
+        nav.skill-sidebar__nav(aria-label="スキルシートナビゲーション")
+          button.skill-nav-item.is-active(type="button" data-tab-target="profile")
+            span $
+            | profile
+            small .md
+          button.skill-nav-item(type="button" data-tab-target="skills")
+            span $
+            | skills
+            small .yaml
+          button.skill-nav-item(type="button" data-tab-target="career")
+            span $
+            | career
+            small .log
+        .skill-sidebar__actions
+          button.skill-export-button(type="button" data-pdf-export title="profile / skills / career をまとめてPDF出力")
+            span.skill-export-button__icon(aria-hidden="true")
+              svg(width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+                path(d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4")
+                polyline(points="7 10 12 15 17 10")
+                line(x1="12" y1="15" x2="12" y2="3")
+            | PDF出力
+            small all
+        .theme-picker
+          p THEME
+          .theme-picker__buttons
+            button.theme-swatch.theme-swatch--snow.is-active(type="button" data-theme="snow" title="スノー")
+            button.theme-swatch.theme-swatch--teal(type="button" data-theme="teal" title="ティール")
+            button.theme-swatch.theme-swatch--charcoal(type="button" data-theme="charcoal" title="チャコール")
+        .skill-sidebar__footer
+          | 更新日 2026.07.10
+      button.skill-sidebar-backdrop(type="button" data-sidebar-close aria-label="メニューを閉じる")
+
+      main.skill-main
+        .skill-pathbar
+          button.skill-menu-toggle(type="button" data-sidebar-toggle aria-label="メニューを開く" aria-expanded="false" aria-controls="skill-sidebar")
+            span.skill-menu-toggle__lines(aria-hidden="true")
+              span.skill-menu-toggle__line
+              span.skill-menu-toggle__line
+              span.skill-menu-toggle__line
+          span.skill-pathbar__user j.k@portfolio
+          span :~/
+          strong(data-path-label) profile.md
+          span.skill-cursor(aria-hidden="true")
+
+        section.skill-panel(data-tab-panel="profile")
+          .skill-mobile-profile-header
+            .skill-profile-mark
+              span.skill-profile-mark__dot
+              span J.K. — skillsheet
+            .skill-sidebar__name
+              | J.K
+              span .
+            p.skill-sidebar__role
+              | ソフトウェアエンジニア
+          .panel-heading
+            h1
+              | フロントからバックエンド、
+              br
+              | インフラまわりまで柔軟に対応します。
+            p.panel-lead フロントエンドからバックエンド、データ基盤、インフラ／DevOps まで一貫して担当できるソフトウェアエンジニアです。0→1 の新規開発と、長年稼働するシステムの改修・保守の双方を経験。金融・建設・教育・小売・Webマーケティングなど、自社事業を含む8領域・12件で、設計から運用まで幅広いフェーズに携わってきました。
+          .profile-grid
+            article.profile-card
+              p.card-kicker BASIC INFO
+              dl.info-list
+                div
+                  dt 氏名
+                  dd J.K.（イニシャル表記）
+                div
+                  dt 年齢
+                  dd 30歳
+                div
+                  dt 形態
+                  dd 個人事業主
+                div
+                  dt 開発経験
+                  dd 6年以上
+            article.profile-card
+              p.card-kicker CORE STACK
+              p 普段の主軸は Go / Python / TypeScript。バックエンドの REST / gRPC API、フロントの React・Vue、Terraform・Kubernetes でのインフラ構築までを単独でカバーします。テスト・コードレビュー・CI/CD・オンボーディング支援など、チーム開発の土台づくりも得意です。
+          .section-title-row
+            h2 得意分野・強み
+            span 担当できる範囲を6つの軸で整理
+          .strength-grid
+            each group in strengthGroups
+              article.strength-card
+                .strength-card__head
+                  span= group.no
+                  h3= group.title
+                ul
+                  each item in group.items
+                    li= item
+                if group.related.length
+                  button.strength-card__link(type="button" data-highlight-skills=group.related.join('|')) 関連スキルを見る
+
+        section.skill-panel(data-tab-panel="skills" hidden)
+          .panel-heading.panel-heading--compact
+            h1 技術スキル
+            p.panel-lead 実務での習熟度（経験年数ベース）の目安をバーで示しています。カテゴリで絞り込めます。
+          .skill-filter-row
+            each cat in skillCategories
+              button(class=cat.key === 'all' ? 'skill-filter is-active' : 'skill-filter' type="button" data-skill-filter=cat.key)= cat.label
+          .skill-grid
+            each skill in skills
+              - const icon = iconMap[skill.name] || { fallback: skill.name.slice(0, 3).toUpperCase() }
+              article.skill-card(data-skill-card data-skill-cat=skill.cat data-skill-name=skill.name)
+                .skill-card__top
+                  .skill-card__identity
+                    span.skill-card__icon
+                      if typeof icon === 'string'
+                        i(class=icon)
+                      else
+                        span= icon.fallback
+                    strong= skill.name
+                  span.skill-card__years= skill.years
+                .skill-level
+                  each level in levels
+                    span(class=level <= skill.level ? 'skill-level__bar is-filled' : 'skill-level__bar')
+                  small= categoryTags[skill.cat]
+
+        section.skill-panel(data-tab-panel="career" hidden)
+          .panel-heading.panel-heading--compact
+            h1 経歴・実績
+          .section-title-row.section-title-row--projects
+            h2 案件実績
+            span
+              strong(data-project-count)= projects.length
+              |  / #{projects.length} 件
+            label.project-sort-field
+              span 表示順
+              select(data-project-sort)
+                option(value="newest") 新しい順
+                option(value="oldest") 古い順
+                option(value="duration-desc") 期間が長い順
+                option(value="duration-asc") 期間が短い順
+                option(value="source-asc") 掲載順
+          .project-filters
+            .project-filter-row.project-filter-row--keyword
+              label.project-filter-field.project-filter-field--search
+                span キーワード
+                input(type="search" data-project-search placeholder="会社・案件・技術で検索" autocomplete="off")
+            .project-filter-row.project-filter-row--selects
+              label.project-filter-field
+                span 業種
+                select(data-project-industry)
+                  option(value="all") すべての業種
+                  each industry in industries
+                    option(value=industry)= industry
+              label.project-filter-field
+                span 技術
+                select(data-project-tech)
+                  option(value="all") すべての技術
+                  each tech in technologies
+                    option(value=tech)= tech
+              label.project-filter-field
+                span 区分
+                select(data-project-type)
+                  option(value="all") すべての区分
+                  each type in projectTypes
+                    option(value=type.key)= type.label
+            .project-filter-row.project-filter-row--actions
+              p.project-filter-summary(data-project-summary aria-live="polite") 全件表示中
+              .project-filter-actions
+                button.project-search-submit(type="button" data-project-search-submit) 検索
+                button.project-filter-reset(type="button" data-project-filter-reset disabled) クリア
+          p.project-empty(data-project-empty hidden) 条件に一致する案件はありませんでした。フィルターを変更してお試しください。
+          .project-list(data-project-list)
+            each project, projectIndex in projects
+              - const projectTech = project.tech || []
+              - const projectTypeLabel = getProjectTypeLabel(project)
+              - const projectStart = getProjectDateValue(project, 0)
+              - const projectEnd = project.active ? 99991231 : getProjectDateValue(project, 1)
+              article.project-card(
+                data-project-card
+                data-project-index=projectIndex
+                data-project-source=project.sourceNo || projectIndex
+                data-project-industry=project.industry
+                data-project-tech=projectTech.join('|')
+                data-project-type=project.type
+                data-project-type-label=projectTypeLabel
+                data-project-active=project.active ? 'true' : 'false'
+                data-project-start=projectStart
+                data-project-end=projectEnd
+                data-project-duration=getProjectDurationMonths(project)
+                data-project-search=getProjectSearchText(project)
+              )
+                .project-card__head
+                  .project-card__title
+                    .project-card__badges
+                      span(class=project.type === 'long' ? 'project-badge project-badge--long' : project.type === 'self' ? 'project-badge project-badge--self' : 'project-badge')= projectTypeLabel
+                      span.project-industry= project.industry
+                      if project.active
+                        span.project-active 参画中
+                    h3 #{project.company} — #{project.title}
+                  span.project-period= project.period
+                .project-card__meta
+                  div
+                    span 担当フェーズ
+                    strong= project.phase
+                  div
+                    span 期間
+                    strong= getProjectPeriodLabel(project)
+                  if project.engagement
+                    div
+                      span 就業形態
+                      strong= project.engagement
+                  div
+                    span 区分
+                    strong= projectTypeLabel
+                .project-tech
+                  each tech in projectTech
+                    - const techIcon = techClass[tech]
+                    span
+                      if typeof techIcon === 'string'
+                        i(class=techIcon)
+                      else if techIcon && techIcon.fallback
+                        b= techIcon.fallback
+                      strong= tech
+                p.project-print-summary= getProjectPrintSummary(project.desc)
+                .project-card__detail(data-project-detail hidden)
+                  .project-detail-block
+                    span.project-detail-label 業務内容
+                    +multiline(project.desc)
+                  if project.team
+                    .project-detail-block
+                      span.project-detail-label 体制・場所
+                      +multiline(project.team)
+                  if project.environment
+                    .project-detail-block
+                      span.project-detail-label 使用技術・環境
+                      +multiline(project.environment)
+                button.project-toggle(type="button" data-project-toggle aria-expanded="false")
+                  span 詳細を見る
+                  i(aria-hidden="true") ▾
+
+    .floating-ai-chat
+      .floating-ai-chat__panel#floating-ai-chat-panel(data-floating-chat-panel hidden)
+        .floating-ai-chat__header
+          span.floating-ai-chat__avatar HK
+          .floating-ai-chat__title
+            strong J.K. に質問する
+            span.floating-ai-chat__status
+              i
+              | AI が回答します
+          .floating-ai-chat__tools
+            button.floating-ai-chat__clear(type="button" data-floating-chat-clear hidden) clear
+            button.floating-ai-chat__close(type="button" data-floating-chat-close aria-label="閉じる") ×
+        .floating-ai-chat__messages(data-floating-chat-messages)
+          .floating-ai-chat__empty(data-floating-chat-empty)
+            p
+              | こんにちは。
+              strong J.K. のスキルシート
+              | について、AI が代わりにお答えします。経験・スキル・案件・稼働条件など、お気軽にどうぞ。
+            .floating-ai-chat__faq-label よくある質問
+            .floating-ai-chat__suggestions
+              each item in chatQuestions
+                button(type="button" data-floating-chat-question data-chat-answer=item.answer)= item.text
+        .floating-ai-chat__input
+          .floating-ai-chat__input-row
+            textarea(data-floating-chat-input rows="1" placeholder="質問を入力…")
+            button(type="button" data-floating-chat-send) 送信
+          .floating-ai-chat__note Enter で送信 ／ Shift+Enter で改行 ・ スキルシートに基づく AI 生成
+      button.floating-ai-chat__launcher(type="button" data-floating-chat-launcher aria-expanded="false" aria-controls="floating-ai-chat-panel")
+        span.floating-ai-chat__icon(aria-hidden="true")
+          svg(width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round")
+            path(d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z")
+        span(data-floating-chat-label) AIに質問

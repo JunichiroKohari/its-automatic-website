@@ -258,6 +258,20 @@ const makeAnime = function () {
     textarea.addEventListener('input', syncTextareaHeight);
   });
 
+  const contactMessage = new URLSearchParams(window.location.search).get('contactMessage');
+  const contactMessageInput = document.querySelector('#message');
+
+  if (contactMessage && contactMessageInput) {
+    contactMessageInput.value = contactMessage;
+    contactMessageInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+    if (window.location.hash === '#contact') {
+      window.requestAnimationFrame(() => {
+        document.querySelector('#contact')?.scrollIntoView({ block: 'start' });
+      });
+    }
+  }
+
   // スクロールボタン押下時処理　トップに戻る
   const pageTop = $('.pagetop');
   let isPageTopVisible = false;
