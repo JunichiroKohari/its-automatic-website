@@ -1,4 +1,3 @@
-
 const contactMessageTemplate = [
   '面談依頼',
   '',

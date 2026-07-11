@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-scroll-target]').forEach((trigger) => {
     trigger.addEventListener('click', (event) => {

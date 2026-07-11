@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   const { body } = document;
   const nav = document.querySelector('.site-nav');

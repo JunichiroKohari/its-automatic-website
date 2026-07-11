@@ -1,6 +1,6 @@
 const $ = window.jQuery;
-const AOS = window.AOS;
-const createREGL = window.createREGL;
+const { AOS } = window;
+const { createREGL } = window;
 
 const makeAnime = function () {
   const FS_CODE = `

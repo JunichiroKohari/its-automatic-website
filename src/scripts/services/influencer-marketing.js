@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof window.Reveal !== 'function') {
     return;
