@@ -5,9 +5,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sortSelect = document.querySelector('.sort-select');
   const gridButton = document.getElementById('gridBtn');
   const listButton = document.getElementById('listBtn');
+  const keywordInput = document.getElementById('keywordInput');
   const priceMinInput = document.getElementById('priceMinInput');
   const priceMaxInput = document.getElementById('priceMaxInput');
+  const areaMinInput = document.getElementById('areaMinInput');
+  const areaMaxInput = document.getElementById('areaMaxInput');
+  const walkMaxSelect = document.getElementById('walkMaxSelect');
   const filterClearButton = document.querySelector('.filter-clear');
+  const activeFilterBar = document.getElementById('activeFilterBar');
+  const activeFilterChips = document.getElementById('activeFilterChips');
   const checkboxFilters = Array.from(document.querySelectorAll('[data-filter-flag]'));
   const revealables = Array.from(document.querySelectorAll('.reveal'));
   const numberFormatter = new Intl.NumberFormat('ja-JP');
@@ -15,6 +21,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     新着: 'badge-new',
     おすすめ: 'badge-rec',
     成約済: 'badge-sold',
+  };
+  const layoutFilterLabelMap = {
+    'under-1ldk': '1LDK以下',
+    '2ldk': '2LDK',
+    '3ldk': '3LDK',
+    '4ldk-plus': '4LDK以上',
+  };
+  const flagFilterLabelMap = {
+    newArrival: '新着',
+    recommended: 'おすすめ',
+    age10: '築10年以内',
+    parking: '駐車場あり',
+    southFacing: '南向き',
+    corner: '角部屋・角地',
+    renovated: 'リフォーム済み',
   };
 
   if (!propGrid || !pagination) {
@@ -62,6 +83,40 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const includesKeyword = (text, patterns) => patterns.some((pattern) => pattern.test(text));
+
+  const normalizeSearchText = (value) => String(value ?? '')
+    .normalize('NFKC')
+    .toLocaleLowerCase('ja-JP');
+
+  const tokenizeKeyword = (value) => normalizeSearchText(value)
+    .split(/[\s\u3000]+/)
+    .filter(Boolean);
+
+  const escapeHtml = (value) => String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const compareNumbersMissingLast = (leftValue, rightValue, direction = 'asc') => {
+    const leftMissing = typeof leftValue !== 'number' || Number.isNaN(leftValue);
+    const rightMissing = typeof rightValue !== 'number' || Number.isNaN(rightValue);
+
+    if (leftMissing && rightMissing) {
+      return 0;
+    }
+
+    if (leftMissing) {
+      return 1;
+    }
+
+    if (rightMissing) {
+      return -1;
+    }
+
+    return direction === 'desc' ? rightValue - leftValue : leftValue - rightValue;
+  };
 
   const createCardMarkup = (property, index) => {
     const animationDelay = `${((index + 1) * 0.05).toFixed(2)}s`;
@@ -111,34 +166,44 @@ document.addEventListener('DOMContentLoaded', async () => {
     const propertyData = await propertiesResponse.json();
     const detailData = detailResponse && detailResponse.ok ? await detailResponse.json() : [];
     const detailsById = new Map(detailData.map((detail) => [detail.id, detail]));
+    const createDefaultFilters = () => ({
+      keyword: '',
+      area: '',
+      category: '',
+      sidebarLayout: '',
+      priceMin: '',
+      priceMax: '',
+      areaMin: '',
+      areaMax: '',
+      walkMax: '',
+      flags: {
+        newArrival: false,
+        recommended: false,
+        age10: false,
+        parking: false,
+        southFacing: false,
+        corner: false,
+        renovated: false,
+      },
+    });
 
     const state = {
       currentPage: 1,
       pageSize: 6,
       sortKey: 'newest',
       viewMode: 'grid',
-      filters: {
-        area: '',
-        category: '',
-        sidebarLayout: '',
-        priceMin: '',
-        priceMax: '',
-        flags: {
-          walk10: false,
-          age10: false,
-          parking: false,
-          southFacing: false,
-          corner: false,
-          renovated: false,
-        },
-      },
+      filters: createDefaultFilters(),
       properties: propertyData.map((property, index) => {
         const detail = detailsById.get(property.id);
         const searchableText = [
+          property.id,
           property.title,
+          property.category,
           property.location,
           property.access,
           ...(property.specs || []),
+          ...(property.badges || []),
+          detail?.address,
           ...(detail?.features || []),
           ...(detail?.description || []),
           ...((detail?.detailRows || []).flat()),
@@ -151,6 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           prefecture: getPrefecture(property.location),
           walkMinutes: parseWalkMinutes(property.access),
           layoutInfo: getLayoutInfo(property.specs),
+          searchIndex: normalizeSearchText(searchableText),
           hasParking: includesKeyword(searchableText, [/駐車/]),
           isSouthFacing: includesKeyword(searchableText, [/南向き/]),
           isCorner: includesKeyword(searchableText, [/(角地|角住戸|角部屋)/]),
@@ -168,13 +234,43 @@ document.addEventListener('DOMContentLoaded', async () => {
       return Number.isFinite(normalized) && normalized >= 0 ? normalized : '';
     };
 
+    const getNormalizedRange = (minValue, maxValue) => {
+      const rawMin = normalizeNumericFilter(minValue);
+      const rawMax = normalizeNumericFilter(maxValue);
+
+      return {
+        min: rawMin !== '' && rawMax !== '' ? Math.min(rawMin, rawMax) : rawMin,
+        max: rawMin !== '' && rawMax !== '' ? Math.max(rawMin, rawMax) : rawMax,
+      };
+    };
+
     const syncFilterControls = () => {
+      if (keywordInput) {
+        keywordInput.value = state.filters.keyword;
+      }
+
       if (priceMinInput) {
         priceMinInput.value = state.filters.priceMin === '' ? '' : String(state.filters.priceMin);
       }
 
       if (priceMaxInput) {
         priceMaxInput.value = state.filters.priceMax === '' ? '' : String(state.filters.priceMax);
+      }
+
+      if (areaMinInput) {
+        areaMinInput.value = state.filters.areaMin === '' ? '' : String(state.filters.areaMin);
+      }
+
+      if (areaMaxInput) {
+        areaMaxInput.value = state.filters.areaMax === '' ? '' : String(state.filters.areaMax);
+      }
+
+      if (walkMaxSelect) {
+        walkMaxSelect.value = state.filters.walkMax === '' ? '' : String(state.filters.walkMax);
+      }
+
+      if (sortSelect) {
+        sortSelect.value = state.sortKey;
       }
 
       checkboxFilters.forEach((input) => {
@@ -233,13 +329,133 @@ document.addEventListener('DOMContentLoaded', async () => {
       return true;
     };
 
+    const createRangeLabel = (label, minValue, maxValue, unit) => {
+      if (minValue !== '' && maxValue !== '') {
+        return `${label}: ${numberFormatter.format(minValue)}${unit}〜${numberFormatter.format(maxValue)}${unit}`;
+      }
+
+      if (minValue !== '') {
+        return `${label}: ${numberFormatter.format(minValue)}${unit}以上`;
+      }
+
+      if (maxValue !== '') {
+        return `${label}: ${numberFormatter.format(maxValue)}${unit}以下`;
+      }
+
+      return '';
+    };
+
+    const getActiveFilterItems = () => {
+      const items = [];
+      const priceRange = getNormalizedRange(state.filters.priceMin, state.filters.priceMax);
+      const areaRange = getNormalizedRange(state.filters.areaMin, state.filters.areaMax);
+
+      if (state.filters.keyword.trim()) {
+        items.push({ key: 'keyword', label: `キーワード: ${state.filters.keyword.trim()}` });
+      }
+
+      if (state.filters.category) {
+        items.push({ key: 'category', label: `種別: ${state.filters.category}` });
+      }
+
+      if (state.filters.area) {
+        items.push({ key: 'area', label: `エリア: ${state.filters.area}` });
+      }
+
+      if (state.filters.sidebarLayout) {
+        items.push({
+          key: 'sidebarLayout',
+          label: `間取り: ${layoutFilterLabelMap[state.filters.sidebarLayout] || state.filters.sidebarLayout}`,
+        });
+      }
+
+      const priceLabel = createRangeLabel('価格', priceRange.min, priceRange.max, '万円');
+      if (priceLabel) {
+        items.push({ key: 'price', label: priceLabel });
+      }
+
+      const areaLabel = createRangeLabel('面積', areaRange.min, areaRange.max, '㎡');
+      if (areaLabel) {
+        items.push({ key: 'areaSize', label: areaLabel });
+      }
+
+      if (state.filters.walkMax !== '') {
+        items.push({ key: 'walkMax', label: `駅徒歩: ${numberFormatter.format(state.filters.walkMax)}分以内` });
+      }
+
+      Object.entries(state.filters.flags).forEach(([key, isActive]) => {
+        if (!isActive) {
+          return;
+        }
+
+        items.push({ key: `flag:${key}`, label: flagFilterLabelMap[key] || key });
+      });
+
+      return items;
+    };
+
+    const clearFilter = (key) => {
+      if (key === 'keyword') {
+        state.filters.keyword = '';
+      } else if (key === 'category') {
+        state.filters.category = '';
+      } else if (key === 'area') {
+        state.filters.area = '';
+      } else if (key === 'sidebarLayout') {
+        state.filters.sidebarLayout = '';
+      } else if (key === 'price') {
+        state.filters.priceMin = '';
+        state.filters.priceMax = '';
+      } else if (key === 'areaSize') {
+        state.filters.areaMin = '';
+        state.filters.areaMax = '';
+      } else if (key === 'walkMax') {
+        state.filters.walkMax = '';
+      } else if (key.startsWith('flag:')) {
+        const flagKey = key.replace('flag:', '');
+        state.filters.flags[flagKey] = false;
+      }
+
+      state.currentPage = 1;
+      syncFilterControls();
+      render();
+    };
+
+    const renderActiveFilters = () => {
+      if (!activeFilterBar || !activeFilterChips) {
+        return;
+      }
+
+      const items = getActiveFilterItems();
+      activeFilterBar.hidden = items.length === 0;
+
+      if (items.length === 0) {
+        activeFilterChips.innerHTML = '';
+        return;
+      }
+
+      activeFilterChips.innerHTML = items.map((item) => (
+        `<button class="active-filter-chip" type="button" data-filter-remove="${escapeHtml(item.key)}">${escapeHtml(item.label)}<span aria-hidden="true">×</span></button>`
+      )).join('');
+
+      activeFilterChips.querySelectorAll('[data-filter-remove]').forEach((button) => {
+        button.addEventListener('click', () => {
+          clearFilter(button.dataset.filterRemove || '');
+        });
+      });
+    };
+
     const getFilteredProperties = () => {
-      const rawMin = normalizeNumericFilter(state.filters.priceMin);
-      const rawMax = normalizeNumericFilter(state.filters.priceMax);
-      const priceMin = rawMin !== '' && rawMax !== '' ? Math.min(rawMin, rawMax) : rawMin;
-      const priceMax = rawMin !== '' && rawMax !== '' ? Math.max(rawMin, rawMax) : rawMax;
+      const keywordTokens = tokenizeKeyword(state.filters.keyword);
+      const priceRange = getNormalizedRange(state.filters.priceMin, state.filters.priceMax);
+      const areaRange = getNormalizedRange(state.filters.areaMin, state.filters.areaMax);
+      const walkMax = normalizeNumericFilter(state.filters.walkMax);
 
       return state.properties.filter((property) => {
+        if (keywordTokens.length > 0 && !keywordTokens.every((token) => property.searchIndex.includes(token))) {
+          return false;
+        }
+
         if (state.filters.area && property.prefecture !== state.filters.area) {
           return false;
         }
@@ -252,15 +468,31 @@ document.addEventListener('DOMContentLoaded', async () => {
           return false;
         }
 
-        if (priceMin !== '' && property.price < priceMin) {
+        if (priceRange.min !== '' && property.price < priceRange.min) {
           return false;
         }
 
-        if (priceMax !== '' && property.price > priceMax) {
+        if (priceRange.max !== '' && property.price > priceRange.max) {
           return false;
         }
 
-        if (state.filters.flags.walk10 && (property.walkMinutes == null || property.walkMinutes > 10)) {
+        if (areaRange.min !== '' && property.sortAreaSqm < areaRange.min) {
+          return false;
+        }
+
+        if (areaRange.max !== '' && property.sortAreaSqm > areaRange.max) {
+          return false;
+        }
+
+        if (walkMax !== '' && (property.walkMinutes == null || property.walkMinutes > walkMax)) {
+          return false;
+        }
+
+        if (state.filters.flags.newArrival && !(property.badges || []).includes('新着')) {
+          return false;
+        }
+
+        if (state.filters.flags.recommended && !(property.badges || []).includes('おすすめ')) {
           return false;
         }
 
@@ -293,21 +525,38 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       sortedProperties.sort((left, right) => {
         if (state.sortKey === 'price-asc') {
-          return left.price - right.price;
+          return compareNumbersMissingLast(left.price, right.price, 'asc') || left.listedOrder - right.listedOrder;
         }
 
         if (state.sortKey === 'price-desc') {
-          return right.price - left.price;
+          return compareNumbersMissingLast(left.price, right.price, 'desc') || left.listedOrder - right.listedOrder;
         }
 
         if (state.sortKey === 'area-desc') {
-          return right.sortAreaSqm - left.sortAreaSqm;
+          return compareNumbersMissingLast(left.sortAreaSqm, right.sortAreaSqm, 'desc') || left.listedOrder - right.listedOrder;
+        }
+
+        if (state.sortKey === 'area-asc') {
+          return compareNumbersMissingLast(left.sortAreaSqm, right.sortAreaSqm, 'asc') || left.listedOrder - right.listedOrder;
+        }
+
+        if (state.sortKey === 'walk-asc') {
+          return compareNumbersMissingLast(left.walkMinutes, right.walkMinutes, 'asc') || left.listedOrder - right.listedOrder;
         }
 
         if (state.sortKey === 'age-asc') {
-          const leftAge = typeof left.buildingAge === 'number' ? left.buildingAge : Number.POSITIVE_INFINITY;
-          const rightAge = typeof right.buildingAge === 'number' ? right.buildingAge : Number.POSITIVE_INFINITY;
-          return leftAge - rightAge;
+          return compareNumbersMissingLast(left.buildingAge, right.buildingAge, 'asc') || left.listedOrder - right.listedOrder;
+        }
+
+        if (state.sortKey === 'age-desc') {
+          return compareNumbersMissingLast(left.buildingAge, right.buildingAge, 'desc') || left.listedOrder - right.listedOrder;
+        }
+
+        if (state.sortKey === 'recommended') {
+          const leftRecommended = (left.badges || []).includes('おすすめ') ? 1 : 0;
+          const rightRecommended = (right.badges || []).includes('おすすめ') ? 1 : 0;
+
+          return rightRecommended - leftRecommended || left.listedOrder - right.listedOrder;
         }
 
         return left.listedOrder - right.listedOrder;
@@ -411,8 +660,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         resultCount.textContent = numberFormatter.format(sortedProperties.length);
       }
 
+      renderActiveFilters();
+
       if (pageItems.length === 0) {
-        propGrid.innerHTML = '<div style="grid-column:1/-1;padding:2.4rem 2rem;background:#fff;border:1px solid rgba(0,0,0,0.06);border-radius:4px;color:#555;line-height:1.8;">該当する物件は見つかりませんでした。検索条件を変更して再度お試しください。</div>';
+        propGrid.innerHTML = `
+          <div class="empty-state">
+            <p>該当する物件は見つかりませんでした。</p>
+            <button class="empty-reset" type="button">条件をリセット</button>
+          </div>
+        `;
+        propGrid.querySelector('.empty-reset')?.addEventListener('click', resetFilters);
       } else {
         propGrid.innerHTML = pageItems.map((property, index) => (
           createCardMarkup(property, index)
@@ -448,21 +705,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const resetFilters = () => {
-      state.filters = {
-        area: '',
-        category: '',
-        sidebarLayout: '',
-        priceMin: '',
-        priceMax: '',
-        flags: {
-          walk10: false,
-          age10: false,
-          parking: false,
-          southFacing: false,
-          corner: false,
-          renovated: false,
-        },
-      };
+      state.filters = createDefaultFilters();
 
       state.currentPage = 1;
       syncFilterControls();
@@ -477,6 +720,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
 
+    keywordInput?.addEventListener('input', () => {
+      state.filters.keyword = keywordInput.value;
+      state.currentPage = 1;
+      render();
+    });
+
     priceMinInput?.addEventListener('input', () => {
       state.filters.priceMin = normalizeNumericFilter(priceMinInput.value);
       state.currentPage = 1;
@@ -485,6 +734,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     priceMaxInput?.addEventListener('input', () => {
       state.filters.priceMax = normalizeNumericFilter(priceMaxInput.value);
+      state.currentPage = 1;
+      render();
+    });
+
+    areaMinInput?.addEventListener('input', () => {
+      state.filters.areaMin = normalizeNumericFilter(areaMinInput.value);
+      state.currentPage = 1;
+      render();
+    });
+
+    areaMaxInput?.addEventListener('input', () => {
+      state.filters.areaMax = normalizeNumericFilter(areaMaxInput.value);
+      state.currentPage = 1;
+      render();
+    });
+
+    walkMaxSelect?.addEventListener('change', () => {
+      state.filters.walkMax = normalizeNumericFilter(walkMaxSelect.value);
       state.currentPage = 1;
       render();
     });

@@ -29,8 +29,13 @@ html(lang="ja")
         div(class="filter-card")
           div(class="filter-title")
             | 絞り込み
-            button(class="filter-clear")
+            button(class="filter-clear", type="button")
               | クリア
+          div(class="filter-section")
+            h4
+              | キーワード
+            div(class="search-field")
+              input(id="keywordInput", type="search", placeholder="エリア・駅名・特徴など")
           div(class="filter-section")
             h4
               | 物件種別
@@ -52,6 +57,27 @@ html(lang="ja")
                 span
                   | 〜
                 input(id="priceMaxInput", type="number", placeholder="上限", min="0", step="100")
+          div(class="filter-section")
+            h4
+              | 面積（㎡）
+            div(class="price-range")
+              div(class="price-row")
+                input(id="areaMinInput", type="number", placeholder="下限", min="0", step="5")
+                span
+                  | 〜
+                input(id="areaMaxInput", type="number", placeholder="上限", min="0", step="5")
+          div(class="filter-section")
+            h4
+              | 駅徒歩
+            select(class="filter-select", id="walkMaxSelect")
+              option(value="")
+                | 指定なし
+              option(value="5")
+                | 5分以内
+              option(value="10")
+                | 10分以内
+              option(value="15")
+                | 15分以内
           div(class="filter-section")
             h4
               | エリア
@@ -78,12 +104,20 @@ html(lang="ja")
                 | 4LDK以上
           div(class="filter-section")
             h4
-              | こだわり条件
+              | 掲載状態
             div(class="filter-check")
               label(class="check-item")
-                input(id="filterWalk10", type="checkbox", data-filter-flag="walk10")
+                input(id="filterNewArrival", type="checkbox", data-filter-flag="newArrival")
                 span
-                  | 駅徒歩10分以内
+                  | 新着
+              label(class="check-item")
+                input(id="filterRecommended", type="checkbox", data-filter-flag="recommended")
+                span
+                  | おすすめ
+          div(class="filter-section")
+            h4
+              | こだわり条件
+            div(class="filter-check")
               label(class="check-item")
                 input(id="filterAge10", type="checkbox", data-filter-flag="age10")
                 span
@@ -107,30 +141,38 @@ html(lang="ja")
       div
         div(class="listing-header reveal")
           div(class="listing-header-main")
-            div(class="result-count")
+            div(class="result-count", aria-live="polite")
               strong
                 | 18
               | 件の物件が見つかりました
             select(class="sort-select")
               option(value="newest")
                 | 並び替え：新着順
+              option(value="recommended")
+                | おすすめ優先
               option(value="price-asc")
                 | 価格が安い順
               option(value="price-desc")
                 | 価格が高い順
               option(value="area-desc")
                 | 面積が広い順
+              option(value="area-asc")
+                | 面積が狭い順
+              option(value="walk-asc")
+                | 駅徒歩が短い順
               option(value="age-asc")
                 | 築年数が新しい順
-          div(style="display:flex;gap:0.8rem;align-items:center;")
+              option(value="age-desc")
+                | 築年数が古い順
+          div(class="listing-header-actions")
             div(class="view-toggles")
-              button(class="view-btn active", id="gridBtn", onclick="setView('grid')")
+              button(class="view-btn active", id="gridBtn", type="button", aria-label="グリッド表示", onclick="setView('grid')")
                 svg(viewbox="0 0 24 24")
                   rect(x="3", y="3", width="7", height="7")
                   rect(x="14", y="3", width="7", height="7")
                   rect(x="3", y="14", width="7", height="7")
                   rect(x="14", y="14", width="7", height="7")
-              button(class="view-btn", id="listBtn", onclick="setView('list')")
+              button(class="view-btn", id="listBtn", type="button", aria-label="リスト表示", onclick="setView('list')")
                 svg(viewbox="0 0 24 24")
                   line(x1="8", y1="6", x2="21", y2="6")
                   line(x1="8", y1="12", x2="21", y2="12")
@@ -138,6 +180,10 @@ html(lang="ja")
                   line(x1="3", y1="6", x2="3.01", y2="6")
                   line(x1="3", y1="12", x2="3.01", y2="12")
                   line(x1="3", y1="18", x2="3.01", y2="18")
+        div(class="active-filter-bar", id="activeFilterBar", hidden)
+          div(class="active-filter-label")
+            | 条件
+          div(class="active-filter-chips", id="activeFilterChips")
         div(class="prop-grid", id="propGrid")
         div(class="pagination reveal", id="pagination")
 
