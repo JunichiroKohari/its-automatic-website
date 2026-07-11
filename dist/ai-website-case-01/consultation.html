@@ -1,1 +1,269 @@
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>無料相談予約 | 小針不動産株式会社</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&amp;family=Noto+Sans+JP:wght@300;400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/common.css"><link rel="stylesheet" href="assets/css/consultation.css"></head><body class="case-site case-site-page case-site-consultation"><nav class="site-header"><a class="nav-logo" href="index.html" aria-label="小針不動産株式会社 ホーム"><span class="nav-logo-text"><span class="nav-logo-corp">株式会社</span><span class="nav-logo-ja">小針不動産</span></span></a><button class="hamburger" type="button" aria-label="メニューを開く" aria-controls="siteNavLinks" aria-expanded="false"><span></span><span></span><span></span></button><ul class="nav-links" id="siteNavLinks"><li class="nav-item nav-item--services"><div class="nav-item-trigger"><a href="index.html#services">サービス</a><button class="nav-submenu-toggle" type="button" aria-label="サービス一覧を開く" aria-controls="siteServicesSubmenu" aria-expanded="false"><span class="sr-only">サービス一覧を開く</span></button></div><ul class="nav-submenu" id="siteServicesSubmenu" aria-label="サービス一覧"><li><a href="service-purchase.html">住宅購入サポート</a></li><li><a href="service-sale.html">不動産売却</a></li><li><a href="service-land.html">土地売買</a></li><li><a href="consultation.html">無料相談・査定</a></li></ul></li><li><a href="index.html#flow">売買の流れ</a></li><li><a href="properties.html">物件情報</a></li><li><a href="team.html">スタッフ紹介</a></li><li><a class="nav-cta" href="consultation.html">無料相談</a></li></ul></nav><script>!function(){const e=document.currentScript?.previousElementSibling;if(!e||!e.classList.contains("site-header"))return;const n=e.querySelector(".hamburger"),t=e.querySelector(".nav-item--services"),i=t?.querySelector(".nav-item-trigger > a"),s=e.querySelector(".nav-submenu-toggle");if(!n)return;const c=()=>{e.classList.remove("is-open"),document.body.classList.remove("nav-open"),n.setAttribute("aria-expanded","false"),t&&s&&(t.classList.remove("is-open"),s.setAttribute("aria-expanded","false"))};if(n.addEventListener("click",function(){e.classList.contains("is-open")?c():(e.classList.add("is-open"),document.body.classList.add("nav-open"),n.setAttribute("aria-expanded","true"))}),s&&t){const e=function(){const e=t.classList.toggle("is-open");s.setAttribute("aria-expanded",String(e))};s.addEventListener("click",function(n){n.preventDefault(),e()}),i?.addEventListener("click",function(n){window.innerWidth>900||(n.preventDefault(),e())})}e.querySelectorAll(".nav-links a").forEach(function(e){e.addEventListener("click",function(){window.innerWidth<=900&&c()})}),window.addEventListener("resize",function(){window.innerWidth>900&&c()}),document.addEventListener("keydown",function(e){"Escape"===e.key&&c()}),document.addEventListener("click",function(n){window.innerWidth>900||e.classList.contains("is-open")&&(e.contains(n.target)||c())})}()</script><div class="page-header"><div class="page-header-inner"><div class="breadcrumb"><a href="index.html">ホーム</a><span>›</span><span style="color:rgba(255,255,255,.6)">無料相談予約</span></div><h1>無料相談予約</h1><p>不動産売買に関するあらゆるお悩みを、<br>経験豊富な専門スタッフが無料でお答えします。</p></div></div><div class="steps-bar"><div class="steps-inner"><div class="step-item"><div class="step-num active" id="step1-num">1</div><div class="step-label active" id="step1-label">ご入力</div></div><div class="step-connector"></div><div class="step-item"><div class="step-num pending" id="step2-num">2</div><div class="step-label" id="step2-label">確認</div></div><div class="step-connector"></div><div class="step-item"><div class="step-num pending" id="step3-num">3</div><div class="step-label" id="step3-label">完了</div></div></div></div><div class="main-wrap"><div><form id="reservationForm" novalidate><div class="form-card reveal"><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>ご相談の種類</div><div class="form-section-desc">当てはまるものをお選びください（複数可）</div><div class="type-chips"><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="purchase"><svg viewbox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>住宅購入</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="sell"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>不動産売却</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="land"><svg viewbox="0 0 24 24"><polygon points="3 11 12 2 21 11 21 21 15 21 15 15 9 15 9 21 3 21"></polygon></svg>土地売買</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="assess"><svg viewbox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>無料査定</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="other"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>その他</label></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>お客様情報</div><div class="form-section-desc">以下の項目をご記入ください</div><div class="form-row"><div class="form-group"><label class="form-label">お名前（姓）<span class="req">必須</span></label><input class="form-input" name="lastName" placeholder="小針" required></div><div class="form-group"><label class="form-label">お名前（名）<span class="req">必須</span></label><input class="form-input" name="firstName" placeholder="太郎" required></div></div><div class="form-row"><div class="form-group"><label class="form-label">フリガナ（姓）<span class="req">必須</span></label><input class="form-input" name="lastKana" placeholder="コバリ" required></div><div class="form-group"><label class="form-label">フリガナ（名）<span class="req">必須</span></label><input class="form-input" name="firstKana" placeholder="タロウ" required></div></div><div class="form-row"><div class="form-group"><label class="form-label">電話番号<span class="req">必須</span></label><input class="form-input" type="tel" name="tel" placeholder="00-0000-0000" required></div><div class="form-group"><label class="form-label">メールアドレス<span class="req">必須</span></label><input class="form-input" type="email" name="email" placeholder="example@email.com" required></div></div><div class="form-row full"><div class="form-group"><label class="form-label">現在のご住所<span class="opt">任意</span></label><input class="form-input" name="address" placeholder="東京都○○区○○町 1-2-3"></div></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z"></path></svg>相談方法</div><div class="form-section-desc">ご希望の相談方法をお選びください</div><div class="method-cards"><label class="method-card active" onclick="selectMethod(this)"><input type="radio" name="method" value="visit" checked="checked"><svg viewbox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg><h4>来店相談</h4><p>弊社オフィスにてご相談</p></label><label class="method-card" onclick="selectMethod(this)"><input type="radio" name="method" value="online"><svg viewbox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg><h4>オンライン</h4><p>Zoom・LINE等で対応</p></label><label class="method-card" onclick="selectMethod(this)"><input type="radio" name="method" value="tel"><svg viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z"></path></svg><h4>電話相談</h4><p>担当よりお電話します</p></label></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>ご希望日程</div><div class="form-section-desc">カレンダーから希望日を選択し、時間帯をお選びください</div><div class="calendar-wrap"><div class="cal-nav"><button class="cal-btn" type="button" onclick="prevMonth()"><svg viewbox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button><div class="cal-title" id="calTitle"></div><button class="cal-btn" type="button" onclick="nextMonth()"><svg viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div><div class="cal-grid" id="calGrid"></div></div><div id="timeSlotWrap" style="display:none"><div style="font-size:.78rem;color:var(--text-mid);margin-top:1.2rem;margin-bottom:.5rem;letter-spacing:.04em" id="selectedDateLabel"></div><div class="time-slots" id="timeSlots"><div class="time-slot" onclick="selectTime(this)">9:00〜10:00</div><div class="time-slot" onclick="selectTime(this)">10:00〜11:00</div><div class="time-slot full">11:00〜12:00</div><div class="time-slot" onclick="selectTime(this)">13:00〜14:00</div><div class="time-slot" onclick="selectTime(this)">14:00〜15:00</div><div class="time-slot full">15:00〜16:00</div><div class="time-slot" onclick="selectTime(this)">16:00〜17:00</div><div class="time-slot" onclick="selectTime(this)">17:00〜18:00</div></div></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>ご要望・ご質問</div><div class="form-section-desc">事前にお知らせいただきたい内容があればご記入ください</div><div class="form-row full"><div class="form-group"><label class="form-label">ご要望・ご質問<span class="opt">任意</span></label><textarea class="form-input" name="message" placeholder="例：3,000万円台の一戸建てを探しています。4人家族で、東急田園都市線沿線を希望しています。"></textarea></div></div><div class="form-row full" style="margin-top:.5rem"><div class="form-group"><label class="form-label">ご予算<span class="opt">任意</span></label><select class="form-input" name="budget"><option value="">-- 選択してください --</option><option>〜2,000万円</option><option>2,000〜3,000万円</option><option>3,000〜4,000万円</option><option>4,000〜5,000万円</option><option>5,000〜7,000万円</option><option>7,000万円〜</option><option>未定・相談したい</option></select></div></div></div><div class="form-footer"><div class="privacy-check" style="margin-bottom:1.2rem"><input type="checkbox" id="privacyCheck" required><label for="privacyCheck"><a href="privacy-policy.html">プライバシーポリシー</a>に同意する（必須）</label></div><button class="btn-submit" type="submit" id="submitBtn"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>予約内容を送信する</button><p class="form-note">送信後、担当者より確認のご連絡をいたします<br>（平日9:00〜18:00、翌営業日中を目安）</p></div></div><div class="complete-screen" id="confirmScreen"><div class="complete-icon" style="background:oklch(95% .015 72);border-color:oklch(70% .1 72)"><svg viewbox="0 0 24 24" style="stroke:oklch(45% 0.12 72)"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div><h2>予約内容のご確認</h2><p>以下の内容でよろしいでしょうか。<br>内容をご確認の上、「この内容で送信する」ボタンを押してください。</p><div class="complete-detail" id="confirmDetail"></div><div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap"><button type="button" onclick="backToForm()" style="padding:.9rem 2rem;border:1px solid rgba(0,0,0,.15);border-radius:3px;background:#fff;font-family:var(--sans);font-size:.88rem;color:var(--text-mid);cursor:pointer;letter-spacing:.06em;transition:border-color .2s" onmouseover='this.style.borderColor="var(--gold)"' onmouseout='this.style.borderColor="rgba(0,0,0,0.15)"'>← 入力内容を修正する</button><button type="button" onclick="submitFinal()" style="padding:.9rem 2.4rem;background:var(--navy);color:#fff;border:none;border-radius:3px;font-family:var(--sans);font-size:.88rem;font-weight:500;letter-spacing:.1em;cursor:pointer;transition:background .2s" onmouseover='this.style.background="var(--navy-light)"' onmouseout='this.style.background="var(--navy)"'>この内容で送信する →</button></div></div><div class="complete-screen" id="completeScreen"><div class="complete-icon"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><h2>ご予約を受け付けました</h2><p>お申し込みいただきありがとうございます。<br>担当者より確認のご連絡をいたします。</p><div class="complete-detail" id="completeDetail"></div><p style="font-size:.78rem;color:var(--text-light)">※ご登録のメールアドレスに確認メールをお送りしました<br>※メールが届かない場合はお電話にてお問い合わせください</p><a class="btn-home" href="index.html">トップページへ戻る</a></div></form></div><aside class="sidebar"><div class="info-card reveal reveal-delay-1"><div class="info-card-header"><h3>安心の無料相談</h3></div><div class="info-card-body"><div class="point-list"><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>相談・査定は<strong>完全無料</strong>。費用は一切かかりません</p></div><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>しつこい営業・勧誘は<strong>一切行いません</strong></p></div><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>経験豊富な<strong>専任スタッフ</strong>が丁寧に対応します</p></div><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>ご相談内容は<strong>厳重に管理</strong>いたします</p></div></div></div></div><div class="info-card reveal reveal-delay-1"><div class="info-card-header"><h3>お電話でのご相談</h3></div><div class="info-card-body"><div class="contact-item"><div class="contact-icon"><svg viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z"></path></svg></div><div class="contact-info"><h4>電話番号</h4><p>00-0000-0000</p><small>平日 9:00〜18:00</small></div></div><div class="contact-item"><div class="contact-icon"><svg viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div><div class="contact-info"><h4>所在地</h4><p style="font-size:.82rem">〒000-0000<br>○○都○○区○○町 1-2-3</p></div></div></div></div><div class="info-card reveal reveal-delay-2"><div class="info-card-header"><h3>よくある質問</h3></div><div class="info-card-body"><div class="faq-item"><div class="faq-q">相談は本当に無料ですか？</div><div class="faq-a">はい、完全無料です。査定のみのご依頼も承ります。</div></div><div class="faq-item"><div class="faq-q">相談後に必ず契約が必要ですか？</div><div class="faq-a">いいえ。ご相談のみでも構いません。しつこい営業は行いません。</div></div><div class="faq-item"><div class="faq-q">当日キャンセルはできますか？</div><div class="faq-a">可能です。お電話またはメールにてご連絡ください。</div></div></div></div></aside></div><footer><div class="footer-inner"><div class="footer-brand"><h3>小針不動産株式会社</h3><p>地域に根ざした信頼の不動産会社として、<br>お客様一人ひとりの夢の実現をサポートします。<br><br>〒000-0000 ○○都○○区○○町 1-2-3<br>TEL: 00-0000-0000</p></div><div class="footer-col"><h4>サービス</h4><a href="service-purchase.html">住宅購入</a><a href="service-sale.html">不動産売却</a><a href="service-land.html">土地売買</a><a href="consultation.html">無料査定</a></div><div class="footer-col"><h4>会社情報</h4><a href="access.html">会社概要</a><a href="team.html">スタッフ紹介</a><a href="news.html">お知らせ</a></div><div class="footer-col"><h4>お問い合わせ</h4><a href="consultation.html">無料相談予約</a><a href="consultation.html">物件査定依頼</a><a href="access.html">アクセス</a><a href="privacy-policy.html">プライバシーポリシー</a></div></div><div class="footer-bottom"><p>© 2026 小針不動産株式会社 All Rights Reserved.</p><a href="#">宅地建物取引業者 国土交通大臣（○）第○○○○号</a></div></footer><button class="scroll-top" id="scrollTop" onclick='window.scrollTo({top:0,behavior:"smooth"})'><svg viewbox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg></button><script>function toggleChip(e){e.classList.toggle("active")}function selectMethod(e){document.querySelectorAll(".method-card").forEach(e=>e.classList.remove("active")),e.classList.add("active")}const today=new Date;let calYear=today.getFullYear(),calMonth=today.getMonth(),selectedDate=null;const WEEKDAYS=["日","月","火","水","木","金","土"],CLOSED=[0];function renderCalendar(){const e=document.getElementById("calTitle"),t=document.getElementById("calGrid");e.textContent=`${calYear}年 ${calMonth+1}月`,t.innerHTML="",WEEKDAYS.forEach((e,a)=>{const l=document.createElement("div");l.className="cal-dow",l.textContent=e,t.appendChild(l)});const a=new Date(calYear,calMonth,1).getDay(),l=new Date(calYear,calMonth+1,0).getDate();for(let e=0;e<a;e++){const e=document.createElement("div");e.className="cal-day empty",t.appendChild(e)}for(let e=1;e<=l;e++){const a=new Date(calYear,calMonth,e),l=a.getDay(),n=a<new Date(today.getFullYear(),today.getMonth(),today.getDate()),o=CLOSED.includes(l),c=e===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear(),s=selectedDate&&a.toDateString()===selectedDate.toDateString(),d=document.createElement("div");let r="cal-day";0===l&&(r+=" sun"),6===l&&(r+=" sat"),n?r+=" past":o&&(r+=" closed"),c&&(r+=" today"),s&&(r+=" selected"),d.className=r,d.textContent=e,n||o||(d.onclick=()=>selectDay(a,d)),t.appendChild(d)}}function selectDay(e,t){document.querySelectorAll(".cal-day.selected").forEach(e=>e.classList.remove("selected")),t.classList.add("selected"),selectedDate=e;const a=document.getElementById("timeSlotWrap");document.getElementById("selectedDateLabel").textContent=`${e.getFullYear()}年${e.getMonth()+1}月${e.getDate()}日（${["日","月","火","水","木","金","土"][e.getDay()]}）の予約可能時間`,document.querySelectorAll(".time-slot").forEach(e=>e.classList.remove("selected")),a.style.display="block",a.scrollIntoView&&(a.style.scrollMargin="20px")}function selectTime(e){e.classList.contains("full")||(document.querySelectorAll(".time-slot").forEach(e=>e.classList.remove("selected")),e.classList.add("selected"))}function prevMonth(){calMonth--,calMonth<0&&(calMonth=11,calYear--),renderCalendar()}function nextMonth(){calMonth++,calMonth>11&&(calMonth=0,calYear++),renderCalendar()}function setStep(e){[1,2,3].forEach(t=>{const a=document.getElementById(`step${t}-num`),l=document.getElementById(`step${t}-label`);t<e?(a.className="step-num done",l.className="step-label"):t===e?(a.className="step-num active",l.className="step-label active"):(a.className="step-num pending",l.className="step-label")})}function collectData(){const e=document.getElementById("reservationForm"),t=document.querySelector(".time-slot.selected");return{lastName:e.lastName.value.trim(),firstName:e.firstName.value.trim(),lastKana:e.lastKana.value.trim(),firstKana:e.firstKana.value.trim(),tel:e.tel.value.trim(),email:e.email.value.trim(),address:e.address.value.trim(),budget:e.budget.value,message:e.message.value.trim(),types:[...document.querySelectorAll(".type-chip.active")].map(e=>e.textContent.trim()).join("、")||"未選択",method:document.querySelector(".method-card.active h4")?.textContent||"来店相談",dateStr:selectedDate?`${selectedDate.getFullYear()}年${selectedDate.getMonth()+1}月${selectedDate.getDate()}日（${["日","月","火","水","木","金","土"][selectedDate.getDay()]}）`:"未選択",timeStr:t?t.textContent:"未選択"}}function buildDetailRows(e){return[["お名前",`${e.lastName} ${e.firstName} 様`],["フリガナ",`${e.lastKana} ${e.firstKana}`],["電話番号",e.tel],["メールアドレス",e.email],["現在のご住所",e.address||"—"],["ご相談種別",e.types],["相談方法",e.method],["ご希望日",e.dateStr],["ご希望時間",e.timeStr],["ご予算",e.budget||"—"],["ご要望・ご質問",e.message||"—"]].map(([e,t])=>`<div class="complete-detail-row"><span>${e}</span><span>${t}</span></div>`).join("")}function backToForm(){setStep(1),document.getElementById("confirmScreen").style.display="none",document.querySelector(".form-card").style.display="block",window.scrollTo({top:0,behavior:"smooth"})}function submitFinal(){const e=collectData();setStep(3),document.getElementById("completeDetail").innerHTML=buildDetailRows(e),document.getElementById("confirmScreen").style.display="none",document.getElementById("completeScreen").style.display="block",window.scrollTo({top:0,behavior:"smooth"})}renderCalendar(),document.getElementById("reservationForm").addEventListener("submit",function(e){e.preventDefault();const t=collectData(),a=document.getElementById("privacyCheck").checked;t.lastName&&t.firstName&&t.tel&&t.email&&a?(setStep(2),document.getElementById("confirmDetail").innerHTML=buildDetailRows(t),document.querySelector(".form-card").style.display="none",document.getElementById("confirmScreen").style.display="block",window.scrollTo({top:0,behavior:"smooth"})):alert("必須項目をすべてご入力の上、プライバシーポリシーにご同意ください。")});const reveals=document.querySelectorAll(".reveal"),obs=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add("visible"),obs.unobserve(e.target))})},{threshold:.1});reveals.forEach(e=>obs.observe(e))</script></body></html>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>無料相談予約 | 小針不動産株式会社</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&amp;family=Noto+Sans+JP:wght@300;400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/css/common.css"><link rel="stylesheet" href="assets/css/consultation.css"></head><body class="case-site case-site-page case-site-consultation"><nav class="site-header"><a class="nav-logo" href="index.html" aria-label="小針不動産株式会社 ホーム"><span class="nav-logo-text"><span class="nav-logo-corp">株式会社</span><span class="nav-logo-ja">小針不動産</span></span></a><button class="hamburger" type="button" aria-label="メニューを開く" aria-controls="siteNavLinks" aria-expanded="false"><span></span><span></span><span></span></button><ul class="nav-links" id="siteNavLinks"><li class="nav-item nav-item--services"><div class="nav-item-trigger"><a href="index.html#services">サービス</a><button class="nav-submenu-toggle" type="button" aria-label="サービス一覧を開く" aria-controls="siteServicesSubmenu" aria-expanded="false"><span class="sr-only">サービス一覧を開く</span></button></div><ul class="nav-submenu" id="siteServicesSubmenu" aria-label="サービス一覧"><li><a href="service-purchase.html">住宅購入サポート</a></li><li><a href="service-sale.html">不動産売却</a></li><li><a href="service-land.html">土地売買</a></li><li><a href="consultation.html">無料相談・査定</a></li></ul></li><li><a href="index.html#flow">売買の流れ</a></li><li><a href="properties.html">物件情報</a></li><li><a href="team.html">スタッフ紹介</a></li><li><a class="nav-cta" href="consultation.html">無料相談</a></li></ul></nav><script>(function () {
+  const header = document.currentScript?.previousElementSibling;
+  if (!header || !header.classList.contains('site-header')) return;
+
+  const menuToggle = header.querySelector('.hamburger');
+  const servicesItem = header.querySelector('.nav-item--services');
+  const servicesLink = servicesItem?.querySelector('.nav-item-trigger > a');
+  const servicesToggle = header.querySelector('.nav-submenu-toggle');
+
+  if (!menuToggle) return;
+
+  const closeServices = () => {
+    if (!servicesItem || !servicesToggle) return;
+    servicesItem.classList.remove('is-open');
+    servicesToggle.setAttribute('aria-expanded', 'false');
+  };
+
+  const closeMenu = () => {
+    header.classList.remove('is-open');
+    document.body.classList.remove('nav-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    closeServices();
+  };
+
+  const openMenu = () => {
+    header.classList.add('is-open');
+    document.body.classList.add('nav-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+  };
+
+  menuToggle.addEventListener('click', function () {
+    if (header.classList.contains('is-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  if (servicesToggle && servicesItem) {
+    const toggleServices = function () {
+      const isOpen = servicesItem.classList.toggle('is-open');
+      servicesToggle.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    servicesToggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      toggleServices();
+    });
+
+    servicesLink?.addEventListener('click', function (event) {
+      if (window.innerWidth > 900) return;
+      event.preventDefault();
+      toggleServices();
+    });
+  }
+
+  header.querySelectorAll('.nav-links a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (window.innerWidth <= 900) {
+        closeMenu();
+      }
+    });
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('click', function (event) {
+    if (window.innerWidth > 900) return;
+    if (!header.classList.contains('is-open')) return;
+    if (header.contains(event.target)) return;
+    closeMenu();
+  });
+})();</script><div class="page-header"><div class="page-header-inner"><div class="breadcrumb"><a href="index.html">ホーム</a><span>›</span><span style="color:rgba(255,255,255,0.6)">無料相談予約</span></div><h1>無料相談予約</h1><p>不動産売買に関するあらゆるお悩みを、<br>経験豊富な専門スタッフが無料でお答えします。</p></div></div><div class="steps-bar"><div class="steps-inner"><div class="step-item"><div class="step-num active" id="step1-num">1</div><div class="step-label active" id="step1-label">ご入力</div></div><div class="step-connector"></div><div class="step-item"><div class="step-num pending" id="step2-num">2</div><div class="step-label" id="step2-label">確認</div></div><div class="step-connector"></div><div class="step-item"><div class="step-num pending" id="step3-num">3</div><div class="step-label" id="step3-label">完了</div></div></div></div><div class="main-wrap"><div><form id="reservationForm" novalidate><div class="form-card reveal"><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"></path></svg>ご相談の種類</div><div class="form-section-desc">当てはまるものをお選びください（複数可）</div><div class="type-chips"><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="purchase"><svg viewbox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>住宅購入</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="sell"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>不動産売却</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="land"><svg viewbox="0 0 24 24"><polygon points="3 11 12 2 21 11 21 21 15 21 15 15 9 15 9 21 3 21"></polygon></svg>土地売買</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="assess"><svg viewbox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>無料査定</label><label class="type-chip" onclick="toggleChip(this)"><input type="checkbox" name="type" value="other"><svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>その他</label></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>お客様情報</div><div class="form-section-desc">以下の項目をご記入ください</div><div class="form-row"><div class="form-group"><label class="form-label">お名前（姓）<span class="req">必須</span></label><input class="form-input" type="text" name="lastName" placeholder="小針" required></div><div class="form-group"><label class="form-label">お名前（名）<span class="req">必須</span></label><input class="form-input" type="text" name="firstName" placeholder="太郎" required></div></div><div class="form-row"><div class="form-group"><label class="form-label">フリガナ（姓）<span class="req">必須</span></label><input class="form-input" type="text" name="lastKana" placeholder="コバリ" required></div><div class="form-group"><label class="form-label">フリガナ（名）<span class="req">必須</span></label><input class="form-input" type="text" name="firstKana" placeholder="タロウ" required></div></div><div class="form-row"><div class="form-group"><label class="form-label">電話番号<span class="req">必須</span></label><input class="form-input" type="tel" name="tel" placeholder="00-0000-0000" required></div><div class="form-group"><label class="form-label">メールアドレス<span class="req">必須</span></label><input class="form-input" type="email" name="email" placeholder="example@email.com" required></div></div><div class="form-row full"><div class="form-group"><label class="form-label">現在のご住所<span class="opt">任意</span></label><input class="form-input" type="text" name="address" placeholder="東京都○○区○○町 1-2-3"></div></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z"></path></svg>相談方法</div><div class="form-section-desc">ご希望の相談方法をお選びください</div><div class="method-cards"><label class="method-card active" onclick="selectMethod(this)"><input type="radio" name="method" value="visit" checked><svg viewbox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg><h4>来店相談</h4><p>弊社オフィスにてご相談</p></label><label class="method-card" onclick="selectMethod(this)"><input type="radio" name="method" value="online"><svg viewbox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg><h4>オンライン</h4><p>Zoom・LINE等で対応</p></label><label class="method-card" onclick="selectMethod(this)"><input type="radio" name="method" value="tel"><svg viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z"></path></svg><h4>電話相談</h4><p>担当よりお電話します</p></label></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>ご希望日程</div><div class="form-section-desc">カレンダーから希望日を選択し、時間帯をお選びください</div><div class="calendar-wrap"><div class="cal-nav"><button class="cal-btn" type="button" onclick="prevMonth()"><svg viewbox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button><div class="cal-title" id="calTitle"></div><button class="cal-btn" type="button" onclick="nextMonth()"><svg viewbox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button></div><div class="cal-grid" id="calGrid"></div></div><div id="timeSlotWrap" style="display:none;"><div style="font-size:0.78rem;color:var(--text-mid);margin-top:1.2rem;margin-bottom:0.5rem;letter-spacing:0.04em;" id="selectedDateLabel"></div><div class="time-slots" id="timeSlots"><div class="time-slot" onclick="selectTime(this)">9:00〜10:00</div><div class="time-slot" onclick="selectTime(this)">10:00〜11:00</div><div class="time-slot full">11:00〜12:00</div><div class="time-slot" onclick="selectTime(this)">13:00〜14:00</div><div class="time-slot" onclick="selectTime(this)">14:00〜15:00</div><div class="time-slot full">15:00〜16:00</div><div class="time-slot" onclick="selectTime(this)">16:00〜17:00</div><div class="time-slot" onclick="selectTime(this)">17:00〜18:00</div></div></div></div><div class="form-section"><div class="form-section-title"><svg viewbox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>ご要望・ご質問</div><div class="form-section-desc">事前にお知らせいただきたい内容があればご記入ください</div><div class="form-row full"><div class="form-group"><label class="form-label">ご要望・ご質問<span class="opt">任意</span></label><textarea class="form-input" name="message" placeholder="例：3,000万円台の一戸建てを探しています。4人家族で、東急田園都市線沿線を希望しています。"></textarea></div></div><div class="form-row full" style="margin-top:0.5rem;"><div class="form-group"><label class="form-label">ご予算<span class="opt">任意</span></label><select class="form-input" name="budget"><option value="">-- 選択してください --</option><option>〜2,000万円</option><option>2,000〜3,000万円</option><option>3,000〜4,000万円</option><option>4,000〜5,000万円</option><option>5,000〜7,000万円</option><option>7,000万円〜</option><option>未定・相談したい</option></select></div></div></div><div class="form-footer"><div class="privacy-check" style="margin-bottom:1.2rem;"><input type="checkbox" id="privacyCheck" required><label for="privacyCheck"><a href="privacy-policy.html">プライバシーポリシー</a>に同意する（必須）</label></div><button class="btn-submit" type="submit" id="submitBtn"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>予約内容を送信する</button><p class="form-note">送信後、担当者より確認のご連絡をいたします<br>（平日9:00〜18:00、翌営業日中を目安）</p></div></div><div class="complete-screen" id="confirmScreen"><div class="complete-icon" style="background:oklch(95% 0.015 72);border-color:oklch(70% 0.10 72);"><svg viewbox="0 0 24 24" style="stroke:oklch(45% 0.12 72)"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div><h2>予約内容のご確認</h2><p>以下の内容でよろしいでしょうか。<br>内容をご確認の上、「この内容で送信する」ボタンを押してください。</p><div class="complete-detail" id="confirmDetail"></div><div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;"><button type="button" onclick="backToForm()" style="padding:0.9rem 2rem;border:1px solid rgba(0,0,0,0.15);border-radius:3px;background:#fff;font-family:var(--sans);font-size:0.88rem;color:var(--text-mid);cursor:pointer;letter-spacing:0.06em;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(0,0,0,0.15)'">← 入力内容を修正する</button><button type="button" onclick="submitFinal()" style="padding:0.9rem 2.4rem;background:var(--navy);color:#fff;border:none;border-radius:3px;font-family:var(--sans);font-size:0.88rem;font-weight:500;letter-spacing:0.1em;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-light)'" onmouseout="this.style.background='var(--navy)'">この内容で送信する →</button></div></div><div class="complete-screen" id="completeScreen"><div class="complete-icon"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><h2>ご予約を受け付けました</h2><p>お申し込みいただきありがとうございます。<br>担当者より確認のご連絡をいたします。</p><div class="complete-detail" id="completeDetail"></div><p style="font-size:0.78rem;color:var(--text-light);">※ご登録のメールアドレスに確認メールをお送りしました<br>※メールが届かない場合はお電話にてお問い合わせください</p><a class="btn-home" href="index.html">トップページへ戻る</a></div></form></div><aside class="sidebar"><div class="info-card reveal reveal-delay-1"><div class="info-card-header"><h3>安心の無料相談</h3></div><div class="info-card-body"><div class="point-list"><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>相談・査定は<strong>完全無料</strong>。費用は一切かかりません</p></div><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>しつこい営業・勧誘は<strong>一切行いません</strong></p></div><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>経験豊富な<strong>専任スタッフ</strong>が丁寧に対応します</p></div><div class="point-item"><svg viewbox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg><p>ご相談内容は<strong>厳重に管理</strong>いたします</p></div></div></div></div><div class="info-card reveal reveal-delay-1"><div class="info-card-header"><h3>お電話でのご相談</h3></div><div class="info-card-body"><div class="contact-item"><div class="contact-icon"><svg viewbox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18C.1.69.5.2 1.09.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.09 7.09a16 16 0 006.29 6.29l1.06-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.18v2.74z"></path></svg></div><div class="contact-info"><h4>電話番号</h4><p>00-0000-0000</p><small>平日 9:00〜18:00</small></div></div><div class="contact-item"><div class="contact-icon"><svg viewbox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div><div class="contact-info"><h4>所在地</h4><p style="font-size:0.82rem;">〒000-0000<br>○○都○○区○○町 1-2-3</p></div></div></div></div><div class="info-card reveal reveal-delay-2"><div class="info-card-header"><h3>よくある質問</h3></div><div class="info-card-body"><div class="faq-item"><div class="faq-q">相談は本当に無料ですか？</div><div class="faq-a">はい、完全無料です。査定のみのご依頼も承ります。</div></div><div class="faq-item"><div class="faq-q">相談後に必ず契約が必要ですか？</div><div class="faq-a">いいえ。ご相談のみでも構いません。しつこい営業は行いません。</div></div><div class="faq-item"><div class="faq-q">当日キャンセルはできますか？</div><div class="faq-a">可能です。お電話またはメールにてご連絡ください。</div></div></div></div></aside></div><footer><div class="footer-inner"><div class="footer-brand"><h3>小針不動産株式会社</h3><p>地域に根ざした信頼の不動産会社として、<br>お客様一人ひとりの夢の実現をサポートします。<br><br>〒000-0000 ○○都○○区○○町 1-2-3<br>TEL: 00-0000-0000</p></div><div class="footer-col"><h4>サービス</h4><a href="service-purchase.html">住宅購入</a><a href="service-sale.html">不動産売却</a><a href="service-land.html">土地売買</a><a href="consultation.html">無料査定</a></div><div class="footer-col"><h4>会社情報</h4><a href="access.html">会社概要</a><a href="team.html">スタッフ紹介</a><a href="news.html">お知らせ</a></div><div class="footer-col"><h4>お問い合わせ</h4><a href="consultation.html">無料相談予約</a><a href="consultation.html">物件査定依頼</a><a href="access.html">アクセス</a><a href="privacy-policy.html">プライバシーポリシー</a></div></div><div class="footer-bottom"><p>© 2026 小針不動産株式会社 All Rights Reserved.</p><a href="#">宅地建物取引業者 国土交通大臣（○）第○○○○号</a></div></footer><button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewbox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg></button><script>// ── Chip toggle (multi select)
+function toggleChip(el) { el.classList.toggle('active'); }
+
+// ── Method select (single)
+function selectMethod(el) {
+  document.querySelectorAll('.method-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── Calendar
+const today = new Date();
+let calYear = today.getFullYear();
+let calMonth = today.getMonth();
+let selectedDate = null;
+
+const WEEKDAYS = ['日','月','火','水','木','金','土'];
+const CLOSED = [0]; // 日曜定休
+
+function renderCalendar() {
+  const title = document.getElementById('calTitle');
+  const grid = document.getElementById('calGrid');
+  title.textContent = `${calYear}年 ${calMonth + 1}月`;
+  grid.innerHTML = '';
+  WEEKDAYS.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'cal-dow';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+  const first = new Date(calYear, calMonth, 1).getDay();
+  const days = new Date(calYear, calMonth + 1, 0).getDate();
+  for (let i = 0; i < first; i++) {
+    const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
+  }
+  for (let d = 1; d <= days; d++) {
+    const date = new Date(calYear, calMonth, d);
+    const dow = date.getDay();
+    const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const isClosed = CLOSED.includes(dow);
+    const isToday = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+    const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+    const el = document.createElement('div');
+    let cls = 'cal-day';
+    if (dow === 0) cls += ' sun';
+    if (dow === 6) cls += ' sat';
+    if (isPast) cls += ' past';
+    else if (isClosed) cls += ' closed';
+    if (isToday) cls += ' today';
+    if (isSelected) cls += ' selected';
+    el.className = cls;
+    el.textContent = d;
+    if (!isPast && !isClosed) {
+      el.onclick = () => selectDay(date, el);
+    }
+    grid.appendChild(el);
+  }
+}
+
+function selectDay(date, el) {
+  document.querySelectorAll('.cal-day.selected').forEach(d => d.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedDate = date;
+  const wrap = document.getElementById('timeSlotWrap');
+  const label = document.getElementById('selectedDateLabel');
+  const weekStr = ['日','月','火','水','木','金','土'];
+  label.textContent = `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日（${weekStr[date.getDay()]}）の予約可能時間`;
+  // Reset time slots
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  wrap.style.display = 'block';
+  wrap.scrollIntoView && (wrap.style.scrollMargin = '20px');
+}
+
+function selectTime(el) {
+  if (el.classList.contains('full')) return;
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function prevMonth() {
+  calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+}
+function nextMonth() {
+  calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+}
+
+renderCalendar();
+
+// ── Steps indicator
+function setStep(n) {
+  [1,2,3].forEach(i => {
+    const num = document.getElementById(`step${i}-num`);
+    const lbl = document.getElementById(`step${i}-label`);
+    if (i < n) { num.className = 'step-num done'; lbl.className = 'step-label'; }
+    else if (i === n) { num.className = 'step-num active'; lbl.className = 'step-label active'; }
+    else { num.className = 'step-num pending'; lbl.className = 'step-label'; }
+  });
+}
+
+// ── Collect form data
+function collectData() {
+  const form = document.getElementById('reservationForm');
+  const timeSelected = document.querySelector('.time-slot.selected');
+  const weekStr = ['日','月','火','水','木','金','土'];
+  return {
+    lastName:  form.lastName.value.trim(),
+    firstName: form.firstName.value.trim(),
+    lastKana:  form.lastKana.value.trim(),
+    firstKana: form.firstKana.value.trim(),
+    tel:       form.tel.value.trim(),
+    email:     form.email.value.trim(),
+    address:   form.address.value.trim(),
+    budget:    form.budget.value,
+    message:   form.message.value.trim(),
+    types:     [...document.querySelectorAll('.type-chip.active')].map(c => c.textContent.trim()).join('、') || '未選択',
+    method:    document.querySelector('.method-card.active h4')?.textContent || '来店相談',
+    dateStr:   selectedDate
+      ? `${selectedDate.getFullYear()}年${selectedDate.getMonth()+1}月${selectedDate.getDate()}日（${weekStr[selectedDate.getDay()]}）`
+      : '未選択',
+    timeStr:   timeSelected ? timeSelected.textContent : '未選択',
+  };
+}
+
+// ── Build detail rows HTML
+function buildDetailRows(data) {
+  const rows = [
+    ['お名前',       `${data.lastName} ${data.firstName} 様`],
+    ['フリガナ',     `${data.lastKana} ${data.firstKana}`],
+    ['電話番号',     data.tel],
+    ['メールアドレス', data.email],
+    ['現在のご住所', data.address || '—'],
+    ['ご相談種別',   data.types],
+    ['相談方法',     data.method],
+    ['ご希望日',     data.dateStr],
+    ['ご希望時間',   data.timeStr],
+    ['ご予算',       data.budget || '—'],
+    ['ご要望・ご質問', data.message || '—'],
+  ];
+  return rows.map(([k, v]) =>
+    `<div class="complete-detail-row"><span>${k}</span><span>${v}</span></div>`
+  ).join('');
+}
+
+// ── Form submit → show confirm screen
+document.getElementById('reservationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = collectData();
+  const privacy = document.getElementById('privacyCheck').checked;
+
+  if (!data.lastName || !data.firstName || !data.tel || !data.email || !privacy) {
+    alert('必須項目をすべてご入力の上、プライバシーポリシーにご同意ください。');
+    return;
+  }
+
+  // Show confirm screen (step 2)
+  setStep(2);
+  document.getElementById('confirmDetail').innerHTML = buildDetailRows(data);
+  document.querySelector('.form-card').style.display = 'none';
+  document.getElementById('confirmScreen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ── Back to form
+function backToForm() {
+  setStep(1);
+  document.getElementById('confirmScreen').style.display = 'none';
+  document.querySelector('.form-card').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Final submit → show complete screen
+function submitFinal() {
+  const data = collectData();
+  setStep(3);
+  document.getElementById('completeDetail').innerHTML = buildDetailRows(data);
+  document.getElementById('confirmScreen').style.display = 'none';
+  document.getElementById('completeScreen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));</script></body></html>

@@ -1,0 +1,60 @@
+---
+import { renderHtmlDocument, renderPugDocument } from '../lib/renderLegacyDocument.mjs';
+
+const {
+  template,
+  type = 'pug',
+  rootAssets = false,
+  stripBundleScript = false,
+  clientScript,
+} = Astro.props;
+
+const doc = type === 'html'
+  ? renderHtmlDocument(template, { stripBundleScript })
+  : renderPugDocument(template, { rootAssets });
+---
+
+<html {...doc.htmlAttrs}>
+  <head>
+    <Fragment set:html={doc.head} />
+    <slot name="head" />
+  </head>
+  <body {...doc.bodyAttrs}>
+    <Fragment set:html={doc.body} />
+    {clientScript === 'corporate' && (
+      <script>
+        import '../scripts/corporate/main.js';
+      </script>
+    )}
+    {clientScript === 'ai-training' && (
+      <script>
+        import '../scripts/services/ai-training.js';
+      </script>
+    )}
+    {clientScript === 'influencer-marketing' && (
+      <script>
+        import '../scripts/services/influencer-marketing.js';
+      </script>
+    )}
+    {clientScript === 'system-development' && (
+      <script>
+        import '../scripts/services/system-development.js';
+      </script>
+    )}
+    {clientScript === 'engineer-skill-sheet' && (
+      <script>
+        import '../scripts/services/engineer-skill-sheet.js';
+      </script>
+    )}
+    {clientScript === 'ai-training-lp' && (
+      <script>
+        import '../scripts/landings/ai-training-lp.jsx';
+      </script>
+    )}
+    {clientScript === 'ryokan-lp' && (
+      <script>
+        import '../scripts/landings/ryokan-lp.jsx';
+      </script>
+    )}
+  </body>
+</html>

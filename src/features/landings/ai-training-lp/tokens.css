@@ -1,0 +1,267 @@
+/* =============================================================
+   It's Automatic — Design System
+   Colors & Typography CSS Custom Properties
+   Inspired by: uploads/DESIGN-claude.md (Anthropic/Claude visual language)
+   Fonts: Noto Serif JP / Noto Sans JP (substitutes for Anthropic Serif/Sans)
+   ⚠️  Font substitution — provide Anthropic font files to match original spec
+   ============================================================= */
+
+/* Google Fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Mono:wght@400;500&display=swap');
+
+/* =============================================================
+   COLOR TOKENS
+   ============================================================= */
+:root {
+
+  /* --- Brand (Logo Colors) --- */
+  --color-logo-blue:       #7B7FD4;  /* Periwinkle blue — logo primary text */
+  --color-logo-blue-dark:  #6367C0;  /* Darker blue — hover states */
+  --color-logo-red:        #E84040;  /* Red — logo "A" accent */
+  --color-logo-red-dark:   #CC3030;  /* Darker red — hover */
+
+  /* --- Brand (Service Page Warm Palette) --- */
+  --color-brand:           #c96442;  /* Terracotta — primary CTA, brand moments */
+  --color-brand-coral:     #d97757;  /* Coral accent — links on dark, text accents */
+  --color-brand-dark:      #a84f31;  /* Terracotta darker hover state */
+
+  /* --- Semantic --- */
+  --color-error:           #b53333;  /* Deep warm red */
+  --color-focus:           #3898ec;  /* Accessibility focus ring — only cool color */
+
+  /* --- Surfaces (Light) --- */
+  --color-bg-parchment:    #f5f4ed;  /* Primary page background */
+  --color-bg-ivory:        #faf9f5;  /* Card / elevated surfaces on parchment */
+  --color-bg-white:        #ffffff;  /* Maximum contrast surfaces */
+  --color-bg-sand:         #e8e6dc;  /* Secondary button bg / prominent interactive */
+
+  /* --- Surfaces (Dark) --- */
+  --color-bg-dark:         #141413;  /* Dark section / page background */
+  --color-bg-dark-surface: #30302e;  /* Dark containers, nav borders */
+  --color-bg-dark-mid:     #1e1e1c;  /* Mid dark surface */
+
+  /* --- Text (Light Theme) --- */
+  --color-text-primary:    #141413;  /* Near black — warm olive tint */
+  --color-text-secondary:  #5e5d59;  /* Olive gray — secondary body */
+  --color-text-tertiary:   #87867f;  /* Stone gray — footnotes, meta */
+  --color-text-link:       #3d3d3a;  /* Dark warm — links, emphasized secondary */
+  --color-text-charcoal:   #4d4c48;  /* Button text on light warm surfaces */
+
+  /* --- Text (Dark Theme) --- */
+  --color-text-on-dark:    #faf9f5;  /* Ivory — primary text on dark */
+  --color-text-on-dark-2:  #b0aea5;  /* Warm silver — secondary text on dark */
+  --color-text-on-dark-3:  #87867f;  /* Stone gray — tertiary on dark */
+
+  /* --- Borders (Light) --- */
+  --color-border-subtle:   #f0eee6;  /* Border cream — gentlest containment */
+  --color-border-warm:     #e8e6dc;  /* Warm sand — prominent borders, dividers */
+  --color-border-mid:      #d1cfc5;  /* Ring warm — hover/focus ring color */
+  --color-border-deep:     #c2c0b6;  /* Ring deep — active/pressed states */
+
+  /* --- Borders (Dark) --- */
+  --color-border-dark:     #30302e;  /* Dark surface borders */
+
+  /* =============================================================
+     TYPOGRAPHY TOKENS
+     ============================================================= */
+
+  /* --- Font Families --- */
+  --font-serif:   'Noto Serif JP', Georgia, 'Times New Roman', serif;
+  --font-sans:    'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'BIZ UDGothic', sans-serif;
+  --font-mono:    'Noto Sans Mono', 'Courier New', monospace;
+
+  /* --- Font Sizes (rem / px) --- */
+  --text-display:    4rem;      /* 64px — Hero headline */
+  --text-h1:         3.25rem;   /* 52px — Section heading */
+  --text-h2:         2.3rem;    /* 36px — Sub-heading large */
+  --text-h3:         2rem;      /* 32px — Sub-heading */
+  --text-h4:         1.6rem;    /* 25.6px — Sub-heading small */
+  --text-h5:         1.3rem;    /* 20.8px — Feature title */
+  --text-body-serif: 1.0625rem; /* 17px — Editorial serif body */
+  --text-body-lg:    1.25rem;   /* 20px — Intro paragraphs */
+  --text-body:       1.0625rem; /* 17px — Standard UI body */
+  --text-body-md:    1rem;      /* 16px — Compact body */
+  --text-body-sm:    0.9375rem; /* 15px — Small body */
+  --text-caption:    0.875rem;  /* 14px — Metadata */
+  --text-label:      0.75rem;   /* 12px — Badges, labels */
+  --text-overline:   0.625rem;  /* 10px — Uppercase overlines */
+  --text-micro:      0.6rem;    /* 9.6px — Smallest */
+  --text-code:       0.9375rem; /* 15px — Code */
+
+  /* --- Font Weights --- */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+
+  /* --- Line Heights --- */
+  --leading-tight:    1.10;
+  --leading-snug:     1.20;
+  --leading-compact:  1.30;
+  --leading-normal:   1.40;
+  --leading-relaxed:  1.60;
+  --leading-ui:       1.00;
+
+  /* --- Letter Spacing --- */
+  --tracking-normal:  normal;
+  --tracking-label:   0.12px;
+  --tracking-overline: 0.5px;
+  --tracking-micro:   0.096px;
+  --tracking-code:    -0.32px;
+
+  /* =============================================================
+     SPACING TOKENS
+     ============================================================= */
+  --space-1:  3px;
+  --space-2:  4px;
+  --space-3:  6px;
+  --space-4:  8px;
+  --space-5:  10px;
+  --space-6:  12px;
+  --space-7:  16px;
+  --space-8:  20px;
+  --space-9:  24px;
+  --space-10: 30px;
+  --space-11: 32px;
+  --space-12: 40px;
+  --space-13: 48px;
+  --space-14: 64px;
+  --space-15: 80px;
+  --space-16: 120px;
+
+  /* =============================================================
+     BORDER RADIUS TOKENS
+     ============================================================= */
+  --radius-sharp:      4px;   /* Minimal inline elements */
+  --radius-subtle:     6px;   /* Small buttons, secondary interactive */
+  --radius-default:    8px;   /* Standard buttons, cards */
+  --radius-generous:   12px;  /* Primary buttons, inputs */
+  --radius-large:      16px;  /* Featured containers, video players */
+  --radius-tag:        24px;  /* Tag-like elements */
+  --radius-max:        32px;  /* Hero containers, media */
+  --radius-full:       9999px; /* Pills */
+
+  /* =============================================================
+     SHADOW TOKENS
+     ============================================================= */
+  --shadow-ring:      0px 0px 0px 1px var(--color-border-mid);
+  --shadow-ring-warm: 0px 0px 0px 1px var(--color-border-warm);
+  --shadow-ring-deep: 0px 0px 0px 1px var(--color-border-deep);
+  --shadow-whisper:   rgba(0,0,0,0.05) 0px 4px 24px;
+  --shadow-soft:      rgba(0,0,0,0.08) 0px 8px 32px;
+  --shadow-brand:     var(--color-brand) 0px 0px 0px 0px, var(--color-brand) 0px 0px 0px 1px;
+
+  /* =============================================================
+     SEMANTIC / ROLE ALIASES
+     ============================================================= */
+
+  /* Page */
+  --bg-page:           var(--color-bg-parchment);
+  --bg-card:           var(--color-bg-ivory);
+  --bg-elevated:       var(--color-bg-white);
+  --bg-interactive:    var(--color-bg-sand);
+
+  /* Text */
+  --fg-1:              var(--color-text-primary);
+  --fg-2:              var(--color-text-secondary);
+  --fg-3:              var(--color-text-tertiary);
+  --fg-link:           var(--color-text-link);
+
+  /* Borders */
+  --border-1:          var(--color-border-subtle);
+  --border-2:          var(--color-border-warm);
+
+  /* Semantic type scale */
+  --h1-font:           var(--font-serif);
+  --h1-size:           var(--text-h1);
+  --h1-weight:         var(--weight-medium);
+  --h1-lh:             var(--leading-snug);
+
+  --h2-font:           var(--font-serif);
+  --h2-size:           var(--text-h2);
+  --h2-weight:         var(--weight-medium);
+  --h2-lh:             var(--leading-compact);
+
+  --h3-font:           var(--font-serif);
+  --h3-size:           var(--text-h3);
+  --h3-weight:         var(--weight-medium);
+  --h3-lh:             var(--leading-tight);
+
+  --body-font:         var(--font-sans);
+  --body-size:         var(--text-body-md);
+  --body-weight:       var(--weight-regular);
+  --body-lh:           var(--leading-relaxed);
+
+  --label-font:        var(--font-sans);
+  --label-size:        var(--text-label);
+  --label-weight:      var(--weight-medium);
+  --label-tracking:    var(--tracking-label);
+}
+
+/* =============================================================
+   DARK THEME OVERRIDES
+   ============================================================= */
+[data-theme="dark"] {
+  --bg-page:           var(--color-bg-dark);
+  --bg-card:           var(--color-bg-dark-surface);
+  --fg-1:              var(--color-text-on-dark);
+  --fg-2:              var(--color-text-on-dark-2);
+  --fg-3:              var(--color-text-on-dark-3);
+  --border-1:          var(--color-border-dark);
+  --border-2:          var(--color-border-dark);
+}
+
+/* =============================================================
+   BASE ELEMENT STYLES
+   ============================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-medium);
+  color: var(--fg-1);
+}
+
+h1 { font-size: var(--text-h1); line-height: var(--leading-snug); }
+h2 { font-size: var(--text-h2); line-height: var(--leading-compact); }
+h3 { font-size: var(--text-h3); line-height: var(--leading-tight); }
+h4 { font-size: var(--text-h4); line-height: var(--leading-snug); }
+h5 { font-size: var(--text-h5); line-height: var(--leading-snug); }
+h6 { font-size: var(--text-body-lg); line-height: var(--leading-snug); }
+
+p {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-2);
+}
+
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+}
+
+a:hover { color: var(--fg-1); }
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-code);
+  letter-spacing: var(--tracking-code);
+  background: var(--bg-card);
+  border-radius: var(--radius-subtle);
+  padding: 2px 6px;
+}
