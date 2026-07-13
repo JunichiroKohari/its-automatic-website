@@ -286,7 +286,6 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
   height: 28px;
   flex: none;
   border-radius: 7px;
-  background: color-mix(in srgb, var(--ss-on-accent) 16%, transparent);
 }
 
 .skill-export-button__icon svg {
@@ -845,6 +844,33 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
   line-height: 1;
 }
 
+.skill-card__icon img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.technology-icon-stack {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.skill-card__icon .technology-icon-stack {
+  width: 100%;
+  height: 100%;
+}
+
+.skill-card__icon .technology-icon-stack i {
+  font-size: 15px;
+}
+
+.skill-card__icon .technology-icon-stack img {
+  width: 15px;
+  height: 15px;
+}
+
 .skill-card__icon span {
   font-family: var(--ss-mono);
   font-size: 8.5px;
@@ -1154,6 +1180,26 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
 .project-tech i {
   font-size: 14px;
   line-height: 1;
+}
+
+.project-tech img {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  object-fit: contain;
+}
+
+.project-tech .technology-icon-stack {
+  gap: 3px;
+}
+
+.project-tech .technology-icon-stack i {
+  font-size: 12px;
+}
+
+.project-tech .technology-icon-stack img {
+  width: 12px;
+  height: 12px;
 }
 
 .project-tech b {

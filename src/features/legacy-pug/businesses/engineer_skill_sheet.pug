@@ -1,20 +1,33 @@
 -
   const skills = skillSheet.skills
 
+  const simpleIcon = (slug) => ({ src: `https://cdn.simpleicons.org/${slug}`, alt: '' })
+  const imageIcon = (src) => ({ src, alt: '' })
+  const databaseIcon = imageIcon('https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/icons/database-fill.svg')
+  const openAiIcon = imageIcon('https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/icons/openai.svg')
+  const codeCommitIcon = imageIcon('https://icon.icepanel.io/AWS/svg/Developer-Tools/CodeCommit.svg')
+  const sharePointIcon = imageIcon('https://upload.wikimedia.org/wikipedia/commons/2/28/Microsoft_Office_SharePoint_%282025%E2%80%93present%29.svg')
+
   const iconMap = {
     'JavaScript': 'devicon-javascript-plain colored',
     'TypeScript': 'devicon-typescript-plain colored',
-    'SQL': { fallback: 'SQL' },
+    'SQL': databaseIcon,
     'Python': 'devicon-python-plain colored',
     'PHP': 'devicon-php-plain colored',
     'Go (Golang)': 'devicon-go-plain colored',
     'C#': 'devicon-csharp-plain colored',
     'Kotlin': 'devicon-kotlin-plain colored',
-    'HTML / CSS': 'devicon-html5-plain colored',
+    'HTML / CSS': { items: ['devicon-html5-plain colored', 'devicon-css3-plain colored'] },
     'ShellScript': 'devicon-bash-plain colored',
-    'Nuxt.js (Vue.js)': 'devicon-nuxtjs-plain colored',
+    'Nuxt.js (Vue.js)': { items: ['devicon-nuxtjs-plain colored', 'devicon-vuejs-plain colored'] },
+    'Nuxt.js、Vue.js': { items: ['devicon-nuxtjs-plain colored', 'devicon-vuejs-plain colored'] },
     'Laravel (Lumen)': 'devicon-laravel-plain colored',
-    'Next.js (React)': 'devicon-nextjs-plain colored',
+    'Laravel': 'devicon-laravel-plain colored',
+    'Gin': simpleIcon('gin'),
+    'Huma': imageIcon('https://huma.rocks/favicon.png'),
+    'Hono': simpleIcon('hono'),
+    'Next.js (React)': { items: ['devicon-nextjs-plain colored', 'devicon-react-original colored'] },
+    'Next.js、React': { items: ['devicon-nextjs-plain colored', 'devicon-react-original colored'] },
     '.NET Framework': 'devicon-dot-net-plain colored',
     'Apache Airflow': 'devicon-apacheairflow-plain colored',
     'PostgreSQL': 'devicon-postgresql-plain colored',
@@ -22,15 +35,20 @@
     'NoSQL (Firestore等)': 'devicon-firebase-plain colored',
     'MySQL': 'devicon-mysql-plain colored',
     'SQLite': 'devicon-sqlite-plain colored',
-    'AWS': { fallback: 'AWS' },
+    'AWS': 'devicon-amazonwebservices-plain-wordmark colored',
     'Linux': 'devicon-linux-plain colored',
     'Windows Server': 'devicon-windows8-original colored',
     'GCP': 'devicon-googlecloud-plain colored',
     'Git': 'devicon-git-plain colored',
     'GitHub': 'devicon-github-original colored',
     'BitBucket': 'devicon-bitbucket-original colored',
-    'CodeCommit': { fallback: 'CC' },
+    'CodeCommit': codeCommitIcon,
     'Terraform': 'devicon-terraform-plain colored',
+    'Codex': openAiIcon,
+    'Claude Code': simpleIcon('anthropic'),
+    'Gemini': simpleIcon('googlegemini'),
+    'Devin': imageIcon('https://devin.ai/favicon.svg'),
+    'Cursor': simpleIcon('cursor'),
   }
 
   const techClass = {
@@ -52,15 +70,20 @@
     'Vue': 'devicon-vuejs-plain colored',
     'jQuery': 'devicon-jquery-plain colored',
     'HTML / CSS': 'devicon-html5-plain colored',
-    'SQL': { fallback: 'SQL' },
+    'SQL': databaseIcon,
     'PostgreSQL': 'devicon-postgresql-plain colored',
     'SQL Server': 'devicon-microsoftsqlserver-plain colored',
     'MySQL': 'devicon-mysql-plain colored',
     'Docker': 'devicon-docker-plain colored',
-    'GitHub Actions': 'devicon-github-original colored',
+    'GitHub Actions': 'devicon-githubactions-plain colored',
     'Unity': 'devicon-unity-original colored',
-    'SharePoint': { fallback: 'SP' },
-    'AWS': { fallback: 'AWS' },
+    'SharePoint': sharePointIcon,
+    'AWS': 'devicon-amazonwebservices-plain-wordmark colored',
+    'CodeCommit': codeCommitIcon,
+    'Gin': simpleIcon('gin'),
+    'Huma': imageIcon('https://huma.rocks/favicon.png'),
+    'Hono': simpleIcon('hono'),
+    'Terraform': 'devicon-terraform-plain colored',
   }
 
   const skillCategoryLabels = {
@@ -203,6 +226,18 @@ mixin multiline(text)
         br
       = line
 
+mixin technologyIcon(icon)
+  if typeof icon === 'string'
+    i(class=icon)
+  else if icon && icon.items
+    span.technology-icon-stack
+      each item in icon.items
+        +technologyIcon(item)
+  else if icon && icon.src
+    img(src=icon.src alt=icon.alt || '' loading="lazy" decoding="async")
+  else if icon && icon.fallback
+    span= icon.fallback
+
 doctype html
 html(lang="ja")
   head
@@ -250,7 +285,6 @@ html(lang="ja")
                 polyline(points="7 10 12 15 17 10")
                 line(x1="12" y1="15" x2="12" y2="3")
             | PDF出力
-            small all
         .theme-picker
           p THEME
           .theme-picker__buttons
@@ -301,10 +335,10 @@ html(lang="ja")
                   dd 30歳
                 div
                   dt 形態
-                  dd 個人事業主
+                  dd 業務委託
                 div
                   dt 開発経験
-                  dd 6年以上
+                  dd 7年以上
             article.profile-card
               p.card-kicker CORE STACK
               p 普段の主軸は Go / Python / TypeScript。バックエンドの REST / gRPC API、フロントの React・Vue、Terraform・Kubernetes でのインフラ構築までを単独でカバーします。テスト・コードレビュー・CI/CD・オンボーディング支援など、チーム開発の土台づくりも得意です。
@@ -337,10 +371,7 @@ html(lang="ja")
                 .skill-card__top
                   .skill-card__identity
                     span.skill-card__icon
-                      if typeof icon === 'string'
-                        i(class=icon)
-                      else
-                        span= icon.fallback
+                      +technologyIcon(icon)
                     strong= skill.name
                   span.skill-card__years= skill.years
                 .skill-level
@@ -440,10 +471,7 @@ html(lang="ja")
                   each tech in projectTech
                     - const techIcon = techClass[tech]
                     span
-                      if typeof techIcon === 'string'
-                        i(class=techIcon)
-                      else if techIcon && techIcon.fallback
-                        b= techIcon.fallback
+                      +technologyIcon(techIcon)
                       strong= tech
                 p.project-print-summary= getProjectPrintSummary(project.desc)
                 .project-card__detail(data-project-detail hidden)

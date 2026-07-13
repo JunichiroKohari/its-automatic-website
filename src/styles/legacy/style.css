@@ -379,14 +379,31 @@ main::before {
 	padding: 0 20px;
 	border: 1px solid #cc78aa;
 	border-radius: 999px;
+	background: transparent;
 	color: #fff;
+	font: inherit;
 	font-size: 1rem;
+	text-decoration: none;
+	cursor: pointer;
 	transition: background .3s, color .3s, transform .3s;
 }
 .product-card__button:hover {
 	background: #cc78aa;
 	color: #141414;
 	transform: translateY(-1px);
+}
+.product-card__button:disabled,
+.product-card__button--disabled {
+	border-color: rgba(255, 255, 255, 0.32);
+	color: rgba(255, 255, 255, 0.55);
+	cursor: not-allowed;
+	opacity: 0.72;
+}
+.product-card__button:disabled:hover,
+.product-card__button--disabled:hover {
+	background: transparent;
+	color: rgba(255, 255, 255, 0.55);
+	transform: none;
 }
 .product-img {
 	width: 100%;

@@ -6,24 +6,27 @@
     - JavaScript
     - TypeScript
     - HTML / CSS
-    - Nuxt.js (Vue.js)
-    - Next.js (React)
+    - Nuxt.js、Vue.js
+    - Next.js、React
 - no: "02"
   title: バックエンド / API
   items:
-    - Laravel(Lumen)・Python での REST API 開発
-    - Go での gRPC API 開発
-    - Go・Python でのバッチ開発
-    - C# での画面・バッチ開発
+    - Laravel・Python・Go・TypeScriptでのREST API開発
+    - GoでのgRPC API 開発
+    - Go・Pythonでのバッチ開発
+    - C#での画面・バッチ開発
   related:
     - PHP
     - Go (Golang)
     - Python
     - C#
-    - Laravel (Lumen)
+    - Laravel
+    - Gin
+    - Huma
+    - Hono
     - .NET Framework
 - no: "03"
-  title: データ基盤
+  title: データ基盤、DB
   items:
     - Apache Airflow でのデータパイプライン構築
     - テーブル設計（RDB / DynamoDB）
@@ -38,10 +41,10 @@
 - no: "04"
   title: インフラ / DevOps
   items:
-    - Terraform・CloudFormation での IaC 構築
-    - Kubernetes 環境でのワークロード構築
-    - Docker での環境構築
-    - CI/CD 構築（GitHub Actions）
+    - Terraform・CloudFormationでのIaC構築
+    - Kubernetes環境でのワークロード構築
+    - Dockerでの環境構築
+    - CI/CD構築（GitHub Actions）
   related:
     - AWS
     - GCP
@@ -54,6 +57,7 @@
 - no: "05"
   title: 品質 / テスト
   items:
+    - テスト計画、リリース計画作成
     - テストコード作成（pytest / Go testing / PHPUnit / Cypress）
     - コードレビュー（Go / Python / PHP / JS / TS）
   related:
