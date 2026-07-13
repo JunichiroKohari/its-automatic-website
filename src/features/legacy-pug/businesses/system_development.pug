@@ -78,11 +78,11 @@ html(lang="ja")
               | 開発現場に入り込み、実装力と設計力の両面からプロジェクトを前に進めます。
             .system-hero__actions
               a.system-button.system-button--primary(href="engineer_skill_sheet.html") 弊社エンジニアの詳細
-              a.system-button.system-button--ghost(href="#support" data-scroll-target="#support") 支援領域を見る
+              a.system-button.system-button--ghost(href="#support" data-scroll-target="#support" style="display: none;") 支援領域を見る
           .system-hero__visual(aria-label="システム開発の対応領域")
             img(src="../../img/system-development-thumbnail.svg" alt="システム開発のイメージ")
 
-      section#support.system-section.system-section--paper
+      section#support.system-section.system-section--paper(style="display: none;")
         .system-container
           .section-heading
             p.system-kicker WHAT WE DO
@@ -97,7 +97,7 @@ html(lang="ja")
             each item in supportItems
               li= item
 
-      section#process.system-section.system-section--dark
+      section#process.system-section.system-section--dark(style="display: none;")
         .system-container
           .section-heading.section-heading--dark
             p.system-kicker PROCESS
@@ -110,7 +110,7 @@ html(lang="ja")
                   h3= step.title
                   p= step.text
 
-      section.system-cta
+      section.system-cta(style="display: none;")
         .system-container.system-cta__inner
           p.system-kicker ENGINEER PROFILE
           h2 実際に支援するエンジニアのスキル・実績をご確認ください。
