@@ -1,24 +1,84 @@
-- sourceNo: "00"
-  company: 自社事業
-  title: スマホアプリ・インフルエンサー仲介事業の運営
-  industry: 自社事業
-  period: 2025/11/01〜
-  dates: 2025/11/01〜
-  type: self
-  active: true
-  phase: 事業運営
-  engagement: 自社事業
-  tech: []
+- company: A社
+  title: タレントマネジメントシステム（SaaS）
+  industry: HR
+  dates:
+    start: 2026/03/01
+    end: now
+  type: long
+  phase: 設計、実装、テスト、保守、運用
+  engagement: 業務委託
+  tech:
+    - Go
+    - TypeScript
+    - Huma
+    - Gin
+    - Hono
+    - Kubernetes
+    - AWS
+    - Terraform
+    - Next.js
   desc: |-
-    個人で運営しているスマホアプリやインフルエンサー仲介事業など、自身の事業に時間を割いています。
-- sourceNo: "01"
-  company: U社
+    タレントマネジメントシステム（SaaS）内の単一プロダクト内においてバックエンド・インフラ領域を主導。PoCフェーズから参画しました（参画中）。
+
+    # 担当業務など
+    - バックエンド70%、フロントエンド0%、インフラ30%
+
+    # 業務内容
+    - アーキテクチャ設計
+    - 実装、コードレビュー、テスト計画作成
+    - PoC協力先企業とのMTG参加
+    - TODO: 続き書く
+  team: |-
+    # 人数
+    ## 全体
+    数十名
+
+    ## チーム
+    8名程度
+    - エンジニア：4名程度
+    - 非エンジニア：4名程度
+
+    # 場所
+    フルリモート
+  environment: |-
+    # 使用言語、FW
+    - Go
+    - TypeScript
+    - Gin
+    - Huma
+    - Hono
+    - Next.js
+
+    # その他ライブラリ
+    - TODO
+
+    # OS、インフラ等
+    - AWS(EKS, Lambda, S3, ECR...)
+    - Docker
+    - GitHub Actions
+    - PostgresSQL
+    - MySQL
+    - DataDog
+    - ArgoCD
+    - Terraform
+    - Terragrunt
+    - DevCycle
+
+    # ツール
+    - Claude Code
+    - Codex
+    - Slack
+    - Figma
+    - Notion
+
+- company: U社
   title: 法人クレジットカード 不正利用対策システム
   industry: 金融
-  period: 1年0ヶ月
-  dates: 2024/11/01〜2025/10/31
+  dates:
+    start: 2024/11
+    end: 2025/10
   type: long
-  phase: 基本設計〜保守・運用
+  phase: 設計、実装、テスト、保守、運用
   engagement: 業務委託
   tech:
     - Go
@@ -41,7 +101,8 @@
     - 不正利用対策関連の社内システムを新規開発し、既存社内システムも改修
     - PRDをもとにMinispecを作成し、目的、課題、ゴール / ノンゴール、ユースケース、リスク、非機能要件、API、画面、アーキテクチャ、データモデル、リリース計画を整理
     - System Changes（リリース申請書）作成、テストコード作成、コードレビュー
-    - テックブログ記事執筆、英語でのライティングコミュニケーション
+    - テックブログ記事執筆（https://tech.up-sider.com/entry/20251027_anti-fraud）
+    - 英語でのライティングコミュニケーション
   team: |-
     # 人数
     ## 全体
@@ -102,14 +163,14 @@
 
     # 開発手法
     - アジャイル（スクラム）
-- sourceNo: "02"
-  company: B社
+- company: B社
   title: ファイル連携データパイプライン再構築PJ
   industry: 小売（スーパー）
-  period: 0年5ヶ月
-  dates: 2024/05/01〜2024/09/30
+  dates:
+    start: 2024/05/01
+    end: 2024/09/30
   type: short
-  phase: 基本設計〜テスト・コードレビュー
+  phase: 設計〜テスト・コードレビュー
   engagement: 業務委託
   tech:
     - Python
@@ -174,14 +235,14 @@
 
     # 開発手法
     - Issueドリブン
-- sourceNo: "03"
-  company: S社
+- company: S社
   title: 学習塾で利用する学習アプリ / 管理者画面
   industry: 教育
-  period: 0年9ヶ月
-  dates: 2024/01/01〜2024/09/30
+  dates:
+    start: 2024/01/01
+    end: 2024/09/30
   type: short
-  phase: 基本設計〜テスト・コードレビュー
+  phase: 設計〜テスト・コードレビュー
   engagement: 業務委託（週0〜20時間程度）
   tech:
     - PHP
@@ -227,14 +288,14 @@
     - GitHub
     - Notion
     - Slack
-- sourceNo: "04"
-  company: Y社
+- company: Y社
   title: Web広告成果測定システム（SaaS）
   industry: Webマーケティング
-  period: 1年1ヶ月
-  dates: 2023/03/01〜2024/03/31
+  dates:
+    start: 2023/03/01
+    end: 2024/03/31
   type: long
-  phase: 基本設計〜保守・運用
+  phase: 設計、実装、テスト、保守、運用
   engagement: 業務委託
   tech:
     - Go
@@ -322,14 +383,14 @@
 
     # 開発手法
     - ウォーターフォール
-- sourceNo: "05"
-  company: N社
+- company: N社
   title: 住宅施工品質マネジメントシステム（SaaS）
   industry: 建設
-  period: 1年9ヶ月
-  dates: 2021/06/01〜2023/02/28
+  dates:
+    start: 2021/06/01
+    end: 2023/02/28
   type: long
-  phase: 基本設計〜保守・運用
+  phase: 設計、実装、テスト、保守、運用
   engagement: 業務委託
   tech:
     - JavaScript
@@ -422,12 +483,12 @@
 
     # 開発手法
     - アジャイル（スクラム）
-- sourceNo: "06"
-  company: S社
+- company: S社
   title: 自立学習型能力開発システム
   industry: 教育
-  period: 0年3ヶ月
-  dates: 2021/03/01〜2021/05/31
+  dates:
+    start: 2021/03/01
+    end: 2021/05/31
   type: short
   phase: 詳細設計〜実装・開発
   engagement: 正社員（1日2〜3時間稼働）
@@ -477,14 +538,14 @@
     - SVN
     - Eclipse
     - Slack
-- sourceNo: "07"
-  company: J社
+- company: J社
   title: T銀行向け銀行口座開設・電子帳票基盤システム
   industry: 金融
-  period: 0年10ヶ月
-  dates: 2020/05/01〜2021/02/28
+  dates:
+    start: 2020/05/01
+    end: 2021/02/28
   type: short
-  phase: 基本設計〜テスト・コードレビュー
+  phase: 設計〜テスト・コードレビュー
   engagement: 正社員
   tech:
     - C#
@@ -512,7 +573,7 @@
     5名
 
     # 場所
-    リモート＆大阪（月1出社）
+    リモート（月1出社）
   environment: |-
     # 使用言語、FW
     - C# 6
@@ -537,14 +598,14 @@
     - SSMS 17.4
     - TFS
     - A5:SQL Mk-2
-- sourceNo: "08"
-  company: J社
+- company: J社
   title: E銀行向け個人ローン申込システム
   industry: 金融
-  period: 0年6ヶ月
-  dates: 2019/11/01〜2020/04/30
+  dates:
+    start: 2019/11/01
+    end: 2020/04/30
   type: short
-  phase: 基本設計〜テスト・コードレビュー
+  phase: 設計〜テスト・コードレビュー
   engagement: 正社員
   tech:
     - C#
@@ -596,12 +657,12 @@
     - SSMS 17.4
     - TFS
     - A5:SQL Mk-2
-- sourceNo: "09"
-  company: J社
+- company: J社
   title: F銀行向け営業支援システム
   industry: 金融
-  period: 0年7ヶ月
-  dates: 2019/04/01〜2019/10/31
+  dates:
+    start: 2019/04/01
+    end: 2019/10/31
   type: short
   phase: 実装・開発〜テスト・コードレビュー
   engagement: 正社員
@@ -659,12 +720,12 @@
     - A5:SQL Mk-2
     - Microsoft SharePoint
     - MicrosoftDynamicsCRM
-- sourceNo: "10"
-  company: P社
+- company: P社
   title: 太陽光発電ソーラーパネル管理システム
   industry: 電気
-  period: 0年3ヶ月
-  dates: 2019/01/01〜2019/03/31
+  dates:
+    start: 2019/01/01
+    end: 2019/03/31
   type: short
   phase: 実装・開発〜テスト・コードレビュー
   engagement: アルバイト
@@ -693,12 +754,12 @@
     # 使用言語、FW
     - Vue.js 2系
     - JavaScript
-- sourceNo: "11"
-  company: R社
+- company: R社
   title: 賃貸ガレージ（トランクルーム）管理システム
   industry: 不動産
-  period: 0年2ヶ月
-  dates: 2018/11/01〜2018/12/31
+  dates:
+    start: 2018/11/01
+    end: 2018/12/31
   type: short
   phase: 保守・運用
   engagement: アルバイト

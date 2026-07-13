@@ -184,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return {
       card,
       index: toNumber(card.getAttribute('data-project-index'), fallbackIndex),
-      source: toNumber(card.getAttribute('data-project-source'), fallbackIndex),
       industry: card.getAttribute('data-project-industry') || '',
       tech: (card.getAttribute('data-project-tech') || '').split('|').filter(Boolean),
       type: card.getAttribute('data-project-type') || '',
@@ -276,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     oldest: (a, b) => a.start - b.start || a.end - b.end || a.index - b.index,
     'duration-desc': (a, b) => b.duration - a.duration || b.start - a.start || a.index - b.index,
     'duration-asc': (a, b) => a.duration - b.duration || b.start - a.start || a.index - b.index,
-    'source-asc': (a, b) => a.source - b.source || a.index - b.index,
+    'order-asc': (a, b) => a.index - b.index,
   };
 
   const updateProjectReset = () => {

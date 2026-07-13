@@ -105,25 +105,68 @@
     label: projectTypeLabels[type] || '案件',
   }))
   const getProjectTypeLabel = (project) => project.typeLabel || projectTypeLabels[project.type] || '案件'
-  const getProjectPeriodLabel = (project) => project.dates || project.period
-  const getProjectDateValue = (project, index) => {
-    const dateMatches = `${project.dates || ''}`.match(/\d{4}\/\d{2}\/\d{2}/g) || []
-    const value = dateMatches[index]
+  const getProjectDateText = (project, key) => `${project.dates?.[key] || ''}`.trim()
+  const getCurrentProjectDateText = () => {
+    const now = new Date()
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const day = String(now.getDate()).padStart(2, '0')
+    return `${now.getFullYear()}/${month}/${day}`
+  }
+  const getProjectDateRangeLabel = (project) => {
+    const startDate = getProjectDateText(project, 'start')
+    const endDate = getProjectDateText(project, 'end')
+
+    if (startDate && endDate) {
+      return `${startDate}〜${endDate}`
+    }
+
+    if (startDate) {
+      return `${startDate}〜`
+    }
+
+    return endDate
+  }
+  const getProjectDateValue = (project, key) => {
+    const value = getProjectDateText(project, key)
     return value ? Number(value.replace(/\D/g, '')) : 0
   }
+  const getProjectMonthIndex = (dateText) => {
+    const value = `${dateText || ''}`.replace(/\D/g, '')
+    const year = Number(value.slice(0, 4))
+    const month = Number(value.slice(4, 6))
+
+    return year && month ? year * 12 + month : 0
+  }
   const getProjectDurationMonths = (project) => {
-    const period = `${project.period || ''}`
-    const years = Number((period.match(/(\d+)年/) || [])[1] || 0)
-    const months = Number((period.match(/(\d+)ヶ?月/) || [])[1] || 0)
-    return years * 12 + months
+    const startDate = getProjectDateText(project, 'start')
+    const endDate = getProjectDateText(project, 'end') || getCurrentProjectDateText()
+    const startMonth = getProjectMonthIndex(startDate)
+    const endMonth = getProjectMonthIndex(endDate)
+
+    if (!startMonth || !endMonth) {
+      return 0
+    }
+
+    return Math.max(endMonth - startMonth + 1, 0)
+  }
+  const getProjectDurationLabel = (project) => {
+    const durationMonths = getProjectDurationMonths(project)
+
+    if (!durationMonths) {
+      return ''
+    }
+
+    const years = Math.floor(durationMonths / 12)
+    const months = durationMonths % 12
+
+    return `${years}年${months}ヶ月`
   }
   const getProjectSearchText = (project) => [
-    project.sourceNo,
     project.company,
     project.title,
     project.industry,
-    project.period,
-    project.dates,
+    getProjectDurationLabel(project),
+    getProjectDateRangeLabel(project),
     getProjectTypeLabel(project),
     project.phase,
     project.engagement,
@@ -320,7 +363,7 @@ html(lang="ja")
                 option(value="oldest") 古い順
                 option(value="duration-desc") 期間が長い順
                 option(value="duration-asc") 期間が短い順
-                option(value="source-asc") 掲載順
+                option(value="order-asc") 掲載順
           .project-filters
             .project-filter-row.project-filter-row--keyword
               label.project-filter-field.project-filter-field--search
@@ -355,12 +398,11 @@ html(lang="ja")
             each project, projectIndex in projects
               - const projectTech = project.tech || []
               - const projectTypeLabel = getProjectTypeLabel(project)
-              - const projectStart = getProjectDateValue(project, 0)
-              - const projectEnd = project.active ? 99991231 : getProjectDateValue(project, 1)
+              - const projectStart = getProjectDateValue(project, 'start')
+              - const projectEnd = project.active || !getProjectDateText(project, 'end') ? 99991231 : getProjectDateValue(project, 'end')
               article.project-card(
                 data-project-card
                 data-project-index=projectIndex
-                data-project-source=project.sourceNo || projectIndex
                 data-project-industry=project.industry
                 data-project-tech=projectTech.join('|')
                 data-project-type=project.type
@@ -379,14 +421,14 @@ html(lang="ja")
                       if project.active
                         span.project-active 参画中
                     h3 #{project.company} — #{project.title}
-                  span.project-period= project.period
+                  span.project-period= getProjectDurationLabel(project)
                 .project-card__meta
                   div
                     span 担当フェーズ
                     strong= project.phase
                   div
                     span 期間
-                    strong= getProjectPeriodLabel(project)
+                    strong= getProjectDateRangeLabel(project)
                   if project.engagement
                     div
                       span 就業形態
