@@ -23,6 +23,7 @@ const contactMessageTemplate = [
 const contactUrl = new URL('index.html', window.location.href);
 contactUrl.searchParams.set('contactMessage', contactMessageTemplate);
 contactUrl.hash = 'contact';
+const meetingBookingUrl = contactUrl.href;
 
 // eslint-disable-next-line no-console
 console.log(
@@ -52,7 +53,7 @@ console.log(
     'text-decoration: underline',
     'box-shadow: 0 2px 6px rgba(37, 99, 235, 0.24)',
   ].join(';'),
-  contactUrl.href,
+  meetingBookingUrl,
 );
 
 const setActive = (nodes, activeNode, activeClass) => {
@@ -485,24 +486,164 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const getFloatingAnswer = (question, explicitAnswer = '') => {
-    if (explicitAnswer) {
-      return explicitAnswer;
+  const floatingSessionStorageKey = 'engineerSkillChatSessionId';
+  const isLocalHostname = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+  const configuredChatEndpoint = () => (
+    window.ENGINEER_CHAT_API_ENDPOINT
+    || floatingChatPanel?.getAttribute('data-chat-api-endpoint')
+    || (isLocalHostname ? 'http://127.0.0.1:8787/chat' : '')
+  );
+  const configuredTurnstileSiteKey = () => (
+    window.ENGINEER_CHAT_TURNSTILE_SITE_KEY
+    || floatingChatPanel?.getAttribute('data-turnstile-site-key')
+    || ''
+  );
+  let floatingChatSessionId = window.localStorage?.getItem(floatingSessionStorageKey) || '';
+  let floatingChatPending = false;
+  let turnstileLoadPromise = null;
+  let turnstileWidgetId = null;
+  let turnstileContainer = null;
+
+  const setFloatingChatPending = (pending) => {
+    floatingChatPending = pending;
+
+    if (floatingChatSend) {
+      floatingChatSend.disabled = pending;
+      floatingChatSend.textContent = pending ? '送信中' : '送信';
+    }
+  };
+
+  const ensureTurnstileScript = () => {
+    if (!configuredTurnstileSiteKey()) {
+      return Promise.resolve(false);
     }
 
-    if (/python|go|golang|言語|開発経験/i.test(question)) {
-      return 'Go は決済基盤、不正利用対策、広告計測SaaSのバッチ、住宅施工品質SaaSのバッチで経験があります。Python は広告計測API、Apache Airflow / MWAAのデータパイプライン、住宅施工品質SaaSのバッチで経験があります。';
+    if (window.turnstile) {
+      return Promise.resolve(true);
     }
 
-    if (/金融|決済|銀行/i.test(question)) {
-      return '法人クレジットカードの不正利用対策システムと、T銀行・E銀行・F銀行向けの銀行系システムで実績があります。決済基盤、社内システム、口座開設、電子帳票、個人ローン申込、営業支援まで担当しています。';
+    if (turnstileLoadPromise) {
+      return turnstileLoadPromise;
     }
 
-    if (/infra|devops|インフラ|aws|gcp|kubernetes|terraform/i.test(question)) {
-      return 'AWS / GCP、Kubernetes、Terraform / Terragrunt、Docker、GitHub Actions、ArgoCD、Helm、MWAAなどの経験があります。アプリケーション実装とあわせて、運用を見据えた基盤整備も支援可能です。';
+    turnstileLoadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve(true);
+      script.onerror = () => reject(new Error('bot検証を読み込めませんでした。'));
+      document.head.append(script);
+    });
+
+    return turnstileLoadPromise;
+  };
+
+  const getTurnstileToken = async () => {
+    const siteKey = configuredTurnstileSiteKey();
+    if (!siteKey) {
+      return '';
     }
 
-    return 'スキルシート掲載情報では、自社事業を含む12件の経歴・案件実績を掲載しています。フロントエンド、バックエンド、データ基盤、インフラ / DevOps まで横断して担当できるエンジニアとして整理されています。';
+    await ensureTurnstileScript();
+
+    if (!turnstileContainer) {
+      turnstileContainer = document.createElement('div');
+      turnstileContainer.hidden = true;
+      document.body.append(turnstileContainer);
+    }
+
+    return new Promise((resolve, reject) => {
+      const options = {
+        sitekey: siteKey,
+        size: 'invisible',
+        callback: (token) => resolve(token),
+        'error-callback': () => reject(new Error('bot検証に失敗しました。')),
+        'expired-callback': () => reject(new Error('bot検証の有効期限が切れました。')),
+      };
+
+      if (turnstileWidgetId === null) {
+        turnstileWidgetId = window.turnstile.render(turnstileContainer, options);
+      } else {
+        window.turnstile.reset(turnstileWidgetId);
+      }
+
+      window.turnstile.execute(turnstileWidgetId);
+    });
+  };
+
+  const requestFloatingAnswer = async (question) => {
+    const endpoint = configuredChatEndpoint();
+    if (!endpoint) {
+      throw new Error('AIチャットAPIのURLが未設定です。');
+    }
+
+    const turnstileToken = await getTurnstileToken();
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: question,
+        sessionId: floatingChatSessionId,
+        turnstileToken,
+      }),
+    });
+    const payload = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(payload.error || 'AIチャットでエラーが発生しました。');
+    }
+
+    if (payload.sessionId) {
+      floatingChatSessionId = payload.sessionId;
+      window.localStorage?.setItem(floatingSessionStorageKey, floatingChatSessionId);
+    }
+
+    const answer = payload.answer || '回答を生成できませんでした。';
+    const limitWarnings = Array.isArray(payload.limitWarnings)
+      ? payload.limitWarnings.filter(Boolean)
+      : [];
+
+    if (!limitWarnings.length) {
+      return answer;
+    }
+
+    const limitWarningMessage = [
+      '質問回数の上限に近づいています。ご興味をお持ちいただけましたら、下記リンクより面談をご予約ください！',
+      meetingBookingUrl,
+    ].join('\n');
+
+    return `${answer}\n\n※ ${limitWarningMessage}`;
+  };
+
+  const appendMessageContent = (element, content) => {
+    const text = `${content}`;
+    const urlPattern = /(https?:\/\/[^\s]+)/g;
+    let lastIndex = 0;
+    let match = urlPattern.exec(text);
+
+    while (match) {
+      if (match.index > lastIndex) {
+        element.append(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+
+      const link = document.createElement('a');
+      const [url] = match;
+      link.href = url;
+      link.textContent = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      element.append(link);
+
+      lastIndex = match.index + url.length;
+      match = urlPattern.exec(text);
+    }
+
+    if (lastIndex < text.length) {
+      element.append(document.createTextNode(text.slice(lastIndex)));
+    }
   };
 
   const renderFloatingMessages = () => {
@@ -527,11 +668,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const label = document.createElement('div');
       label.className = 'floating-ai-chat__message-label';
-      label.textContent = message.role === 'user' ? 'あなた' : 'H.K. AI';
+      label.textContent = message.role === 'user' ? 'あなた' : 'J.K. AI';
 
       const bubble = document.createElement('div');
       bubble.className = 'floating-ai-chat__bubble';
-      bubble.textContent = message.content;
+      appendMessageContent(bubble, message.content);
 
       row.append(label, bubble);
       floatingChatMessages.append(row);
@@ -540,15 +681,16 @@ document.addEventListener('DOMContentLoaded', () => {
     floatingChatMessages.scrollTop = floatingChatMessages.scrollHeight;
   };
 
-  const sendFloatingQuestion = (question, explicitAnswer = '') => {
+  const sendFloatingQuestion = async (question) => {
     const trimmedQuestion = question.trim();
-    if (!trimmedQuestion) {
+    if (!trimmedQuestion || floatingChatPending) {
       return;
     }
 
     floatingMessages.push({ role: 'user', content: trimmedQuestion });
-    floatingMessages.push({ role: 'assistant', content: getFloatingAnswer(trimmedQuestion, explicitAnswer) });
+    floatingMessages.push({ role: 'assistant', content: '回答を生成しています。' });
     renderFloatingMessages();
+    setFloatingChatPending(true);
 
     if (floatingChatInput) {
       floatingChatInput.value = '';
@@ -556,6 +698,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setFloatingChatOpen(true);
+
+    try {
+      floatingMessages[floatingMessages.length - 1] = {
+        role: 'assistant',
+        content: await requestFloatingAnswer(trimmedQuestion),
+      };
+    } catch (error) {
+      floatingMessages[floatingMessages.length - 1] = {
+        role: 'assistant',
+        content: error.message || 'AIチャットでエラーが発生しました。',
+      };
+    } finally {
+      setFloatingChatPending(false);
+      renderFloatingMessages();
+    }
   };
 
   floatingChatLauncher?.addEventListener('click', () => {
@@ -569,12 +726,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   floatingChatClear?.addEventListener('click', () => {
     floatingMessages.splice(0, floatingMessages.length);
+    floatingChatSessionId = '';
+    window.localStorage?.removeItem(floatingSessionStorageKey);
     renderFloatingMessages();
   });
 
   document.querySelectorAll('[data-floating-chat-question]').forEach((button) => {
     button.addEventListener('click', () => {
-      sendFloatingQuestion(button.textContent || '', button.getAttribute('data-chat-answer') || '');
+      sendFloatingQuestion(button.textContent || '');
     });
   });
 

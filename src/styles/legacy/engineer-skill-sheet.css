@@ -1545,6 +1545,12 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
   color: var(--ss-text-2);
 }
 
+.floating-ai-chat__bubble a {
+  color: var(--ss-accent);
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+}
+
 .floating-ai-chat__input {
   flex: none;
   padding: 14px 16px;
@@ -1575,6 +1581,7 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
 
 .floating-ai-chat__input button {
   flex: none;
+  min-width: 72px;
   padding: 9px 18px;
   border-radius: 8px;
   background: var(--ss-accent);
@@ -1583,6 +1590,11 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
   font-family: var(--ss-mono);
   font-size: 13px;
   font-weight: 700;
+}
+
+.floating-ai-chat__input button:disabled {
+  cursor: wait;
+  opacity: 0.58;
 }
 
 .floating-ai-chat__note {
