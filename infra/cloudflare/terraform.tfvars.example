@@ -1,0 +1,21 @@
+cloudflare_account_id = "replace-with-cloudflare-account-id"
+
+openai_api_key  = "sk-..."
+rate_limit_salt = "replace-with-long-random-string"
+
+allowed_origins = [
+  "https://its-automatic.com",
+  "https://www.its-automatic.com",
+]
+
+turnstile_domains = [
+  "its-automatic.com",
+  "www.its-automatic.com",
+]
+
+# Optional: route the Worker through a stable API hostname.
+# worker_custom_domains = {
+#   "api.its-automatic.com" = {
+#     zone_name = "its-automatic.com"
+#   }
+# }

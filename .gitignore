@@ -1,4 +1,12 @@
 /node_modules/
 .astro/
+.wrangler/
+.dev.vars
 public/bundle.js
 config.js
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+*.tfplan

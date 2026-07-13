@@ -7,6 +7,11 @@
   "scripts": {
     "prestart": "node tools/sync-public-assets.mjs",
     "start": "astro dev",
+    "dev:chat-api": "wrangler dev --local --port 8787",
+    "db:chat:migrate:local": "wrangler d1 migrations apply engineer_chat --local",
+    "tf:cloudflare:init": "terraform -chdir=infra/cloudflare init",
+    "tf:cloudflare:plan": "terraform -chdir=infra/cloudflare plan",
+    "tf:cloudflare:apply": "terraform -chdir=infra/cloudflare apply",
     "prebuild": "node tools/sync-public-assets.mjs",
     "build": "astro build",
     "preview": "astro preview",
@@ -19,7 +24,8 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "wrangler": "^4.110.0"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",

@@ -1,0 +1,23 @@
+name = "engineer-skill-chat-api"
+main = "workers/engineer-chat/worker.js"
+compatibility_date = "2026-07-13"
+
+[vars]
+ALLOWED_ORIGINS = "http://localhost:4321,http://127.0.0.1:4321"
+OPENAI_MODEL = "gpt-5-nano"
+OPENAI_REASONING_EFFORT = "minimal"
+MAX_INPUT_CHARS = "600"
+MAX_OUTPUT_TOKENS = "500"
+MAX_SESSION_TURNS = "10"
+HISTORY_MESSAGE_LIMIT = "8"
+IP_MINUTE_LIMIT = "3"
+IP_DAILY_LIMIT = "20"
+SESSION_DAILY_LIMIT = "10"
+GLOBAL_DAILY_LIMIT = "100"
+REQUIRE_TURNSTILE = "false"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "engineer_chat"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "workers/engineer-chat/migrations"
