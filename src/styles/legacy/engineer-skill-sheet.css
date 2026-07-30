@@ -1899,7 +1899,9 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
     background: #ffffff !important;
   }
 
-  body.skill-sheet-page {
+  body.skill-sheet-page,
+  body.skill-sheet-page[data-theme-mode="teal"],
+  body.skill-sheet-page[data-theme-mode="charcoal"] {
     --ss-bg: #ffffff;
     --ss-surface: #ffffff;
     --ss-surface-2: #f7f8fb;
@@ -2108,12 +2110,37 @@ body.skill-sheet-page[data-theme-mode="charcoal"] {
     margin-bottom: 1.2mm;
   }
 
-  .skill-card__icon {
-    display: none;
+  .skill-card__identity {
+    gap: 1.5mm;
   }
 
-  .skill-card__identity {
-    gap: 0;
+  .skill-card__icon {
+    width: 6mm;
+    height: 6mm;
+    border-radius: 1.5mm;
+    background: #f7f8fb;
+  }
+
+  .skill-card__icon i {
+    font-size: 10pt;
+  }
+
+  .skill-card__icon img {
+    width: 4.3mm;
+    height: 4.3mm;
+  }
+
+  .skill-card__icon .technology-icon-stack {
+    gap: 0.5mm;
+  }
+
+  .skill-card__icon .technology-icon-stack i {
+    font-size: 7.5pt;
+  }
+
+  .skill-card__icon .technology-icon-stack img {
+    width: 3.4mm;
+    height: 3.4mm;
   }
 
   .skill-card__identity strong {

@@ -472,8 +472,34 @@ document.addEventListener('DOMContentLoaded', () => {
     setPdfExportMode(false);
   };
 
-  const startPdfExport = () => {
+  const waitForTechnologyIconImages = () => {
+    const iconImages = Array.from(document.querySelectorAll('[data-technology-icon-image]'));
+    const imageLoads = iconImages.map((image) => {
+      image.setAttribute('loading', 'eager');
+
+      if (image.complete && image.naturalWidth > 0) {
+        return Promise.resolve();
+      }
+
+      if (typeof image.decode === 'function') {
+        return image.decode().catch(() => {});
+      }
+
+      return new Promise((resolve) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+      });
+    });
+    const timeout = new Promise((resolve) => {
+      window.setTimeout(resolve, 2500);
+    });
+
+    return Promise.race([Promise.all(imageLoads), timeout]);
+  };
+
+  const startPdfExport = async () => {
     setPdfExportMode(true);
+    await waitForTechnologyIconImages();
 
     window.requestAnimationFrame(() => {
       window.print();
