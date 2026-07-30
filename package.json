@@ -16,10 +16,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "validate:skill-sheet": "node tools/validate-engineer-skill-sheet.mjs",
+    "test:skill-sheet:prod": "playwright test tests/e2e/engineer-skill-sheet.production.spec.mjs",
     "lint": "eslint src --ext .js,.jsx",
     "lint:fix": "eslint src --ext .js,.jsx --fix"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.25.2",

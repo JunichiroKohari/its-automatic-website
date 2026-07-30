@@ -1,6 +1,8 @@
 /node_modules/
 .astro/
 .wrangler/
+playwright-report/
+test-results/
 .dev.vars
 public/bundle.js
 config.js
