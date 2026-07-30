@@ -15,6 +15,7 @@
     "prebuild": "node tools/sync-public-assets.mjs",
     "build": "astro build",
     "preview": "astro preview",
+    "validate:skill-sheet": "node tools/validate-engineer-skill-sheet.mjs",
     "lint": "eslint src --ext .js,.jsx",
     "lint:fix": "eslint src --ext .js,.jsx --fix"
   },
