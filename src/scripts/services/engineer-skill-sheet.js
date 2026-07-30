@@ -24,37 +24,61 @@ const contactUrl = new URL('index.html', window.location.href);
 contactUrl.searchParams.set('contactMessage', contactMessageTemplate);
 contactUrl.hash = 'contact';
 const meetingBookingUrl = contactUrl.href;
+const chatRequestTimeoutMs = 20000;
 
-// eslint-disable-next-line no-console
-console.log(
-  '%cご確認いただきありがとうございます！ご興味をお持ちいただけましたら、下記リンクより面談をご予約ください！%c\n%c%s',
-  [
-    'display: inline-block',
-    'padding: 10px 14px',
-    'border: 1px solid #1f2937',
-    'border-radius: 6px',
-    'background: #f8fafc',
-    'color: #0f172a',
-    'font-size: 13px',
-    'font-weight: 600',
-    'line-height: 1.6',
-  ].join(';'),
-  '',
-  [
-    'display: inline-block',
-    'padding: 10px 14px',
-    'border: 1px solid #1d4ed8',
-    'border-radius: 6px',
-    'background: #2563eb',
-    'color: #ffffff',
-    'font-size: 15px',
-    'font-weight: 700',
-    'letter-spacing: 0',
-    'text-decoration: underline',
-    'box-shadow: 0 2px 6px rgba(37, 99, 235, 0.24)',
-  ].join(';'),
-  meetingBookingUrl,
-);
+const getBrowserStorage = () => {
+  try {
+    return typeof window === 'undefined' ? null : window.localStorage;
+  } catch {
+    return null;
+  }
+};
+
+const readStoredValue = (key) => {
+  try {
+    return getBrowserStorage()?.getItem(key) || '';
+  } catch {
+    return '';
+  }
+};
+
+const writeStoredValue = (key, value) => {
+  try {
+    getBrowserStorage()?.setItem(key, value);
+  } catch {
+    // Storage can be blocked by privacy settings; chat still works without persistence.
+  }
+};
+
+const removeStoredValue = (key) => {
+  try {
+    getBrowserStorage()?.removeItem(key);
+  } catch {
+    // Ignore blocked storage cleanup.
+  }
+};
+
+const fetchJsonWithTimeout = async (url, options = {}, timeoutMs = chatRequestTimeoutMs) => {
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    const payload = await response.json().catch(() => ({}));
+    return { response, payload };
+  } catch (error) {
+    if (error?.name === 'AbortError') {
+      throw new Error('AIチャットの応答がタイムアウトしました。少し時間をおいて再度お試しください。');
+    }
+
+    throw error;
+  } finally {
+    window.clearTimeout(timeoutId);
+  }
+};
 
 const setActive = (nodes, activeNode, activeClass) => {
   nodes.forEach((node) => node.classList.toggle(activeClass, node === activeNode));
@@ -68,7 +92,12 @@ const toNumber = (value, fallback = 0) => {
 };
 
 const getMonthIndex = (dateValue) => {
-  const value = String(dateValue || '').padStart(8, '0');
+  const value = String(dateValue || '').replace(/\D/g, '');
+
+  if (value.length < 6) {
+    return 0;
+  }
+
   const year = Number(value.slice(0, 4));
   const month = Number(value.slice(4, 6));
 
@@ -115,10 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const projectCards = Array.from(document.querySelectorAll('[data-project-card]'));
   const projectList = document.querySelector('[data-project-list]');
   const projectSearch = document.querySelector('[data-project-search]');
-  const projectSearchSubmit = document.querySelector('[data-project-search-submit]');
   const industryFilter = document.querySelector('[data-project-industry]');
   const techFilter = document.querySelector('[data-project-tech]');
-  const typeFilter = document.querySelector('[data-project-type]');
+  const placeFilter = document.querySelector('[data-project-place]');
   const projectSort = document.querySelector('[data-project-sort]');
   const projectFilterReset = document.querySelector('[data-project-filter-reset]');
   const projectCount = document.querySelector('[data-project-count]');
@@ -137,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const floatingMessages = [];
   let pdfExportResetTimer = 0;
   const sidebarMediaQuery = window.matchMedia('(max-width: 1080px)');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const isMobileSidebar = () => sidebarMediaQuery.matches;
 
@@ -189,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tech: (card.getAttribute('data-project-tech') || '').split('|').filter(Boolean),
       type: card.getAttribute('data-project-type') || '',
       typeLabel: card.getAttribute('data-project-type-label') || '',
+      place: card.getAttribute('data-project-place') || '',
       active,
       start,
       end,
@@ -217,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }[name] || 'profile.md';
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: reducedMotionQuery.matches ? 'auto' : 'smooth' });
 
     if (isMobileSidebar()) {
       setSidebarOpen(false);
@@ -276,7 +306,6 @@ document.addEventListener('DOMContentLoaded', () => {
     oldest: (a, b) => a.start - b.start || a.end - b.end || a.index - b.index,
     'duration-desc': (a, b) => b.duration - a.duration || b.start - a.start || a.index - b.index,
     'duration-asc': (a, b) => a.duration - b.duration || b.start - a.start || a.index - b.index,
-    'order-asc': (a, b) => a.index - b.index,
   };
 
   const updateProjectReset = () => {
@@ -289,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
       || projectSearch?.value.trim()
       || (industryFilter && industryFilter.value !== 'all')
       || (techFilter && techFilter.value !== 'all')
-      || (typeFilter && typeFilter.value !== 'all')
+      || (placeFilter && placeFilter.value !== 'all')
       || (projectSort && projectSort.value !== 'newest'),
     );
 
@@ -300,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const keywords = projectSearchQuery.split(/[\s,、]+/).filter(Boolean);
     const industry = industryFilter ? industryFilter.value : 'all';
     const tech = techFilter ? techFilter.value : 'all';
-    const type = typeFilter ? typeFilter.value : 'all';
+    const place = placeFilter ? placeFilter.value : 'all';
     const sort = projectSort?.value || 'newest';
     let visibleCount = 0;
     const activeFilterLabels = [];
@@ -317,8 +346,8 @@ document.addEventListener('DOMContentLoaded', () => {
       activeFilterLabels.push(`技術: ${getSelectedText(techFilter)}`);
     }
 
-    if (type !== 'all') {
-      activeFilterLabels.push(`区分: ${getSelectedText(typeFilter)}`);
+    if (place !== 'all') {
+      activeFilterLabels.push(`勤務形態: ${getSelectedText(placeFilter)}`);
     }
 
     const sortedProjectItems = [...projectItems]
@@ -328,8 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const keywordMatch = keywords.every((keyword) => projectItem.searchText.includes(keyword));
       const industryMatch = industry === 'all' || projectItem.industry === industry;
       const techMatch = tech === 'all' || projectItem.tech.includes(tech);
-      const typeMatch = type === 'all' || projectItem.type === type;
-      const visible = keywordMatch && industryMatch && techMatch && typeMatch;
+      const placeMatch = place === 'all' || projectItem.place === place;
+      const visible = keywordMatch && industryMatch && techMatch && placeMatch;
 
       projectItem.card.toggleAttribute('hidden', !visible);
       if (visible) {
@@ -356,24 +385,28 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProjectReset();
   };
 
-  const applyProjectSearch = () => {
+  const syncProjectSearch = () => {
     projectSearchQuery = normalizeSearchText(projectSearch?.value || '');
     projectSearchLabel = projectSearch?.value.trim() || '';
+  };
+
+  const applyProjectSearch = () => {
+    syncProjectSearch();
     updateProjects();
   };
 
-  projectSearch?.addEventListener('input', updateProjectReset);
-
-  projectSearch?.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      applyProjectSearch();
+  projectSearch?.addEventListener('input', (event) => {
+    if (event.isComposing) {
+      updateProjectReset();
+      return;
     }
+
+    applyProjectSearch();
   });
+  projectSearch?.addEventListener('compositionend', applyProjectSearch);
+  projectSearch?.addEventListener('search', applyProjectSearch);
 
-  projectSearchSubmit?.addEventListener('click', applyProjectSearch);
-
-  [industryFilter, techFilter, typeFilter, projectSort].forEach((filter) => {
+  [industryFilter, techFilter, placeFilter, projectSort].forEach((filter) => {
     filter?.addEventListener('change', updateProjects);
   });
 
@@ -393,8 +426,8 @@ document.addEventListener('DOMContentLoaded', () => {
       techFilter.value = 'all';
     }
 
-    if (typeFilter) {
-      typeFilter.value = 'all';
+    if (placeFilter) {
+      placeFilter.value = 'all';
     }
 
     if (projectSort) {
@@ -498,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
     || floatingChatPanel?.getAttribute('data-turnstile-site-key')
     || ''
   );
-  let floatingChatSessionId = window.localStorage?.getItem(floatingSessionStorageKey) || '';
+  let floatingChatSessionId = readStoredValue(floatingSessionStorageKey);
   let floatingChatPending = false;
   let turnstileLoadPromise = null;
   let turnstileWidgetId = null;
@@ -579,9 +612,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const turnstileToken = await getTurnstileToken();
-    const response = await fetch(endpoint, {
+    const { response, payload } = await fetchJsonWithTimeout(endpoint, {
       method: 'POST',
       headers: {
+        accept: 'application/json',
         'content-type': 'application/json',
       },
       body: JSON.stringify({
@@ -590,7 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
         turnstileToken,
       }),
     });
-    const payload = await response.json().catch(() => ({}));
 
     if (!response.ok) {
       throw new Error(payload.error || 'AIチャットでエラーが発生しました。');
@@ -598,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (payload.sessionId) {
       floatingChatSessionId = payload.sessionId;
-      window.localStorage?.setItem(floatingSessionStorageKey, floatingChatSessionId);
+      writeStoredValue(floatingSessionStorageKey, floatingChatSessionId);
     }
 
     const answer = payload.answer || '回答を生成できませんでした。';
@@ -727,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
   floatingChatClear?.addEventListener('click', () => {
     floatingMessages.splice(0, floatingMessages.length);
     floatingChatSessionId = '';
-    window.localStorage?.removeItem(floatingSessionStorageKey);
+    removeStoredValue(floatingSessionStorageKey);
     renderFloatingMessages();
   });
 

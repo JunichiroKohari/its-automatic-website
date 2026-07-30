@@ -60,10 +60,7 @@
     - テスト計画、リリース計画作成
     - テストコード作成（pytest / Go testing / PHPUnit / Cypress）
     - コードレビュー（Go / Python / PHP / JS / TS）
-  related:
-    - Git
-    - GitHub
-    - BitBucket
+  related: []
 - no: "06"
   title: 開発スタイル / チーム
   items:

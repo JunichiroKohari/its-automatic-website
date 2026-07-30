@@ -1,12 +1,80 @@
+- company: B社(2回目)
+  title: ファイル連携基盤クラウドリフト・ETL処理改修・BIツール向けAIエージェント構築（記載中）
+  summary: 小売企業のファイル連携基盤に関する複数プロジェクトへ参画。クラウドリフト、ETL処理改修、BIツール向けAIエージェント構築を、データ基盤・クラウド・AI活用の観点から支援しています（参画中）。
+  industry: 小売（スーパー）
+  dates:
+    start: 2026/07
+  type: short
+  phase: 設計、実装、テスト
+  engagement: 業務委託
+  place: フルリモート
+  tech:
+    - Python
+    - Apache Airflow
+    - Sagent(富士通)
+    - AWS
+    - GCP
+    - Terraform
+    - GitHub Actions
+    - Claude Code
+    - Codex
+  desc: |-
+
+    # 担当業務など
+    - バックエンド%、データパイプライン、AIエージェント開発を担当
+
+    # 業務内容
+    - ファイル連携基盤のクラウドリフトに向けたETL処理の調査、設計、改修
+    - Apache Airflow / MWAA 周辺のローカル検証環境、テスト、運用を見据えた改善
+    - BIツール向けAIエージェント構築における技術検証と実装支援
+    - Terraform、GitHub Actions、AIコーディング支援ツールを活用した開発効率化
+    - TODO: 続き書く
+  team: |-
+    # 人数
+    ## 全体
+    おそらく10~20名
+    - 部門長：1名
+    - 旧システムチーム：6名程度
+    - 新システムチーム：3名
+    - インフラのコンサルタント：数名
+    - 24/365運用ベンダー：数名
+    - ビジネスサイド：数名
+
+    ## チーム
+    x名
+
+  environment: |-
+    # 使用言語、FW
+    - Python 3.11
+    - Apache Airflow
+
+    # その他ライブラリ
+    - pytest
+    - LocalStack
+    - mwaa-local-runner
+    - ruff
+
+    # OS、インフラ
+    - AWS(S3, CloudWatch, CodeBuildなど)
+    - GCP(Cloud Composer Cloud Run, Cloud Storageなど)
+    - Docker
+
+    # ツール
+    - GitHub
+    - Notion
+    - Slack
+    - Microsoft Teams
+
 - company: A社
   title: タレントマネジメントシステム（SaaS）
+  summary: タレントマネジメントシステム（SaaS）内の単一プロダクト内においてバックエンド・インフラ領域を主導。PoCフェーズから参画しました（参画中）。
   industry: HR
   dates:
-    start: 2026/03/01
-    end: now
+    start: 2026/03
   type: long
-  phase: 設計、実装、テスト、保守、運用
+  phase: 設計、実装、テスト、保守
   engagement: 業務委託
+  place: フルリモート
   tech:
     - Go
     - TypeScript
@@ -17,9 +85,9 @@
     - AWS
     - Terraform
     - Next.js
+    - Claude Code
+    - Codex
   desc: |-
-    タレントマネジメントシステム（SaaS）内の単一プロダクト内においてバックエンド・インフラ領域を主導。PoCフェーズから参画しました（参画中）。
-
     # 担当業務など
     - バックエンド70%、フロントエンド0%、インフラ30%
 
@@ -38,8 +106,6 @@
     - エンジニア：4名程度
     - 非エンジニア：4名程度
 
-    # 場所
-    フルリモート
   environment: |-
     # 使用言語、FW
     - Go
@@ -73,6 +139,12 @@
 
 - company: U社
   title: 法人クレジットカード 不正利用対策システム
+  summary: toB向け法人クレジットカードの決済基盤、ユーザー画面、社内システムにおいて不正利用関連の機能開発を担当。成長中Fintechスタートアップ企業のメインプロダクトで、不正利用対策チームの初期メンバーとして参画しました。
+  link:
+    - blog:
+        url: https://tech.up-sider.com/entry/20251027_anti-fraud
+        title: Workload Identity FederationをGKEに導入しセキュリティを強化する
+        image: "https://cdn.image.st-hatena.com/image/scale/3b9966a82e80a699e7210e8583de7f30b2661caa/backend=imagemagick;version=1;width=1300/https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fu%2Fupsider_dev%2F20251021%2F20251021172240.png"
   industry: 金融
   dates:
     start: 2024/11
@@ -80,6 +152,7 @@
   type: long
   phase: 設計、実装、テスト、保守、運用
   engagement: 業務委託
+  place: フルリモート
   tech:
     - Go
     - TypeScript
@@ -89,9 +162,8 @@
     - Kubernetes
     - GCP
     - Terraform
+    - Cursor
   desc: |-
-    toB向け法人クレジットカードの決済基盤、ユーザー画面、社内システムにおいて不正利用関連の機能開発を担当。成長中Fintechスタートアップ企業のメインプロダクトで、不正利用対策チームの初期メンバーとして参画しました。
-
     # 担当業務など
     - バックエンド33%、フロントエンド33%、インフラ33%
 
@@ -100,8 +172,8 @@
     - クレジットカード管理画面に不正利用対策関連の画面を追加
     - 不正利用対策関連の社内システムを新規開発し、既存社内システムも改修
     - PRDをもとにMinispecを作成し、目的、課題、ゴール / ノンゴール、ユースケース、リスク、非機能要件、API、画面、アーキテクチャ、データモデル、リリース計画を整理
-    - System Changes（リリース申請書）作成、テストコード作成、コードレビュー
-    - テックブログ記事執筆（https://tech.up-sider.com/entry/20251027_anti-fraud）
+    - テストコード作成、コードレビュー
+    - テックブログ記事執筆
     - 英語でのライティングコミュニケーション
   team: |-
     # 人数
@@ -113,8 +185,6 @@
     - ビジネス職：3名
     - エンジニア：5名程度
 
-    # 場所
-    フルリモート
   environment: |-
     # 使用言語、FW
     - Go v1.22.x~
@@ -163,15 +233,17 @@
 
     # 開発手法
     - アジャイル（スクラム）
-- company: B社
+- company: B社(1回目)
   title: ファイル連携データパイプライン再構築PJ
+  summary: 約160店舗のPOS等のデータをシステム間でファイル連携する社内向けデータパイプライン再構築案件。既存システムの品質課題を受け、技術的負債を解消するために作り直すプロジェクトへ参画しました。
   industry: 小売（スーパー）
   dates:
-    start: 2024/05/01
-    end: 2024/09/30
+    start: 2024/05
+    end: 2024/09
   type: short
-  phase: 設計〜テスト・コードレビュー
+  phase: 設計、実装、テスト
   engagement: 業務委託
+  place: フルリモート
   tech:
     - Python
     - Apache Airflow
@@ -179,8 +251,6 @@
     - Docker
     - GitHub Actions
   desc: |-
-    約160店舗のPOS等のデータをシステム間でファイル連携する社内向けデータパイプライン再構築案件。既存システムの品質課題を受け、技術的負債を解消するために作り直すプロジェクトへ参画しました。
-
     # 担当業務など
     - バックエンド100%
 
@@ -209,8 +279,6 @@
     - 上記の補佐1名（開発も少し）
     - 開発エンジニア1人（私）
 
-    # 場所
-    フルリモート
   environment: |-
     # 使用言語、FW
     - Python11
@@ -233,17 +301,17 @@
     - Slack
     - Microsoft Teams
 
-    # 開発手法
-    - Issueドリブン
 - company: S社
   title: 学習塾で利用する学習アプリ / 管理者画面
+  summary: toB / toC向けの、学習塾で利用する外国語学習単語帳アプリと、生徒の学習状況や校舎を管理する管理者画面の受託開発支援。本番リリースの数ヶ月前から参画しました。
   industry: 教育
   dates:
-    start: 2024/01/01
-    end: 2024/09/30
+    start: 2024/01
+    end: 2024/09
   type: short
-  phase: 設計〜テスト・コードレビュー
+  phase: 設計、実装、テスト
   engagement: 業務委託（週0〜20時間程度）
+  place: フルリモート
   tech:
     - PHP
     - Laravel
@@ -251,8 +319,6 @@
     - MySQL
     - AWS
   desc: |-
-    toB / toC向けの、学習塾で利用する外国語学習単語帳アプリと、生徒の学習状況や校舎を管理する管理者画面の受託開発支援。本番リリースの数ヶ月前から参画しました。
-
     # 担当業務など
     - バックエンド30%、フロントエンド70%
 
@@ -269,8 +335,6 @@
     - 開発2名（私）
     - お客様：不明
 
-    # 場所
-    フルリモート
   environment: |-
     # 使用言語、FW
     - PHP8
@@ -290,13 +354,15 @@
     - Slack
 - company: Y社
   title: Web広告成果測定システム（SaaS）
+  summary: 約19年稼働しているtoB向けWeb広告成果測定SaaSの機能追加・保守案件。ユーザー企業が出稿したWeb広告の広告効果をPV / CVやマーケティング指標で算出し、広告出稿の改善につなげるシステムを担当しました。
   industry: Webマーケティング
   dates:
-    start: 2023/03/01
-    end: 2024/03/31
+    start: 2023/03
+    end: 2024/03
   type: long
-  phase: 設計、実装、テスト、保守、運用
+  phase: 設計、実装、テスト、保守
   engagement: 業務委託
+  place: フルリモート
   tech:
     - Go
     - Python
@@ -307,8 +373,6 @@
     - AWS
     - Docker
   desc: |-
-    約19年稼働しているtoB向けWeb広告成果測定SaaSの機能追加・保守案件。ユーザー企業が出稿したWeb広告の広告効果をPV / CVやマーケティング指標で算出し、広告出稿の改善につなげるシステムを担当しました。
-
     # 担当業務など
     - バックエンド50%、フロントエンド20%、インフラ30%
 
@@ -385,13 +449,15 @@
     - ウォーターフォール
 - company: N社
   title: 住宅施工品質マネジメントシステム（SaaS）
+  summary: toB向け住宅施工品質マネジメントSaaSの0→1新規開発。住宅の施工品質を適正に評価・可視化し、品質改善のPDCAを回すサービスで、最初期メンバーとしてプロトタイプ開発、RC版開発、正式版開発、ローンチ、ローンチ後の機能追加・運用まで担当しました。
   industry: 建設
   dates:
-    start: 2021/06/01
-    end: 2023/02/28
+    start: 2021/06
+    end: 2023/02
   type: long
-  phase: 設計、実装、テスト、保守、運用
+  phase: 設計、実装、テスト、運用
   engagement: 業務委託
+  place: フルリモート
   tech:
     - JavaScript
     - PHP
@@ -402,8 +468,6 @@
     - Laravel
     - AWS
   desc: |-
-    toB向け住宅施工品質マネジメントSaaSの0→1新規開発。住宅の施工品質を適正に評価・可視化し、品質改善のPDCAを回すサービスで、最初期メンバーとしてプロトタイプ開発、RC版開発、正式版開発、リリース、リリース後の機能追加・運用まで担当しました。
-
     # 担当業務など
     - バックエンド50%、フロントエンド50%
 
@@ -421,8 +485,8 @@
     - PWA / Service Worker / Workboxを活用したオフライン対応
     - コードレビュー、単体テスト、結合テスト、E2Eテスト
 
-    ## その他
-    - 新規参画者や若手のオンボーディング、タスク切り出し、技術サポート
+    ## マネジメント系
+    - 新規参画者や若手のオンボーディング、タスク管理、技術サポート
   team: |-
     # 人数
     ## 全体
@@ -435,8 +499,6 @@
     - フロントエンドエンジニア1名
     - 残り、フロント兼バックエンドエンジニア（私）
 
-    # 場所
-    フルリモート
   environment: |-
     # 使用言語、FW
     - JavaScript
@@ -485,13 +547,15 @@
     - アジャイル（スクラム）
 - company: S社
   title: 自立学習型能力開発システム
+  summary: 学習塾で利用される学生向け学習ゲームアプリのバックエンド開発支援。他の社内業務（採用活動、新人教育、メールサーバー構築等）と掛け持ちのため、当案件は1日2〜3時間の稼働で担当しました。
   industry: 教育
   dates:
-    start: 2021/03/01
-    end: 2021/05/31
+    start: 2021/03
+    end: 2021/05
   type: short
-  phase: 詳細設計〜実装・開発
+  phase: 設計、実装
   engagement: 正社員（1日2〜3時間稼働）
+  place: 大阪(フル出社)
   tech:
     - PHP
     - Laravel
@@ -500,8 +564,6 @@
     - MySQL
     - AWS
   desc: |-
-    学習塾で利用される学生向け学習ゲームアプリのバックエンド開発支援。他の社内業務（採用活動、新人教育、メールサーバー構築等）と掛け持ちのため、当案件は1日2〜3時間の稼働で担当しました。
-
     # 担当業務など
     - API設計、実装
     - SQLチューニング
@@ -518,8 +580,6 @@
     ## 所属チーム
     3名
 
-    # 場所
-    大阪（フル出社）
   environment: |-
     # 使用言語、FW
     - PHP7
@@ -538,15 +598,17 @@
     - SVN
     - Eclipse
     - Slack
-- company: J社
+- company: J社(3回目)
   title: T銀行向け銀行口座開設・電子帳票基盤システム
+  summary: T銀行向けの銀行口座開設・電子帳票基盤システムを担当。画面、帳票生成バッチ、他システム連携バッチの設計、実装、テストを行いました。
   industry: 金融
   dates:
-    start: 2020/05/01
-    end: 2021/02/28
+    start: 2020/05
+    end: 2021/02
   type: short
-  phase: 設計〜テスト・コードレビュー
+  phase: 設計、実装、テスト
   engagement: 正社員
+  place: リモート(月1出社)
   tech:
     - C#
     - .NET Framework
@@ -556,8 +618,6 @@
     - SQL
     - SQL Server
   desc: |-
-    T銀行向けの銀行口座開設・電子帳票基盤システムを担当。画面、帳票生成バッチ、他システム連携バッチの設計、実装、テストを行いました。
-
     # 担当業務など
     - 画面や帳票生成バッチ、他システム連携バッチの設計、実装、テスト
 
@@ -572,8 +632,6 @@
     ## 所属チーム
     5名
 
-    # 場所
-    リモート（月1出社）
   environment: |-
     # 使用言語、FW
     - C# 6
@@ -598,15 +656,17 @@
     - SSMS 17.4
     - TFS
     - A5:SQL Mk-2
-- company: J社
+- company: J社(2回目)
   title: E銀行向け個人ローン申込システム
+  summary: E銀行向け個人ローン申込システムを担当。銀行員やローン申込者が利用する画面のUIデザイン、設計、実装、テストを行いました。
   industry: 金融
   dates:
-    start: 2019/11/01
-    end: 2020/04/30
+    start: 2019/11
+    end: 2020/04
   type: short
-  phase: 設計〜テスト・コードレビュー
+  phase: 設計、実装、テスト
   engagement: 正社員
+  place: 大阪(フル出社)
   tech:
     - C#
     - .NET Framework
@@ -616,10 +676,8 @@
     - SQL
     - SQL Server
   desc: |-
-    E銀行向け個人ローン申込システムを担当。銀行員やローン申込者が利用する画面のデザイン、設計、実装、テストを行いました。
-
     # 担当業務など
-    - 画面や帳票のデザイン、設計、実装、テストを担当
+    - 画面や帳票のUIデザイン、設計、実装、テストを担当
 
     # 業務内容
     - 銀行員やローン申込者が利用する画面のデザイン、設計、実装、テスト
@@ -631,8 +689,6 @@
     ## 所属チーム
     5名
 
-    # 場所
-    大阪（フル出社）
   environment: |-
     # 使用言語、FW
     - C# 6
@@ -657,15 +713,17 @@
     - SSMS 17.4
     - TFS
     - A5:SQL Mk-2
-- company: J社
+- company: J社(1回目)
   title: F銀行向け営業支援システム
+  summary: F銀行向け営業支援システムを担当。ポータルサイトの改修とCRMの改修に従事しました。
   industry: 金融
   dates:
-    start: 2019/04/01
-    end: 2019/10/31
+    start: 2019/04
+    end: 2019/10
   type: short
-  phase: 実装・開発〜テスト・コードレビュー
+  phase: 実装、テスト
   engagement: 正社員
+  place: 大阪(フル出社)
   tech:
     - C#
     - .NET Framework
@@ -676,8 +734,6 @@
     - SQL Server
     - SharePoint
   desc: |-
-    F銀行向け営業支援システムを担当。ポータルサイトの改修とCRMの改修に従事しました。
-
     # 担当業務など
     - ポータルサイトの改修、CRMの改修を担当
 
@@ -692,8 +748,6 @@
     ## 所属チーム
     3名
 
-    # 場所
-    大阪（フル出社）
   environment: |-
     # 使用言語、FW
     - C# 6
@@ -722,24 +776,24 @@
     - MicrosoftDynamicsCRM
 - company: P社
   title: 太陽光発電ソーラーパネル管理システム
+  summary: 太陽光発電ソーラーパネル管理システムのフロントエンド実装を担当しました。
   industry: 電気
   dates:
-    start: 2019/01/01
-    end: 2019/03/31
+    start: 2019/01
+    end: 2019/03
   type: short
-  phase: 実装・開発〜テスト・コードレビュー
-  engagement: アルバイト
+  phase: 実装、テスト
+  engagement: アルバイト(大学生)
+  place: 大阪(フル出社)
   tech:
     - Vue
     - JavaScript
   desc: |-
-    太陽光発電ソーラーパネル管理システムのフロントエンド実装を担当しました。
-
     # 担当業務など
     - フロントエンドの実装、単体テストを担当
 
     # 業務内容
-    - UI改修、バグ対応
+    - UI改修、バグ対応、リファクタリング
   team: |-
     # 人数
     ## 全体
@@ -756,21 +810,21 @@
     - JavaScript
 - company: R社
   title: 賃貸ガレージ（トランクルーム）管理システム
+  summary: IT業界での初めての仕事でした。賃貸ガレージ（トランクルーム）管理システムの運用を担当し、データメンテナンスを行いました。
   industry: 不動産
   dates:
-    start: 2018/11/01
-    end: 2018/12/31
+    start: 2018/11
+    end: 2018/12
   type: short
-  phase: 保守・運用
-  engagement: アルバイト
+  phase: 運用
+  engagement: アルバイト(大学生)
+  place: 大阪(フル出社)
   tech:
     - SQL
     - PostgreSQL
   desc: |-
-    賃貸ガレージ（トランクルーム）管理システムの運用を担当しました。
-
     # 担当業務など
-    - 運用担当
+    - 運用
 
     # 業務内容
     - 銀行統廃合による、お客様の請求口座更新SQL作成
@@ -783,8 +837,6 @@
     ## 所属チーム
     3名
 
-    # 場所
-    大阪（フル出社）
   environment: |-
     # 使用言語、FW
     - SQL

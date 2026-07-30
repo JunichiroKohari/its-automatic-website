@@ -4,7 +4,8 @@
   const simpleIcon = (slug) => ({ src: `https://cdn.simpleicons.org/${slug}`, alt: '' })
   const imageIcon = (src) => ({ src, alt: '' })
   const databaseIcon = imageIcon('https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/icons/database-fill.svg')
-  const openAiIcon = imageIcon('https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/icons/openai.svg')
+  const codexIcon = imageIcon('/img/skill-icons/codex-color.svg')
+  const claudeCodeIcon = imageIcon('/img/skill-icons/claude-color.svg')
   const codeCommitIcon = imageIcon('https://icon.icepanel.io/AWS/svg/Developer-Tools/CodeCommit.svg')
   const sharePointIcon = imageIcon('https://upload.wikimedia.org/wikipedia/commons/2/28/Microsoft_Office_SharePoint_%282025%E2%80%93present%29.svg')
 
@@ -44,8 +45,8 @@
     'BitBucket': 'devicon-bitbucket-original colored',
     'CodeCommit': codeCommitIcon,
     'Terraform': 'devicon-terraform-plain colored',
-    'Codex': openAiIcon,
-    'Claude Code': simpleIcon('anthropic'),
+    'Codex': codexIcon,
+    'Claude Code': claudeCodeIcon,
     'Gemini': simpleIcon('googlegemini'),
     'Devin': imageIcon('https://devin.ai/favicon.svg'),
     'Cursor': simpleIcon('cursor'),
@@ -84,6 +85,8 @@
     'Huma': imageIcon('https://huma.rocks/favicon.png'),
     'Hono': simpleIcon('hono'),
     'Terraform': 'devicon-terraform-plain colored',
+    'Codex': codexIcon,
+    'Claude Code': claudeCodeIcon,
   }
 
   const skillCategoryLabels = {
@@ -91,13 +94,20 @@
     lang: '言語',
     fw: 'フレームワーク',
     db: 'DB',
-    infra: 'インフラ・OS',
-    tool: 'ツール',
+    infra: 'インフラ',
+    tool: 'その他',
     ai: 'AI',
   }
+  const skillCategoryKeys = Array.from(new Set(skills.map((skill) => skill.cat)))
+  const leadingSkillCategoryOrder = ['lang', 'fw', 'db', 'infra', 'ai']
+  const orderedSkillCategoryKeys = [
+    ...leadingSkillCategoryOrder.filter((key) => skillCategoryKeys.includes(key)),
+    ...skillCategoryKeys.filter((key) => !leadingSkillCategoryOrder.includes(key) && key !== 'tool'),
+    ...(skillCategoryKeys.includes('tool') ? ['tool'] : []),
+  ]
   const skillCategories = [
     { key: 'all', label: skillCategoryLabels.all },
-    ...Array.from(new Set(skills.map((skill) => skill.cat))).map((key) => ({
+    ...orderedSkillCategoryKeys.map((key) => ({
       key,
       label: skillCategoryLabels[key] || key.toUpperCase(),
     })),
@@ -123,11 +133,97 @@
     short: '短期・スポット',
     self: '自社事業',
   }
-  const projectTypes = Array.from(new Set(projects.map((project) => project.type))).map((type) => ({
-    key: type,
-    label: projectTypeLabels[type] || '案件',
-  }))
   const getProjectTypeLabel = (project) => project.typeLabel || projectTypeLabels[project.type] || '案件'
+  const getProjectPlaceLabel = (project) => `${project.place || ''}`.trim()
+  const projectPlaces = Array.from(new Set(projects.map((project) => getProjectPlaceLabel(project)).filter(Boolean))).sort()
+  const getSafeHttpUrl = (value) => {
+    try {
+      const parsedUrl = new URL(`${value || ''}`.trim())
+      return ['http:', 'https:'].includes(parsedUrl.protocol) ? parsedUrl.href : ''
+    } catch {
+      return ''
+    }
+  }
+  const getSafePreviewImageUrl = (value) => {
+    const url = `${value || ''}`.trim()
+
+    if (!url) {
+      return ''
+    }
+
+    if (url.startsWith('/') && !url.startsWith('//')) {
+      return url
+    }
+
+    return getSafeHttpUrl(url)
+  }
+  const createProjectLink = (link) => {
+    const url = getSafeHttpUrl(link.url)
+
+    if (!url) {
+      return null
+    }
+
+    return {
+      ...link,
+      url,
+      image: getSafePreviewImageUrl(link.image),
+    }
+  }
+  const getProjectLinks = (project) => {
+    const items = Array.isArray(project.link) ? project.link : [project.link]
+
+    return items.flatMap((item) => {
+      if (!item) {
+        return []
+      }
+
+      if (typeof item === 'string') {
+        return [createProjectLink({ url: item, title: item })]
+      }
+
+      if (item.url) {
+        return [createProjectLink({
+          url: item.url,
+          title: item.title || item.label || item.url,
+          type: item.type || item.label || '',
+          description: item.description || item.summary || '',
+          image: item.image || item.thumbnail || item.thumbnailUrl || item.ogImage || '',
+          imageAlt: item.imageAlt || item.thumbnailAlt || item.title || item.label || '',
+        })]
+      }
+
+      return Object.entries(item).flatMap(([type, value]) => {
+        if (!value) {
+          return []
+        }
+
+        if (typeof value === 'string') {
+          return [createProjectLink({ url: value, title: value, type })]
+        }
+
+        if (value.url) {
+          return [createProjectLink({
+            url: value.url,
+            title: value.title || value.label || value.url,
+            type: value.type || type,
+            description: value.description || value.summary || '',
+            image: value.image || value.thumbnail || value.thumbnailUrl || value.ogImage || '',
+            imageAlt: value.imageAlt || value.thumbnailAlt || value.title || value.label || '',
+          })]
+        }
+
+        return []
+      })
+    }).filter((link) => link && link.url)
+  }
+  const getProjectLinkHost = (url) => {
+    try {
+      return new URL(url).hostname.replace(/^www\./, '')
+    } catch {
+      return ''
+    }
+  }
   const getProjectDateText = (project, key) => `${project.dates?.[key] || ''}`.trim()
   const getCurrentProjectDateText = () => {
     const now = new Date()
@@ -144,10 +240,10 @@
     }
 
     if (startDate) {
-      return `${startDate}〜`
+      return `${startDate}〜参画中`
     }
 
-    return endDate
+    return endDate || '参画中'
   }
   const getProjectDateValue = (project, key) => {
     const value = getProjectDateText(project, key)
@@ -191,6 +287,9 @@
     getProjectDurationLabel(project),
     getProjectDateRangeLabel(project),
     getProjectTypeLabel(project),
+    getProjectPlaceLabel(project),
+    project.summary,
+    ...getProjectLinks(project).flatMap((link) => [link.type, link.title, link.url]),
     project.phase,
     project.engagement,
     ...(project.tech || []),
@@ -322,7 +421,7 @@ html(lang="ja")
               | フロントからバックエンド、
               br
               | インフラまわりまで柔軟に対応します。
-            p.panel-lead フロントエンドからバックエンド、データ基盤、インフラ／DevOps まで一貫して担当できるソフトウェアエンジニアです。0→1 の新規開発と、長年稼働するシステムの改修・保守の双方を経験。金融・建設・教育・小売・Webマーケティングなど、自社事業を含む8領域・12件で、設計から運用まで幅広いフェーズに携わってきました。
+            p.panel-lead 現場の状況に合わせて、フロントエンドからバックエンド・インフラまで幅広く開発を支援してきました。担当範囲を限定しすぎず、必要に応じて周辺領域にも関わりながら、開発全体に関わってきました。チーム内で相談しながら、必要な実装や改善を一つずつ進めることを大切にしています。
           .profile-grid
             article.profile-card
               p.card-kicker BASIC INFO
@@ -341,7 +440,7 @@ html(lang="ja")
                   dd 7年以上
             article.profile-card
               p.card-kicker CORE STACK
-              p 普段の主軸は Go / Python / TypeScript。バックエンドの REST / gRPC API、フロントの React・Vue、Terraform・Kubernetes でのインフラ構築までを単独でカバーします。テスト・コードレビュー・CI/CD・オンボーディング支援など、チーム開発の土台づくりも得意です。
+              p Go / Python / TypeScriptを主軸に、フロントエンドからバックエンド、インフラまわりまで、必要な領域に手を伸ばしながら開発してきました。QAやレビュー、CI/CD整備など、開発を安定して進めるための周辺業務にも取り組んできました。
           .section-title-row
             h2 得意分野・強み
             span 担当できる範囲を6つの軸で整理
@@ -378,6 +477,12 @@ html(lang="ja")
                   each level in levels
                     span(class=level <= skill.level ? 'skill-level__bar is-filled' : 'skill-level__bar')
                   small= categoryTags[skill.cat]
+                if Array.isArray(skill.services) && skill.services.length
+                  .skill-services
+                    span.skill-services__label 主な利用サービス
+                    .skill-services__list
+                      each service in skill.services
+                        span.skill-services__item= service
 
         section.skill-panel(data-tab-panel="career" hidden)
           .panel-heading.panel-heading--compact
@@ -394,12 +499,11 @@ html(lang="ja")
                 option(value="oldest") 古い順
                 option(value="duration-desc") 期間が長い順
                 option(value="duration-asc") 期間が短い順
-                option(value="order-asc") 掲載順
           .project-filters
             .project-filter-row.project-filter-row--keyword
               label.project-filter-field.project-filter-field--search
                 span キーワード
-                input(type="search" data-project-search placeholder="会社・案件・技術で検索" autocomplete="off")
+                input(type="search" data-project-search placeholder="フリーワード検索" autocomplete="off")
             .project-filter-row.project-filter-row--selects
               label.project-filter-field
                 span 業種
@@ -414,23 +518,25 @@ html(lang="ja")
                   each tech in technologies
                     option(value=tech)= tech
               label.project-filter-field
-                span 区分
-                select(data-project-type)
-                  option(value="all") すべての区分
-                  each type in projectTypes
-                    option(value=type.key)= type.label
+                span 勤務形態
+                select(data-project-place)
+                  option(value="all") すべての勤務形態
+                  each place in projectPlaces
+                    option(value=place)= place
             .project-filter-row.project-filter-row--actions
               p.project-filter-summary(data-project-summary aria-live="polite") 全件表示中
               .project-filter-actions
-                button.project-search-submit(type="button" data-project-search-submit) 検索
                 button.project-filter-reset(type="button" data-project-filter-reset disabled) クリア
           p.project-empty(data-project-empty hidden) 条件に一致する案件はありませんでした。フィルターを変更してお試しください。
           .project-list(data-project-list)
             each project, projectIndex in projects
               - const projectTech = project.tech || []
               - const projectTypeLabel = getProjectTypeLabel(project)
+              - const projectPlaceLabel = getProjectPlaceLabel(project)
+              - const projectLinks = getProjectLinks(project)
+              - const projectIsActive = project.active || !getProjectDateText(project, 'end')
               - const projectStart = getProjectDateValue(project, 'start')
-              - const projectEnd = project.active || !getProjectDateText(project, 'end') ? 99991231 : getProjectDateValue(project, 'end')
+              - const projectEnd = projectIsActive ? 99991231 : getProjectDateValue(project, 'end')
               article.project-card(
                 data-project-card
                 data-project-index=projectIndex
@@ -438,7 +544,8 @@ html(lang="ja")
                 data-project-tech=projectTech.join('|')
                 data-project-type=project.type
                 data-project-type-label=projectTypeLabel
-                data-project-active=project.active ? 'true' : 'false'
+                data-project-place=projectPlaceLabel
+                data-project-active=projectIsActive ? 'true' : 'false'
                 data-project-start=projectStart
                 data-project-end=projectEnd
                 data-project-duration=getProjectDurationMonths(project)
@@ -447,12 +554,33 @@ html(lang="ja")
                 .project-card__head
                   .project-card__title
                     .project-card__badges
-                      span(class=project.type === 'long' ? 'project-badge project-badge--long' : project.type === 'self' ? 'project-badge project-badge--self' : 'project-badge')= projectTypeLabel
                       span.project-industry= project.industry
-                      if project.active
-                        span.project-active 参画中
                     h3 #{project.company} — #{project.title}
-                  span.project-period= getProjectDurationLabel(project)
+                    if project.summary || projectLinks.length
+                      .project-card__summary
+                        if project.summary
+                          p= project.summary
+                        if projectLinks.length
+                          ul.project-card__links
+                            each projectLink, projectLinkIndex in projectLinks
+                              - const projectLinkHost = getProjectLinkHost(projectLink.url)
+                              - const projectLinkPreviewId = `project-link-preview-${projectIndex}-${projectLinkIndex}`
+                              li
+                                if projectLink.type
+                                  span.project-card__link-label ブログ執筆
+                                a(href=projectLink.url target="_blank" rel="noopener noreferrer" aria-describedby=projectLinkPreviewId)= projectLink.title
+                                .project-link-preview(id=projectLinkPreviewId role="tooltip")
+                                  if projectLink.image
+                                    .project-link-preview__thumb
+                                      img(src=projectLink.image alt=projectLink.imageAlt || '' loading="lazy" decoding="async")
+                                  strong= projectLink.title
+                                  if projectLink.description
+                                    p= projectLink.description
+                                  span.project-link-preview__url= projectLink.url
+                  .project-card__status
+                    if projectIsActive
+                      span.project-active 参画中
+                    span.project-period= getProjectDurationLabel(project)
                 .project-card__meta
                   div
                     span 担当フェーズ
@@ -464,9 +592,10 @@ html(lang="ja")
                     div
                       span 就業形態
                       strong= project.engagement
-                  div
-                    span 区分
-                    strong= projectTypeLabel
+                  if projectPlaceLabel
+                    div
+                      span 勤務形態
+                      strong= projectPlaceLabel
                 .project-tech
                   each tech in projectTech
                     - const techIcon = techClass[tech]
@@ -488,7 +617,7 @@ html(lang="ja")
                       +multiline(project.environment)
                 button.project-toggle(type="button" data-project-toggle aria-expanded="false")
                   span 詳細を見る
-                  i(aria-hidden="true") ▾
+                  i(aria-hidden="true")
 
     .floating-ai-chat
       .floating-ai-chat__panel#floating-ai-chat-panel(data-floating-chat-panel data-chat-api-endpoint="" data-turnstile-site-key="" hidden)

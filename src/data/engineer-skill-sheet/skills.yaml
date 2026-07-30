@@ -30,6 +30,10 @@
   years: 〜1年
   cat: lang
   level: 1
+- name: Ruby
+  years: 〜1年
+  cat: lang
+  level: 1
 - name: HTML / CSS
   years: 〜6年
   cat: lang
@@ -42,6 +46,10 @@
   years: 〜3年
   cat: fw
   level: 4
+- name: Next.js、React
+  years: 〜2年
+  cat: fw
+  level: 3
 - name: Laravel
   years: 〜3年
   cat: fw
@@ -58,10 +66,10 @@
   years: 〜1年
   cat: fw
   level: 1
-- name: Next.js、React
-  years: 〜2年
+- name: Ruby on Rails
+  years: 〜1年
   cat: fw
-  level: 3
+  level: 1
 - name: .NET Framework
   years: 〜2年
   cat: fw
@@ -83,17 +91,43 @@
   cat: db
   level: 3
 - name: MySQL
-  years: 〜2年
+  years: 〜3年
   cat: db
   level: 3
 - name: SQLite
   years: 〜2年
   cat: db
   level: 2
+- name: ElasticSearch(OpenSearch)
+  years: 〜2年
+  cat: db
+  level: 1
 - name: AWS
   years: 〜4年
   cat: infra
   level: 4
+  services:
+    - EC2
+    - ECS
+    - EKS
+    - Lambda
+    - S3
+    - RDS
+    - DynamoDB
+    - CloudFormation
+    - CloudWatch
+    - Step Functions
+- name: GCP
+  years: 〜3年
+  cat: infra
+  level: 2
+  services:
+    - GKE
+    - Cloud Run
+    - BigQuery
+    - Spanner
+    - Cloud Storage
+    - Pub/Sub
 - name: Linux
   years: 〜3年
   cat: infra
@@ -102,29 +136,41 @@
   years: 〜2年
   cat: infra
   level: 3
-- name: GCP
+- name: Docker
+  years: 〜5年
+  cat: infra
+  level: 5
+- name: Kubernetes
+  years: 〜2年
+  cat: infra
+  level: 2
+- name: Istio
   years: 〜1年
   cat: infra
   level: 2
+- name: Helm
+  years: 〜1年
+  cat: infra
+  level: 1
+- name: ArgoCD
+  years: 〜2年
+  cat: infra
+  level: 1
 - name: Git
   years: 〜5年
   cat: tool
   level: 5
 - name: GitHub
-  years: 〜4年
+  years: 〜5年
   cat: tool
   level: 5
 - name: BitBucket
   years: 〜2年
   cat: tool
   level: 3
-- name: CodeCommit
-  years: 〜1年
-  cat: tool
-  level: 2
 - name: Terraform
   years: 〜2年
-  cat: tool
+  cat: infra
   level: 3
 - name: Codex
   years: 〜1年
