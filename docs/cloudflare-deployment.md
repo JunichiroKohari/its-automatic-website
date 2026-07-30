@@ -2,6 +2,19 @@
 
 この手順書は、Cloudflare を使う部分だけを Terraform でデプロイするためのものです。静的サイト本体のビルドや配信は既存の運用に従い、ここでは `engineer_skill_sheet` の AI チャット API に必要な Cloudflare リソースを扱います。
 
+## 現在のデプロイ状態
+
+2026-07-30 時点では、初回本番デプロイを Terraform ではなく Wrangler OAuth で実行しています。
+
+- Worker: `engineer-skill-chat-api`
+- URL: `https://engineer-skill-chat-api.junichiro-kohari.workers.dev`
+- D1 database: `engineer_chat`
+- D1 database ID: `88f12f8a-e497-4f55-b357-0d34e62f9979`
+- Turnstile: 有効 (`REQUIRE_TURNSTILE=true`)
+- Turnstile sitekey: `0x4AAAAAAEBoL2jrqIU5Tx59`
+
+この状態から Terraform 管理へ移す場合は、既存の Worker / D1 / 必要に応じて Turnstile を Terraform state へ import してから `plan` / `apply` してください。import せずに Terraform を実行すると、同名または別 ID のリソース作成、設定差分、管理経路の競合が起きます。
+
 ## 管理対象
 
 Terraform は `infra/cloudflare` 配下で次を管理します。
@@ -13,7 +26,7 @@ Terraform は `infra/cloudflare` 配下で次を管理します。
 - 任意の Worker custom domain
 - D1 初期 schema の適用
 
-本番 Worker は Terraform でデプロイします。`wrangler deploy` は同じ Worker に対して使わず、`wrangler` はローカル開発や調査用途に限定します。
+Terraform 運用に統一する場合、本番 Worker は Terraform でデプロイします。その場合は `wrangler deploy` を同じ Worker に対して使わず、`wrangler` はローカル開発や調査用途に限定します。現在の Wrangler デプロイから移行する場合は、先に既存リソースを import してください。
 
 ## 前提
 

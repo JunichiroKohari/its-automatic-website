@@ -12,7 +12,7 @@ variable "worker_name" {
 variable "worker_compatibility_date" {
   description = "Cloudflare Workers compatibility date."
   type        = string
-  default     = "2026-07-13"
+  default     = "2026-07-30"
 }
 
 variable "enable_workers_dev" {
