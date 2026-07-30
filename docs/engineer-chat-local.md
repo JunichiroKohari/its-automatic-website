@@ -14,16 +14,18 @@ npm ci
 npm run db:chat:migrate:local
 ```
 
-## 3. 任意: OpenAI APIキー
+## 3. OpenAI APIキーとローカルモック
 
 `.dev.vars.example` を参考に `.dev.vars` を作成します。
 
 ```bash
 OPENAI_API_KEY=sk-...
 RATE_LIMIT_SALT=local-random-string
+# OPENAI_API_KEYなしでローカルモックを確認する場合だけ設定
+# ALLOW_LOCAL_MOCK=true
 ```
 
-`OPENAI_API_KEY` が未設定の場合、Workerはローカル確認用の応答を返します。画面連携、D1保存、回数制限の確認は可能です。
+`OPENAI_API_KEY` を設定すると、OpenAI APIによる実回答に切り替わります。APIキーなしで画面連携、D1保存、回数制限だけ確認する場合は、`RATE_LIMIT_SALT` を未設定にするか、`ALLOW_LOCAL_MOCK=true` を設定します。
 
 リミットに近づくと、APIレスポンスの `limitWarnings` に警告コードが入り、フロントでは回答末尾に面談予約リンク付きの案内を表示します。
 
@@ -45,7 +47,7 @@ npm start
 
 - XServer StaticにはAPIキーを置かないでください。
 - 本番のCloudflare Worker、D1、Turnstileは `infra/cloudflare` のTerraformでデプロイします。
-- `OPENAI_API_KEY`、`TURNSTILE_SECRET_KEY`、`RATE_LIMIT_SALT` はTerraformのWorker secret bindingとして登録されます。Terraform stateの保管先は安全に扱ってください。
+- `OPENAI_API_KEY` と `RATE_LIMIT_SALT` は必須のWorker secret bindingです。Turnstileを有効化する場合は `TURNSTILE_SECRET_KEY` もTerraformのWorker secret bindingとして登録されます。Terraform stateの保管先は安全に扱ってください。
 - 本番のWorker URLをフロントへ渡すには、`window.ENGINEER_CHAT_API_ENDPOINT` を設定するか、チャットパネルの `data-chat-api-endpoint` を更新します。
 - Turnstileを使う場合は `window.ENGINEER_CHAT_TURNSTILE_SITE_KEY` または `data-turnstile-site-key` を設定し、Worker側で `REQUIRE_TURNSTILE=true` にします。
-- 手順は `infra/cloudflare/README.md` を参照してください。
+- デプロイ手順は `docs/cloudflare-deployment.md` を参照してください。

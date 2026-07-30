@@ -7,8 +7,14 @@ Static website project built with Astro. The editable source lives in `src/`, an
 ```bash
 npm ci
 npm start
+npm run validate:skill-sheet
 npm run build
 ```
+
+## Deploy
+
+- Static site: build with `npm run build`, then publish `dist/` through the existing static-site hosting flow.
+- Cloudflare resources for the AI chat API: see [docs/cloudflare-deployment.md](docs/cloudflare-deployment.md).
 
 ## Codex cloud setup
 
@@ -20,6 +26,7 @@ npm run build
 6. Keep agent internet access off unless a task truly needs it.
 
 This repository does not currently require any `.env` file or runtime secret for build/edit tasks.
+
 ## What Codex should edit
 
 - Main source: `src/`

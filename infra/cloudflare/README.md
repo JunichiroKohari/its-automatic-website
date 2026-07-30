@@ -2,6 +2,8 @@
 
 Cloudflare 上の AI チャット API を Terraform でデプロイします。
 
+実作業の手順は [docs/cloudflare-deployment.md](../../docs/cloudflare-deployment.md) にまとめています。この README は Terraform 定義の概要です。
+
 対象リソース:
 
 - Cloudflare D1 database: `engineer_chat`
@@ -29,7 +31,7 @@ API token は少なくとも次の権限を持つものを使います。
 cp infra/cloudflare/terraform.tfvars.example infra/cloudflare/terraform.tfvars
 ```
 
-`terraform.tfvars` に `cloudflare_account_id`、`openai_api_key`、`rate_limit_salt` を設定します。`terraform.tfvars` と state には secret が入るため、Git にはコミットしません。
+`terraform.tfvars` に `cloudflare_account_id`、`openai_api_key`、`rate_limit_salt` を設定します。`openai_api_key` と `rate_limit_salt` は本番 Worker の必須 secret binding です。`terraform.tfvars` と state には secret が入るため、Git にはコミットしません。
 
 Cloudflare API token は環境変数で渡します。
 
@@ -44,6 +46,8 @@ npm run tf:cloudflare:init
 npm run tf:cloudflare:plan
 npm run tf:cloudflare:apply
 ```
+
+詳しい事前確認、デプロイ後確認、ロールバック、トラブルシュートは [docs/cloudflare-deployment.md](../../docs/cloudflare-deployment.md) を参照してください。
 
 `terraform apply` の中で `workers/engineer-chat/migrations/0001_initial.sql` を D1 Query API に流します。migration SQL は `CREATE TABLE IF NOT EXISTS` ベースなので再実行可能です。
 

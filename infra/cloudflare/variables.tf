@@ -111,6 +111,12 @@ variable "rate_limit_salt" {
   sensitive   = true
 }
 
+variable "max_request_body_chars" {
+  description = "Maximum JSON request body size accepted by the Worker."
+  type        = number
+  default     = 8192
+}
+
 variable "max_input_chars" {
   description = "Maximum user message length accepted by the Worker."
   type        = number

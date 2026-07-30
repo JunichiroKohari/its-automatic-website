@@ -14,6 +14,33 @@ const json = (payload, init = {}, corsHeaders = {}) => new Response(JSON.stringi
   },
 });
 
+const createHttpError = (message, status = 500, expose = status < 500) => {
+  const error = new Error(message);
+  error.status = status;
+  error.expose = expose;
+  return error;
+};
+
+const getErrorStatus = (error) => (
+  Number.isInteger(error?.status) && error.status >= 400 ? error.status : 500
+);
+
+const getExposedErrorMessage = (error, status) => (
+  error?.expose || status < 500
+    ? error.message
+    : 'AIチャットでエラーが発生しました。時間をおいて再度お試しください。'
+);
+
+const logError = ({ error, request, url, status }) => {
+  console.error(JSON.stringify({
+    message: 'engineer-chat request failed',
+    method: request.method,
+    path: url.pathname,
+    status,
+    error: error?.causeMessage || error?.message || String(error),
+  }));
+};
+
 const getAllowedOrigins = (env) => {
   if (!env.ALLOWED_ORIGINS) {
     return DEFAULT_ALLOWED_ORIGINS;
@@ -27,15 +54,19 @@ const getAllowedOrigins = (env) => {
 const getCorsHeaders = (request, env) => {
   const origin = request.headers.get('origin') || '';
   const allowedOrigins = getAllowedOrigins(env);
-  const allowOrigin = allowedOrigins.includes(origin) ? origin : allowedOrigins[0] || '';
-
-  return {
-    'access-control-allow-origin': allowOrigin,
+  const allowOrigin = origin && allowedOrigins.includes(origin) ? origin : '';
+  const headers = {
     'access-control-allow-methods': 'POST, OPTIONS, GET',
     'access-control-allow-headers': 'content-type',
     'access-control-max-age': '86400',
     vary: 'Origin',
   };
+
+  if (allowOrigin) {
+    headers['access-control-allow-origin'] = allowOrigin;
+  }
+
+  return headers;
 };
 
 const getClientIp = (request) => (
@@ -62,6 +93,7 @@ const toInt = (value, fallback) => {
 const addDays = (date, days) => new Date(date.getTime() + days * 86400000);
 
 const getLimits = (env) => ({
+  maxRequestBodyChars: toInt(env.MAX_REQUEST_BODY_CHARS, 8192),
   maxInputChars: toInt(env.MAX_INPUT_CHARS, 600),
   maxOutputTokens: toInt(env.MAX_OUTPUT_TOKENS, 500),
   maxSessionTurns: toInt(env.MAX_SESSION_TURNS, 10),
@@ -99,9 +131,7 @@ const incrementRateLimit = async (db, { scope, key, window }) => {
 
 const assertLimit = (count, limit, message) => {
   if (count > limit) {
-    const error = new Error(message);
-    error.status = 429;
-    throw error;
+    throw createHttpError(message, 429);
   }
 };
 
@@ -135,17 +165,13 @@ const verifyTurnstile = async ({ token, request, env }) => {
 
   if (!secret) {
     if (requireTurnstile) {
-      const error = new Error('bot検証の設定が未完了です。');
-      error.status = 500;
-      throw error;
+      throw createHttpError('bot検証の設定が未完了です。', 500, false);
     }
     return;
   }
 
   if (!token) {
-    const error = new Error('bot検証に失敗しました。ページを再読み込みしてもう一度お試しください。');
-    error.status = 403;
-    throw error;
+    throw createHttpError('bot検証に失敗しました。ページを再読み込みしてもう一度お試しください。', 403);
   }
 
   const form = new FormData();
@@ -160,9 +186,7 @@ const verifyTurnstile = async ({ token, request, env }) => {
   const result = await response.json();
 
   if (!result.success) {
-    const error = new Error('bot検証に失敗しました。ページを再読み込みしてもう一度お試しください。');
-    error.status = 403;
-    throw error;
+    throw createHttpError('bot検証に失敗しました。ページを再読み込みしてもう一度お試しください。', 403);
   }
 };
 
@@ -314,6 +338,10 @@ const callOpenAI = async ({ env, message, history, limits }) => {
   const model = env.OPENAI_MODEL || 'gpt-5-nano';
 
   if (!apiKey) {
+    if (env.RATE_LIMIT_SALT && env.ALLOW_LOCAL_MOCK !== 'true') {
+      throw createHttpError('AIチャットAPIの設定が未完了です。', 503, false);
+    }
+
     return {
       answer: getLocalDevAnswer(message),
       model: 'local-dev',
@@ -341,10 +369,10 @@ const callOpenAI = async ({ env, message, history, limits }) => {
     body: JSON.stringify(body),
   });
 
-  const data = await response.json();
+  const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    const error = new Error(data.error?.message || 'OpenAI API request failed.');
-    error.status = 502;
+    const error = createHttpError('AIチャットの回答生成に失敗しました。', 502, false);
+    error.causeMessage = data.error?.message || `OpenAI API request failed with status ${response.status}`;
     throw error;
   }
 
@@ -362,9 +390,47 @@ const callOpenAI = async ({ env, message, history, limits }) => {
   };
 };
 
+const parseChatRequestBody = async (request, limits) => {
+  const contentType = request.headers.get('content-type') || '';
+
+  if (!contentType.toLowerCase().includes('application/json')) {
+    throw createHttpError('JSON形式で送信してください。', 415);
+  }
+
+  const contentLength = toInt(request.headers.get('content-length'), 0);
+  if (contentLength > limits.maxRequestBodyChars) {
+    throw createHttpError('送信内容が大きすぎます。', 413);
+  }
+
+  const rawBody = await request.text();
+  if (rawBody.length > limits.maxRequestBodyChars) {
+    throw createHttpError('送信内容が大きすぎます。', 413);
+  }
+
+  try {
+    return JSON.parse(rawBody);
+  } catch {
+    throw createHttpError('JSON形式で送信してください。', 400);
+  }
+};
+
+const getRateLimitSalt = (env) => {
+  const salt = `${env.RATE_LIMIT_SALT || ''}`.trim();
+
+  if (salt) {
+    return salt;
+  }
+
+  if (!env.OPENAI_API_KEY) {
+    return 'local-dev-salt';
+  }
+
+  throw createHttpError('AIチャットの回数制限設定が未完了です。', 500, false);
+};
+
 const handleChat = async (request, env, corsHeaders) => {
   const limits = getLimits(env);
-  const body = await request.json().catch(() => ({}));
+  const body = await parseChatRequestBody(request, limits);
   const message = `${body.message || ''}`.replace(/\s+/g, ' ').trim();
 
   if (!message) {
@@ -380,8 +446,9 @@ const handleChat = async (request, env, corsHeaders) => {
   const date = new Date();
   const dayWindow = getWindowKey(date, 'day');
   const minuteWindow = getWindowKey(date, 'minute');
-  const ipHash = await sha256(`${env.RATE_LIMIT_SALT || 'local-dev-salt'}:${getClientIp(request)}`);
-  const userAgentHash = await sha256(`${env.RATE_LIMIT_SALT || 'local-dev-salt'}:${request.headers.get('user-agent') || ''}`);
+  const rateLimitSalt = getRateLimitSalt(env);
+  const ipHash = await sha256(`${rateLimitSalt}:${getClientIp(request)}`);
+  const userAgentHash = await sha256(`${rateLimitSalt}:${request.headers.get('user-agent') || ''}`);
 
   const session = await getOrCreateSession({
     db: env.DB,
@@ -449,7 +516,10 @@ export default {
     const corsHeaders = getCorsHeaders(request, env);
 
     if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders });
+      return new Response(null, {
+        status: corsHeaders['access-control-allow-origin'] ? 204 : 403,
+        headers: corsHeaders,
+      });
     }
 
     try {
@@ -463,10 +533,11 @@ export default {
 
       return json({ error: 'Not found' }, { status: 404 }, corsHeaders);
     } catch (error) {
-      console.error(error);
+      const status = getErrorStatus(error);
+      logError({ error, request, url, status });
       return json({
-        error: error.message || 'AIチャットでエラーが発生しました。',
-      }, { status: error.status || 500 }, corsHeaders);
+        error: getExposedErrorMessage(error, status),
+      }, { status }, corsHeaders);
     }
   },
 };

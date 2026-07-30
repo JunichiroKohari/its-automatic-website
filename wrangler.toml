@@ -1,11 +1,25 @@
 name = "engineer-skill-chat-api"
 main = "workers/engineer-chat/worker.js"
 compatibility_date = "2026-07-13"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 0.05
 
 [vars]
 ALLOWED_ORIGINS = "http://localhost:4321,http://127.0.0.1:4321"
 OPENAI_MODEL = "gpt-5-nano"
 OPENAI_REASONING_EFFORT = "minimal"
+MAX_REQUEST_BODY_CHARS = "8192"
 MAX_INPUT_CHARS = "600"
 MAX_OUTPUT_TOKENS = "500"
 MAX_SESSION_TURNS = "10"
@@ -15,6 +29,10 @@ IP_DAILY_LIMIT = "20"
 SESSION_DAILY_LIMIT = "10"
 GLOBAL_DAILY_LIMIT = "100"
 REQUIRE_TURNSTILE = "false"
+ALLOW_LOCAL_MOCK = "false"
+
+[secrets]
+required = ["OPENAI_API_KEY", "RATE_LIMIT_SALT"]
 
 [[d1_databases]]
 binding = "DB"

@@ -1,3 +1,4 @@
 OPENAI_API_KEY=
 TURNSTILE_SECRET_KEY=
 RATE_LIMIT_SALT=change-this-in-production
+ALLOW_LOCAL_MOCK=true

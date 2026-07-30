@@ -8,6 +8,7 @@ locals {
     ALLOWED_ORIGINS       = join(",", var.allowed_origins)
     OPENAI_MODEL          = var.openai_model
     OPENAI_REASONING_EFFORT = var.openai_reasoning_effort
+    MAX_REQUEST_BODY_CHARS = tostring(var.max_request_body_chars)
     MAX_INPUT_CHARS       = tostring(var.max_input_chars)
     MAX_OUTPUT_TOKENS     = tostring(var.max_output_tokens)
     MAX_SESSION_TURNS     = tostring(var.max_session_turns)
@@ -17,6 +18,7 @@ locals {
     SESSION_DAILY_LIMIT   = tostring(var.session_daily_limit)
     GLOBAL_DAILY_LIMIT    = tostring(var.global_daily_limit)
     REQUIRE_TURNSTILE     = tostring(var.enable_turnstile)
+    ALLOW_LOCAL_MOCK      = "false"
   }
 
   worker_plain_text_bindings = [
