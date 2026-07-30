@@ -521,14 +521,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const floatingSessionStorageKey = 'engineerSkillChatSessionId';
   const isLocalHostname = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+  const productionChatEndpoint = 'https://engineer-skill-chat-api.junichiro-kohari.workers.dev/chat';
+  const productionTurnstileSiteKey = '0x4AAAAAAEBoL2jrqIU5Tx59';
+  const isProductionHostname = ['its-automatic.com', 'www.its-automatic.com'].includes(window.location.hostname);
   const configuredChatEndpoint = () => (
     window.ENGINEER_CHAT_API_ENDPOINT
     || floatingChatPanel?.getAttribute('data-chat-api-endpoint')
+    || (isProductionHostname ? productionChatEndpoint : '')
     || (isLocalHostname ? 'http://127.0.0.1:8787/chat' : '')
   );
   const configuredTurnstileSiteKey = () => (
     window.ENGINEER_CHAT_TURNSTILE_SITE_KEY
     || floatingChatPanel?.getAttribute('data-turnstile-site-key')
+    || (isProductionHostname ? productionTurnstileSiteKey : '')
     || ''
   );
   let floatingChatSessionId = readStoredValue(floatingSessionStorageKey);
